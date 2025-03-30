@@ -92,8 +92,8 @@ The events should be clear, compact and easy to understand.
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "branch_a": {"type": "string", "description": "One sentence summary of the branch A."},
-                            "branch_b": {"type": "string", "description": "One sentence summary of the branch B."},
+                            "branch_a": {"type": "string", "description": "One sentence summary of the branch A. Style: clear, compact and easy to understand."},
+                            "branch_b": {"type": "string", "description": "One sentence summary of the branch B. Style: clear, compact and easy to understand."},
                             "events_a": {
                                 "type": "array",
                                 "description": "Timeline events caused by branch A.",
