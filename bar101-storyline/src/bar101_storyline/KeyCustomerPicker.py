@@ -28,12 +28,12 @@ Events: {"; ".join([event['description'] for event in events_b])}
 -----
 Describe how actions or decisions of {customer_name} influenced the story's transition from the TIMELINE to the NEXT CHAPTER. 
 {customer_name} faced a binary, mutually exclusive choice — leading the story down the path of either VARIANT A or VARIANT B.
-Their influence may be direct or indirect, shaped in part by their conversations with Alex, the bartender. 
+Their influence may be direct or indirect, shaped in part by their conversations with Alex, the bartender (do not mention Alex directly in the events or variants).
 Both paths were viable and probable, but {customer_name} ultimately made a decision that steered the story forward.
 Make sure that actions are inline with the character's personality, background, and motivations.
 
 As a result provide:
-  - Cause: The event or situation that lead the customer's make face the dilemma. Must by inline with the character's profile
+  - Cause: The event or situation that lead the customer's make face the dilemma. Exmplain why it is plausible and inline with the character's profile.
 	-	Dilemma: The key conflict or decision they faced
   - Reason: Why the customer is unsure about the decision
 	-	Variant A: The choice that leads to VARIANT A from the TIMELINE
