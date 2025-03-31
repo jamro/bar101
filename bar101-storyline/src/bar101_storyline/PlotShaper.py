@@ -32,7 +32,6 @@ class PlotShaper:
         self.timeline = read_context_file(os.path.join(base_path, "timeline.json"))
         self.world_context = read_context_file(os.path.join(base_path, "world.json"))
         self.plot_structure = read_context_file(os.path.join(base_path, "plot_structure.json"))
-        self.customers = self.world_context['bar']['customers']
 
     def fork_plot(self):
         last_error = None
@@ -59,7 +58,7 @@ class PlotShaper:
             
         plot_stage = self.get_plot_stage()
         chapter_examples = "\n   * ".join(plot_stage['examples'])
-        event_count = "between 3 and 5"
+        event_count = "between 2 and 4"
 
         prompt = f"""
 # TIMELINE
@@ -67,11 +66,13 @@ class PlotShaper:
 
 -----
 Fork the storyline described by creating two two distinct version of the next chapter.
+The next chapter should start 3 days after the last event in the timeline and carry on for next 2-3 weeks.
 Make sure each version is distinct and push the story in a different direction.
 Be specific and detailed about sotry elements, characters, and events.
 For each of the branched chapter, create series of {event_count} events that happened between end of the current timeline and the end of the branched chapter.
-Events should provide additional context and details to the chapter.
+Events should provide additional context and details to the chapter. Be specific and provide all necessary details.
 The events should be clear, compact and easy to understand.
+Avoid overuse of technical jargon when it could lead to confusion or lack of understanding.
 
 # Next Chapter: {plot_stage['name']}
 - Purpose: {plot_stage['purpose']}
@@ -92,15 +93,15 @@ The events should be clear, compact and easy to understand.
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "branch_a": {"type": "string", "description": "One sentence summary of the branch A. Style: clear, compact and easy to understand."},
-                            "branch_b": {"type": "string", "description": "One sentence summary of the branch B. Style: clear, compact and easy to understand."},
+                            "branch_a": {"type": "string", "description": "One sentence summary of the branch A. Style: clear, compact and easy to understand. Length: 10-20 words."},
+                            "branch_b": {"type": "string", "description": "One sentence summary of the branch B. Style: clear, compact and easy to understand. Length: 10-20 words."},
                             "events_a": {
                                 "type": "array",
                                 "description": "Timeline events caused by branch A.",
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "timestamp": {"type": "string", "description": "The date of the event in YYYY-MM-DD format."},
+                                        "timestamp": {"type": "string", "description": "The date of the event in YYYY-MM-DDTHH:mm:SS format."},
                                         "visibility": {"type": "string", "description": "The visibility level of the event (e.g., public, semi-public, internal, private)."},
                                         "description": {"type": "string", "description": "A brief description of the event. Style: clear, compact and easy to understand."}
                                     },
@@ -113,7 +114,7 @@ The events should be clear, compact and easy to understand.
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "timestamp": {"type": "string", "description": "The date of the event in YYYY-MM-DD format."},
+                                        "timestamp": {"type": "string", "description": "The date of the event in YYYY-MM-DDTHH:mm:SS format."},
                                         "visibility": {"type": "string", "description": "The visibility level of the event (e.g., public, semi-public, internal, private)."},
                                         "description": {"type": "string", "description": "A brief description of the event. Style: clear, compact and easy to understand."}
                                     },
@@ -147,4 +148,4 @@ The events should be clear, compact and easy to understand.
                 self.plot_stage_index += 1
                 return response
 
-        return None
+        raise Exception("Failed to parse function call response")
