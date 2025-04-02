@@ -1,0 +1,24 @@
+.chatWindow {
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+  max-width: 30em;
+  height: 100vh;
+  padding: 0;
+}
+
+.chatContent {
+  display: block;
+  flex: 1;
+  padding: 1em;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+}
+
+.chatFooter {
+  display: block;
+}
