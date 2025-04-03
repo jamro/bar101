@@ -28,6 +28,8 @@ def print_table(timeline):
 
 if __name__ == "__main__":
     console = Console()
+    story_node_path = os.path.join(os.path.dirname(__file__), "../../story_tree")
+    story_node_name = "storyline_x"
 
     plot_shaper = PlotShaper(os.getenv("OPENAI_API_KEY"))
     cusomer_picker = KeyCustomerPicker(os.getenv("OPENAI_API_KEY"))
@@ -40,20 +42,50 @@ if __name__ == "__main__":
     print_table(plot_shaper.timeline)
 
     while not plot_shaper.is_complete():
-      console.print(f"[dim]Forking plot - {plot_shaper.get_plot_stage()['name']}...[/dim]")
-      bar_night = plot_shaper.fork_plot()
-      customer_dilemma = cusomer_picker.pick_customer_dilemma(
-          plot_shaper.timeline,
-          bar_night['branch_a'],
-          bar_night['branch_b'],
-          bar_night['events_a'],
-          bar_night['events_b'],
-          log_callback=lambda message: console.print(f"[dim]{message}[/dim]")
-      )
+
+      if os.path.exists(os.path.join(story_node_path, f"{story_node_name}.json")):
+          console.print(f"[bold red]File {story_node_name}.json already exists! Reusing it...[/bold red]")
+          customer_dilemma = json.load(open(os.path.join(story_node_path, f"{story_node_name}.json")))
+      else:
+          console.print(f"[dim]Forking plot - {plot_shaper.get_plot_stage()['name']}...[/dim]")
+          bar_night = plot_shaper.fork_plot()
+          customer_dilemma = cusomer_picker.pick_customer_dilemma(
+              plot_shaper.timeline,
+              bar_night['branch_a'],
+              bar_night['branch_b'],
+              bar_night['events_a'],
+              bar_night['events_b'],
+              log_callback=lambda message: console.print(f"[dim]{message}[/dim]")
+          )
+          
+          console.print(f"[dim]Integrating timeline A...[/dim]")
+          events_a = timeline_integrator.integrate_timeline(
+              plot_shaper.timeline,
+              [*customer_dilemma['transition_events_a'], *bar_night['events_a']],
+              customer_dilemma['customer']['id'],
+              customer_dilemma['dilemma'],
+              customer_dilemma['variant_a'],
+              bar_night['branch_a']
+          )
+          console.print(f"[dim]Integrating timeline B...[/dim]")
+          events_b = timeline_integrator.integrate_timeline(
+              plot_shaper.timeline,
+              [*customer_dilemma['transition_events_b'], *bar_night['events_b']],
+              customer_dilemma['customer']['id'],
+              customer_dilemma['dilemma'],
+              customer_dilemma['variant_b'],
+              bar_night['branch_b']
+          )
+          customer_dilemma['transition_events_a'] = events_a
+          customer_dilemma['transition_events_b'] = events_b
+          customer_dilemma['outcome_a'] = bar_night['branch_a']
+          customer_dilemma['outcome_b'] = bar_night['branch_b']
+
+          with open(os.path.join(story_node_path, f"{story_node_name}.json"), "w") as f:
+              json.dump(customer_dilemma, f, indent=2)
 
       console.print(f"[bold yellow]{customer_dilemma['customer']['name']}: [/bold yellow][white]{customer_dilemma['preceding']}[/white]")
       console.print(f"[bold yellow]{customer_dilemma['customer']['name']}[/bold yellow] [dim]is in a dilemma[/dim] [yellow]{customer_dilemma['dilemma']}[/yellow]")
-
       decision = questionary.select(
           message=f"What's next?",
           choices=[
@@ -62,26 +94,17 @@ if __name__ == "__main__":
           ]
       ).ask()
 
+
       if decision.startswith("1"):
-          events = [*customer_dilemma['transition_events_a'], *bar_night['events_a']]
-          outcome = bar_night['branch_a']
-          customer_choice = customer_dilemma['variant_a']
+          events = customer_dilemma['transition_events_a']
+          outcome = customer_dilemma['outcome_a']
+          story_node_name += "a"
       else:
-          events = [*customer_dilemma['transition_events_b'], *bar_night['events_b']]
-          outcome = bar_night['branch_b']
-          customer_choice = customer_dilemma['variant_a']
+          events = customer_dilemma['transition_events_b']
+          outcome = customer_dilemma['outcome_b']
+          story_node_name += "b"
 
       console.print(f"[dim]Decsion made by[/dim] [yellow bold]{customer_dilemma['customer']['name']}[/yellow bold][dim] leads to[/dim] [yellow bold]{outcome}[/yellow bold]")
-      console.print(f"[dim]Integrating timeline...[/dim]")
-      
-      events = timeline_integrator.integrate_timeline(
-          plot_shaper.timeline,
-          events,
-          customer_dilemma['customer']['id'],
-          customer_dilemma['dilemma'],
-          customer_choice,
-          outcome
-      )
 
       print_table(events)
       plot_shaper.timeline += events

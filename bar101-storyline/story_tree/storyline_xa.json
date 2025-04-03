@@ -1,0 +1,82 @@
+{
+  "customer": {
+    "id": "kdeltov",
+    "name": "Karina Deltov",
+    "sex": "Female",
+    "age": "29",
+    "access": "Semi-public",
+    "details": "Karina is a licensed journalist affiliated with Stenogram, a semi-independent media outlet specializing in administrative transparency and civic processes. She holds dual degrees in investigative journalism and legal systems, and her early reporting on land-use corruption earned her quiet citations in internal policy reviews. Though she avoids overt political posturing, her work is frequently used by reformist blocs within the Civic Audit Network as supporting evidence in committee reviews. She has informal access to mid-ranking bureaucrats and policy editors, and she\u2019s rumored to have once ghostwritten a speech for a Council sub-chair. Karina is single, keeps meticulous notebooks, and spends her weekends in community libraries reviewing physical archives.",
+    "communication": "Speaks like she\u2019s writing headlines in her head. Her questions seem casual \u2014 until you realize they\u2019re traps. Always watching, always writing."
+  },
+  "preceding": "In the midst of mounting BCI disruptions and growing public unrest, Karina encounters Alex at Bar 101, altering her perspective on the root causes and potential angles for her next big report.",
+  "dilemma": "Karina must decide whether to expose potential foreign cyber threats affecting the city, or to focus on internal systemic failures impacting citizens' everyday lives.",
+  "reason": "Karina grapples with balancing the urgency to unearth damaging foreign interference against the need to highlight critical local governance issues without exacerbating public fear.",
+  "variant_a": "Karina chooses to investigate foreign interference, discovering a sophisticated cyber attack targeting city infrastructure.",
+  "transition_events_a": [
+    {
+      "timestamp": "2025-04-10T08:00:00",
+      "visibility": "semi-public",
+      "description": "Karina notices unusual patterns in digital communications linked to city systems. Suspecting foreign involvement, she begins compiling evidence."
+    },
+    {
+      "timestamp": "2025-04-10T13:30:00",
+      "visibility": "internal",
+      "description": "Security analysts, based on Karina's findings, confirm suspicious network activity, pointing to possible cyber infiltration, and initiate defensive measures."
+    },
+    {
+      "timestamp": "2025-04-12T15:00:00",
+      "visibility": "public",
+      "description": "A cyberattack by an external group disrupts airport systems, causing emergency procedures, delays, and cancellations, adding to public unrest."
+    },
+    {
+      "timestamp": "2025-04-15T18:30:00",
+      "visibility": "semi-public",
+      "description": "Public fear intensifies as cryptic messages appear on city media, hinting at chaos, leading to confusion among citizens."
+    },
+    {
+      "timestamp": "2025-04-17T11:45:00",
+      "visibility": "internal",
+      "description": "Investigations discover a trojan horse in city servers, traced back to a foreign entity, escalating security protocols."
+    },
+    {
+      "timestamp": "2025-04-20T09:00:00",
+      "visibility": "public",
+      "description": "A major power outage affects several city districts, sparking safety concerns and debates on the security of city infrastructure."
+    }
+  ],
+  "variant_b": "Karina decides to focus on internal failures, partnering with reformist groups to demand transparency and accountability within city governance.",
+  "transition_events_b": [
+    {
+      "timestamp": "2025-04-10T09:00:00",
+      "visibility": "public",
+      "description": "Karina's investigative reporting sheds light on internal malfunctions within the BCI system, revealing pervasive disruptions affecting daily financial transactions and personal identification. Citizens are now mobilized, demanding transparency and accountability."
+    },
+    {
+      "timestamp": "2025-04-10T13:30:00",
+      "visibility": "internal",
+      "description": "Amid heightened public pressure, city officials convene emergency meetings to address the escalating failures of the BCI system, promising structural audits and immediate corrective measures to restore stability."
+    },
+    {
+      "timestamp": "2025-04-12T11:00:00",
+      "visibility": "internal",
+      "description": "A critical software anomaly inadvertently blocks citizen access to bank records, effectively freezing financial transactions and halting business operations across the city."
+    },
+    {
+      "timestamp": "2025-04-14T09:45:00",
+      "visibility": "public",
+      "description": "City residents face significant hurdles in accessing essential identity documents due to ongoing system errors, leading to frustrations as many find themselves unable to perform basic legal and societal tasks."
+    },
+    {
+      "timestamp": "2025-04-18T14:00:00",
+      "visibility": "semi-public",
+      "description": "During a closed-door meeting, government officials strategize targeted interventions to resolve the BCI issues, emphasizing quick restoration of citizen trust and confidence."
+    },
+    {
+      "timestamp": "2025-04-21T15:00:00",
+      "visibility": "public",
+      "description": "As technical teams make progress, financial and identity systems show signs of stabilization. However, public confidence in the city\u2019s governance framework remains highly fragile, prompting continuous calls for reform."
+    }
+  ],
+  "outcome_a": "Cyberattack from external rivals leads to emergencies and chaos across the city.",
+  "outcome_b": "Algorithmic failure inadvertently turns the financial and identity systems unstable."
+}

@@ -1,0 +1,77 @@
+{
+  "customer": {
+    "id": "trellin",
+    "name": "Tomas Rellin",
+    "sex": "Male",
+    "age": "47",
+    "access": "Internal",
+    "details": "Tomas is a corridor operations supervisor in the Department of Public Infrastructure. His teams manage high-volume sensor arrays, drone navigation beacons, and utility control nodes \u2014 critical systems that keep Stenograd\u2019s automation layers functional. With over two decades in the field, Tomas is known for detecting system anomalies before they become incidents. He has a reputation for running crews efficiently, but he also keeps a private log of procedural inconsistencies, unrecorded reroutes, and unexpected power cycling events. Off-duty, he mentors junior techs and restores vintage transport schematics as a hobby. Through his work, Tomas maintains direct contact with infrastructure liaisons who regularly interface with security forces and emergency response units, granting him visibility into pre-crisis maneuvering.",
+    "communication": "Talks in rambling stories full of side-notes and inside jokes. But somewhere in the middle, there\u2019s always a fact that matters \u2014 if you\u2019re paying attention."
+  },
+  "preceding": "While off-duty at Bar 101, Tomas confided in Alex about growing anomalies in infrastructure systems, revealing his unease with potential surveillance misuse.",
+  "dilemma": "Tomas must decide whether to quietly support reformists by exposing system vulnerabilities or to report issues officially, strengthening government controls.",
+  "reason": "Tomas fears exposing flaws might escalate conflict, while reporting them could legitimize increased surveillance.",
+  "variant_a": "Covertly supports reformists with evidence of system flaws, undermining government control.",
+  "transition_events_a": [
+    {
+      "timestamp": "2025-05-21T10:00:00",
+      "visibility": "private",
+      "description": "Tomas carefully shares data from his private logs with select reformist leaders, revealing vulnerabilities in the city's infrastructure systems."
+    },
+    {
+      "timestamp": "2025-05-23T09:00:00",
+      "visibility": "semi-public",
+      "description": "Reformists mobilize using Tomas's leaked insights, planning coordinated actions to highlight BCI's unreliability. Secret meetings are organized by Maria Sevcik to build an underground resistance network."
+    },
+    {
+      "timestamp": "2025-05-26T14:00:00",
+      "visibility": "public",
+      "description": "A major BCI system failure occurs during rush hour, attributed to overlooked system flaws. The breakdown exacerbates public discontent, leading to widespread criticism of the system's ineffectiveness."
+    },
+    {
+      "timestamp": "2025-05-28T14:00:00",
+      "visibility": "semi-public",
+      "description": "Leaflets are discreetly distributed among citizens, offering advice on minimizing BCI impacts and garnering quiet support for the reformist cause."
+    },
+    {
+      "timestamp": "2025-06-02T11:00:00",
+      "visibility": "public",
+      "description": "A sudden and severe BCI crash coincides with peak travel time, resulting in chaotic commuter delays. Public frustration boils over, sparking protests demanding better system transparency and accountability."
+    }
+  ],
+  "variant_b": "Files official technical reports, giving government leverage for increased surveillance.",
+  "transition_events_b": [
+    {
+      "timestamp": "2025-05-21T09:00:00",
+      "visibility": "internal",
+      "description": "Tomas submits technical anomaly reports, highlighting areas of vulnerability in the city's infrastructure. This prompts a governmental review to identify security weaknesses."
+    },
+    {
+      "timestamp": "2025-05-23T10:00:00",
+      "visibility": "internal",
+      "description": "Government drafts a directive for broader surveillance powers, justified by the need to prevent potential exploits of infrastructural vulnerabilities."
+    },
+    {
+      "timestamp": "2025-05-26T13:30:00",
+      "visibility": "semi-public",
+      "description": "Council debates, then approves, increased security measures in critical areas of infrastructure, with a focus on technological monitoring."
+    },
+    {
+      "timestamp": "2025-05-28T16:00:00",
+      "visibility": "public",
+      "description": "Government announces a phased expansion of surveillance systems to ensure national security, emphasizing transparency and accountability to mitigate public concern."
+    },
+    {
+      "timestamp": "2025-06-03T14:30:00",
+      "visibility": "semi-public",
+      "description": "Heightened surveillance measures are noticed in public areas, sparking discussions about privacy among citizens and civil rights groups."
+    },
+    {
+      "timestamp": "2025-06-05T15:00:00",
+      "visibility": "public",
+      "description": "An official announcement highlights the deployment of advanced surveillance technologies, aimed at maintaining public order and deterring dissent, leading to increased public unease and debates over personal freedoms."
+    }
+  ],
+  "outcome_a": "Citizens start organizing against BCI control, driven by growing frustration.",
+  "outcome_b": "Government increases surveillance, justifying it as necessary for national security."
+}
