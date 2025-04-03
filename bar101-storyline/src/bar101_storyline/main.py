@@ -26,6 +26,53 @@ def print_table(timeline):
 
     console.print(table)
 
+
+def get_customer_dilema(plot_shaper, cusomer_picker, timeline_integrator, story_node_path, story_node_name):
+  
+    if os.path.exists(os.path.join(story_node_path, f"{story_node_name}.json")):
+        console.print(f"[bold red]File {story_node_name}.json already exists! Reusing it...[/bold red]")
+        customer_dilemma = json.load(open(os.path.join(story_node_path, f"{story_node_name}.json")))
+    else:
+        console.print(f"[dim]Forking plot - {plot_shaper.get_plot_stage()['name']}...[/dim]")
+        bar_night = plot_shaper.fork_plot()
+        customer_dilemma = cusomer_picker.pick_customer_dilemma(
+            plot_shaper.timeline,
+            bar_night['branch_a'],
+            bar_night['branch_b'],
+            bar_night['events_a'],
+            bar_night['events_b'],
+            log_callback=lambda message: console.print(f"[dim]{message}[/dim]")
+        )
+        
+        console.print(f"[dim]Integrating timeline A...[/dim]")
+        events_a = timeline_integrator.integrate_timeline(
+            plot_shaper.timeline,
+            [*customer_dilemma['transition_events_a'], *bar_night['events_a']],
+            customer_dilemma['customer']['id'],
+            customer_dilemma['dilemma'],
+            customer_dilemma['variant_a'],
+            bar_night['branch_a']
+        )
+        console.print(f"[dim]Integrating timeline B...[/dim]")
+        events_b = timeline_integrator.integrate_timeline(
+            plot_shaper.timeline,
+            [*customer_dilemma['transition_events_b'], *bar_night['events_b']],
+            customer_dilemma['customer']['id'],
+            customer_dilemma['dilemma'],
+            customer_dilemma['variant_b'],
+            bar_night['branch_b']
+        )
+        customer_dilemma['transition_events_a'] = events_a
+        customer_dilemma['transition_events_b'] = events_b
+        customer_dilemma['outcome_a'] = bar_night['branch_a']
+        customer_dilemma['outcome_b'] = bar_night['branch_b']
+
+        with open(os.path.join(story_node_path, f"{story_node_name}.json"), "w") as f:
+            json.dump(customer_dilemma, f, indent=2)
+
+    return customer_dilemma
+
+
 if __name__ == "__main__":
     console = Console()
     story_node_path = os.path.join(os.path.dirname(__file__), "../../story_tree")
@@ -43,46 +90,13 @@ if __name__ == "__main__":
 
     while not plot_shaper.is_complete():
 
-      if os.path.exists(os.path.join(story_node_path, f"{story_node_name}.json")):
-          console.print(f"[bold red]File {story_node_name}.json already exists! Reusing it...[/bold red]")
-          customer_dilemma = json.load(open(os.path.join(story_node_path, f"{story_node_name}.json")))
-      else:
-          console.print(f"[dim]Forking plot - {plot_shaper.get_plot_stage()['name']}...[/dim]")
-          bar_night = plot_shaper.fork_plot()
-          customer_dilemma = cusomer_picker.pick_customer_dilemma(
-              plot_shaper.timeline,
-              bar_night['branch_a'],
-              bar_night['branch_b'],
-              bar_night['events_a'],
-              bar_night['events_b'],
-              log_callback=lambda message: console.print(f"[dim]{message}[/dim]")
-          )
-          
-          console.print(f"[dim]Integrating timeline A...[/dim]")
-          events_a = timeline_integrator.integrate_timeline(
-              plot_shaper.timeline,
-              [*customer_dilemma['transition_events_a'], *bar_night['events_a']],
-              customer_dilemma['customer']['id'],
-              customer_dilemma['dilemma'],
-              customer_dilemma['variant_a'],
-              bar_night['branch_a']
-          )
-          console.print(f"[dim]Integrating timeline B...[/dim]")
-          events_b = timeline_integrator.integrate_timeline(
-              plot_shaper.timeline,
-              [*customer_dilemma['transition_events_b'], *bar_night['events_b']],
-              customer_dilemma['customer']['id'],
-              customer_dilemma['dilemma'],
-              customer_dilemma['variant_b'],
-              bar_night['branch_b']
-          )
-          customer_dilemma['transition_events_a'] = events_a
-          customer_dilemma['transition_events_b'] = events_b
-          customer_dilemma['outcome_a'] = bar_night['branch_a']
-          customer_dilemma['outcome_b'] = bar_night['branch_b']
-
-          with open(os.path.join(story_node_path, f"{story_node_name}.json"), "w") as f:
-              json.dump(customer_dilemma, f, indent=2)
+      customer_dilemma = get_customer_dilema(
+          plot_shaper, 
+          cusomer_picker, 
+          timeline_integrator, 
+          story_node_path, 
+          story_node_name
+      )
 
       console.print(f"[bold yellow]{customer_dilemma['customer']['name']}: [/bold yellow][white]{customer_dilemma['preceding']}[/white]")
       console.print(f"[bold yellow]{customer_dilemma['customer']['name']}[/bold yellow] [dim]is in a dilemma[/dim] [yellow]{customer_dilemma['dilemma']}[/yellow]")
