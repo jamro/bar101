@@ -33,6 +33,9 @@ class PlotShaper:
         self.world_context = read_context_file(os.path.join(base_path, "world.json"))
         self.plot_structure = read_context_file(os.path.join(base_path, "plot_structure.json"))
 
+    def move_to_next_stage(self):
+        self.plot_stage_index += 1
+
     def fork_plot(self):
         last_error = None
         for i in range(3):
@@ -73,6 +76,8 @@ For each of the branched chapter, create series of {event_count} events that hap
 Events should provide additional context and details to the chapter. Be specific and provide all necessary details.
 The events should be clear, compact and easy to understand.
 Avoid overuse of technical jargon when it could lead to confusion or lack of understanding.
+When referring to system failures, limit to BCI (Behavioral Compliance Index) and it's impact on lifes of citizens.
+Ensure cause and effect are clear and logical for entire timeline.
 
 # Next Chapter: {plot_stage['name']}
 - Purpose: {plot_stage['purpose']}
@@ -145,7 +150,6 @@ Avoid overuse of technical jargon when it could lead to confusion or lack of und
                     "events_b": params["events_b"],
                     "plot_stage": plot_stage
                 }
-                self.plot_stage_index += 1
                 return response
 
         raise Exception("Failed to parse function call response")

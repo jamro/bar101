@@ -33,8 +33,8 @@ Both paths were viable and probable, but {customer_name} ultimately made a decis
 Make sure that actions are inline with the character's personality, background, and motivations.
 
 As a result provide:
-  - Cause: The event or situation that lead the customer's make face the dilemma. Exmplain why it is plausible and inline with the character's profile.
-	-	Dilemma: The key conflict or decision they faced
+  - Cause: One of recent events or situations that lead the customer's make face the dilemma. Explain why it is plausible and inline with the character's profile.
+	-	Dilemma: The key conflict or decision they faced caused by recent events.
   - Reason: Why the customer is unsure about the decision
 	-	Variant A: The choice that leads to VARIANT A from the TIMELINE
   - Transition Events A: 2-3 events that are between the TIMELINE and VARIANT A ensuring the story's transition. It icludes preceding events, customer's actions, and their consequences that leads to VARIANT A. Be specific and provide all necessary details.
@@ -92,7 +92,7 @@ class KeyCustomerPicker:
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
 
     def _pick_customer_dilemma(self, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
-        timeline = timeline[-10:] # last events
+        timeline = timeline[-8:] # last events
         key_customer = self.get_random_customer()
 
         timeline_info = ""

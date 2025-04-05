@@ -35,6 +35,8 @@ Events triggered by the choice made by **{customer_name}**:
 - When neccesary merge or remove events to ensure smooth transition.
 - Adjust time of events to make them more realistic and logical. Make sure the events are in chronological order.
 - Avoid overuse of technical jargon when it could lead to confusion or lack of understanding.
+- Ensure cause and effect relationships are clear and logical.
+- When referring to system failures, limit to BCI (Behavioral Compliance Index) and it's impact on lifes of citizens.
 - Style: compact, informative, easy to understand
 """
 
