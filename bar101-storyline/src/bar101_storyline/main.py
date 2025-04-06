@@ -80,9 +80,14 @@ if __name__ == "__main__":
 
         plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
         dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, plot_a, plot_b, plot_shaper.timeline, variants_chain)
-        customer = get_customer_by_id(dilemma["customer_id"])
-        decision = decide_dilemma(customer, dilemma, plot_a, plot_b)
+        key_customer = get_customer_by_id(dilemma["customer_id"])
+        
 
+        patrons = cusomer_picker.get_random_patrons(key_customer['id'])
+        for patron_id in patrons:
+            console.print(f"[yellow bold]{get_customer_by_id(patron_id)['name']}[/yellow bold][dim] enters the bar...[/dim]")
+
+        decision = decide_dilemma(key_customer, dilemma, plot_a, plot_b)
         if decision == "a":
             variants_chain.append("a")
             choice = dilemma["choice_a"]
@@ -94,13 +99,13 @@ if __name__ == "__main__":
             outcome = plot_b["outcome"]
             events = [*transition_b, *plot_b['events']]
 
-        new_events = integrate_timeline(timeline_integrator, customer, dilemma, choice, outcome, plot_shaper.timeline, events, variants_chain)
+        new_events = integrate_timeline(timeline_integrator, key_customer, dilemma, choice, outcome, plot_shaper.timeline, events, variants_chain)
         print_table(new_events)
 
         plot_shaper.timeline += new_events
         plot_shaper.move_to_next_stage()
 
-        develop_character_story(character_story_builder, customer, dilemma, choice, new_events, variants_chain)
+        develop_character_story(character_story_builder, key_customer, dilemma, choice, new_events, variants_chain)
 
     get_news_spot(news_writter, new_events, outcome, variants_chain)
 

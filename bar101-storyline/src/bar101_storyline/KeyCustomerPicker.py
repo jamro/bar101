@@ -75,6 +75,21 @@ class KeyCustomerPicker:
             raise ValueError("Customers not loaded. Please call read_context() first.")
         
         return random.choice(self.customers)
+    
+    def get_random_patrons(self, key_customer_id, num_patrons=4):
+        if self.customers is None:
+            raise ValueError("Customers not loaded. Please call read_context() first.")
+        
+        all_customer_ids = [customer['id'] for customer in self.customers]
+        
+        patrons = [key_customer_id]
+        while len(patrons) < num_patrons and len(patrons) < len(all_customer_ids):
+            random_customer = random.choice(all_customer_ids)
+            if random_customer not in patrons:
+                patrons.append(random_customer)
+        
+        random.shuffle(patrons)
+        return patrons
 
 
     def pick_customer_dilemma(self, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
