@@ -4,7 +4,9 @@ from PlotShaper import PlotShaper
 from KeyCustomerPicker import KeyCustomerPicker
 from TimelineIntegrator import TimelineIntegrator
 from CharacterStoryBuilder import CharacterStoryBuilder
+from NewsWriter import NewsWriter
 import json
+from rich.panel import Panel
 from rich.console import Console
 from generator import (
     print_table,
@@ -14,7 +16,8 @@ from generator import (
     get_customer_by_id,
     decide_dilemma,
     integrate_timeline,
-    develop_character_story
+    develop_character_story,
+    get_news_spot
 )
 
 # Load environment variables
@@ -31,11 +34,13 @@ if __name__ == "__main__":
     cusomer_picker = KeyCustomerPicker(os.getenv("OPENAI_API_KEY"))
     timeline_integrator = TimelineIntegrator(os.getenv("OPENAI_API_KEY"))
     character_story_builder = CharacterStoryBuilder(os.getenv("OPENAI_API_KEY"))
+    news_writter = NewsWriter(os.getenv("OPENAI_API_KEY"))
     
     plot_shaper.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     cusomer_picker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     timeline_integrator.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     character_story_builder.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
+    news_writter.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
 
     all_characters = character_story_builder.get_characters()
 
@@ -65,8 +70,14 @@ if __name__ == "__main__":
             characters_story[character_id]
         )
 
+    new_events = plot_shaper.timeline
+    outcome = "Marek Halden is found dead"
+
     while not plot_shaper.is_complete():
         create_variant_dirs(variants_chain)
+        
+        get_news_spot(news_writter, new_events, outcome, variants_chain)
+
         plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
         dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, plot_a, plot_b, plot_shaper.timeline, variants_chain)
         customer = get_customer_by_id(dilemma["customer_id"])
@@ -90,5 +101,7 @@ if __name__ == "__main__":
         plot_shaper.move_to_next_stage()
 
         develop_character_story(character_story_builder, customer, dilemma, choice, new_events, variants_chain)
+
+    get_news_spot(news_writter, new_events, outcome, variants_chain)
 
 

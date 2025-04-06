@@ -6,3 +6,4 @@ from .get_customer_by_id import get_customer_by_id
 from .integrate_timeline import integrate_timeline
 from .decide_dilemma import decide_dilemma
 from .develop_character_story import develop_character_story
+from .get_news_spot import get_news_spot

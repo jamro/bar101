@@ -43,6 +43,8 @@ class PlotShaper:
                 response = self._fork_plot()
                 if response is not None:
                     return response
+                else:
+                    raise Exception("No response from the model.")
             except Exception as e:
                 last_error = e
                 print(f"Error occurred: {e}")
