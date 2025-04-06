@@ -78,6 +78,7 @@ The events should be clear, compact and easy to understand.
 Avoid overuse of technical jargon when it could lead to confusion or lack of understanding.
 When referring to system failures, limit to BCI (Behavioral Compliance Index) and it's impact on lifes of citizens.
 Ensure cause and effect are clear and logical for entire timeline.
+Do not repeat events that are already in the timeline - ensure unique plot development.
 
 # Next Chapter: {plot_stage['name']}
 - Purpose: {plot_stage['purpose']}
