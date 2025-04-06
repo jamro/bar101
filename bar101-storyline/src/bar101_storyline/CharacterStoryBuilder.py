@@ -9,6 +9,7 @@ get_system_message = lambda background, character, events, character_story, extr
 Name: {character['name']}
 Age: {character['age']}
 Sex: {character['sex']}
+Job Title: {character['job_title']}
 Access to information: {character['access']}
 {character['details']}
 

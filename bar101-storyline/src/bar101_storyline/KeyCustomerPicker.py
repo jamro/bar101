@@ -121,6 +121,7 @@ class KeyCustomerPicker:
             customers_info += f"## {customer['name']} (ID: {customer['id']})\n"
             customers_info += f" - Age: {customer['age']}\n"
             customers_info += f" - Sex: {customer['sex']}\n"
+            customers_info += f" - Job Title: {customer['job_title']}\n"
             customers_info += f" - Information access level: {customer['access']}\n"
             customers_info += f"{customer['details']}\n"
             customers_info += "\n"
