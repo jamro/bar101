@@ -17,7 +17,8 @@ from generator import (
     decide_dilemma,
     integrate_timeline,
     develop_character_story,
-    get_news_spot
+    get_news_spot,
+    serve_customer
 )
 
 # Load environment variables
@@ -73,6 +74,10 @@ if __name__ == "__main__":
     new_events = plot_shaper.timeline
     outcome = "Marek Halden is found dead"
 
+    customers_model = {}
+    for character_id in all_characters:
+        customers_model[character_id] = { "trust": 0 }
+
     while not plot_shaper.is_complete():
         create_variant_dirs(variants_chain)
         
@@ -84,10 +89,12 @@ if __name__ == "__main__":
         
 
         patrons = cusomer_picker.get_random_patrons(key_customer['id'])
+        decision = 'a'
         for patron_id in patrons:
-            console.print(f"[yellow bold]{get_customer_by_id(patron_id)['name']}[/yellow bold][dim] enters the bar...[/dim]")
+            serve_customer(patron_id, customers_model)
+            if patron_id == key_customer['id']:
+                decision = decide_dilemma(key_customer, dilemma, plot_a, plot_b)
 
-        decision = decide_dilemma(key_customer, dilemma, plot_a, plot_b)
         if decision == "a":
             variants_chain.append("a")
             choice = dilemma["choice_a"]

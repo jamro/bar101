@@ -10,6 +10,73 @@
       "details": "Former systems technician involved in early Stenograd infrastructure, specializing in biometric and off-grid node integration. Removed in 2021 for 'non-aligned behavior.' Vanished from records until 2024, when he reappeared as the operator of Bar 101 — an unregistered, surveillance-free bar beneath a disused tram station. Radan has no official ties to any Council faction but is known to interact with members of all three. His BCI score is unlisted. The bar remains open despite multiple compliance violations, suggesting high-level protection. Known for discretion, technical knowledge, and a history that no one in power seems eager to dig up",
       "communication": "Speaks rarely and with quiet precision — each word deliberate, often letting silence carry more meaning than speech."
     },
+    "drinks": {
+      "daiquiri": {
+        "id": "daiquiri",
+        "name": "Daiquiri",
+        "glass": "coupe",
+        "mixing": "shaken",
+        "ingredients": [
+          { "name": "White Rum", "amount": "60" },
+          { "name": "Lime Juice", "amount": "25" },
+          { "name": "Simple Syrup", "amount": "15" }
+        ]
+      },
+      "old_fashioned": {
+        "id": "old_fashioned",
+        "name": "Old Fashioned",
+        "glass": "rocks",
+        "mixing": "stirred",
+        "ingredients": [
+          { "name": "Whiskey", "amount": "60" },
+          { "name": "Simple Syrup", "amount": "10" },
+          { "name": "Lime Juice", "amount": "5" }
+        ]
+      },
+      "gimlet": {
+        "id": "gimlet",
+        "name": "Gimlet",
+        "glass": "coupe",
+        "mixing": "shaken",
+        "ingredients": [
+          { "name": "Gin", "amount": "60" },
+          { "name": "Lime Juice", "amount": "30" },
+          { "name": "Simple Syrup", "amount": "15" }
+        ]
+      },
+      "negroni": {
+        "id": "negroni",
+        "name": "Negroni",
+        "glass": "rocks",
+        "mixing": "stirred",
+        "ingredients": [
+          { "name": "Gin", "amount": "30" },
+          { "name": "Triple Sec", "amount": "30" },
+          { "name": "Sweet Vermouth", "amount": "30" }
+        ]
+      },
+      "dry_martini": {
+        "id": "dry_martini",
+        "name": "Dry Martini",
+        "glass": "coupe",
+        "mixing": "stirred",
+        "ingredients": [
+          { "name": "Gin", "amount": "60" },
+          { "name": "Dry Vermouth", "amount": "15" }
+        ]
+      },
+      "sidecar": {
+        "id": "sidecar",
+        "name": "Sidecar",
+        "glass": "coupe",
+        "mixing": "shaken",
+        "ingredients": [
+          { "name": "Whiskey", "amount": "45" },
+          { "name": "Triple Sec", "amount": "25" },
+          { "name": "Lemon Juice", "amount": "20" }
+        ]
+      }
+    },
     "customers": [
       {
         "id": "olintz",
@@ -18,6 +85,7 @@
         "age": 38,
         "access": "internal",
         "job_title": "Behavioral Pattern Analyst",
+        "drink": "daiquiri",
         "details": "Oksana works in the Central Oversight Directorate, helping the system flag unusual behavior patterns in citizens. She used to believe the BCI protected social order — until she saw people blocked from basic services over minor nonconformities. She lives alone in a government-managed block and rarely speaks at meetings. Her growing discomfort with the system brings her to Bar 101 more often than she admits.",
         "communication": "Precise, analytical, but often hesitant mid-sentence — always measuring the risk of what she says.",
         "secret": "She’s been quietly altering flagging thresholds to protect certain citizens from system escalation.",
@@ -30,6 +98,7 @@
         "age": 61,
         "access": "private",
         "job_title": "Former Executive Assistant to the Council Secretariat",
+        "drink": "old_fashioned",
         "details": "Nikola spent over a decade assisting Council members — managing calendars, meetings, and message approvals. He knows how the Council thinks and how its members maneuver around each other. Now retired, he lives on a modest pension in a low-visibility zone and still carries a locked briefcase from his final year in service. No one knows what’s inside, but some believe it holds documents not meant to survive Halden.",
         "communication": "Measured and polite, often speaking in half-statements or coded references — trusts paper more than people.",
         "secret": "He has a full backup of a restricted Council protocol that was supposed to be erased after Halden’s death.",
@@ -42,6 +111,7 @@
         "age": 34,
         "access": "semi-public",
         "job_title": "Firmware Technician – Wearable Health Division",
+        "drink": "gimlet",
         "details": "Daria works in a government lab maintaining the wristbands worn by most citizens. They track movement, health, and mood. Officially, she ensures system updates work smoothly. Unofficially, she knows how to make someone’s data look clean — or vanish completely. She doesn’t talk about her younger brother, who disappeared during a BCI audit. She’s careful, quiet, and trusted by people with something to hide.",
         "communication": "Quiet, direct, and technically precise — avoids eye contact, but never misses a detail.",
         "secret": "She’s hiding a copy of her brother’s final BCI data packet — including a redacted internal flag.",
@@ -54,6 +124,7 @@
         "age": 45,
         "access": "semi-public",
         "job_title": "Independent Systems Maintenance Contractor",
+        "drink": "negroni",
         "details": "Lenart fixes problems in the city’s infrastructure — faulty building systems, broken service networks, or data mismatches. He used to work for the state full-time but now takes private contracts. He has no formal affiliations but is on friendly terms with people from all three factions. He rents a workshop no one visits twice and trades his services for favors more often than credits.",
         "communication": "Wry and unhurried, often dryly humorous — speaks like someone who knows he's needed.",
         "secret": "He keeps access credentials to defunct system layers that shouldn’t exist anymore — or so the Council believes.",
@@ -66,6 +137,7 @@
         "age": 40,
         "access": "private",
         "job_title": "Strategic Messaging Advisor",
+        "drink": "dry_martini",
         "details": "Sven writes the speeches and public statements read by faction leaders. He rarely appears in public but has shaped the way Stenograd talks about compliance, security, and order. He keeps copies of every version — even the ones that were never supposed to be shared. He lives in a restricted zone and comes to Bar 101 only after major policy shifts, always with a notebook.",
         "communication": "Eloquent, slightly theatrical — uses language like a weapon and never says more than he has to.",
         "secret": "He’s been keeping his own predictive model of Council instability based on unpublished speech edits.",
@@ -78,6 +150,7 @@
         "age": 36,
         "access": "semi-public",
         "job_title": "State Media Correspondent",
+        "drink": "sidecar",
         "details": "Rada works for state media, covering government programs and public compliance. But off the record, she saves raw footage, edits out what’s missing, and passes it through encrypted channels. She’s received two silent warnings from her employer — both ignored. Raised by a BCI officer, she knows how stories are shaped. Bar 101 is where she goes to watch the real news unfold.",
         "communication": "Engaging and sharp, always probing — speaks like she’s interviewing you, even when she’s not.",
         "secret": "She has enough suppressed footage to discredit at least two Council members — but she’s waiting for the right moment.",
