@@ -7,6 +7,7 @@ from CharacterStoryBuilder import CharacterStoryBuilder
 from ChatOpenerEngine import ChatOpenerEngine
 from NewsWriter import NewsWriter
 import json
+import random
 from rich.panel import Panel
 from rich.console import Console
 from generator import (
@@ -81,7 +82,7 @@ if __name__ == "__main__":
 
     customers_model = {}
     for character_id in all_characters:
-        customers_model[character_id] = { "trust": -1 }
+        customers_model[character_id] = { "trust": -2 + int(5 * random.random()) }
 
     while not plot_shaper.is_complete():
         create_variant_dirs(variants_chain)
