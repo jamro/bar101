@@ -8,3 +8,4 @@ from .decide_dilemma import decide_dilemma
 from .develop_character_story import develop_character_story
 from .get_news_spot import get_news_spot
 from .serve_customer import serve_customer
+from .get_bar_visitors import get_bar_visitors

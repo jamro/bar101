@@ -4,6 +4,7 @@ from PlotShaper import PlotShaper
 from KeyCustomerPicker import KeyCustomerPicker
 from TimelineIntegrator import TimelineIntegrator
 from CharacterStoryBuilder import CharacterStoryBuilder
+from ChatOpenerEngine import ChatOpenerEngine
 from NewsWriter import NewsWriter
 import json
 from rich.panel import Panel
@@ -18,7 +19,8 @@ from generator import (
     integrate_timeline,
     develop_character_story,
     get_news_spot,
-    serve_customer
+    serve_customer,
+    get_bar_visitors
 )
 
 # Load environment variables
@@ -36,12 +38,14 @@ if __name__ == "__main__":
     timeline_integrator = TimelineIntegrator(os.getenv("OPENAI_API_KEY"))
     character_story_builder = CharacterStoryBuilder(os.getenv("OPENAI_API_KEY"))
     news_writter = NewsWriter(os.getenv("OPENAI_API_KEY"))
+    chat_opener_engine = ChatOpenerEngine(os.getenv("OPENAI_API_KEY"))
     
     plot_shaper.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     cusomer_picker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     timeline_integrator.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     character_story_builder.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     news_writter.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
+    chat_opener_engine.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
 
     all_characters = character_story_builder.get_characters()
 
@@ -73,25 +77,28 @@ if __name__ == "__main__":
 
     new_events = plot_shaper.timeline
     outcome = "Marek Halden is found dead"
+    outcome_timeline = [outcome]
 
     customers_model = {}
     for character_id in all_characters:
-        customers_model[character_id] = { "trust": 0 }
+        customers_model[character_id] = { "trust": -1 }
 
     while not plot_shaper.is_complete():
         create_variant_dirs(variants_chain)
         
         get_news_spot(news_writter, new_events, outcome, variants_chain)
 
-        plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
-        dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, plot_a, plot_b, plot_shaper.timeline, variants_chain)
-        key_customer = get_customer_by_id(dilemma["customer_id"])
-        
+        console.print("\n[bold cyan]Press Enter to continue...[/bold cyan]")
+        input()
 
-        patrons = cusomer_picker.get_random_patrons(key_customer['id'])
+        plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
+        dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, plot_a, plot_b, plot_shaper.timeline, outcome_timeline, variants_chain)
+        key_customer = get_customer_by_id(dilemma["customer_id"])
+
+        patrons = get_bar_visitors(cusomer_picker, key_customer['id'], variants_chain)
         decision = 'a'
         for patron_id in patrons:
-            serve_customer(patron_id, customers_model)
+            serve_customer(chat_opener_engine, patron_id, customers_model, characters_story[patron_id], outcome_timeline, new_events, variants_chain)
             if patron_id == key_customer['id']:
                 decision = decide_dilemma(key_customer, dilemma, plot_a, plot_b)
 
@@ -106,13 +113,14 @@ if __name__ == "__main__":
             outcome = plot_b["outcome"]
             events = [*transition_b, *plot_b['events']]
 
+        outcome_timeline.append(outcome)
         new_events = integrate_timeline(timeline_integrator, key_customer, dilemma, choice, outcome, plot_shaper.timeline, events, variants_chain)
         print_table(new_events)
 
         plot_shaper.timeline += new_events
         plot_shaper.move_to_next_stage()
 
-        develop_character_story(character_story_builder, key_customer, dilemma, choice, new_events, variants_chain)
+        characters_story = develop_character_story(character_story_builder, key_customer, dilemma, choice, new_events, variants_chain)
 
     get_news_spot(news_writter, new_events, outcome, variants_chain)
 

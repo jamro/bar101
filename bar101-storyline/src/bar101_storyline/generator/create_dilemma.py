@@ -6,7 +6,7 @@ from rich.console import Console
 
 console = Console()
 
-def create_dilemma(cusomer_picker, plot_a, plot_b, timeline, variants_chain):
+def create_dilemma(cusomer_picker, plot_a, plot_b, timeline, outcome_timeline, variants_chain):
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
     dilemma_path = os.path.join(story_root, *variants_chain, "dilemma.json")
     transition_a_path = os.path.join(story_root, *variants_chain, "a", "_transition.json")
@@ -19,6 +19,7 @@ def create_dilemma(cusomer_picker, plot_a, plot_b, timeline, variants_chain):
         return dilemma, transition_a, transition_b
 
     customer_dilemma = cusomer_picker.pick_customer_dilemma(
+        outcome_timeline,
         timeline,
         plot_a['outcome'],
         plot_b['outcome'],

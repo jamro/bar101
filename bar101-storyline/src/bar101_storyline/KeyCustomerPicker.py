@@ -3,7 +3,7 @@ import os
 import json
 import random
 
-get_system_message = lambda world_context, customers_info, timeline_info: f"""# BACKGROUND
+get_system_message = lambda world_context, customers_info, outcome_info, timeline_info: f"""# BACKGROUND
 {world_context['background']}
 
 # BAR 101
@@ -11,6 +11,9 @@ get_system_message = lambda world_context, customers_info, timeline_info: f"""# 
 
 # BAR 101 CUSTOMERS
 {customers_info}
+
+# STORY SUMMARY
+{outcome_info}
 
 # TIMELINE
 {timeline_info}
@@ -92,11 +95,11 @@ class KeyCustomerPicker:
         return patrons
 
 
-    def pick_customer_dilemma(self, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
+    def pick_customer_dilemma(self, outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
         last_error = None
         for i in range(3):
             try:
-                response = self._pick_customer_dilemma(timeline, branch_a, branch_b, events_a, events_b, log_callback)
+                response = self._pick_customer_dilemma(outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, log_callback)
                 if response is not None:
                     return response
                 else:
@@ -108,7 +111,7 @@ class KeyCustomerPicker:
 
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
 
-    def _pick_customer_dilemma(self, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
+    def _pick_customer_dilemma(self, outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
         timeline = timeline[-8:] # last events
         key_customer = self.get_random_customer()
 
@@ -126,7 +129,8 @@ class KeyCustomerPicker:
             customers_info += f"{customer['details']}\n"
             customers_info += "\n"
 
-        system_message = get_system_message(self.world_context, customers_info, timeline_info)
+        outcome_info = "\n".join([f" - {event}" for event in outcome_timeline])
+        system_message = get_system_message(self.world_context, customers_info, outcome_info, timeline_info)
         prompt = get_dilemma_prompt(key_customer['name'], branch_a, branch_b, events_a, events_b)
 
         messages = [
