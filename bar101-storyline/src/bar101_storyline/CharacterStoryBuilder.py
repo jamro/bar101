@@ -24,6 +24,7 @@ Access to information: {character['access']}
 
 get_prompt = lambda: f"""You are provided with:
 - A CHARACTER PROFILE (background, beliefs, occupation, emotional state, relationships, etc.)
+- CHARACTER'S CURRENT STORY (what has happened to them so far)
 - A set of RECENT GLOBAL EVENTS (from the past few days)
 
 # Your Task:
@@ -47,10 +48,12 @@ Language: Plain, specific, and unambiguous. No metaphors or poetic phrases.
  - A new action or behavior
  - A shift in thinking or habits
  - A lasting effect or unresolved issue
-5. Specificity - Use clear, concrete details. Avoid vague words like “pressure,” “distress,” or “disruption.” Show exactly what changed and how.
+5. Specificity - Include a specific situation as an example that happend within one day. Use clear, concrete details. Avoid vague words like “pressure,” “distress,” or “disruption.” Show exactly what changed and how.
 6. Narrative Continuity - The paragraph should logically extend the character’s arc, not feel like a standalone moment.
 7. Avoid Overuse of Technical Terms - Use domain-specific language only when necessary, and only if the meaning is immediately clear in context. Avoid jargon or abbreviations that require explanation.
 8. Narrative Continuity - The paragraph must extend CHARACTER'S CURRENT STORY. Do not restate past facts or reset the narrative. Build on what the character is already experiencing.
+9. If it was explicitly stated that the character faced a DILEMMA recently, begin the story with the dilemma - make their decision and central to the plot.
+10. Style - Engaging and easy to understand.
 
 # Optional structure for clarity:
 Event -> Immediate disruption -> Emotional or behavioral shift -> Coping or adaptation -> Lingering tension or result

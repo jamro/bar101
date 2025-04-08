@@ -27,8 +27,8 @@ def develop_character_story(character_story_builder, customer, dilemma, choice, 
         console.print(f"[dim]Creating story for character {character_id}...[/dim]")
         extra_context = ""
         if character_id == customer["id"]:
-            extra_context = f"""
-            The character face a dilemma: {dilemma['dilemma']}
+            extra_context = f""" # DILEMMA
+            Before RECENT GLOBAL EVENTS The character faced a dilemma: {dilemma['dilemma']}
             The dilema is caused by: {dilemma['reason']}
             The character decides to: {choice}
             """
