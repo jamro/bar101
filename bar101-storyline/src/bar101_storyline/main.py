@@ -5,6 +5,7 @@ from KeyCustomerPicker import KeyCustomerPicker
 from TimelineIntegrator import TimelineIntegrator
 from CharacterStoryBuilder import CharacterStoryBuilder
 from ChatOpenerEngine import ChatOpenerEngine
+from ChatStoryEngine import ChatStoryEngine
 from NewsWriter import NewsWriter
 import json
 import random
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     character_story_builder = CharacterStoryBuilder(os.getenv("OPENAI_API_KEY"))
     news_writter = NewsWriter(os.getenv("OPENAI_API_KEY"))
     chat_opener_engine = ChatOpenerEngine(os.getenv("OPENAI_API_KEY"))
+    chat_story_engine = ChatStoryEngine(os.getenv("OPENAI_API_KEY"))
     
     plot_shaper.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     cusomer_picker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
@@ -47,6 +49,7 @@ if __name__ == "__main__":
     character_story_builder.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     news_writter.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     chat_opener_engine.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
+    chat_story_engine.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
 
     all_characters = character_story_builder.get_characters()
 
@@ -99,7 +102,16 @@ if __name__ == "__main__":
         patrons = get_bar_visitors(cusomer_picker, key_customer['id'], variants_chain)
         decision = 'a'
         for patron_id in patrons:
-            serve_customer(chat_opener_engine, patron_id, customers_model, characters_story[patron_id], outcome_timeline, new_events, variants_chain)
+            serve_customer(
+                chat_opener_engine, 
+                chat_story_engine, 
+                patron_id, 
+                customers_model, 
+                characters_story[patron_id], 
+                outcome_timeline, 
+                new_events, 
+                variants_chain
+            )
             if patron_id == key_customer['id']:
                 decision = decide_dilemma(key_customer, dilemma, plot_a, plot_b)
 

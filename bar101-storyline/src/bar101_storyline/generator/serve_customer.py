@@ -15,7 +15,7 @@ console = Console()
 
 
 def print_customer_chat(customer, text, customers=None):
-    sleep(0.5)
+    sleep(0.1)
     console.print(Padding(
         Panel(
             text,
@@ -25,7 +25,7 @@ def print_customer_chat(customer, text, customers=None):
     ))
 
 def print_alex_chat(text):
-    sleep(0.5)
+    sleep(0.1)
     console.print(Padding(
         Panel(
             f"[magenta]{text}[/magenta]",
@@ -81,7 +81,7 @@ def print_serve_drink(customer):
        ```\"\"\"\"```
                   [/yellow]""")
 
-def serve_customer(chat_opener_engine, customer_id, customers, recent_story, outcome_timeline, events, variants_chain):
+def serve_customer(chat_opener_engine, chat_story_engine, customer_id, customers, recent_story, outcome_timeline, events, variants_chain):
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
     customer = get_customer_by_id(customer_id)
 
@@ -140,3 +140,54 @@ def serve_customer(chat_opener_engine, customer_id, customers, recent_story, out
             customers[customer_id]["trust"] -= 1
             console.print(f"[red]{customer['name']} Trust -1[/red]")
             print_customer_chat(customer, opener['wrong_hobby_answer'], customers)
+    print_customer_chat(customer, "...", customers)
+
+    # Continue the conversation
+    console.print("\n[bold cyan]Press Enter to continue...[/bold cyan]")
+    input()
+    main_convo_path = os.path.join(story_root, *variants_chain, f"chat_{customer['id']}_main.json")
+    console.print(f"[dim]Generating main dialogue...[/dim]")
+    if not os.path.exists(main_convo_path):
+        opener = chat_story_engine.get_opener()
+        conversation = chat_story_engine.get_conversation(
+            opener, 
+            customer_id, 
+            recent_story, 
+            outcome_timeline, 
+            events, 
+            log_callback=console.print
+        )
+        with open(main_convo_path, "w") as f:
+            json.dump(conversation, f, indent=2)
+    else:
+        conversation = json.load(open(main_convo_path, "r"))
+        opener = conversation['main']['opener']
+
+    print_alex_chat(opener)
+    monologue = conversation['main']['variants'][get_trust_level(customer_id, customers)]
+    for msg in monologue:
+        print_customer_chat(customer, msg, customers)
+
+    decision = questionary.select(message=f"Alex:", choices=[
+        f"1: {conversation['emotional']['opener']}",
+        f"2: {conversation['factual']['opener']}",
+    ]).ask()
+
+    decision = int(decision[0])
+    if decision == 1:
+        print_alex_chat(conversation['emotional']['opener'])
+        customers[customer_id]["trust"] += 1
+        console.print(f"[green]{customer['name']} Trust +1[/green]")
+        monologue = conversation['emotional']['variants'][get_trust_level(customer_id, customers)]
+        for msg in monologue:
+            print_customer_chat(customer, msg, customers)
+    else:
+        print_alex_chat(conversation['factual']['opener'])
+        monologue = conversation['factual']['variants'][get_trust_level(customer_id, customers)]
+        for msg in monologue:
+            print_customer_chat(customer, msg, customers)
+
+        customers[customer_id]["trust"] -= 1
+        console.print(f"[red]{customer['name']} Trust -1[/red]")
+
+    

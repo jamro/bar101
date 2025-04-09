@@ -108,7 +108,7 @@ get_neutral_prompt = lambda customer, question: f"""Imagine you are {customer['n
 Once you have entered the bar, bartender Alex served you a drink and started a conversation by asking you: "{question}".
 Write a short monologue in response - not a dialogue. 
 Use this moment to reveal hobby of {customer['name']} and related activities. 
-Assume the bartender doesn't know what her hobby is.
+Assume the bartender doesn't know what your hobby is.
 
 # Guidelines
 - Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
@@ -118,7 +118,7 @@ Assume the bartender doesn't know what her hobby is.
 - Make sure details about hobby are realistic and technically correct - do not make things up
 - Do not ask questions or request any actions from Alex
 - Monologue should end naturally — no need for dramatic conclusion or exit line
-- Ensure smooth and natural transtion from answering bartender's to talking about her hobby
+- Ensure smooth and natural transtion from answering bartender's to talking about your hobby
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
 
 # Variants
@@ -127,11 +127,11 @@ Write five monologue variants, each reflecting a different level of trust {custo
 - Suspicious: Gives a bit more, but still cautious
 - Neutral: Comfortable enough to speak plainly
 - Trusting: Open and more personal
-- Very Trusting: Speaks freely, includes more background about herself and the world
+- Very Trusting: Speaks freely, includes more background about yourself and the world
 
 # Across all versions:
-- ALWAYS mention her hobby explicite and something related to it
-- ALWAYS refer to some recent event that affected her hobby
+- ALWAYS mention your hobby explicite and something related to it
+- ALWAYS refer to some recent event that affected your hobby
 - As trust increases, shift from public and widely known information to private insights, personal experiences, and secrets known only by the character
 - Include world background and recent events appropriate to the level of trust
 
@@ -162,10 +162,10 @@ Write five monologue variants, each reflecting a different level of trust {custo
 - Suspicious: Gives a bit more, but still cautious
 - Neutral: Comfortable enough to speak plainly
 - Trusting: Open and more personal
-- Very Trusting: Speaks freely, includes more background about herself and the world
+- Very Trusting: Speaks freely, includes more background about yourself and the world
 
 # Across all versions:
-- ALWAYS refer to some recent event that affected her hobby
+- ALWAYS refer to some recent event that affected your hobby
 - As trust increases, shift from public and widely known information to private insights, personal experiences, and secrets known only by the character
 - Include world background and recent events appropriate to the level of trust
 
