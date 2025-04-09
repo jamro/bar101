@@ -92,7 +92,7 @@ Comunication style: {customer['communication']}
 """
 
 get_hobby_story_prompt = lambda customer: f"""You are {customer['name']}.
-Write a realistic and engaging story (100-150 words) describing a recent situation in which 
+Write a realistic and engaging story (150-200 words) describing a recent situation in which 
 RECENT GLOBAL EVENTS impacted your personal hobby.
 
 # Instructions:
@@ -114,6 +114,8 @@ Assume the bartender doesn't know what her hobby is.
 - Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
 - Tone: Conversational and natural
 - Language: Avoid technical jargon, vague statements, or overly generic wording
+- Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.
+- Make sure details about hobby are realistic and technically correct - do not make things up
 - Do not ask questions or request any actions from Alex
 - Monologue should end naturally — no need for dramatic conclusion or exit line
 - Ensure smooth and natural transtion from answering bartender's to talking about her hobby
@@ -141,10 +143,10 @@ get_hobby_prompt = lambda customer, question: f"""Imagine you are {customer['nam
 Once you have entered the bar, bartender Alex served you a drink and started a conversation by asking you about your hobby: "{question}".
 Write a short monologue in response - not a dialogue. 
 Use this moment to reveal how recent global events afected hobby of {customer['name']}
-Use only information that the {customer['name']} would know/
+Use only information that the {customer['name']} would know
 
 # Guidelines
-- Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
+- Format: 5-9 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
 - Tone: Conversational and natural
 - Language: Avoid technical jargon, vague statements, or overly generic wording
 - Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.

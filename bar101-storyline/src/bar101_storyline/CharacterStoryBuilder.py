@@ -42,7 +42,7 @@ Language: Plain, specific, and unambiguous. No metaphors or poetic phrases.
 # Content Rules:
 1. External Events Only - The character does not cause or influence the events. Show how outside forces change their behavior or thinking.
 2. Two Related Events - Select two events that interact or build on each other. Show how both lead to a noticeable change.
-3. Lived Impact - Do not describe the events directly. Instead, show their effect on routines, decisions, environments, or relationships.
+3. Lived Impact - Do not describe the events directly. Instead, show their effect on behaviour, decisions, environments, or relationships.
 4. Cause and Effect - Ensure each sentence shows either:
  - A direct consequence of the events
  - A new action or behavior
