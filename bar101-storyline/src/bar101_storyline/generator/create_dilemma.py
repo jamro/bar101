@@ -30,11 +30,13 @@ def create_dilemma(cusomer_picker, plot_a, plot_b, timeline, outcome_timeline, v
 
     dilemma = {
         "customer_id": customer_dilemma["customer"]["id"],
-        "preceding": customer_dilemma["preceding"],
+        "trigger_event": customer_dilemma["trigger_event"],
         "dilemma": customer_dilemma["dilemma"],
         "reason": customer_dilemma["reason"],
         "choice_a": customer_dilemma["variant_a"],
+        "emotions_a": customer_dilemma["emotional_drivers_a"],
         "choice_b": customer_dilemma["variant_b"],
+        "emotions_b": customer_dilemma["emotional_drivers_b"],
     }
     transition_a = customer_dilemma['transition_events_a']
     transition_b = customer_dilemma['transition_events_b']

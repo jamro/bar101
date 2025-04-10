@@ -37,19 +37,21 @@ Make sure that actions are inline with the character's personality, background, 
 
 As a result provide:
   - Cause: One of recent events or situations that lead the customer's make face the dilemma. Explain why it is plausible and inline with the character's profile.
-	-	Dilemma: The key conflict or decision they faced caused by recent events.
+	-	Dilemma: The key conflict or decision they faced. It must be logical result of the Cause from previous step.
   - Reason: Why the customer is unsure about the decision
 	-	Variant A: The choice that leads to VARIANT A from the TIMELINE
-  - Transition Events A: 2-3 events that are between the TIMELINE and VARIANT A ensuring the story's transition. It icludes preceding events, customer's actions, and their consequences that leads to VARIANT A. Be specific and provide all necessary details.
+  - Emotional Drivers A: 3 emotional drivers that lead character to choose VARIANT A.
+  - Transition Events A: 2-3 events that are between the TIMELINE and VARIANT A ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT A. Be specific and provide all necessary details.
 	-	Variant B: The choice that leads to VARIANT B from the TIMELINE
-  - Transition Events B: 2-3 events that are between the TIMELINE and VARIANT B ensuring the story's transition. It icludes preceding events, customer's actions, and their consequences that leads to VARIANT B. Be specific and provide all necessary details.
+  - Emotional Drivers B: 3 emotional drivers that lead character to choose VARIANT B. (make sure they are different from the emotional drivers A)
+  - Transition Events B: 2-3 events that are between the TIMELINE and VARIANT B ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT B. Be specific and provide all necessary details.
 """
 
 get_refine_prompt = lambda: f"""
 `refine_customer_dilemma` to make it more vivid, emotionally engaging, and clearly binary, ensuring both choices are mutually exclusive and lead to distinct story outcomes (VARIANT A or VARIANT B).
 Maintain the customer's connection to Alex, the bartender, as a key influence on their thought process.
 Make sure a smooth and logical transition from the TIMELINE to the VARIANT A and VARIANT B.
-Include in transition events the preceding events, customer's actions, and their consequences that leads to VARIANT A and VARIANT B.
+Include in transition events the trigger_event events, customer's actions, and their consequences that leads to VARIANT A and VARIANT B.
 Keep minimal number of events that ensures smooth and logical story transition.
 Avoid overuse of technical jargon when it could lead to confusion or lack of understanding.
 """
@@ -154,7 +156,7 @@ class KeyCustomerPicker:
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "preceding": {
+                            "trigger_event": {
                                 "type": "string",
                                 "description": f"One sentence description of the event that lead {key_customer['name']} to face the dilemma. Style: concise, clear, and easy to understand."
                             },
@@ -169,6 +171,14 @@ class KeyCustomerPicker:
                             "variant_a": {
                                 "type": "string",
                                 "description": "The choice that leads to VARIANT A. Style: concise, clear, and easy to understand."
+                            },
+                            "emotional_drivers_a": {
+                                "type": "array",
+                                "description": f"Three emotional drivers that lead character to choose VARIANT A.",
+                                "items": {
+                                    "type": "string",
+                                    "description": "One word description of the emotional driver. Style: concise, clear, and easy to understand. For example: 'fear', 'joy', 'sadness', 'anger', 'disgust', 'surprise'."
+                                }
                             },
                             "transition_events_a": {
                                 "type": "array",
@@ -187,6 +197,14 @@ class KeyCustomerPicker:
                                 "type": "string",
                                 "description": "The choice that leads to VARIANT B. Style: concise, clear, and easy to understand."
                             },
+                            "emotional_drivers_b": {
+                                "type": "array",
+                                "description": f"Three emotional drivers that lead character to choose VARIANT B.",
+                                "items": {
+                                    "type": "string",
+                                    "description": "One word description of the emotional driver. Style: concise, clear, and easy to understand. For example: 'fear', 'joy', 'sadness', 'anger', 'disgust', 'surprise'."
+                                }
+                            },
                             "transition_events_b": {
                                 "type": "array",
                                 "description": f"The events related to {key_customer['name']}'s decision that ensures smooth transition from the TIMELINE to VARIANT B.",
@@ -201,7 +219,7 @@ class KeyCustomerPicker:
                                 }
                             },
                         },
-                        "required": ["customer_id", "dilemma", "reason", "variant_a", "transition_events_a", "variant_b", "transition_events_b"]
+                        "required": ["customer_id", "dilemma", "reason", "variant_a", "emotional_drivers_a", "transition_events_a", "variant_b", "emotional_drivers_b", "transition_events_b"]
                     }
                 }
             ]
@@ -214,12 +232,14 @@ class KeyCustomerPicker:
 
                 response = {
                     "customer": key_customer,
-                    "preceding": params["preceding"],
+                    "trigger_event": params["trigger_event"],
                     "dilemma": params["dilemma"],
                     "reason": params["reason"],
                     "variant_a": params["variant_a"],
+                    "emotional_drivers_a": params["emotional_drivers_a"],
                     "transition_events_a": params["transition_events_a"],
                     "variant_b": params["variant_b"],
+                    "emotional_drivers_b": params["emotional_drivers_b"],
                     "transition_events_b": params["transition_events_b"],
                 }
                 return response

@@ -11,7 +11,7 @@ import questionary
 console = Console()
 
 def decide_dilemma(customer, dilemma, plot_a, plot_b):
-    console.print(f"[bold yellow]{customer['name']}: [/bold yellow][white]{dilemma['preceding']}[/white]")
+    console.print(f"[bold yellow]{customer['name']}: [/bold yellow][white]{dilemma['trigger_event']}[/white]")
     console.print(f"[bold yellow]{customer['name']}[/bold yellow] [dim]is in a dilemma[/dim] [yellow]{dilemma['dilemma']}[/yellow]")
     decision = questionary.select(
         message=f"What's next?",
