@@ -40,11 +40,12 @@ As a result provide:
 	-	Dilemma: The key conflict or decision they faced. It must be logical result of the Cause from previous step.
   - Reason: Why the customer is unsure about the decision
 	-	Variant A: The choice that leads to VARIANT A from the TIMELINE
-  - Emotional Drivers A: 3 emotional drivers that lead character to choose VARIANT A.
+  - Belief A: Belief of {customer_name} that leads to chose VARIANT A. It must be opposite of the belief B.
   - Transition Events A: 2-3 events that are between the TIMELINE and VARIANT A ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT A. Be specific and provide all necessary details.
 	-	Variant B: The choice that leads to VARIANT B from the TIMELINE
-  - Emotional Drivers B: 3 emotional drivers that lead character to choose VARIANT B. (make sure they are different from the emotional drivers A)
+  - Belief B: Belief of {customer_name} that leads to chose VARIANT B. It must be opposite of the belief A.
   - Transition Events B: 2-3 events that are between the TIMELINE and VARIANT B ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT B. Be specific and provide all necessary details.
+  - Preference: Variant that {customer_name} prefers. It must be aligned with character profile and backstory. Allowed values: A or B.
 """
 
 get_refine_prompt = lambda: f"""
@@ -172,12 +173,12 @@ class KeyCustomerPicker:
                                 "type": "string",
                                 "description": "The choice that leads to VARIANT A. Style: concise, clear, and easy to understand."
                             },
-                            "emotional_drivers_a": {
+                            "sub_beliefs_driver_a": {
                                 "type": "array",
-                                "description": f"Three emotional drivers that lead character to choose VARIANT A.",
+                                "description": f"List of 3 distinct sub beliefs of {key_customer['name']} that leads to choose VARIANT A. All must be components of the main belief driver A and they must be opposite of the sub beliefs driver B",
                                 "items": {
                                     "type": "string",
-                                    "description": "One word description of the emotional driver. Style: concise, clear, and easy to understand. For example: 'fear', 'joy', 'sadness', 'anger', 'disgust', 'surprise'."
+                                    "description": f"A sub belief of {key_customer['name']} that leads to choose VARIANT A and is part of the main belief driver A. Format: compact, single sentence."
                                 }
                             },
                             "transition_events_a": {
@@ -197,12 +198,12 @@ class KeyCustomerPicker:
                                 "type": "string",
                                 "description": "The choice that leads to VARIANT B. Style: concise, clear, and easy to understand."
                             },
-                            "emotional_drivers_b": {
+                            "sub_beliefs_driver_b": {
                                 "type": "array",
-                                "description": f"Three emotional drivers that lead character to choose VARIANT B.",
+                                "description": f"List of 3 distinct sub beliefs of {key_customer['name']} that leads to choose VARIANT B. All must be components of the main belief driver B and they must be opposite of the sub beliefs driver A.",
                                 "items": {
                                     "type": "string",
-                                    "description": "One word description of the emotional driver. Style: concise, clear, and easy to understand. For example: 'fear', 'joy', 'sadness', 'anger', 'disgust', 'surprise'."
+                                    "description": f"A sub belief of {key_customer['name']} that leads to choose VARIANT B and is part of the main belief driver N. Format: compact, single sentence."
                                 }
                             },
                             "transition_events_b": {
@@ -218,8 +219,12 @@ class KeyCustomerPicker:
                                     "required": ["timestamp", "visibility", "description"]
                                 }
                             },
+                            "preference": {
+                                "type": "string",
+                                "description": f"The variant that {key_customer['name']} prefers. It must be aligned with character profile and backstory. Allowed values: A or B."
+                            }
                         },
-                        "required": ["customer_id", "dilemma", "reason", "variant_a", "emotional_drivers_a", "transition_events_a", "variant_b", "emotional_drivers_b", "transition_events_b"]
+                        "required": ["customer_id", "dilemma", "reason", "variant_a", "belief_driver_a", "transition_events_a", "variant_b", "belief_driver_b", "transition_events_b", "preference"]
                     }
                 }
             ]
@@ -236,11 +241,12 @@ class KeyCustomerPicker:
                     "dilemma": params["dilemma"],
                     "reason": params["reason"],
                     "variant_a": params["variant_a"],
-                    "emotional_drivers_a": params["emotional_drivers_a"],
+                    "belief_driver_a": params["sub_beliefs_driver_a"],
                     "transition_events_a": params["transition_events_a"],
                     "variant_b": params["variant_b"],
-                    "emotional_drivers_b": params["emotional_drivers_b"],
+                    "belief_driver_b": params["sub_beliefs_driver_b"],
                     "transition_events_b": params["transition_events_b"],
+                    "preference": "a" if params["preference"].lower() == "a" else "b",
                 }
                 return response
 
