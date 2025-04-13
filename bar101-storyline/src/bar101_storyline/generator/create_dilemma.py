@@ -37,6 +37,7 @@ def create_dilemma(cusomer_picker, plot_a, plot_b, timeline, outcome_timeline, v
         "belief_a": customer_dilemma["belief_driver_a"],
         "choice_b": customer_dilemma["variant_b"],
         "belief_b": customer_dilemma["belief_driver_b"],
+        "preference": customer_dilemma["preference"].lower(),
     }
     transition_a = customer_dilemma['transition_events_a']
     transition_b = customer_dilemma['transition_events_b']

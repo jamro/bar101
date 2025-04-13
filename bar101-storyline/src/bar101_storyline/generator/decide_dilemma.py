@@ -10,7 +10,19 @@ import questionary
 
 console = Console()
 
-def decide_dilemma(customer, dilemma, plot_a, plot_b):
+def decide_dilemma(decision_maker, customer, dilemma, plot_a, plot_b, timeline, variants_chain):
+    story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
+    decision_path = os.path.join(story_root, *variants_chain, f"chat_{customer['id']}_decision.json")
+
+    chat = None
+    if os.path.exists(decision_path):
+        with open(decision_path, "r") as f:
+            chat = json.load(f)
+    else:
+        chat = decision_maker.get_dilemma_convo(customer, dilemma, timeline, log_callback=console.print)
+        with open(decision_path, "w") as f:
+            json.dump(chat, f, indent=2)
+
     console.print(f"[bold yellow]{customer['name']}: [/bold yellow][white]{dilemma['trigger_event']}[/white]")
     console.print(f"[bold yellow]{customer['name']}[/bold yellow] [dim]is in a dilemma[/dim] [yellow]{dilemma['dilemma']}[/yellow]")
     decision = questionary.select(

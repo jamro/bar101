@@ -6,6 +6,7 @@ from TimelineIntegrator import TimelineIntegrator
 from CharacterStoryBuilder import CharacterStoryBuilder
 from ChatOpenerEngine import ChatOpenerEngine
 from ChatStoryEngine import ChatStoryEngine
+from DecisionMaker import DecisionMaker
 from NewsWriter import NewsWriter
 import json
 import random
@@ -42,6 +43,7 @@ if __name__ == "__main__":
     news_writter = NewsWriter(os.getenv("OPENAI_API_KEY"))
     chat_opener_engine = ChatOpenerEngine(os.getenv("OPENAI_API_KEY"))
     chat_story_engine = ChatStoryEngine(os.getenv("OPENAI_API_KEY"))
+    decision_maker = DecisionMaker(os.getenv("OPENAI_API_KEY"))
     
     plot_shaper.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     cusomer_picker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
@@ -50,6 +52,7 @@ if __name__ == "__main__":
     news_writter.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     chat_opener_engine.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     chat_story_engine.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
+    decision_maker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
 
     all_characters = character_story_builder.get_characters()
 
@@ -113,7 +116,7 @@ if __name__ == "__main__":
                 variants_chain
             )
             if patron_id == key_customer['id']:
-                decision = decide_dilemma(key_customer, dilemma, plot_a, plot_b)
+                decision = decide_dilemma(decision_maker, key_customer, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain)
 
         if decision == "a":
             variants_chain.append("a")
