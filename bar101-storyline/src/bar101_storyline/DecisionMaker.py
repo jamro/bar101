@@ -131,9 +131,8 @@ For EACH belief, write a short internal monologue in response about the dilemma 
 # Guidelines for each belief
 - Format: 3-6 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
 - Tone: Conversational and natural
-- Purpose: Share your belief and how it relates to world background
+- Purpose:  Explain what is your belief and why. Make sure it is clear without any additional context as you did not share it before.
 - Language: Avoid technical jargon, vague statements, or overly generic wording. keep it simple, compact and easy to understand
-- What to Share: Explain why you believe in this
 - Do not request any actions from Alex
 - End the monologue on a neutral but thoughtful note, leaving space for Alex to challenge or support your beliefs
 - Keep the tone true to the world of Stenograd — subtle, loaded, layered with quiet tension
@@ -144,7 +143,7 @@ For EACH belief, write a short internal monologue in response about the dilemma 
 - NEVER mention "Option A" or "Option B" phrases but use the actual meaning of the choice
 - Alex responses for each belief:
    * Create two, short responses of Alex to the monologue. One should be supportive resulting in keeping the belief, and the other should be challenging resulting in changing the belief.
-   * Each response should be 2 bullet points long. Each bullet point must be compact, easy to understand, and natural.
+   * Each response should be 2-3 bullet points long. Each bullet point must be compact, easy to understand, and natural.
    * Response of Alex should not requrie any follow up from {customer['name']}. After the response, {customer['name']} will immediately continue with the next belief. Make sure Alex's response allows that in natural way.
    * First line of Alex's response should refer directly to the belief shared by {customer['name']}.
    * Lat line of Alex's response should be a natural shift of the conversation to {customer['name']} sharing the next belief. Make it natural and smooth. Do not be pushy or too direct. Let {customer['name']} open up to the next belief in a natural way.

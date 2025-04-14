@@ -116,7 +116,7 @@ if __name__ == "__main__":
                 variants_chain
             )
             if patron_id == key_customer['id']:
-                decision = decide_dilemma(decision_maker, key_customer, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain)
+                decision = decide_dilemma(decision_maker, key_customer, customers_model, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain)
 
         if decision == "a":
             variants_chain.append("a")

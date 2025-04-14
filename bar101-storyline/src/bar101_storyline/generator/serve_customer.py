@@ -9,77 +9,16 @@ from rich.padding import Padding
 from rich.table import Table
 from rich.prompt import Prompt
 from .get_customer_by_id import get_customer_by_id
+from .lib import (
+    get_trust_level,
+    print_alex_chat,
+    print_customer_chat,
+    print_serve_drink,
+    print_customer_enter,
+)
 import questionary
 
 console = Console()
-
-
-def print_customer_chat(customer, text, customers=None):
-    sleep(0.1)
-    console.print(Padding(
-        Panel(
-            text,
-            title=f"[bold]{customer['name']}[/bold] ({customers[customer['id']]['trust'] if customers else '?'})",
-        ),
-        (0, 10, 0, 0)
-    ))
-
-def print_alex_chat(text):
-    sleep(0.1)
-    console.print(Padding(
-        Panel(
-            f"[magenta]{text}[/magenta]",
-            title="[bold]Alex[/bold]",
-            border_style="magenta"
-        ),
-        (0, 0, 0, 10)
-    ))
-
-def get_trust_level(customer_id, customers):
-    trust = customers[customer_id]["trust"]
-    level = round(trust / 2.0) + 2
-    level = min(level, 4)
-    level = max(level, 0)
-
-    return level
-
-def print_customer_enter(customer):
-    console.print(f"""[yellow]
-      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⢀⣀⡠⠤⠴⠚⣿⠃
-      ⠀⠸⣿⡭⣭⣿⣽⣿⣿⣿⣿⣿⣿⣿⣽⣿⡿⠓⠚⠉⣉⣀⣤⡤⣴⠀⣿⠀
-      ⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢰⠞⢩⠀⢻⡏⠀⡏⠀⣿⠄
-      ⠀⢠⣟⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢸⠀⢸⠀⢸⡇⠀⠃⠀⣿⠂    
-      ⠀⢘⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢸⠀⢸⠀⢸⡇⠀⡇⠀⣿⡇
-      ⠀⠈⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢸⠀⢸⠀⢸⡇⠀⣷⠀⣿⡇
-      ⠀⣠⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢸⠀⢸⠀⢸⡇⠀⣿⣼⣿⡇
-      ⠀⡃⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠘⠛⠛⠒⠛⠓⠛⠛⣿⣿⡇       [bold]{customer['name']}[/bold] [dim white]enters the bar...[/dim white]
-      ⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢰⠦⢠⠀⢤⣤⣤⣄⠋⣿⡇
-      ⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢸⠀⢸⠀⢸⡇⠈⣿⠀⣿⡇
-      ⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢸⠀⢸⠀⢸⡇⠀⣿⠀⣿⡇
-      ⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢸⣄⢸⠠⣼⡇⠀⣿⠀⣿⡇
-      ⠀⣸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠉⠉⠀⠛⠚⠯⠿⠀⣿⡇
-      ⠠⢿⣿⣷⣶⣶⣶⠶⢶⡶⢶⣶⣶⣶⣶⢿⣶⣤⣄⣀⣀⠀⠀⠀⢨⠀⣿⡇
-      ⠀⠀⠀⠈⠀⠐⠒⠒⠀⠀⠀⠘⠁⠈⠀⠀⠀⠀⠉⠉⢛⠉⠑⠒⠠⠤⢿⠇
-
-                 [/yellow]""")
-    
-def print_serve_drink(customer):
-    console.print(f"""[yellow]
-  
-    ..--\"\"````\"\"--.._
-  (_                _)
-  \ ```\"\"\"----\"\"\"``` /  
-   '-.            .-'
-      `\        /`
-        '-.__.-'
-           ||                  [dim white]Alex serves[/dim white] [yellow bold]{customer['drink']}[/yellow bold] [dim white]to[/dim white] [yellow bold]{customer['name']}[/yellow bold]
-           ||
-           ||
-           ||
-      _..--||--.._
-     (_          _)
-       ```\"\"\"\"```
-                  [/yellow]""")
 
 def serve_customer(chat_opener_engine, chat_story_engine, customer_id, customers, recent_story, outcome_timeline, events, variants_chain):
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
@@ -169,8 +108,8 @@ def serve_customer(chat_opener_engine, chat_story_engine, customer_id, customers
         print_customer_chat(customer, msg, customers)
 
     decision = questionary.select(message=f"Alex:", choices=[
-        f"1: {conversation['emotional']['opener']}",
-        f"2: {conversation['factual']['opener']}",
+        f"1: Emotional support",
+        f"2: Push for more information",
     ]).ask()
 
     decision = int(decision[0])

@@ -1,5 +1,8 @@
 .PHONY: run format lint test
 
+install:
+	poetry install
+
 # Run the app
 run:
 	poetry run python src/bar101_storyline/main.py
