@@ -148,6 +148,9 @@ For EACH belief, write a short internal monologue in response about the dilemma 
    * First line of Alex's response should refer directly to the belief shared by {customer['name']}.
    * Lat line of Alex's response should be a natural shift of the conversation to {customer['name']} sharing the next belief. Make it natural and smooth. Do not be pushy or too direct. Let {customer['name']} open up to the next belief in a natural way.
 
+# IMPORTANT
+ALWAYS generate 3 monologues - one for each belief. Make sure the number of monologues must match the number of beliefs.
+
 # Output
 Return the result using the generate_monologue_variants function.
 """
@@ -204,7 +207,7 @@ class DecisionMaker:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4o"
+        self.model = "gpt-4.1"
 
         self.variant_props = {
             "very_suspicious": {
@@ -253,7 +256,7 @@ class DecisionMaker:
 
         self.generate_beliefs_monologue_variants_func = {
           "name": "generate_monologue_variants",
-          "description": "Generate 3 monologue variants for each belief. Make sure the number of monologues must match the number of beliefs.",
+          "description": "Generate THREE monologue variants for each belief. Make sure the number of monologues must match the number of beliefs.",
           "parameters": {
             "type": "object",
             "properties": {
@@ -401,7 +404,7 @@ class DecisionMaker:
     
     def share_beliefs(self, customer, dilemma, timeline, choice_a, choice_b, beliefs):
         last_error = None
-        for i in range(3):
+        for i in range(5):
             try:
                 response = self._share_beliefs(customer, dilemma, timeline, choice_a, choice_b, beliefs)
                 if response is not None:
@@ -412,7 +415,7 @@ class DecisionMaker:
                 last_error = e
                 print(f"Error occurred: {e}")
                 print("Retrying...")
-        raise Exception(f"Failed to share beliefs after 3 attempts: {last_error}")
+        raise Exception(f"Failed to share beliefs after 5 attempts: {last_error}")
     
     
     def _share_beliefs(self, customer, dilemma, timeline, choice_a, choice_b, beliefs):

@@ -136,7 +136,7 @@ Do not repeat events that are already in the timeline - ensure unique plot devel
             ]
 
         response = self.client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=messages,
             functions=functions
         )

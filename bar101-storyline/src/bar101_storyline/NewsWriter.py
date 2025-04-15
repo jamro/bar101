@@ -50,7 +50,7 @@ class NewsWriter:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4o"
+        self.model = "gpt-4.1"
 
     def read_context(self, base_path):
         def read_context_file(file_path):

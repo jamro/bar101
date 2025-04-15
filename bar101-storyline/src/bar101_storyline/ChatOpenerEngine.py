@@ -141,7 +141,7 @@ Return the result using the generate_monologue_variants function.
 
 get_hobby_prompt = lambda customer, question: f"""Imagine you are {customer['name']}. 
 Once you have entered the bar, bartender Alex served you a drink and started a conversation by asking you about your hobby: "{question}".
-Write a short monologue in response - not a dialogue. 
+Write a short monologue in response (not a dialogue) that starts with a short answer to the question and then expands into a more detailed discussion about your hobby.
 Use this moment to reveal how recent global events afected hobby of {customer['name']}
 Use only information that the {customer['name']} would know
 
@@ -177,7 +177,7 @@ class ChatOpenerEngine:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4o"
+        self.model = "gpt-4.1"
         self.generate_monologue_variants_func = {
           "name": "generate_monologue_variants",
           "description": "Generates 5 monologue variants based on trust levels for a given character and stores them",

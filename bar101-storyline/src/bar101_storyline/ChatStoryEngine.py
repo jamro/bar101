@@ -169,7 +169,7 @@ class ChatStoryEngine:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4o"
+        self.model = "gpt-4.1"
 
         self.variant_props = {
             "very_suspicious": {
