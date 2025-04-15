@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 import json
+import random
 
 class PlotShaper:
 
@@ -62,7 +63,7 @@ class PlotShaper:
             timeline_info += f" - {event['timestamp']} ({event['visibility']}) - {event['description']}\n"
             
         plot_stage = self.get_plot_stage()
-        chapter_examples = "\n   * ".join(plot_stage['examples'])
+        chapter_examples = "\n   * ".join(random.sample(plot_stage['examples'], 10))
         event_count = "between 2 and 4"
 
         prompt = f"""
@@ -73,21 +74,30 @@ class PlotShaper:
 Fork the storyline described by creating two two distinct version of the next chapter.
 The next chapter should start 3 days after the last event in the timeline and carry on for next 2-3 weeks.
 Make sure each version is distinct and push the story in a different direction.
-Be specific and detailed about sotry elements, characters, and events.
+Be specific and detailed about story elements, characters, and events.
 For each of the branched chapter, create series of {event_count} events that happened between end of the current timeline and the end of the branched chapter.
 Events should provide additional context and details to the chapter. Be specific and provide all necessary details.
 The events should be clear, compact and easy to understand.
 Avoid overuse of technical jargon when it could lead to confusion or lack of understanding.
-When referring to system failures, limit to BCI (Behavioral Compliance Index) and it's impact on lifes of citizens.
+When referring to system failures, limit to BCI (Behavioral Compliance Index) and it's impact on lifes of citizens or politics.
 Ensure cause and effect are clear and logical for entire timeline.
 Do not repeat events that are already in the timeline - ensure unique plot development.
+
+# For each branch:
+- Make sure they are unique and distinct perspectives allowing the plot to develope in multiple direction. 
+- Make sure each branch is engaging, and specific. Avoid technical jargon that could be hard to understand. 
+- Make each branch aligned with background of the world.
+- All branches must be meaningful and have wide impact on many citizens and/or key politics. 
+- Do not mention Bar 101 directly in the branches.
 
 # Next Chapter: {plot_stage['name']}
 - Purpose: {plot_stage['purpose']}
 - Core Idea: {plot_stage['core']}
-- Examples: {chapter_examples}
+- Examples: 
+   * {chapter_examples}
 
 """
+      
 
         messages = [
             {"role": "system", "content": system_message},
@@ -101,8 +111,8 @@ Do not repeat events that are already in the timeline - ensure unique plot devel
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "branch_a": {"type": "string", "description": "One sentence summary of the branch A. Style: clear, compact and easy to understand. Length: 10-20 words."},
-                            "branch_b": {"type": "string", "description": "One sentence summary of the branch B. Style: clear, compact and easy to understand. Length: 10-20 words."},
+                            "branch_a": {"type": "string", "description": "Short summary of the branch A. Be specific and include all important details. Style: clear, compact and easy to understand. Length: 20-40 words."},
+                            "branch_b": {"type": "string", "description": "Short summary of summary of the branch B. Be specific and include all important details. Style: clear, compact and easy to understand. Length: 20-40 words."},
                             "events_a": {
                                 "type": "array",
                                 "description": "Timeline events caused by branch A.",
