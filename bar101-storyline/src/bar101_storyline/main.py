@@ -8,6 +8,7 @@ from ChatOpenerEngine import ChatOpenerEngine
 from ChatStoryEngine import ChatStoryEngine
 from DecisionMaker import DecisionMaker
 from NewsWriter import NewsWriter
+from TreePacker import TreePacker
 import json
 import random
 from rich.panel import Panel
@@ -36,6 +37,7 @@ if __name__ == "__main__":
     story_root = os.path.join(os.path.dirname(__file__), "../../story_tree")
     variants_chain = []
 
+    tree_packer = TreePacker()
     plot_shaper = PlotShaper(os.getenv("OPENAI_API_KEY"))
     cusomer_picker = KeyCustomerPicker(os.getenv("OPENAI_API_KEY"))
     timeline_integrator = TimelineIntegrator(os.getenv("OPENAI_API_KEY"))
@@ -117,6 +119,10 @@ if __name__ == "__main__":
             )
             if patron_id == key_customer['id']:
                 decision = decide_dilemma(decision_maker, key_customer, customers_model, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain)
+
+        node_path = os.path.join(story_root, *variants_chain, "node.json")
+        node = tree_packer.pack_node(os.path.join(story_root, *variants_chain))
+        json.dump(node, open(node_path, "w"), indent=2)
 
         if decision == "a":
             variants_chain.append("a")
