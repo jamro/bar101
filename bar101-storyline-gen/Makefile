@@ -7,6 +7,9 @@ install:
 run:
 	poetry run python src/bar101_storyline/main.py
 
+extract-nodes:
+	poetry run python src/bar101_storyline/extract-nodes.py
+
 # Format code with black
 format:
 	poetry run black .
