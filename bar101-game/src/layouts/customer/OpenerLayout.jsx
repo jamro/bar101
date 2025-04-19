@@ -89,7 +89,7 @@ export default function OpenerLayout({ customer, allCustomers, chat, drink, serv
           onTrustChange(-0.1)
           await chatWindowRef.current.print(chat.opener.wrong_hobby_answer, customer.name, 0, true)
           setPhase("exit")
-          setChatOptions(["Continue", "Skip"])
+          setChatOptions(["Continue", "Stay quiet"])
           return;
         }
         if (question.id === "neutral") {
@@ -98,7 +98,7 @@ export default function OpenerLayout({ customer, allCustomers, chat, drink, serv
             await chatWindowRef.current.print(neutralAnswer[i], customer.name, 0, i === neutralAnswer.length - 1)
           }
           setPhase("exit")
-          setChatOptions(["Continue", "Skip"])
+          setChatOptions(["Continue", "Stay quiet"])
           return
         }
         if (question.id === customer.hobby_id) {
@@ -108,7 +108,7 @@ export default function OpenerLayout({ customer, allCustomers, chat, drink, serv
             await chatWindowRef.current.print(hobbyAnswer[i], customer.name, 0, i === hobbyAnswer.length - 1)
           }
           setPhase("exit")
-          setChatOptions(["Continue", "Skip"])
+          setChatOptions(["Continue", "Stay quiet"])
           return
         }
 
