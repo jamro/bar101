@@ -11,6 +11,7 @@ export default function CustomerLayout({ customers, customerId, drinks, chats, o
   
   const [phase, setPhase] = useState("ask_drink");
   const [drink, setDrink] = useState(null);
+  const [serveUsual, setServeUsual] = useState(false);
 
   useEffect(() => {
     console.log("Resetting customer layout for new customerId", customerId);
@@ -39,9 +40,14 @@ export default function CustomerLayout({ customers, customerId, drinks, chats, o
     return <div>Chat not found</div>;
   }
 
+  const gotoDrinkServing = (serveUsual) => {
+    setPhase("serve_drink")
+    setServeUsual(serveUsual);
+  }
+
   let content = null
   if (phase === "ask_drink") {
-    content = <DrinkPrompLayout customer={customer} onClose={() => setPhase("serve_drink")} />;
+    content = <DrinkPrompLayout customer={customer} onClose={(serveUsual) => gotoDrinkServing(serveUsual)} />;
   } else if (phase === "serve_drink") {
     content = <DrinkPrepLayout customer={customer} drinks={drinks} onServe={(drink) => serveDrink(drink)} />;
   } else if (phase === "opener") {
@@ -50,7 +56,8 @@ export default function CustomerLayout({ customers, customerId, drinks, chats, o
       allCustomers={customers}
       chat={chat} 
       drink={drink} 
-      onGoBack={() => setPhase("serve_drink")} 
+      serveUsual={serveUsual}
+      onGoBack={() => gotoDrinkServing(false)} 
       onTrustChange={(dt) => onTrustChange(customer.id, dt)} 
       onClose={(skip) => setPhase(skip ? (chat.decision ? "decision_chat" : "exit") : "main_chat")}
     />;

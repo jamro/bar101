@@ -8,7 +8,7 @@ export default function CustomerPreview({ id, name, trust, drink, children }) {
       <div className={styles.customerHeader}>
         <h2>{name}</h2>
         <p>
-          <strong>Trust Level:</strong> {10*Math.round(10*trust)}%
+          <strong>Trust Level:</strong> {Math.round(100*trust)}%
           <br/>
           <strong>Drink:</strong> {drink ? drink.glass : 'None'}
           <br/>

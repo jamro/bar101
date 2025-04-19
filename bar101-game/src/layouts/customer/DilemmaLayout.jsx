@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-const MSG_DELAY = 100
-
 export default function DilemmaLayout({ customer, chat, onTrustChange, drink, onClose, onDecision }) {
- 
   const [chatOptions, setChatOptions] = useState([]);
-  const [messages, setMessages] = useState([]);
   const [phase, setPhase] = useState("serve");
   const [beliefsA, setBeliefsA] = useState(chat.decision.belief_a)
   const [beliefsB, setBeliefsB] = useState(chat.decision.belief_b)
@@ -16,6 +12,7 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
   const [lastChoice, setLastChoice] = useState(chat.decision.dilemma.preference)
   const [beliefScoreA, setBeliefScoreA] = useState(0)
   const [beliefScoreB, setBeliefScoreB] = useState(0)
+  const chatWindowRef = useRef(null);
 
   const popRandomBelief = (variant) => {
     let beliefs, setBeliefs
@@ -41,35 +38,29 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
     return Math.round((trust + 1) * 2)
   }
 
-  const scheduleMessage = (text, from, userIndex, ms) => setTimeout(() => {
-    setMessages((prevMessages) => ([ ...prevMessages, { text, from, userIndex} ]))
-  }, ms)
-
-  const scheduleMessageSeries = (textList, from, userIndex, ms, onEnd=()=>{}) => {
-    textList.forEach((text, index) => {
-      scheduleMessage(text, from, userIndex, ms * (index+1))
-    })
-    setTimeout(() => {
-      onEnd()
-    }, ms * (textList.length + 1))
-  }
-
   useEffect(() => {
-    scheduleMessage(chat.decision.dilemma.opener, "Alex", 1, 1)
-    const mainVariant = chat.decision.dilemma.variants[getTrustIndex(customer.trust)]
+    const run = async () => {
+      await chatWindowRef.current.print(chat.decision.dilemma.opener, "Alex", 1)
+      const mainVariant = chat.decision.dilemma.variants[getTrustIndex(customer.trust)]
 
-    const initBelief = popRandomBelief(chat.decision.dilemma.preference)
-    setLastChoice(chat.decision.dilemma.preference)
-    setCurrentBelief(initBelief)
+      const initBelief = popRandomBelief(chat.decision.dilemma.preference)
+      setLastChoice(chat.decision.dilemma.preference)
+      setCurrentBelief(initBelief)
 
-    scheduleMessageSeries([...mainVariant, "...", ...initBelief.monologue], customer.name, 0, MSG_DELAY, () => {
+      for (let i = 0; i < mainVariant.length; i++) {
+        await chatWindowRef.current.print(mainVariant[i], customer.name, 0)
+      }
+      for (let i = 0; i < initBelief.monologue.length; i++) {
+        await chatWindowRef.current.print(initBelief.monologue[i], customer.name, 0, i === initBelief.monologue.length - 1)
+      }
       setChatOptions(["Support", "Doubt"])
       setPhase("followup")
-    })
+    }
+    run()
 
   }, [customer.id])
 
-  const sendMessage = (index) => {
+  const sendMessage = async (index) => {
     switch(phase) {
       case "followup":
         const setBeliefScore = (lastChoice === "a") ? setBeliefScoreA : setBeliefScoreB
@@ -89,22 +80,27 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
         }
         const nextBeleif = popRandomBelief(nextChoice)
         if (nextBeleif === null) {
-          scheduleMessageSeries([...dilemmaResponse], "Alex", 1, MSG_DELAY, () => {
-            setChatOptions(["Continue"])
-            setPhase("decision")
-          })
+          for (let i = 0; i < dilemmaResponse.length; i++) {
+            await chatWindowRef.current.print(dilemmaResponse[i], "Alex", 1, i === dilemmaResponse.length - 1)
+          }
+          setChatOptions(["Continue"])
+          setPhase("decision")
           return
         }
 
         setLastChoice(nextChoice)
         setCurrentBelief(nextBeleif)
 
-        scheduleMessageSeries([...dilemmaResponse], "Alex", 1, MSG_DELAY, () => {
-          scheduleMessageSeries([...nextBeleif.monologue], customer.name, 0, MSG_DELAY, () => {
-            setChatOptions(["Support", "Doubt"])
-            setPhase("followup")
-          })
-        })
+        for (let i = 0; i < dilemmaResponse.length; i++) {
+          await chatWindowRef.current.print(dilemmaResponse[i], "Alex", 1)
+        }
+        for (let i = 0; i < nextBeleif.monologue.length; i++) {
+          await chatWindowRef.current.print(nextBeleif.monologue[i], customer.name, 0, i === nextBeleif.monologue.length - 1)
+        }
+
+        setChatOptions(["Support", "Doubt"])
+        setPhase("followup")
+
         break;
       case "decision":
         const trustLevel = getTrustIndex(customer.trust)
@@ -141,16 +137,16 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
         const decision_monologue_variant = decision_monologue[getTrustIndex(customer.trust)]
 
         setChatOptions([])
-        scheduleMessageSeries([...decision_monologue_variant], customer.name, 0, MSG_DELAY, () => {
-          setChatOptions(["Continue"])
-          setPhase("exit")
-        });
+        for (let i = 0; i < decision_monologue_variant.length; i++) {
+          await chatWindowRef.current.print(decision_monologue_variant[i], customer.name, 0, i === decision_monologue_variant.length - 1)
+        }
+        setChatOptions(["Continue"])
+        setPhase("exit")
 
         break;
       case "exit":
         setChatOptions([])
-        scheduleMessage(`...`, customer.name, 0, 1)
-        setTimeout(() => onClose(), 700)
+        onClose()
         break;
 
       default:
@@ -159,7 +155,7 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
   
   return <div className="container">
     <CustomerPreview id={customer.id} name={customer.name} trust={customer.trust} drink={drink}>
-      <ChatWindow options={chatOptions} messages={messages} onSubmit={(index) => sendMessage(index)} />
+      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
   </div>
 }

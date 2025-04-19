@@ -1,58 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-const MSG_DELAY = 100
-
 export default function DrinkPrompLayout({ customer, onClose }) {
   const drinkQuestions = ['What can I get you?', 'The usual?']
-
   const [chatOptions, setChatOptions] = useState([...drinkQuestions]);
-  const [messages, setMessages] = useState([]);
   const [phase, setPhase] = useState("ask");
-
-  const scheduleMessage = (text, from, userIndex, ms) => setTimeout(() => {
-    setMessages((prevMessages) => ([
-      ...prevMessages,
-      { text, from, userIndex},
-    ]))
-  }, ms)
+  const chatWindowRef = useRef(null);
+  const [serveUsual, setServeUsual] = useState(false);
     
-  
-  const sendMessage = (index) => {
+  const sendMessage = async (index) => {
     if (phase === "exit") {
       setChatOptions([])
-      setMessages((prevMessages) => ([
-        ...prevMessages,
-        { text: "You got it - one moment.", from: "Alex", userIndex: 1 },
-      ]))
-      setTimeout(() => onClose(), 2*MSG_DELAY)
+      await chatWindowRef.current.print("You got it - one moment.", "Alex", 1)
+      onClose(serveUsual)
       return
     }
 
     setChatOptions([])
-    setMessages((prevMessages) => ([
-      ...prevMessages,
-      { text: drinkQuestions[index], from: "Alex", userIndex: 1 },
-    ]))
 
     if (index === 0) {
-      scheduleMessage(`I would like ${customer['drink']}, please.`, customer.name, 0, MSG_DELAY)
+      await chatWindowRef.current.print(drinkQuestions[index], "Alex", 1)
+      await chatWindowRef.current.print(`I would like ${customer['drink']}, please.`, customer.name, 0, true)
+      setServeUsual(false)
     } else {
-      scheduleMessage("Yes, the usual.", customer.name, 0, MSG_DELAY)
+      await chatWindowRef.current.print(drinkQuestions[index], "Alex", 1)
+      await chatWindowRef.current.print("Yes, the usual.", customer.name, 0, true)
+      setServeUsual(true)
     }
 
-    setTimeout(() => {
-      setChatOptions(["OK"])
-      setPhase("exit")
-    }, 2*MSG_DELAY)
-
+    setChatOptions(["OK"])
+    setPhase("exit")
   }
 
   return <div className="container">
     <CustomerPreview id={customer.id} name={customer.name} trust={customer.trust}>
-      <ChatWindow options={chatOptions} messages={messages} onSubmit={(index) => sendMessage(index)} />
+      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
   </div>
 }
