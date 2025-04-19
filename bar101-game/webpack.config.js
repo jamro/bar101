@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -47,6 +48,9 @@ module.exports = {
       patterns: [
         { from: "../bar101-storytree", to: "story" },
       ],
+    }),
+    new webpack.DefinePlugin({
+      __BUILD_DATE__: JSON.stringify(new Date().toISOString()).replace(/[TZ\-:\."]/g, '').substring(2, 14)
     }),
   ],
   devServer: {
