@@ -69,7 +69,7 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, o
   }}
   
   return <div className="container">
-    <CustomerPreview id={customer.id} name={customer.name} trust={customer.trust} drink={drink}>
+    <CustomerPreview id={customer.id} name={customer.name} jobTitle={customer.job_title} trust={customer.trust} drink={drink}>
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
   </div>

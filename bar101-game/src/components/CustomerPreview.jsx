@@ -2,12 +2,14 @@ import React from 'react';
 import * as styles from './CustomerPreview.module.css';
 import PropTypes from 'prop-types';
 
-export default function CustomerPreview({ id, name, trust, drink, children }) {
+export default function CustomerPreview({ id, name, jobTitle, trust, drink, children }) {
   return (
     <div className={styles.customerContainer}>
       <div className={styles.customerHeader}>
         <h2>{name}</h2>
         <p>
+          {jobTitle}
+          <br/>
           <strong>Trust Level:</strong> {Math.round(100*trust)}%
           <br/>
           <strong>Drink:</strong> {drink ? drink.glass : 'None'}
@@ -24,6 +26,7 @@ export default function CustomerPreview({ id, name, trust, drink, children }) {
 CustomerPreview.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  jobTitle: PropTypes.string.isRequired,
   trust: PropTypes.number.isRequired,
   drink: PropTypes.object,
   children: PropTypes.node,
