@@ -32,6 +32,7 @@ Write a 150-word paragraph showing how two related external events have directly
 Focus on a single, specific story arc that illustrates the character's response to these events.
 Make sure it is understandable without extra context. Avoid vague language and ensure clarity.
 The result should read like a clear, factual entry in a character-focused case file or narrative log.
+Prioritize latest events to ensure the story is current, relevant and convey information about actual global situation.
 
 # Output Guidelines:
 Perspective: Third-person, limited to what the character knows or believes

@@ -88,6 +88,7 @@ Do not repeat events that are already in the timeline - ensure unique plot devel
 - Make sure each branch is engaging, and specific. Avoid technical jargon that could be hard to understand. 
 - Make each branch aligned with background of the world.
 - All branches must be meaningful and have wide impact on many citizens and/or key politics. 
+- Each branch should be continuation of the previous chapter building on the past events.
 - Do not mention Bar 101 directly in the branches.
 
 # Next Chapter: {plot_stage['name']}
