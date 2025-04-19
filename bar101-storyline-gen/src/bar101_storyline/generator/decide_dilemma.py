@@ -39,80 +39,13 @@ def decide_dilemma(decision_maker, customer, all_customers, dilemma, plot_a, plo
         with open(decision_path, "w") as f:
             json.dump(chat, f, indent=2)
 
-    # intro to dilemma
-    dilemma_intro = chat['dilemma']['variants'][get_trust_level(customer['id'], all_customers)]
-    print_alex_chat(chat['dilemma']['opener'])
-    for line in dilemma_intro:
-        print_customer_chat(customer, line, all_customers)
-    print_customer_chat(customer, "...", all_customers)
+    decision = questionary.select(message=f"Choice:", choices=[
+        f"A: {plot_a['outcome']}",
+        f"B: {plot_b['outcome']}",
+      ], 
+      default=f"A: {plot_a['outcome']}" if dilemma['preference'] == 'a' else f"B: {plot_b['outcome']}",
+    ).ask()
 
-    # beliefs
-    beliefs = {
-        # object deep copy of chat['belief_a']
-        "a": chat['belief_a'].copy(),
-        "b": chat['belief_b'].copy(),
-    }
-    belief_preference = dilemma['preference'].lower()
-    scores = { "a": 0, "b": 0 }
-    while(len(beliefs[belief_preference]) > 0):
-      random_belief = pick_belief(beliefs, belief_preference)
-      for line in random_belief['monologue']:
-          print_customer_chat(customer, line, all_customers)
-
-      decision = questionary.select(message=f"Alex:", choices=[
-        f"1: Support",
-        f"2: Challenge",
-      ]).ask()
-
-      decision = int(decision[0])
-      if decision == 1:
-          scores[belief_preference] += 1
-          for linne in random_belief['supportive_response']:
-              print_alex_chat(linne)
-      else:
-          scores[belief_preference] -= 1
-          for linne in random_belief['challenging_response']:
-              print_alex_chat(linne)
-          belief_preference = "a" if belief_preference == "b" else "b"
-
-
-    decision = dilemma['preference'].lower()
-    influenced = False
-    score_diff = abs(scores['a'] - scores['b'])
-    trust_level = get_trust_level(customer['id'], all_customers)
-    console.print(f"[dim]Decision score:[/dim] [yellow]{scores['a']} vs {scores['b']}. Score difference: {score_diff}. Trust level: {trust_level}[/yellow]")
-    if trust_level == 0 and score_diff >= 5:
-        decision = "a" if scores['a'] > scores['b'] else "b"
-        influenced = True
-    elif trust_level == 1 and score_diff >= 4:
-        decision = "a" if scores['a'] > scores['b'] else "b"
-        influenced = True
-    elif trust_level == 2 and score_diff >=3:
-        decision = "a" if scores['a'] > scores['b'] else "b"
-        influenced = True
-    elif trust_level == 3 and score_diff >= 2:
-        decision = "a" if scores['a'] > scores['b'] else "b"
-        influenced = True
-    elif trust_level == 4 and score_diff >= 1:
-        decision = "a" if scores['a'] > scores['b'] else "b"
-        influenced = True
-
-    console.print(f"[dim]Decision made by[/dim] [yellow bold]{customer['name']}[/yellow bold][dim] leads to[/dim] [yellow bold]{decision.upper()}. It was {'influenced' if influenced else 'not influenced'} by Alex.[/yellow bold]")
-    
-    # share decision
-    decision_monologue = None
-    if not influenced:
-        decision_monologue = chat['decision']['monologue_self']
-    elif decision == "a":
-        decision_monologue = chat['decision']['monologue_a']
-    else:
-        decision_monologue = chat['decision']['monologue_b']
-
-    decision_monologue_variant = decision_monologue[get_trust_level(customer['id'], all_customers)]
-    
-    for line in decision_monologue_variant:
-        print_customer_chat(customer, line, all_customers)
-    print_customer_chat(customer, "...", all_customers)
-    
+    decision = "a" if decision[0] == "A" else "b"
 
     return decision

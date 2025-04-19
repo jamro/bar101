@@ -59,7 +59,6 @@ if __name__ == "__main__":
     all_characters = character_story_builder.get_characters()
 
     # initial timeline
-    print_table(plot_shaper.timeline)
     with open(os.path.join(story_root, "timeline.json"), "w") as f:
         json.dump(plot_shaper.timeline, f, indent=2)
 
@@ -97,9 +96,6 @@ if __name__ == "__main__":
         
         get_news_spot(news_writter, new_events, outcome, variants_chain)
 
-        console.print("\n[bold cyan]Press Enter to continue...[/bold cyan]")
-        input()
-
         plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
         dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, plot_a, plot_b, plot_shaper.timeline, outcome_timeline, variants_chain)
         key_customer = get_customer_by_id(dilemma["customer_id"])
@@ -118,6 +114,7 @@ if __name__ == "__main__":
                 variants_chain
             )
             if patron_id == key_customer['id']:
+                console.print(f"[bold white]Story path: {' > '.join(variants_chain) if len(variants_chain) > 0 else 'x'}[/bold white]")
                 decision = decide_dilemma(decision_maker, key_customer, customers_model, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain)
 
         node_path = os.path.join(story_root, *variants_chain, "node.json")
@@ -137,7 +134,6 @@ if __name__ == "__main__":
 
         outcome_timeline.append(outcome)
         new_events = integrate_timeline(timeline_integrator, key_customer, dilemma, choice, outcome, plot_shaper.timeline, events, variants_chain)
-        print_table(new_events)
 
         plot_shaper.timeline += new_events
         plot_shaper.move_to_next_stage()
