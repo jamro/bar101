@@ -9,7 +9,7 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
   const [beliefsA, setBeliefsA] = useState(chat.decision.belief_a)
   const [beliefsB, setBeliefsB] = useState(chat.decision.belief_b)
   const [currentBelief, setCurrentBelief] = useState(null)
-  const [lastChoice, setLastChoice] = useState(chat.decision.dilemma.preference)
+  const [lastChoice, setLastChoice] = useState(chat.decision.preference)
   const [beliefScoreA, setBeliefScoreA] = useState(0)
   const [beliefScoreB, setBeliefScoreB] = useState(0)
   const chatWindowRef = useRef(null);
@@ -43,8 +43,9 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
       await chatWindowRef.current.print(chat.decision.dilemma.opener, "Alex", 1)
       const mainVariant = chat.decision.dilemma.variants[getTrustIndex(customer.trust)]
 
-      const initBelief = popRandomBelief(chat.decision.dilemma.preference)
-      setLastChoice(chat.decision.dilemma.preference)
+      console.log({chat})
+      const initBelief = popRandomBelief(chat.decision.preference)
+      setLastChoice(chat.decision.preference)
       setCurrentBelief(initBelief)
 
       for (let i = 0; i < mainVariant.length; i++) {
@@ -106,7 +107,7 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
         const trustLevel = getTrustIndex(customer.trust)
         const scoreDiff = Math.abs(beliefScoreA - beliefScoreB)
         let influenced = false
-        let decision = chat.decision.dilemma.preference
+        let decision = chat.decision.preference
 
         if (trustLevel === 0 && scoreDiff >= 5) {
           decision = (beliefScoreA > beliefScoreB) ? "a" : "b"
