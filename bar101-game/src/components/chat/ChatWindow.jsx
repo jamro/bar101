@@ -5,7 +5,7 @@ import ChatMessage from './ChatMessage';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-function ChatWindow({messages, onSubmit}) {
+function ChatWindow({messages, options, onSubmit}) {
   const chatContentRef = useRef(null);
   const chatMessages = messages.map((msg, key) => (
     <ChatMessage key={key} userIndex={msg.userIndex} from={msg.from}>{msg.text}</ChatMessage>
@@ -18,6 +18,11 @@ function ChatWindow({messages, onSubmit}) {
   }
   , [messages]);
 
+
+  const buttons = options.map((option, key) => (
+    <ChatSubmitButton key={key} onClick={() => onSubmit(key)} label={option} />
+  ));
+
   return (
     <div className={styles.chatWindow}>
       <div className={styles.chatContent} ref={chatContentRef}>
@@ -25,7 +30,7 @@ function ChatWindow({messages, onSubmit}) {
       </div>
       <div className={styles.chatFooter}>
         <ChatInput >
-          <ChatSubmitButton onClick={onSubmit} />
+          {buttons}
         </ChatInput>
       </div>
     </div>
@@ -41,10 +46,12 @@ ChatWindow.propTypes = {
     })
   ),
   onSubmit: PropTypes.func,
+  options: PropTypes.arrayOf(PropTypes.string),
 };
 ChatWindow.defaultProps = {
   messages: [],
   onSubmit: () => {},
+  options: [],
 };
 
 export default ChatWindow;

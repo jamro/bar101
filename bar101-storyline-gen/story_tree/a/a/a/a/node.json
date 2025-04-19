@@ -1,39 +1,4 @@
 {
-  "characters": {
-    "olintz": "After news of abrupt leader demotions and widespread BCI score drops circulated on public forums, Oksana arrived at work to find half her department running emergency manual audits with little explanation. When her afternoon instructions contradicted system prompts, she stopped following automated recommendations and spent the rest of the day reconciling paper records with recent digital logs. Colleagues openly questioned which guidelines to trust, causing Oksana to double-check profiles and annotate every change by hand. By the day\u2019s end, she avoided discussing her findings with others, instead storing copies of flagged files at home for personal reference, anticipating further shifts.",
-    "npetrak": "After news of abrupt leadership demotions spread online and residents began exchanging unofficial guidance manuals in his building, Nikola stopped using official city channels and avoided his assigned digital assistant. That afternoon, a neighbor quietly handed him a copied page outlining safer food purchase patterns and Metro entry times. Following the manual\u2019s advice, Nikola postponed his usual shopping trip to avoid crowds and used an alternate Metro entrance. He now carefully checks new pages slipped under his door each morning, only shopping and traveling at recommended times, wary that further leadership changes could trigger additional inconsistencies or intensify surveillance in his area.",
-    "dtomenko": "Following widespread rumors of sabotage and abrupt BCI score drops among city officials, Daria arrived at work to find the staff entrance restricted and her supervisor unusually silent. Colleagues now queued at a single access point, swiping wristbands multiple times as supervisors watched. That afternoon, requests from the hospital doubled but her own approval permissions remained inconsistent. Instead of submitting a flagged patch for her colleague as planned, Daria manually reviewed all recent updates to avoid triggering suspicious activity. She now avoided internal chat channels, limited her work to direct supervisor instructions, and hid her handwritten notes at the end of each shift.",
-    "lkova": "After choosing to repair the government facility\u2019s smart mirror as requested by the Harmonist engineer, Lenart\u2019s routine changed when Council loyalty checks triggered new badge restrictions and sudden access denials at several of his usual worksites. The following afternoon, he arrived at a residential tower, only to be questioned by unfamiliar security about his recent entry into a sensitive sector and temporarily refused elevator access until his credentials were manually verified. Cautious after these delays, Lenart began checking in directly with building supervisors before each job, lengthening his route and forcing him to prioritize physical documentation over digital logs.",
-    "shalek": "After news of abrupt Council demotions linked to sabotage rumors, Sven found three of his direct team contacts unreachable and their review notes abruptly disappearing from the archive. Forced to complete urgent revisions for a Council statement alone, he hand-delivered the handwritten draft to a Harmonist aide instead of uploading it. Later that day, learning that loyalty checks had caused sudden access denials in his department, Sven chose not to enter the main office at all. Instead, he reviewed revisions from home, coordinated only by secure phone calls, and placed all finished drafts in his personal safe rather than official archives.",
-    "rmiskovic": "Following new rumors about Council sabotage and abrupt demotions, Rada discovered her media access was blocked after returning from lunch, coinciding with public leaks about BCI score drops for senior staff. Without digital credentials, she used a borrowed badge to enter the newsroom and handwrote edits on printouts for the evening broadcast. That afternoon, uncertainty among her colleagues grew as personnel lists were suddenly updated and several team members were reassigned. Rada made copies of all edited printouts, sharing them privately, then left early without notifying anyone, unsure if her position or credentials would still exist the next morning."
-  },
-  "timeline": [
-    {
-      "timestamp": "2025-05-22T00:30:00",
-      "visibility": "internal",
-      "description": "Lenart Kova enters Council Sector E under Harmonist escort to repair a malfunctioning smart mirror. He spots encrypted, rapidly erasing messages hidden in the diagnostics logs, signed \"MH/37-A\"."
-    },
-    {
-      "timestamp": "2025-05-22T06:45:00",
-      "visibility": "semi-public",
-      "description": "Initial analysis of the smart mirror points to insider tampering within the Council security perimeter. Faction leaders order urgent loyalty checks and temporarily restrict data access in sensitive departments."
-    },
-    {
-      "timestamp": "2025-05-24T09:10:00",
-      "visibility": "internal",
-      "description": "A detailed examination reveals the messages contained instructions for bypassing BCI override protocols, with data trails implicating possible senior-level sabotage linked to prior BCI malfunctions."
-    },
-    {
-      "timestamp": "2025-05-28T09:00:00",
-      "visibility": "semi-public",
-      "description": "Council factions debate over the scope of the internal breach. Directorate officials call for immediate suspensions, while Harmonists push for quiet containment and further investigation."
-    },
-    {
-      "timestamp": "2025-06-05T14:40:00",
-      "visibility": "public",
-      "description": "Rumors and partial leaks about sabotage and Council disloyalty spread to public forums. News of abrupt demotions and BCI score drops for some leaders causes fresh uncertainty and stirs distrust among citizens."
-    }
-  ],
   "news": {
     "official": {
       "headline": "System Security Update",
@@ -45,25 +10,6 @@
       "anchor_line": "Glitched mirror in top government sector flashes hidden messages\u2014now sudden leader demotions and BCI drops hit the news.",
       "contextual_reframing": "They call it 'maintenance,' but leaked logs point to inside sabotage and Council infighting. The system\u2019s cracks are showing\u2014watch your score, and each other."
     }
-  },
-  "dilemma": {
-    "customer_id": "dtomenko",
-    "trigger_event": "A Harmonist intermediary discreetly approaches Daria at Bar 101, asking her to unlock a mysterious encrypted drive found during the smart mirror investigation. The drive contains either an AI core or a hologram.",
-    "dilemma": "Daria must choose whether to activate the rogue AI Arbiter, giving it the power to judge Stenograd's future, or to unleash Halden\u2019s secret hologram message, revealing the truth about the system to everyone.",
-    "reason": "Daria is torn between risking a new, potentially uncontrollable intelligence deciding the city\u2019s fate, and detonating the system\u2019s legitimacy by exposing Halden\u2019s words\u2014knowing either path could spark chaos or transformation. Alex, the bartender, encourages her to listen to her conscience and weighs the risk of silence against the cost of revelation.",
-    "choice_a": "She secretly awakens the Arbiter AI, enabling it to demand input from all factions and take authority in deciding Stenograd\u2019s future.",
-    "belief_a": [
-      "A neutral intelligence might break faction deadlock and offer new justice.",
-      "Change from above is safer than exposing hidden truths all at once.",
-      "Trusting people with the truth could lead to uncontrollable chaos."
-    ],
-    "choice_b": "She leaks Halden\u2019s hologram citywide, exposing the truth about conditioning and shaking public faith in the system.",
-    "belief_b": [
-      "The people deserve to know how they\u2019re controlled, no matter the cost.",
-      "Exposing the system might finally force real change from below.",
-      "Secrecy only allows injustice to grow deeper."
-    ],
-    "preference": "b"
   },
   "visitors": [
     "dtomenko",
@@ -284,6 +230,7 @@
       },
       "decision": {
         "dilemma": {
+          "preference": "b",
           "opener": "Whatever's chasing you, it hasn't caught you yet.",
           "variants": [
             [

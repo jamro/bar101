@@ -1,24 +1,21 @@
-.chatWindow {
+.customerContainer {
   display: flex;
   flex-direction: column;
-  background-color: #eee;
-  height: 100%;
+  height: 100vh;
   padding: 0;
-  border-radius: 0.5em;
 }
 
-.chatContent {
+.customerHeader {
+  display: block;
+}
+
+.customerContent {
   display: block;
   flex: 1;
-  padding: 1em;
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer and Edge */
   &::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
-}
-
-.chatFooter {
-  display: block;
 }

@@ -549,6 +549,7 @@ class DecisionMaker:
             dilemma["choice_b"], 
         )
         return {
+            "preference": dilemma["preference"],
             "dilemma": dilemma_chat,
             "belief_a": belief_a_chat,
             "belief_b": belief_b_chat,

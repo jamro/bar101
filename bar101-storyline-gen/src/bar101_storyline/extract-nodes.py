@@ -38,8 +38,22 @@ def extract_node(story_root, target_root, variant_path=[]):
 if __name__ == "__main__":
   console.print("Extracting nodes from the story tree...", style="bold green")
   story_root = os.path.join(os.path.dirname(__file__), "../../story_tree")
+  context_root = os.path.join(os.path.dirname(__file__), "../../context")
   target_root = os.path.join(os.path.dirname(__file__), "../../../bar101-storytree")
 
   extract_node(story_root, target_root)
+
+  # copy context.json to target path
+  console.print("Copying context.json...", style="bold green")
+  world_path = os.path.abspath(os.path.join(context_root, "world.json"))
+  target_world_path = os.path.abspath(os.path.join(target_root, "world_context.json"))
+  console.print(f"Source world path: {world_path}", style="blue")
+  console.print(f"Target world path: {target_world_path}", style="blue")
+  os.makedirs(os.path.dirname(target_world_path), exist_ok=True)
+  with open(world_path, "r") as source_file:
+    with open(target_world_path, "w") as target_file:
+      target_file.write(source_file.read())
+  console.print("Done!", style="bold green")
+  console.print("All nodes extracted!", style="bold green")
 
 

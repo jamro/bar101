@@ -23,10 +23,7 @@ class TreePacker:
         visitors_chat[dilemma["customer_id"]]['decision'] = self._read_file(path, f"chat_{dilemma['customer_id']}_decision.json")
 
         return {
-            "characters": self._read_file(path, "characters.json"),
-            "timeline": self._read_file(path, "timeline.json"),
             "news": self._read_file(path, "news.json"),
-            "dilemma": dilemma,
             "visitors": visitors,
             "chats": visitors_chat
         }
