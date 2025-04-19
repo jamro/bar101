@@ -9,7 +9,6 @@ from rich.prompt import Prompt
 console = Console()
 
 def fork_plot(plot_shaper, variants_chain):
-    console.print(f"[dim]Forking plot - {plot_shaper.get_plot_stage()['name']}...[/dim]")
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
     plot_a_path = os.path.join(story_root, *variants_chain, "a", "_plot.json")
     plot_b_path = os.path.join(story_root, *variants_chain, "b", "_plot.json")
@@ -18,7 +17,7 @@ def fork_plot(plot_shaper, variants_chain):
         plot_b = json.load(open(plot_b_path))
         return plot_a, plot_b
     
-    bar_night = plot_shaper.fork_plot()
+    bar_night = plot_shaper.fork_plot(log_callback=console.print)
 
     plot_a = { "outcome": bar_night["branch_a"], "events": bar_night["events_a"]}
     plot_b = { "outcome": bar_night["branch_b"], "events": bar_night["events_b"]}
