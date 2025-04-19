@@ -111,7 +111,7 @@ Use this moment to reveal hobby of {customer['name']} and related activities.
 Assume the bartender doesn't know what your hobby is.
 
 # Guidelines
-- Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
+- Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, max 10-15 words each)
 - Tone: Conversational and natural
 - Language: Avoid technical jargon, vague statements, or overly generic wording
 - Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.
@@ -123,11 +123,11 @@ Assume the bartender doesn't know what your hobby is.
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
-- Very Suspicious: Shares minimal detail, guarded language
-- Suspicious: Gives a bit more, but still cautious
-- Neutral: Comfortable enough to speak plainly
-- Trusting: Open and more personal
-- Very Trusting: Speaks freely, includes more background about yourself and the world
+- Very Suspicious: Shares minimal detail, guarded language (up to 4 bullet points)
+- Suspicious: Gives a bit more, but still cautious (up to 5 bullet points)
+- Neutral: Comfortable enough to speak plainly (up to 6 bullet points)
+- Trusting: Open and more personal (up to 7 bullet points)
+- Very Trusting: Speaks freely, includes more background about yourself and the world (up to 8 bullet points)
 
 # Across all versions:
 - ALWAYS mention your hobby explicite and something related to it
@@ -146,7 +146,7 @@ Use this moment to reveal how recent global events afected hobby of {customer['n
 Use only information that the {customer['name']} would know
 
 # Guidelines
-- Format: 5-9 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
+- Format: 5-9 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, max 10-15 words each)
 - Tone: Conversational and natural
 - Language: Avoid technical jargon, vague statements, or overly generic wording
 - Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.
@@ -158,11 +158,11 @@ Use only information that the {customer['name']} would know
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
-- Very Suspicious: Shares minimal detail, guarded language
-- Suspicious: Gives a bit more, but still cautious
-- Neutral: Comfortable enough to speak plainly
-- Trusting: Open and more personal
-- Very Trusting: Speaks freely, includes more background about yourself and the world
+- Very Suspicious: Shares minimal detail, guarded language (up to 5 bullet points)
+- Suspicious: Gives a bit more, but still cautious (up to 6 bullet points)
+- Neutral: Comfortable enough to speak plainly (up to 7 bullet points)
+- Trusting: Open and more personal (up to 8 bullet points)
+- Very Trusting: Speaks freely, includes more background about yourself and the world (up to 9 bullet points)
 
 # Across all versions:
 - ALWAYS refer to some recent event that affected your hobby
