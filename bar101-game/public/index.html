@@ -15,5 +15,14 @@
 </head>
 <body>
   <div id="root"></div>
+  <script>
+    // This script sets a CSS variable for 1vh to ensure proper height calculations
+    function updateVhUnit() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    } 
+    updateVhUnit();
+    window.addEventListener('resize', updateVhUnit);
+  </script>
 </body>
 </html>
