@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GameLayout from './layouts/GameLayout';  
 import LoadingScreen from './layouts/LoadingScreen';
+import StartLayout from './layouts/StartLayout';
 
 function App() {
   const [ storyNode, setStoryNode ] = useState(null);
@@ -9,6 +10,7 @@ function App() {
   const [ chats, setChats ] = useState({});
   const [ storyPath, setStoryPath ] = useState([]);
   const [ loading, setLoading ] = useState(true);
+  const [ isStarted, setIsStarted ] = useState(false);
 
   React.useEffect(() => {
     const fetchStoryNode = async (nodeFileName) => {
@@ -63,6 +65,10 @@ function App() {
   
   if (loading) {
     return <LoadingScreen />
+  }
+
+  if(!isStarted) {
+    return <StartLayout onStart={() => setIsStarted(true)} />
   }
 
   return <GameLayout 
