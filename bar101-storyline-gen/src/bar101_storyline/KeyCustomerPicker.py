@@ -3,14 +3,19 @@ import os
 import json
 import random
 
-get_system_message = lambda world_context, customers_info, outcome_info, timeline_info: f"""# BACKGROUND
+get_system_message = lambda world_context, customer, character_stats, outcome_info, timeline_info: f"""# BACKGROUND
 {world_context['background']}
 
-# BAR 101
-{world_context['bar']['details']}
-
-# BAR 101 CUSTOMERS
-{customers_info}
+# CHARACTER PROFILE
+Name: {customer['name']}
+Age: {customer['age']}
+Sex: {customer['sex']}
+Job Title: {customer['job_title']}
+Access to information: {customer['access']}
+Political Preferences: {character_stats['political_preference']}
+BCI Score: {character_stats['bci_score']}
+Hobby: {customer['hobby']}
+Comunication style: {customer['communication']}
 
 # STORY SUMMARY
 {outcome_info}
@@ -33,7 +38,7 @@ Describe how actions or decisions of {customer_name} influenced the story's tran
 {customer_name} faced a binary, mutually exclusive choice — leading the story down the path of either VARIANT A or VARIANT B.
 Their influence may be direct or indirect, shaped in part by their conversations with Alex, the bartender (do not mention Alex directly in the events or variants).
 Both paths were viable and probable, but {customer_name} ultimately made a decision that steered the story forward.
-Make sure that actions are inline with the character's personality, background, and motivations.
+Make sure that actions are inline with the character's personality, job position, area of influence, background, and motivations.
 
 As a result provide:
   - Cause: One of recent events or situations that lead the customer's make face the dilemma. Explain why it is plausible and inline with the character's profile.
@@ -41,11 +46,13 @@ As a result provide:
   - Reason: Why the customer is unsure about the decision
 	-	Variant A: The choice that leads to VARIANT A from the TIMELINE
   - Belief A: Belief of {customer_name} that leads to chose VARIANT A. It must be opposite of the belief B.
+  - Political support A: Political faction which is supported by the VARIANT A. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'
   - Transition Events A: 2-3 events that are between the TIMELINE and VARIANT A ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT A. Be specific and provide all necessary details.
 	-	Variant B: The choice that leads to VARIANT B from the TIMELINE
   - Belief B: Belief of {customer_name} that leads to chose VARIANT B. It must be opposite of the belief A.
+  - Political support B: Political faction which is supported by the VARIANT B. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'
   - Transition Events B: 2-3 events that are between the TIMELINE and VARIANT B ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT B. Be specific and provide all necessary details.
-  - Preference: Variant that {customer_name} prefers. It must be aligned with character profile and backstory. Allowed values: A or B.
+  - Preference: Variant that {customer_name} prefers. It must be aligned with character profile, political preferences and backstory. Allowed values: A or B.
 """
 
 get_refine_prompt = lambda: f"""
@@ -98,11 +105,11 @@ class KeyCustomerPicker:
         return patrons
 
 
-    def pick_customer_dilemma(self, outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
+    def pick_customer_dilemma(self, outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, customers_model, log_callback=None):
         last_error = None
         for i in range(3):
             try:
-                response = self._pick_customer_dilemma(outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, log_callback)
+                response = self._pick_customer_dilemma(outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, customers_model, log_callback)
                 if response is not None:
                     return response
                 else:
@@ -114,26 +121,18 @@ class KeyCustomerPicker:
 
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
 
-    def _pick_customer_dilemma(self, outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, log_callback=None):
+    def _pick_customer_dilemma(self, outcome_timeline, timeline, branch_a, branch_b, events_a, events_b, customers_model, log_callback=None):
         timeline = timeline[-8:] # last events
         key_customer = self.get_random_customer()
+
+        character_stats = customers_model[key_customer['id']]
 
         timeline_info = ""
         for event in timeline:
             timeline_info += f" - {event['timestamp']} ({event['visibility']}) - {event['description']}\n"
 
-        customers_info = ""
-        for customer in self.customers:
-            customers_info += f"## {customer['name']} (ID: {customer['id']})\n"
-            customers_info += f" - Age: {customer['age']}\n"
-            customers_info += f" - Sex: {customer['sex']}\n"
-            customers_info += f" - Job Title: {customer['job_title']}\n"
-            customers_info += f" - Information access level: {customer['access']}\n"
-            customers_info += f"{customer['details']}\n"
-            customers_info += "\n"
-
         outcome_info = "\n".join([f" - {event}" for event in outcome_timeline])
-        system_message = get_system_message(self.world_context, customers_info, outcome_info, timeline_info)
+        system_message = get_system_message(self.world_context, key_customer, character_stats, outcome_info, timeline_info)
         prompt = get_dilemma_prompt(key_customer['name'], branch_a, branch_b, events_a, events_b)
 
         messages = [
@@ -173,6 +172,10 @@ class KeyCustomerPicker:
                                 "type": "string",
                                 "description": "The choice that leads to VARIANT A. Style: concise, clear, and easy to understand."
                             },
+                            "political_support_a": {
+                                "type": "string",
+                                "description": "The political faction which is supported by the VARIANT A. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'."
+                            },
                             "sub_beliefs_driver_a": {
                                 "type": "array",
                                 "description": f"List of 3 distinct sub beliefs of {key_customer['name']} that leads to choose VARIANT A. All must be components of the main belief driver A and they must be opposite of the sub beliefs driver B",
@@ -197,6 +200,10 @@ class KeyCustomerPicker:
                             "variant_b": {
                                 "type": "string",
                                 "description": "The choice that leads to VARIANT B. Style: concise, clear, and easy to understand."
+                            },
+                            "political_support_b": {
+                                "type": "string",
+                                "description": "The political faction which is supported by the VARIANT B. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'."
                             },
                             "sub_beliefs_driver_b": {
                                 "type": "array",
@@ -235,15 +242,32 @@ class KeyCustomerPicker:
             if function_call.name == "refine_customer_dilemma":
                 params = json.loads(function_call.arguments)
 
+                if params["political_support_a"] not in ["harmonists", "innovators", "directorate", "rebel"]:
+                    raise ValueError(f"Political support A is invalid value: {params['political_support_a']}. Allowed values: 'harmonists', 'innovators', 'directorate' or 'rebel'.")
+                if params["political_support_b"] not in ["harmonists", "innovators", "directorate", "rebel"]:
+                    raise ValueError(f"Political support B is invalid value: {params['political_support_b']}. Allowed values: 'harmonists', 'innovators', 'directorate' or 'rebel'.")
+                if params["preference"].lower() not in ["a", "b"]:
+                    raise ValueError(f"Preference is invalid value: {params['preference']}. Allowed values: A or B.")
+                if len(params["sub_beliefs_driver_a"]) != 3:
+                    raise ValueError(f"Sub beliefs driver A must be a list of 3 distinct beliefs. Found: {len(params['sub_beliefs_driver_a'])}")
+                if len(params["sub_beliefs_driver_b"]) != 3:
+                    raise ValueError(f"Sub beliefs driver B must be a list of 3 distinct beliefs. Found: {len(params['sub_beliefs_driver_b'])}")
+                if params["sub_beliefs_driver_a"] == params["sub_beliefs_driver_b"]:
+                    raise ValueError(f"Sub beliefs driver A and B must be distinct. Found: {params['sub_beliefs_driver_a']}")
+                if params["sub_beliefs_driver_a"][0] == params["sub_beliefs_driver_b"][0]:
+                    raise ValueError(f"Sub beliefs driver A and B must be distinct. Found: {params['sub_beliefs_driver_a'][0]}")
+
                 response = {
                     "customer": key_customer,
                     "trigger_event": params["trigger_event"],
                     "dilemma": params["dilemma"],
                     "reason": params["reason"],
                     "variant_a": params["variant_a"],
+                    "political_support_a": params["political_support_a"],
                     "belief_driver_a": params["sub_beliefs_driver_a"],
                     "transition_events_a": params["transition_events_a"],
                     "variant_b": params["variant_b"],
+                    "political_support_b": params["political_support_b"],
                     "belief_driver_b": params["sub_beliefs_driver_b"],
                     "transition_events_b": params["transition_events_b"],
                     "preference": "a" if params["preference"].lower() == "a" else "b",

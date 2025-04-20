@@ -6,13 +6,6 @@ from rich.console import Console
 from rich.table import Table
 from rich.prompt import Prompt
 import questionary
-from .lib import (
-    get_trust_level,
-    print_alex_chat,
-    print_customer_chat,
-    print_serve_drink,
-    print_customer_enter,
-)
 import random
 
 console = Console()
@@ -24,9 +17,8 @@ def pick_belief(beliefs, preference):
     random_belief = random.choice(prefered_beliefs)
     prefered_beliefs.remove(random_belief)
     return random_belief
-    
 
-def decide_dilemma(decision_maker, customer, all_customers, dilemma, plot_a, plot_b, timeline, variants_chain):
+def decide_dilemma(decision_maker, customer, customers_model, dilemma, plot_a, plot_b, timeline, variants_chain):
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
     decision_path = os.path.join(story_root, *variants_chain, f"chat_{customer['id']}_decision.json")
 
@@ -35,11 +27,11 @@ def decide_dilemma(decision_maker, customer, all_customers, dilemma, plot_a, plo
         with open(decision_path, "r") as f:
             chat = json.load(f)
     else:
-        chat = decision_maker.get_dilemma_convo(customer, dilemma, timeline, log_callback=console.print)
+        chat = decision_maker.get_dilemma_convo(customer, customers_model[customer['id']], dilemma, timeline, log_callback=console.print)
         with open(decision_path, "w") as f:
             json.dump(chat, f, indent=2)
 
-    decision = questionary.select(message=f"Choice:", choices=[
+    decision = questionary.select(message=f"{customer['name']} leads to:", choices=[
         f"A: {plot_a['outcome']}",
         f"B: {plot_b['outcome']}",
       ], 
@@ -47,5 +39,9 @@ def decide_dilemma(decision_maker, customer, all_customers, dilemma, plot_a, plo
     ).ask()
 
     decision = "a" if decision[0] == "A" else "b"
+
+    new_political_preference = dilemma['political_a'] if decision == "a" else dilemma['political_b']
+
+    customers_model[customer['id']]['political_preference'] = new_political_preference
 
     return decision

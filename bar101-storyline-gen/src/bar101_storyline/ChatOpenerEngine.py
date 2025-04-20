@@ -67,18 +67,19 @@ all_openers = [
     "Is your night just starting or ending?"
 ]
 
-get_system_message = lambda background, customer, recent_story, outcome_timeline, events: f"""#BACKGROUND
+get_system_message = lambda background, customer, character_stats, recent_story, outcome_timeline, events: f"""#BACKGROUND
 {background}
 
-# PROFILE
+# CHARACTER PROFILE
 Name: {customer['name']}
 Age: {customer['age']}
 Sex: {customer['sex']}
-Job Toitle: {customer['job_title']}
+Job Title: {customer['job_title']}
 Access to information: {customer['access']}
+Political Preferences: {character_stats['political_preference']}
+BCI Score: {character_stats['bci_score']}
 Hobby: {customer['hobby']}
 Comunication style: {customer['communication']}
-
 {customer['details']}
 
 # RECENT STORY OF {customer['name']}
@@ -101,6 +102,7 @@ RECENT GLOBAL EVENTS impacted your personal hobby.
 - The story must be technically accurate, plausible, and grounded in reality — do not invent unrealistic scenarios.
 - Describe a specific event that occurred recently (within the past few weeks).
 - The situation should span around 1 to 6 hours — include relevant details about when, where, what happened, and how global events influenced it.
+- Ensure the situation is aligned with the character's profile
 - Make it interesting and immersive by focusing on details, emotions, or unexpected outcomes.
 """
 
@@ -113,6 +115,7 @@ Assume the bartender doesn't know what your hobby is.
 # Guidelines
 - Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, max 10-15 words each)
 - Tone: Conversational and natural
+- Style: align with the character's communication style, personality and political preferences
 - Language: Avoid technical jargon, vague statements, or overly generic wording
 - Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.
 - Make sure details about hobby are realistic and technically correct - do not make things up
@@ -148,6 +151,7 @@ Use only information that the {customer['name']} would know
 # Guidelines
 - Format: 5-9 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, max 10-15 words each)
 - Tone: Conversational and natural
+- Style: align with the character's communication style, personality and political preferences
 - Language: Avoid technical jargon, vague statements, or overly generic wording
 - Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.
 - Make sure details about hobby are realistic and technically correct - do not make things up
@@ -261,11 +265,11 @@ class ChatOpenerEngine:
         wrong_opener = customer["wrong_opener"]
         return wrong_opener
     
-    def get_neutral_conversation(self, question, customer_id, recent_story, outcome_timeline, events, hobby_story):
+    def get_neutral_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
         last_error = None
         for i in range(3):
             try:
-                response = self._get_neutral_conversation( question, customer_id, recent_story, outcome_timeline, events, hobby_story)
+                response = self._get_neutral_conversation( question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story)
                 if response is not None:
                     return response
                 else:
@@ -278,11 +282,11 @@ class ChatOpenerEngine:
 
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
     
-    def get_hobby_conversation(self,  question, customer_id, recent_story, outcome_timeline, events, hobby_story):
+    def get_hobby_conversation(self,  question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
         last_error = None
         for i in range(3):
             try:
-                response = self._get_hobby_conversation( question, customer_id, recent_story, outcome_timeline, events, hobby_story)
+                response = self._get_hobby_conversation( question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story)
                 if response is not None:
                     return response
                 else:
@@ -295,11 +299,12 @@ class ChatOpenerEngine:
 
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
     
-    def _get_neutral_conversation(self, question, customer_id, recent_story, outcome_timeline, events, hobby_story):
+    def _get_neutral_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             recent_story, 
             outcome_timeline,
             events
@@ -325,11 +330,12 @@ class ChatOpenerEngine:
             params["very_trusting"]
         ]
     
-    def _get_hobby_conversation(self, question, customer_id, recent_story, outcome_timeline, events, hobby_story):
+    def _get_hobby_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             recent_story, 
             outcome_timeline,
             events
@@ -355,11 +361,12 @@ class ChatOpenerEngine:
             params["very_trusting"]
         ]
     
-    def get_opener_story(self, customer_id, recent_story, outcome_timeline, events):
+    def get_opener_story(self, customer_id, character_stats, recent_story, outcome_timeline, events):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             recent_story, 
             outcome_timeline,
             events
@@ -373,15 +380,15 @@ class ChatOpenerEngine:
         response = self.client.chat.completions.create(model=self.model, messages=messages)
         return response.choices[0].message.content
     
-    def get_opener(self, customer_id, recent_story, outcome_timeline, events, log_callback=None):
+    def get_opener(self, customer_id, character_stats, recent_story, outcome_timeline, events, log_callback=None):
         neutral_question = self.get_neutral_opener()
 
         log_callback(f"[dim]{customer_id} generates hobby story...[/dim]") if log_callback else None
-        story = self.get_opener_story(customer_id, recent_story, outcome_timeline, events)
+        story = self.get_opener_story(customer_id, character_stats, recent_story, outcome_timeline, events)
         log_callback(f"[dim]{customer_id} answers neutral question...[/dim]") if log_callback else None
-        neutral_answer = self.get_neutral_conversation(neutral_question, customer_id, recent_story, outcome_timeline, events, story)
+        neutral_answer = self.get_neutral_conversation(neutral_question, customer_id, character_stats, recent_story, outcome_timeline, events, story)
         log_callback(f"[dim]{customer_id} answers hobby question...[/dim]") if log_callback else None
-        hobby_answer = self.get_hobby_conversation(self.get_hobby_opener(customer_id), customer_id, recent_story, outcome_timeline, events, story)
+        hobby_answer = self.get_hobby_conversation(self.get_hobby_opener(customer_id), customer_id, character_stats, recent_story, outcome_timeline, events, story)
         response = {
             "customer_id": customer_id,
             "questions": {

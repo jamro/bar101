@@ -11,6 +11,7 @@ class TreePacker:
             return json.load(f)
    
     def pack_node(self, path):
+        characters = self._read_file(path, "characters.json")
         dilemma = self._read_file(path, "dilemma.json")
         visitors = self._read_file(path, "visitors.json")
         visitors_chat = {}
@@ -22,9 +23,18 @@ class TreePacker:
           
         visitors_chat[dilemma["customer_id"]]['decision'] = self._read_file(path, f"chat_{dilemma['customer_id']}_decision.json")
 
+        character_stats = {}
+        for character in characters:
+            character_stats[character] = {
+                "bci_score": characters[character]["bci_score"],
+                "political_preference": characters[character]["political_preference"],
+            }
+
         return {
             "news": self._read_file(path, "news.json"),
             "visitors": visitors,
-            "chats": visitors_chat
+            "character_stats": character_stats,
+            "chats": visitors_chat,
+            
         }
         

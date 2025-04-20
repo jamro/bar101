@@ -37,15 +37,17 @@ all_openers = [
   "Folks don't always talk, but they carry plenty. You carrying much these days?"
 ]
 
-get_system_message = lambda background, customer, recent_story, outcome_timeline=None, events=None: f"""#BACKGROUND
+get_system_message = lambda background, customer, character_stats, recent_story, outcome_timeline=None, events=None: f"""#BACKGROUND
 {background}
 
 # PROFILE
 Name: {customer['name']}
 Age: {customer['age']}
 Sex: {customer['sex']}
-Job Toitle: {customer['job_title']}
+Job Title: {customer['job_title']}
 Access to information: {customer['access']}
+Political Preferences: {character_stats['political_preference']}
+BCI Score: {character_stats['bci_score']}
 Comunication style: {customer['communication']}
 
 {customer['details']}
@@ -68,6 +70,7 @@ Use this moment to reveal RECENT STORY OF {customer['name']}
 # Guidelines
 - Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
 - Tone: Conversational and natural
+- Style: align with the character's communication style, personality and political preferences
 - Language: Avoid technical jargon, vague statements, or overly generic wording
 - Express your feelings and emotions about the recent events
 - Share specific details and situations that happened in your RECENT STORY
@@ -81,8 +84,8 @@ Write five monologue variants, each reflecting a different level of trust {custo
 - Very Suspicious: Shares minimal detail, guarded language
 - Suspicious: Gives a bit more, but still cautious
 - Neutral: Comfortable enough to speak plainly
-- Trusting: Open and more personal
-- Very Trusting: Speaks freely, includes more background about yourself and the world
+- Trusting: Open and more personal, includes more background about yourself and the world
+- Very Trusting: Speaks freely, includes more background about yourself and the world revealing political preferences
 
 # Across all versions:
 - ALWAYS refer to some recent event and share your story
@@ -140,6 +143,7 @@ You just had following coversation with bartender Alex (assume you had all of va
 # Guidelines
 - Format: 5-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions)
 - Tone: Conversational and natural
+- Style: align with the character's communication style, personality and political preferences
 - Your emotion: {emotion}
 - Be specific and detailed about the GLOBAL EVENTS
 - GLOBAL STORY SUMMARY provides additional context for GLOBAL EVENTS
@@ -151,9 +155,9 @@ You just had following coversation with bartender Alex (assume you had all of va
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
 - Very Suspicious: Shares minimal detail, guarded language
 - Suspicious: Gives a bit more, but still cautious
-- Neutral: Comfortable enough to speak plainly
-- Trusting: Open and more personal
-- Very Trusting: Speaks freely, includes more background about yourself and the world
+- Neutral: Comfortable enough to speak plainly. Indirectly reveal your political preferences
+- Trusting: Open and more personal, revealing your political preferences
+- Very Trusting: Speaks freely, includes more background about yourself and the world. Be open about your political preferences.
 
 # Across all versions:
 - ALWAYS refer to GLOBAL EVENTS
@@ -261,13 +265,13 @@ class ChatStoryEngine:
                 return customer
         return None
     
-    def get_conversation(self, question, customer_id, recent_story, outcome_timeline, events, log_callback=None):
+    def get_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, log_callback=None):
         log_callback(f"[dim]Generating main conversation of {customer_id}...[/dim]") if log_callback else None
-        main = self.get_main_conversation(question, customer_id, recent_story, outcome_timeline, events)
+        main = self.get_main_conversation(question, customer_id, character_stats, recent_story, outcome_timeline, events)
         log_callback(f"[dim]Generating emotional followup of {customer_id}...[/dim]") if log_callback else None
-        emotional = self.get_emotional_followup(customer_id, recent_story, main["emotion"])
+        emotional = self.get_emotional_followup(customer_id, character_stats, recent_story, main["emotion"])
         log_callback(f"[dim]Generating factual followup of {customer_id}...[/dim]") if log_callback else None
-        factual = self.get_factual_followup(customer_id, recent_story, main["emotion"], main["variants"], outcome_timeline, events)
+        factual = self.get_factual_followup(customer_id, character_stats, recent_story, main["emotion"], main["variants"], outcome_timeline, events)
         
         return {
             "main": main,
@@ -275,11 +279,11 @@ class ChatStoryEngine:
             "factual": factual
         }
     
-    def get_emotional_followup(self, customer_id, recent_story, emotion):
+    def get_emotional_followup(self, customer_id, character_stats, recent_story, emotion):
         last_error = None
         for i in range(3):
             try:
-                response = self._get_emotional_followup(customer_id, recent_story, emotion)
+                response = self._get_emotional_followup(customer_id, character_stats, recent_story, emotion)
                 if response is not None:
                     return response
                 else:
@@ -292,11 +296,11 @@ class ChatStoryEngine:
 
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
 
-    def get_factual_followup(self, customer_id, recent_story, emotion, main_variants, outcome_timeline, events):
+    def get_factual_followup(self, customer_id, character_stats, recent_story, emotion, main_variants, outcome_timeline, events):
         last_error = None
         for i in range(3):
             try:
-                response = self._get_factual_followup(customer_id, recent_story, emotion, main_variants, outcome_timeline, events)
+                response = self._get_factual_followup(customer_id, character_stats, recent_story, emotion, main_variants, outcome_timeline, events)
                 if response is not None:
                     return response
                 else:
@@ -310,11 +314,11 @@ class ChatStoryEngine:
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
 
 
-    def get_main_conversation(self, question, customer_id, recent_story, outcome_timeline, events):
+    def get_main_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events):
         last_error = None
         for i in range(3):
             try:
-                response = self._get_main_conversation( question, customer_id, recent_story, outcome_timeline, events)
+                response = self._get_main_conversation( question, customer_id, character_stats, recent_story, outcome_timeline, events)
                 if response is not None:
                     return response
                 else:
@@ -327,11 +331,12 @@ class ChatStoryEngine:
 
         raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
     
-    def _get_emotional_followup(self, customer_id, recent_story, emotion):
+    def _get_emotional_followup(self, customer_id, character_stats, recent_story, emotion):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             recent_story
         )
         prompt = get_emotional_prompt(customer, emotion)
@@ -356,11 +361,12 @@ class ChatStoryEngine:
           ]
         }
     
-    def _get_factual_followup(self, customer_id, recent_story, emotion, main_variants, outcome_timeline, events):
+    def _get_factual_followup(self, customer_id, character_stats, recent_story, emotion, main_variants, outcome_timeline, events):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             recent_story,
             outcome_timeline,
             events
@@ -387,11 +393,12 @@ class ChatStoryEngine:
           ]
         }
     
-    def _get_main_conversation(self, question, customer_id, recent_story, outcome_timeline, events):
+    def _get_main_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             recent_story, 
             outcome_timeline,
             events

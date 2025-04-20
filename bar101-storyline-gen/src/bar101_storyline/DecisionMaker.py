@@ -50,15 +50,17 @@ all_openers = [
 ]
 
 
-get_system_message = lambda background, customer, events=None: f"""#BACKGROUND
+get_system_message = lambda background, customer, character_stats, events=None: f"""#BACKGROUND
 {background}
 
 # PROFILE
 Name: {customer['name']}
 Age: {customer['age']}
 Sex: {customer['sex']}
-Job Toitle: {customer['job_title']}
+Job Title: {customer['job_title']}
 Access to information: {customer['access']}
+Political Preferences: {character_stats['political_preference']}
+BCI Score: {character_stats['bci_score']}
 Comunication style: {customer['communication']}
 
 {customer['details']}
@@ -66,7 +68,6 @@ Comunication style: {customer['communication']}
 {'# GLOBAL EVENTS' if events else ''}
 {json.dumps(events, indent=2)}
 """
-
 
 get_dilemma_prompt = lambda customer, trigger_event, dilemma, reason, question, choice_a, choice_b: f"""Imagine you are {customer['name']}. 
 You have an important decision to make, and you are in a dilemma: {dilemma}.
@@ -90,6 +91,7 @@ Write a short internal monologue in response about the dilemma - no dialogue, no
 - Keep the tone true to the world of Stenograd — subtle, loaded, layered with quiet tension
 - Share specific details and situations that triggered the dilemma
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
+- Share what direction you are leaning towards and how your political preferences and current BCI score may affect the decision
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
@@ -348,11 +350,11 @@ class DecisionMaker:
             
         self.world_context = read_context_file(os.path.join(base_path, "world.json"))
 
-    def expopse_dilemma(self, customer, dilemma, timeline):
+    def expose_dilemma(self, customer, character_stats, dilemma, timeline):
         last_error = None
         for i in range(3):
             try:
-                response = self._expopse_dilemma(customer, dilemma, timeline)
+                response = self._expose_dilemma(customer, character_stats, dilemma, timeline)
                 if response is not None:
                     return response
                 else:
@@ -364,11 +366,12 @@ class DecisionMaker:
         raise Exception(f"Failed to expose dilemma after 3 attempts: {last_error}")
     
 
-    def _expopse_dilemma(self, customer, dilemma, timeline):
+    def _expose_dilemma(self, customer, character_stats, dilemma, timeline):
         opener = random.choice(all_openers)
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             timeline
         )
         prompt = get_dilemma_prompt(
@@ -404,11 +407,11 @@ class DecisionMaker:
           ]
         }
     
-    def share_beliefs(self, customer, dilemma, timeline, choice_a, choice_b, beliefs):
+    def share_beliefs(self, customer, character_stats, dilemma, timeline, choice_a, choice_b, beliefs):
         last_error = None
         for i in range(5):
             try:
-                response = self._share_beliefs(customer, dilemma, timeline, choice_a, choice_b, beliefs)
+                response = self._share_beliefs(customer, character_stats, dilemma, timeline, choice_a, choice_b, beliefs)
                 if response is not None:
                     return response
                 else:
@@ -420,10 +423,11 @@ class DecisionMaker:
         raise Exception(f"Failed to share beliefs after 5 attempts: {last_error}")
     
     
-    def _share_beliefs(self, customer, dilemma, timeline, choice_a, choice_b, beliefs):
+    def _share_beliefs(self, customer, character_stats, dilemma, timeline, choice_a, choice_b, beliefs):
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             timeline
         )
         prompt = get_beliefs_prompt(
@@ -456,11 +460,11 @@ class DecisionMaker:
 
         return monologues
     
-    def share_decision(self, customer, dilemma, timeline, choice_a, choice_b):
+    def share_decision(self, customer, character_stats, dilemma, timeline, choice_a, choice_b):
         last_error = None
         for i in range(3):
             try:
-                response = self._share_decision(customer, dilemma, timeline, choice_a, choice_b)
+                response = self._share_decision(customer, character_stats, dilemma, timeline, choice_a, choice_b)
                 if response is not None:
                     return response
                 else:
@@ -472,10 +476,11 @@ class DecisionMaker:
         raise Exception(f"Failed to share decision after 3 attempts: {last_error}")
     
     
-    def _share_decision(self, customer, dilemma, timeline, choice_a, choice_b):
+    def _share_decision(self, customer, character_stats, dilemma, timeline, choice_a, choice_b):
         system_message = get_system_message(
             self.world_context["background"],
             customer,
+            character_stats,
             timeline
         )
         prompt = get_decision_prompt(
@@ -524,12 +529,13 @@ class DecisionMaker:
             ]
         }
     
-    def get_dilemma_convo(self, customer, dilemma, timeline, log_callback=None):
+    def get_dilemma_convo(self, customer, character_stats, dilemma, timeline, log_callback=None):
         log_callback(f"[dim]{customer['id']} share the dilemma...[/dim]") if log_callback else None
-        dilemma_chat = self._expopse_dilemma(customer, dilemma, timeline)
+        dilemma_chat = self._expose_dilemma(customer, character_stats, dilemma, timeline)
         log_callback(f"[dim]{customer['id']} share the beliefs A...[/dim]") if log_callback else None
         belief_a_chat = self.share_beliefs(
             customer, 
+            character_stats,
             dilemma, 
             timeline, 
             dilemma["choice_a"], 
@@ -539,6 +545,7 @@ class DecisionMaker:
         log_callback(f"[dim]{customer['id']} share the beliefs B...[/dim]") if log_callback else None
         belief_b_chat = self.share_beliefs(
             customer, 
+            character_stats,
             dilemma, 
             timeline, 
             dilemma["choice_b"], 
@@ -548,6 +555,7 @@ class DecisionMaker:
         log_callback(f"[dim]{customer['id']} share the decision...[/dim]") if log_callback else None
         decision_chat = self.share_decision(
             customer, 
+            character_stats,
             dilemma, 
             timeline, 
             dilemma["choice_a"], 

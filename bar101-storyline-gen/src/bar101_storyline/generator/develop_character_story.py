@@ -6,7 +6,7 @@ from rich.console import Console
 
 console = Console()
 
-def develop_character_story(character_story_builder, customer, dilemma, choice, events, variants_chain):
+def develop_character_story(character_story_builder, customer, customers_model, dilemma, choice, events, variants_chain):
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
     characters_story_path = os.path.join(story_root, *variants_chain, "characters.json")
     all_characters = character_story_builder.get_characters()
@@ -18,30 +18,25 @@ def develop_character_story(character_story_builder, customer, dilemma, choice, 
             console.print(f"[dim]Creating story for character {character_id}...[/dim]")
             character_story_builder.store_character_chapter(
                 character_id,
-                characters_story[character_id]
+                characters_story[character_id]['chapter']
             )
         return characters_story
 
     characters_story = {}
     for character_id in all_characters:
         console.print(f"[dim]Creating story for character {character_id}...[/dim]")
-        extra_context = ""
-        if character_id == customer["id"]:
-            extra_context = f""" # DILEMMA
-            Before RECENT GLOBAL EVENTS The character faced a dilemma: {dilemma['dilemma']}
-            The dilema is caused by: {dilemma['reason']}
-            The character decides to: {choice}
-            """
         characters_story[character_id] = character_story_builder.create_character_chapter(
             character_id,
+            customers_model[character_id],
             events,
-            extra_context
+            dilemma if character_id == dilemma["customer_id"] else None,
+            choice if character_id == dilemma["customer_id"] else None,
         )
     
     for character_id in all_characters:
         character_story_builder.store_character_chapter(
             character_id,
-            characters_story[character_id]
+            characters_story[character_id]['chapter']
         )
 
     with open(characters_story_path, "w") as f:

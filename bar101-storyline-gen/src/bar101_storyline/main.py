@@ -57,6 +57,12 @@ if __name__ == "__main__":
     decision_maker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
 
     all_characters = character_story_builder.get_characters()
+    customers_model = {}
+    for character_id in all_characters:
+        customers_model[character_id] = { 
+            "political_preference": get_customer_by_id(character_id)["political_preference"],
+            "bci_score": get_customer_by_id(character_id)["bci_score"],
+        }
 
     # initial timeline
     with open(os.path.join(story_root, "timeline.json"), "w") as f:
@@ -64,12 +70,14 @@ if __name__ == "__main__":
 
     # initial character story
     characters_story_path = os.path.join(story_root, "characters.json")
+    chapter = None
     if not os.path.exists(characters_story_path):
         characters_story = {}
         for character_id in all_characters:
             console.print(f"[dim]Creating story for character {character_id}...[/dim]")
             characters_story[character_id] = character_story_builder.create_character_chapter(
                 character_id,
+                customers_model[character_id],
                 plot_shaper.timeline
             )
         with open(os.path.join(story_root, "characters.json"), "w") as f:
@@ -80,16 +88,13 @@ if __name__ == "__main__":
     for character_id in all_characters:
         character_story_builder.store_character_chapter(
             character_id,
-            characters_story[character_id]
+            characters_story[character_id]["chapter"]
         )
+        customers_model[character_id]["bci_score"] = characters_story[character_id]["bci_score"]
 
     new_events = plot_shaper.timeline
     outcome = "Marek Halden is found dead"
     outcome_timeline = [outcome]
-
-    customers_model = {}
-    for character_id in all_characters:
-        customers_model[character_id] = { "trust": -2 + int(5 * random.random()) }
 
     while not plot_shaper.is_complete():
         create_variant_dirs(variants_chain)
@@ -97,7 +102,7 @@ if __name__ == "__main__":
         get_news_spot(news_writter, new_events, outcome, variants_chain)
 
         plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
-        dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, plot_a, plot_b, plot_shaper.timeline, outcome_timeline, variants_chain)
+        dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, customers_model, plot_a, plot_b, plot_shaper.timeline, outcome_timeline, variants_chain)
         key_customer = get_customer_by_id(dilemma["customer_id"])
 
         patrons = get_bar_visitors(cusomer_picker, key_customer['id'], variants_chain)
@@ -108,7 +113,7 @@ if __name__ == "__main__":
                 chat_story_engine, 
                 patron_id, 
                 customers_model, 
-                characters_story[patron_id], 
+                characters_story[patron_id]["chapter"], 
                 outcome_timeline, 
                 new_events, 
                 variants_chain
@@ -138,7 +143,19 @@ if __name__ == "__main__":
         plot_shaper.timeline += new_events
         plot_shaper.move_to_next_stage()
 
-        characters_story = develop_character_story(character_story_builder, key_customer, dilemma, choice, new_events, variants_chain)
+        characters_story = develop_character_story(
+            character_story_builder, 
+            key_customer, 
+            customers_model,
+            dilemma, 
+            choice, 
+            new_events, 
+            variants_chain
+        )
+
+        # iteracte over keys in characters_story dict
+        for character_id in characters_story:
+            customers_model[character_id]["bci_score"] = characters_story[character_id]["bci_score"]
 
     get_news_spot(news_writter, new_events, outcome, variants_chain)
 
