@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NewsLayout from './NewsLayout';
 import CustomerLayout from './CustomerLayout';
 
-function GameLayout({storyNode, customers, drinks, chats, onTrustChange, onLevelComplete}) {
+function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChange, onLevelComplete}) {
   if(!storyNode) {
     return <div>Loading...</div>;
   }
@@ -46,6 +46,7 @@ function GameLayout({storyNode, customers, drinks, chats, onTrustChange, onLevel
     case 'customer':
       return <CustomerLayout 
         customers={customers} 
+        bartender={bartender}
         customerId={customerId} 
         chats={chats} 
         drinks={drinks} 

@@ -5,27 +5,29 @@ import PropTypes from 'prop-types';
 
 const MSG_DELAY = 100
 
-export default function GoodbyeLayout({ customer, drink, onClose }) {
+export default function GoodbyeLayout({ bartender, customer, drink, onClose }) {
  
   const chatWindowRef = useRef(null);
 
+  const getTrustIndex = (trust) => {
+    return Math.round((trust + 1) * 2)
+  }
+
+  const arrRnd = (arr) => {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  }
+
+  const arrTrust = (arr, customer) => {
+    const trustIndex = getTrustIndex(customer.trust)
+    return arr[trustIndex]
+  }
+
   useEffect(() => {
     const run = async () => {
-      const goodbyeMessages = [
-        "Alright, I should get going. Thanks for the chat!",
-        "Time for me to head out - take care!",
-        "Gotta run, but it was good talking with you.",
-        "Thanks for the drink and the company. Catch you next time!",
-        "I have to run, but I had a great time. See you around!",
-        "I should probably get going. Thanks for the drink!",
-        "Thanks for the chat! I had a great time.",
-        "I should get going now. Thanks for the drink!",
-        "Thanks for the drink! I should get going now.",
-        "Thanks for the chat! I had a great time.",
-      ]
-      const randomGoodbye = goodbyeMessages[Math.floor(Math.random() * goodbyeMessages.length)]
-      await chatWindowRef.current.print(randomGoodbye, customer.name, 1)
-      await chatWindowRef.current.print("See you around!", "Alex", 0)
+
+      await chatWindowRef.current.print(arrTrust(customer.phrases.goodbye, customer), customer.name, 1)
+      await chatWindowRef.current.print(arrRnd(bartender.phrases.goodbye), "Alex", 0)
 
       onClose()
     }

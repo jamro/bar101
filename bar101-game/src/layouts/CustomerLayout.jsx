@@ -7,7 +7,7 @@ import MainChatLayout from './customer/MainChatLayout';
 import DilemmaLayout from './customer/DilemmaLayout';
 import GoodbyeLayout from './customer/GoodbyeLayout';
 
-export default function CustomerLayout({ customers, customerId, drinks, chats, onTrustChange, onClose, onDecision }) {
+export default function CustomerLayout({ bartender, customers, customerId, drinks, chats, onTrustChange, onClose, onDecision }) {
   
   const [phase, setPhase] = useState("ask_drink");
   const [drink, setDrink] = useState(null);
@@ -32,7 +32,7 @@ export default function CustomerLayout({ customers, customerId, drinks, chats, o
 
   const customer = customers[customerId];
   if (!customer) {
-    return <div>Customer not found</div>;
+    return <div>Customer {customerId} not found</div>;
   }
 
   const chat = chats[customerId];
@@ -47,11 +47,12 @@ export default function CustomerLayout({ customers, customerId, drinks, chats, o
 
   let content = null
   if (phase === "ask_drink") {
-    content = <DrinkPrompLayout customer={customer} onClose={(serveUsual) => gotoDrinkServing(serveUsual)} />;
+    content = <DrinkPrompLayout bartender={bartender} customer={customer} onClose={(serveUsual) => gotoDrinkServing(serveUsual)} />;
   } else if (phase === "serve_drink") {
     content = <DrinkPrepLayout customer={customer} drinks={drinks} onServe={(drink) => serveDrink(drink)} />;
   } else if (phase === "opener") {
     content = <OpenerLayout 
+      bartender={bartender}
       customer={customer} 
       allCustomers={customers}
       chat={chat} 
@@ -80,6 +81,7 @@ export default function CustomerLayout({ customers, customerId, drinks, chats, o
     />;
   } else if (phase === "exit") {
     content = <GoodbyeLayout
+      bartender={bartender}
       customer={customer} 
       drink={drink} 
       onClose={() => close()}

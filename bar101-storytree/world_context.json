@@ -9,7 +9,51 @@
       "age": "42",
       "access": "Semi-public",
       "details": "Former systems technician involved in early Stenograd infrastructure, specializing in biometric and off-grid node integration. Removed in 2021 for 'non-aligned behavior.' Vanished from records until 2024, when he reappeared as the operator of Bar 101 — an unregistered, surveillance-free bar beneath a disused tram station. Radan has no official ties to any Council faction but is known to interact with members of all three. His BCI score is unlisted. The bar remains open despite multiple compliance violations, suggesting high-level protection. Known for discretion, technical knowledge, and a history that no one in power seems eager to dig up",
-      "communication": "Speaks rarely and with quiet precision — each word deliberate, often letting silence carry more meaning than speech."
+      "communication": "Speaks rarely and with quiet precision — each word deliberate, often letting silence carry more meaning than speech.",
+      "phrases": {
+        "ask_for_drink": [
+          "What can I get you?",
+          "What are you drinking tonight?",
+          "What will it be?",
+          "What do you want to drink?",
+          "What can I pour for you?"
+        ],
+        "ask_for_the_usual": [
+          "The usual?",
+          "Back to the usual?",
+          "Back to your usual drink?",
+          "Sticking with the usual?",
+          "The usual drink tonight?"
+        ],
+        "confirm_drink": [
+          "Got it.",
+          "Sure thing.",
+          "Coming right up.",
+          "On it.",
+          "Right away."
+        ],
+        "enjoy": [
+          "Here you go, enjoy!",
+          "Enjoy your drink!",
+          "Hope it hits the spot!",
+          "Enjoy the moment!",
+          "Hope you like it!"
+        ],
+        "fix_drink": [
+          "Let me fix that for you.",
+          "I'll take care of that.",
+          "Let me adjust that for you.",
+          "I'll sort that out.",
+          "Let me make it right."
+        ],
+        "goodbye": [
+          "Take care.",
+          "See you next time.",
+          "Stay safe.",
+          "Until next time.",
+          "Goodbye."
+        ]
+      }
     },
     "drinks": {
       "daiquiri": {
@@ -106,7 +150,44 @@
             "Got a new origami fold in your pocket?",
             "Any origami cranes lately?"
         ],
-        "wrong_opener": "That's not me - In free time, I fold origami... from scrap forms mostly. It helps me think - quietly."
+        "wrong_opener": "That's not me - In free time, I fold origami... from scrap forms mostly. It helps me think - quietly.",
+        "phrases": {
+          "goodbye": [
+            "Thanks for the drink. I should go. Early shift tomorrow.",
+            "I should head out. Too much noise today already.",
+            "I need to get back. If anyone asks, I wasn't here long.",
+            "I'll be back sooner than I should. Don't log this, alright?",
+            "Gotta run. You'll keep this between us, won't you? I think I needed this more than I knew."
+          ],
+          "wrong_drink": [
+            "Actually... this isn't a daiquiri.",
+            "Sorry, I ordered a daiquiri — not this.",
+            "That's not a daiquiri. Mind double-checking?",
+            "You're usually sharper than this — I asked for a daiquiri.",
+            "Unless this is your way of testing me, I'll still take the daiquiri."
+          ],
+          "drink": [
+            "Just... a daiquiri. Nothing else.",
+            "Daiquiri, please. Simple's best tonight.",
+            "Can I get a daiquiri? It's been... a day.",
+            "Same as usual — daiquiri. Mind if I sit farther from the monitors?",
+            "Daiquiri. And maybe a quieter corner, if you've got one."
+          ],
+          "the_usual": [
+            "If you're keeping count... sure.",
+            "Same as last time. Quietly, please.",
+            "Yeah. Let's not make a thing of it.",
+            "You remember. That helps.",
+            "Only place I don't second-guess. Yes, the usual."
+          ],
+          "thanks": [
+            "Thanks. That'll be all for now.",
+            "Appreciate it. Just needed something steady.",
+            "You always know what I need.",
+            "Hard day. This helps more than I'll admit.",
+            "You always know when I need this — thank you."
+          ]
+        }
       },
       {
         "id": "npetrak",
@@ -135,7 +216,44 @@
             "Antique typewriters holding up?",
             "Another day, another typewriter cleaned?"
         ],
-        "wrong_opener": "That's not me - In free time, I collect antique typewriters. They remind me of a time when things were different."
+        "wrong_opener": "That's not me - In free time, I collect antique typewriters. They remind me of a time when things were different.",
+        "phrases": {
+          "goodbye": [
+            "Appreciate the company. Best not to linger too long.",
+            "You've been... discreet. That's rare. Until next time.",
+            "Keep the lights dim and the questions quiet — I may return.",
+            "If anything shifts upstairs, you'll feel it first. I'll be back with the wind.",
+            "Gotta go! There are pages I haven't shown you yet. When it's safe, I'll bring the rest."
+          ],
+          "wrong_drink": [
+            "Not quite what I asked for... I prefer an Old Fashioned.",
+            "I think this isn't mine. I usually go with an Old Fashioned.",
+            "Wrong glass, my friend. Old Fashioned's more my pace.",
+            "Old Fashioned, please. You know I'm a creature of routine.",
+            "If this is a test, I still choose the Old Fashioned. Like always."
+          ],
+          "drink": [
+            "Old fashioned. No questions.",
+            "Same as last time - Old fashioned. You remember.",
+            "Old fashioned, like the records I still keep.",
+            "Old fashioned - and maybe a word off the record.",
+            "Old fashioned. And if you're pouring, I might even say something useful."
+          ],
+          "the_usual": [
+            "Let's keep it routine.",
+            "As expected. No surprises.",
+            "Same rhythm, same glass.",
+            "You remember well. Go ahead.",
+            "Only you'd know exactly what I need."
+          ],
+          "thanks": [
+            "Appreciated. Neat pour.",
+            "Reliable as ever. Like old times.",
+            "You always know what fits the mood.",
+            "Reminds me of council nights... before things changed.",
+            "Still the only place I don't have to redact my thoughts."
+          ]
+        }
       },
       {
         "id": "dtomenko",
@@ -164,7 +282,44 @@
             "You flying analog or digital FPV drones these days?",
             "Any new mods on your FPV quad?"
         ],
-        "wrong_opener": "That's not me - In free time, I fly FPV drones. It's a way to escape the noise of the city."
+        "wrong_opener": "That's not me - In free time, I fly FPV drones. It's a way to escape the noise of the city.",
+        "phrases": {
+          "goodbye": [
+            "Thanks for the gimlet. I should get going.",
+            "Appreciate the quiet. Time to disappear again.",
+            "System updates wait for no one. Catch you next time.",
+            "You're one of the few places left where the signal noise drops. I'll be back.",
+            "Gotta run! If you ever need someone to make a data stream vanish... you know how to reach me."
+          ],
+          "wrong_drink": [
+            "Not what I ordered. I asked for a gimlet.",
+            "That's not a gimlet. Can you check?",
+            "Wrong drink. It should be a gimlet - I keep things precise.",
+            "I usually ask for a gimlet. Mind switching it out?",
+            "You know I only drink gimlets. Thought you'd remember by now."
+          ],
+          "drink": [
+            "Gimlet. Clean, no garnish.",
+            "Gimlet. Like always.",
+            "Gimlet. You remember how I like it, right?",
+            "Same gimlet. Just... keep it quiet tonight.",
+            "Gimlet, please. And... thanks for not asking more."
+          ],
+          "the_usual": [
+            "Sure.",
+            "Yeah. Just like last time.",
+            "If the data's clean, I won't object.",
+            "You remember. I like that.",
+            "Only if you promise not to log this one."
+          ],
+          "thanks": [
+            "Thanks. Just what I asked for.",
+            "Appreciate it. You get things right.",
+            "You remember my drink. That's rare.",
+            "You know what I need before I ask. Useful.",
+            "Only person I trust to serve this right. Thanks."
+          ]
+        }
       },
       {
         "id": "lkova",
@@ -193,7 +348,44 @@
             "Urban Tunnels whisper anything interesting?",
             "Urban exploration ever get boring for you?"
         ],
-        "wrong_opener": "That's not me - In free time, I explore the city's underground. It's a different world down there."
+        "wrong_opener": "That's not me - In free time, I explore the city's underground. It's a different world down there.",
+        "phrases": {
+          "goodbye": [
+            "Alright, that's enough socializing for one week. Thanks for the drink.",
+            "Gotta check on something in the tunnels. Don't wait up.",
+            "If anyone asks — I wasn't here tonight. You know the drill.",
+            "Gotta go! You ever need something fixed off the books... you know where to knock.",
+            "Keep the glass. I'll be back when the city starts making strange noises again."
+          ],
+          "wrong_drink": [
+            "That's not mine. I asked for a Negroni.",
+            "Hmm. Not a Negroni. Mind double-checking?",
+            "Appreciate the effort, but I was counting on a Negroni.",
+            "Wrong pour - unless you're testing my patience. Negroni, please.",
+            "Nice try, but I'm a Negroni loyalist. You know that."
+          ],
+          "drink": [
+            "Negroni. Easy on the questions.",
+            "Negroni. Standard.",
+            "Negroni. Haven't earned a better one today.",
+            "Negroni. You know how I like it.",
+            "Negroni. And maybe later... something off the shelf we don't talk about."
+          ],
+          "the_usual": [
+            "Let's not tempt routine just yet.",
+            "If you've still got it the same way, sure.",
+            "You know me too well - go ahead.",
+            "Only if you poured it like last time.",
+            "Yeah. No need to ask tonight."
+          ],
+          "thanks": [
+            "Guess you do know your Negronis.",
+            "Right on target. Appreciate that.",
+            "You always mix it like you've been down there with me.",
+            "You know how to keep it simple.",
+            "That's why I keep coming back - some things here still work."
+          ]
+        }
       },
       {
         "id": "shalek",
@@ -222,7 +414,44 @@
             "You still hunting political literature no one’s supposed to find?",
             "The Council would flinch at your political literature stash."
         ],
-        "wrong_opener": "That's not me - In free time, I collect political literature. It's a reminder of what was lost."
+        "wrong_opener": "That's not me - In free time, I collect political literature. It's a reminder of what was lost.",
+        "phrases": {
+          "goodbye": [
+            "Appreciate the pour. Let's call this conversation... classified. Bye for now.",
+            "You'll find me between the lines - until next time.",
+            "If anyone asks, I was never here. But thank you, really.",
+            "You listen better than most advisors I've written for. Keep the notebook close. Bye!",
+            "You understand silence better than most. If things shift, I'll come to you first. Bye!"
+          ],
+          "wrong_drink": [
+            "Not quite what I ordered. I asked for a dry martini.",
+            "That's... close. But I was expecting a dry martini.",
+            "Wrong stage, wrong script. Dry martini was the line.",
+            "We both know I asked for a dry martini — let's not pretend otherwise.",
+            "You know me better than that. Dry martini — like always."
+          ],
+          "drink": [
+            "Dry martini. No garnish.",
+            "Something precise. Dry martini will do.",
+            "You know what I drink. Let's not pretend. Dry martini is the line.",
+            "Same as after the last policy shift. Dry martini.",
+            "Make it sharp. Like the speech they didn't let me publish. Dry martini, please."
+          ],
+          "the_usual": [
+            "Let's keep the pattern steady.",
+            "You already know how this ends.",
+            "Only if the speech still fits the glass.",
+            "Same lines, different stage. Yes.",
+            "If you're still listening, I'm still trusting."
+          ],
+          "thanks": [
+            "Martini. Neat delivery, as always.",
+            "Appreciate the consistency - both in drink and discretion.",
+            "You know, the best speeches start after the second sip.",
+            "Every word counts tonight. So does the pour.",
+            "You always serve silence better than most serve drinks."
+          ]
+        }
       },
       {
         "id": "rmiskovic",
@@ -251,7 +480,44 @@
           "The city looks different through analog photography, doesn’t it?",
           "Is analog photography still worth the risk?"
         ],
-        "wrong_opener": "That's not me - In free time, I take analog photographs. They capture the truth in a way that digital can't."
+        "wrong_opener": "That's not me - In free time, I take analog photographs. They capture the truth in a way that digital can't.",
+        "phrases": {
+          "goodbye": [
+            "Thanks for the drink. I've got what I need — for now.",
+            "I should go before someone notices I'm off-script. Catch you next time.",
+            "Gotta run! Always good talking here — more honest than my newsroom, anyway.",
+            "Keep that sidecar cold, and your ears open. I might need both soon. See you around.",
+            "If something breaks, you'll hear from me first. Thanks for the drink. Bye!"
+          ],
+          "wrong_drink": [
+            "That's not my drink. I ordered a sidecar.",
+            "Hmm... not a sidecar. Want to try again?",
+            "Close, but I'm a sidecar kind of woman — mind switching it?",
+            "Unless this is some new kind of sidecar, we've got a mix-up.",
+            "You know me better than that — sidecar, please. No edits."
+          ],
+          "drink": [
+            "Sidecar. Neat. Like the story I'm not telling you.",
+            "Sidecar. No garnish. Just like the brief.",
+            "Sidecar. Unless you're out of truth tonight.",
+            "Make it a Sidecar. And maybe pretend we're not being watched.",
+            "Sidecar. And if you're still pouring secrets, I might trade you one."
+          ],
+          "the_usual": [
+            "Let's keep it routine - for now.",
+            "Sure, the usual works.",
+            "You read me too well.",
+            "You always know what I need before I do.",
+            "Only you get it right every time - thanks."
+          ],
+          "thanks": [
+            "Thanks. Let's see what tonight edits out.",
+            "Appreciate it. Always something unscripted here.",
+            "Perfect. This place knows how to serve truth.",
+            "You always know what cuts through the noise.",
+            "That's why I come here - truth, no filters."
+          ]
+        }
       }
     ]
   }

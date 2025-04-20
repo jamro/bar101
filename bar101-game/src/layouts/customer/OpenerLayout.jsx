@@ -3,7 +3,7 @@ import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-export default function OpenerLayout({ customer, allCustomers, chat, drink, serveUsual, onGoBack, onTrustChange, onClose }) {
+export default function OpenerLayout({ bartender, customer, allCustomers, chat, drink, serveUsual, onGoBack, onTrustChange, onClose }) {
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
   const [openerQuestions, setOpenerQuestions] = useState([]);
@@ -11,6 +11,16 @@ export default function OpenerLayout({ customer, allCustomers, chat, drink, serv
 
   const getTrustIndex = (trust) => {
     return Math.round((trust + 1) * 2)
+  }
+
+  const arrRnd = (arr) => {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  }
+
+  const arrTrust = (arr, customer) => {
+    const trustIndex = getTrustIndex(customer.trust)
+    return arr[trustIndex]
   }
 
   useEffect(() => {
@@ -53,18 +63,18 @@ export default function OpenerLayout({ customer, allCustomers, chat, drink, serv
       })
       setOpenerQuestions(openers)
       
-      await chatWindowRef.current.print(`Here you go, enjoy!`, "Alex", 1)
+      await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy), "Alex", 1)
       if (drink.id == customer.drink) {
         if(serveUsual) {
           onTrustChange(+0.1)
         }
-        await chatWindowRef.current.print(`Thanks!`, customer.name, 0, true)
+        await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, 0, true)
 
         setChatOptions(openers.map(o => o.label))
         setPhase("opener")
       } else {
         onTrustChange(-0.1)
-        await chatWindowRef.current.print(`Sorry, this isn't what I wanted. Can I get ${customer.drink} please?`, customer.name, 0)
+        await chatWindowRef.current.print(arrRnd(customer.phrases.wrong_drink, customer), customer.name, 0)
         setChatOptions(["Fix it"])
         setPhase("goBack")
       }
@@ -77,7 +87,7 @@ export default function OpenerLayout({ customer, allCustomers, chat, drink, serv
 
       case "goBack":
         setChatOptions([])
-        await chatWindowRef.current.print(`Oops, my bad - one ${customer.drink} coming up!`, "Alex", 1)
+        await chatWindowRef.current.print(arrRnd(bartender.phrases.fix_drink), "Alex", 1) 
         onGoBack()
         break;
 

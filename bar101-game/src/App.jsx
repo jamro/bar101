@@ -7,6 +7,7 @@ function App({initStoryPath=[], onStoryPathChange = () => {}}) {
   const [ storyNode, setStoryNode ] = useState(null);
   const [ customers, setCustomers ] = useState({});
   const [ drinks, setDrinks ] = useState({});
+  const [ bartender, setBartender ] = useState(null);
   const [ chats, setChats ] = useState({});
   const [ storyPath, setStoryPath ] = useState(null);
   const [ loading, setLoading ] = useState(true);
@@ -28,6 +29,7 @@ function App({initStoryPath=[], onStoryPathChange = () => {}}) {
         return acc;
       }, {}))
       setDrinks(data.bar.drinks);
+      setBartender(data.bar.bartender);
       setLoading(false);
     }
     fetchWorldContext();
@@ -96,6 +98,7 @@ function App({initStoryPath=[], onStoryPathChange = () => {}}) {
 
   return <GameLayout 
     storyNode={storyNode} 
+    bartender={bartender}
     customers={customers} 
     drinks={drinks} 
     chats={chats}
