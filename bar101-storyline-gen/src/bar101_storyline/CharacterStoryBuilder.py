@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 import json
+from lib import ask_llm
 
 get_system_message = lambda background, character, character_stats, events, character_story: f"""# BACKGROUND
 {background}
@@ -119,7 +120,6 @@ class CharacterStoryBuilder:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4.1"
         self.chapters = {}
 
         self.store_character_chapter_func = {
@@ -212,7 +212,11 @@ class CharacterStoryBuilder:
             {"role": "user", "content": prompt}
         ]
 
-        response = self.client.chat.completions.create(model=self.model, messages=messages, functions=[self.store_character_chapter_func])
+        response = ask_llm(
+            self.client, 
+            messages=messages, 
+            functions=[self.store_character_chapter_func]
+        )
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "store_character_chapter":
             raise Exception("The model did not return a function call.")
         params = json.loads(response.choices[0].message.function_call.arguments)

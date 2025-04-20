@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 import json
 import random
-
+from lib import ask_llm
 
 get_system_message = lambda background, events: f"""# BACKGROUND
 {background}
@@ -127,10 +127,7 @@ class PlotShaper:
             {"role": "user", "content": brainstorm_prompt}
         ]
         log_callback("[dim]Brainstorming ideas for the next chapter...[/dim]") if log_callback else None
-        response = self.client.chat.completions.create(
-            model="gpt-4.1",
-            messages=messages
-        )
+        response = ask_llm(self.client, messages)
 
         fork_prompt = get_fork_prompt(plot_stage, chapter_examples)
 
@@ -182,11 +179,7 @@ class PlotShaper:
                 }
             ]
         log_callback("[dim]Forking the storyline...[/dim]") if log_callback else None
-        response = self.client.chat.completions.create(
-            model="gpt-4.1",
-            messages=messages,
-            functions=functions
-        )
+        response = ask_llm(self.client, messages, functions)
 
         # Handle function call
         if response.choices[0].finish_reason == "function_call":

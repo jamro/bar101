@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 import json
+from lib import ask_llm
 
 get_system_message = lambda background, events, outcome: f"""# BACKGROUND
 {background}
@@ -50,7 +51,6 @@ class NewsWriter:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4.1"
 
     def read_context(self, base_path):
         def read_context_file(file_path):
@@ -112,8 +112,7 @@ class NewsWriter:
                     }
                 }
             ]
-
-        response = self.client.chat.completions.create(model=self.model, messages=messages, functions=functions)
+        response = ask_llm(self.client, messages, functions)
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "publish_news":
             raise Exception("The model did not return a function call.")
         params = json.loads(response.choices[0].message.function_call.arguments)
@@ -126,7 +125,7 @@ class NewsWriter:
 
         prompt = get_underground_prompt()
         messages.append({"role": "user", "content": prompt})
-        response = self.client.chat.completions.create(model=self.model, messages=messages, functions=functions)
+        response = ask_llm(self.client, messages, functions)
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "publish_news":
             raise Exception("The model did not return a function call.")
         params = json.loads(response.choices[0].message.function_call.arguments)

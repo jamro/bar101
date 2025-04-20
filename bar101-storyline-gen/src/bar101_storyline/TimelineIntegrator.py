@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 import json
+from lib import ask_llm
 
 get_system_message = lambda world_context, customer, timeline_info: f"""# BACKGROUND
 {world_context['background']}
@@ -119,12 +120,7 @@ class TimelineIntegrator:
                     }
                 }
             ]
-        
-        response = self.client.chat.completions.create(
-            model="gpt-4.1",
-            messages=messages,
-            functions=functions
-        )
+        response = ask_llm(self.client, messages, functions)
 
         # Handle function call
         if response.choices[0].finish_reason == "function_call":

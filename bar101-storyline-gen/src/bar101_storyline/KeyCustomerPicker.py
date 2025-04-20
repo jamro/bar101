@@ -2,6 +2,7 @@ from openai import OpenAI
 import os
 import json
 import random
+from lib import ask_llm
 
 get_system_message = lambda world_context, customer, character_stats, outcome_info, timeline_info: f"""# BACKGROUND
 {world_context['background']}
@@ -69,7 +70,6 @@ class KeyCustomerPicker:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4.1"
         self.customers = None
 
     def read_context(self, base_path):
@@ -141,14 +141,14 @@ class KeyCustomerPicker:
         ]
 
         log_callback(f"Brainstorming {key_customer['name']} dilemma...") if log_callback else None
-        response = self.client.chat.completions.create(model=self.model, messages=messages)
+        response = ask_llm(self.client, messages)
         messages.append({"role": "assistant", "content": response.choices[0].message.content})
         
         log_callback("Refining the dilemma...") if log_callback else None
         messages.append({"role": "user", "content": get_refine_prompt()})
-        response = self.client.chat.completions.create(
-            model=self.model, 
-            messages=messages,
+        response = ask_llm(
+            self.client, 
+            messages,
             functions=[
                 {
                     "name": "refine_customer_dilemma",

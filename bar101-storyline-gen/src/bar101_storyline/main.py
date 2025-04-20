@@ -11,6 +11,7 @@ from NewsWriter import NewsWriter
 from TreePacker import TreePacker
 import json
 import random
+from lib import get_global_llm_cost
 from rich.panel import Panel
 from rich.console import Console
 from generator import (
@@ -36,6 +37,7 @@ if __name__ == "__main__":
 
     story_root = os.path.join(os.path.dirname(__file__), "../../story_tree")
     variants_chain = []
+    const_snapshop = 0
 
     tree_packer = TreePacker()
     plot_shaper = PlotShaper(os.getenv("OPENAI_API_KEY"))
@@ -122,9 +124,22 @@ if __name__ == "__main__":
                 console.print(f"[bold white]Story path: {' > '.join(variants_chain) if len(variants_chain) > 0 else 'x'}[/bold white]")
                 decision = decide_dilemma(decision_maker, key_customer, customers_model, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain)
 
+        # pack the story node
         node_path = os.path.join(story_root, *variants_chain, "node.json")
         node = tree_packer.pack_node(os.path.join(story_root, *variants_chain))
         json.dump(node, open(node_path, "w"), indent=2)
+
+        # track costs
+        total_cost = get_global_llm_cost()
+        cost = total_cost - const_snapshop
+        const_snapshop = total_cost
+        console.print(f"[bold yellow]----------------------------[/bold yellow]")
+        console.print(f"[bold yellow]STORY NODE COST: ${cost:.2f}[/bold yellow]")
+        console.print(f"[bold yellow]----------------------------[/bold yellow]")
+        cost_path = os.path.join(story_root, *variants_chain, "cost.json")
+        cost_info = { "node_cost": cost }
+        if not os.path.exists(cost_path):
+            json.dump(cost_info, open(cost_path, "w"), indent=2)
 
         if decision == "a":
             variants_chain.append("a")
@@ -156,6 +171,7 @@ if __name__ == "__main__":
         # iteracte over keys in characters_story dict
         for character_id in characters_story:
             customers_model[character_id]["bci_score"] = characters_story[character_id]["bci_score"]
+
 
     get_news_spot(news_writter, new_events, outcome, variants_chain)
 

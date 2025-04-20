@@ -2,6 +2,7 @@ import random
 from openai import OpenAI
 import os
 import json
+from lib import ask_llm
 
 all_openers = [
     "Hey, how's it going?",
@@ -181,7 +182,6 @@ class ChatOpenerEngine:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.model = "gpt-4.1"
         self.generate_monologue_variants_func = {
           "name": "generate_monologue_variants",
           "description": "Generates 5 monologue variants based on trust levels for a given character and stores them",
@@ -317,7 +317,7 @@ class ChatOpenerEngine:
             {"role": "assistant", "content": hobby_story},
             {"role": "user", "content": prompt}
         ]
-        response = self.client.chat.completions.create(model=self.model, messages=messages, functions=[self.generate_monologue_variants_func])
+        response = ask_llm(self.client, messages=messages, functions=[self.generate_monologue_variants_func])
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
             raise Exception("The model did not return a function call.")
         params = json.loads(response.choices[0].message.function_call.arguments)
@@ -348,7 +348,7 @@ class ChatOpenerEngine:
             {"role": "assistant", "content": hobby_story},
             {"role": "user", "content": prompt}
         ]
-        response = self.client.chat.completions.create(model=self.model, messages=messages, functions=[self.generate_monologue_variants_func])
+        response = ask_llm(self.client, messages=messages, functions=[self.generate_monologue_variants_func])
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
             raise Exception("The model did not return a function call.")
         params = json.loads(response.choices[0].message.function_call.arguments)
@@ -377,7 +377,7 @@ class ChatOpenerEngine:
             {"role": "system", "content": system_message},
             {"role": "user", "content": prompt}
         ]
-        response = self.client.chat.completions.create(model=self.model, messages=messages)
+        response = ask_llm(self.client, messages=messages)
         return response.choices[0].message.content
     
     def get_opener(self, customer_id, character_stats, recent_story, outcome_timeline, events, log_callback=None):
