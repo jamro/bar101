@@ -134,7 +134,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
   }}
   
   return <div className="container">
-    <CustomerPreview id={customer.id} name={customer.name} jobTitle={customer.job_title} trust={customer.trust} drink={drink}>
+    <CustomerPreview customer={customer} drink={drink}>
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
   </div>

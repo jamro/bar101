@@ -12,7 +12,7 @@ export default function DrinkPrepLayout({ customer, drinks, onServe }) {
   ));
 
   return <div className="container">
-    <CustomerPreview id={customer.id} name={customer.name} jobTitle={customer.job_title} trust={customer.trust}>
+    <CustomerPreview customer={customer}>
       {buttons}
     </CustomerPreview>
   </div>

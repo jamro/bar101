@@ -49,6 +49,15 @@ function App({initStoryPath=[], onStoryPathChange = () => {}}) {
         console.log("Story node data loaded", data);
         setStoryNode(data);
         setChats(data.chats);
+        setCustomers((prevCustomers) => Object.values(prevCustomers).reduce((acc, customer) => {
+          acc[customer.id] = {
+            ...customer,
+            bci_score: data.character_stats[customer.id]?.bci_score || customer.bci_score,
+            political_preference: data.character_stats[customer.id]?.political_preference || customer.political_preference,
+          };
+          return acc;
+        }
+        , {}));
         setLoading(false);
       } catch (error) {
         console.error("Error fetching story node:", error);

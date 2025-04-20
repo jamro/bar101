@@ -50,7 +50,7 @@ export default function DrinkPrompLayout({ bartender, customer, onClose }) {
   }
 
   return <div className="container">
-    <CustomerPreview id={customer.id} name={customer.name} jobTitle={customer.job_title} trust={customer.trust}>
+    <CustomerPreview customer={customer}>
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
   </div>
