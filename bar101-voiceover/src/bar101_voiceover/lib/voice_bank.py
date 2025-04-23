@@ -1,7 +1,7 @@
 voice_bank = {
     "news_official": {
         "id": "news_official",
-        "speker": "p317",
+        "speaker": "p317",
         "samples": [
             "Council Affirms Clarity",
             "The Council has released new details on the recent BCI disruption, promising a transparent review and stability in services.",
@@ -10,7 +10,7 @@ voice_bank = {
     },
     "news_underground": {
         "id": "news_underground",
-        "speker": "p248",
+        "speaker": "p248",
         "samples": [
             "Halden's Loop: City Hacked",
             "Speakers blast Halden's coded message - crowds gather, BCI glitches out, fear and hope on every face.",
@@ -19,7 +19,7 @@ voice_bank = {
     },
     "aradan": {
         "id": "aradan",
-        "speker": "p267",
+        "speaker": "p267",
         "samples": [
             "What can I get you?",
             "Long walk to get here?",
@@ -28,7 +28,7 @@ voice_bank = {
     },
     "olintz": {
         "id": "olintz",
-        "speker": "p308",
+        "speaker": "p308",
         "samples": [
             "Thanks for the drink. I should go. Early shift tomorrow.",
             "Unless this is your way of testing me, I'll still take the daiquiri.",
@@ -37,7 +37,7 @@ voice_bank = {
     },
     "npetrak": {
         "id": "npetrak",
-        "speker": "p340",
+        "speaker": "p340",
         "samples": [
             "Old fashioned - and maybe a word off the record.",
             "Made it, not without obstacles - they're changing access rules again.",
@@ -46,7 +46,7 @@ voice_bank = {
     },
     "dtomenko": {
         "id": "dtomenko",
-        "speker": "p283",
+        "speaker": "p283",
         "samples": [
             "You know what I need before I ask. Useful.",
             "Yeah, flying's still the best way to zone out.",
@@ -55,7 +55,7 @@ voice_bank = {
     },
     "lkova": {
         "id": "lkova",
-        "speker": "p287",
+        "speaker": "p287",
         "samples": [
             "Barely, with my sanity intact.",
             "System's constant monitoring used to stop at surface level, now it's everywhere.",
@@ -64,7 +64,7 @@ voice_bank = {
     },
     "shalek": {
         "id": "shalek",
-        "speker": "p228",
+        "speaker": "p228",
         "samples": [
             "Barter's back - people trade, official credits don't always work.",
             "Odd, but in chaos, these books matter more than ever.",
@@ -73,7 +73,7 @@ voice_bank = {
     },
     "rmiskovic": {
         "id": "rmiskovic",
-        "speker": "p335",
+        "speaker": "p335",
         "samples": [
             "Tried to capture that, but got flagged moving zones this week.",
             "Still going, but film's getting harder to come by.",

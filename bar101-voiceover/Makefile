@@ -4,6 +4,9 @@ install:
 	poetry install
 
 # Run the app
+run:
+	poetry run python src/bar101_voiceover/main.py
+
 samples:
 	poetry run python src/bar101_voiceover/samples.py
 
