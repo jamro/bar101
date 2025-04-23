@@ -17,7 +17,6 @@ export default function CustomerPreview({ customer, drink, children }) {
         <h2 className='mb-0'>{name}</h2>
         <p>
           {jobTitle}
-          <hr/>
           <strong>BCI Score:</strong> {Math.round(bciScore)}%
           <br/>
           <strong>Political Preference:</strong> {politicalPreference}

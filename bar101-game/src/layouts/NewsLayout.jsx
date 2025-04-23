@@ -1,8 +1,45 @@
-import React, { useState} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import ConversationText from '../components/chat/ConversationText';
 
 export default function NewsLayout({data, onClose=() => {}}) {
 
   const [segmentName, setSegmentName] = useState('official');
+  const [completed, setCompleted] = useState(false);
+
+  const headerRef = useRef(null);
+  const bodyRef1 = useRef(null);
+  const bodyRef2 = useRef(null);
+
+  useEffect(() => {
+    const run = async () => {
+      if (headerRef.current) {
+        await headerRef.current.print(data[segmentName].headline);
+      }
+      if (bodyRef1.current) {
+        await bodyRef1.current.print(data[segmentName].anchor_line);
+      }
+      if (bodyRef2.current) {
+        await bodyRef2.current.print(data[segmentName].contextual_reframing);
+      }
+      setCompleted(true)
+    }
+    run()
+    setCompleted(false)
+
+  }
+  , [headerRef, segmentName]);
+
+  const skip = () => {
+    if (headerRef.current) {
+      headerRef.current.skip();
+    }
+    if (bodyRef1.current) {
+      bodyRef1.current.skip();
+    }
+    if (bodyRef2.current) {
+      bodyRef2.current.skip();
+    }
+  }
 
   const close = () => {
     if (segmentName === 'official') {
@@ -28,13 +65,15 @@ export default function NewsLayout({data, onClose=() => {}}) {
     <div className="container pt-5" >
       <div className={"card " + segmentClass}>
         <h5 className="card-header">
-         {data[segmentName].headline}
+         <ConversationText key={segmentName+"0"} ref={headerRef} />
         </h5>
         <div className="card-body">
-          <p className="card-text">{data[segmentName].anchor_line} {data[segmentName].contextual_reframing}</p>
+          <p className="card-text">
+            <ConversationText key={segmentName+"1"} ref={bodyRef1} /> <ConversationText key={segmentName+"2"} ref={bodyRef2} placeholder="" />
+          </p>
         </div>
         <div className="card-footer">
-          <button className="btn btn-primary float-end" onClick={() => close()}>Close</button>
+          <button className="btn btn-primary float-end" onClick={() => completed ? close() : skip()}>{completed ? "Close" : "Skip"}</button>
         </div>
       </div>
     </div>
