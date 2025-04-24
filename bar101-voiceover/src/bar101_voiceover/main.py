@@ -11,18 +11,24 @@ with open(context_path, "r") as f:
 
 model =  TTS(model_name="tts_models/en/vctk/vits", progress_bar=True)
 
+
+# write empty JSON array to log file, override when it exists
+log_path = os.path.join(os.path.dirname(__file__), "..", "..", "voiceovers/storytree_log.json")
+log = []
+
 # CONTEXT ------------------------------------------------------------------------------------
 
 # Alex
 phrases = context["bar"]["bartender"]["phrases"].keys()
 for phrase in phrases:
     variants = context["bar"]["bartender"]["phrases"][phrase]
-    for i in range(1, len(variants)):
+    for i in range(0, len(variants)):
         generate_voiceover(
             "context",
             "aradan",
             variants[i],
-            model=model
+            model=model,
+            log=log,
         )
 
 # Customers
@@ -32,19 +38,22 @@ for customer in cusomers:
         "context",
         customer['id'],
         customer['wrong_opener'],
-        model=model
+        model=model,
+        log=log,
     )
     phrases = customer["phrases"].keys()
     for phrase in phrases:
         variants = customer["phrases"][phrase]
-        for i in range(1, len(variants)):
+        for i in range(0, len(variants)):
             generate_voiceover(
                 "context",
                 customer['id'],
                 variants[i],
-                model=model
+                model=model,
+                log=log,
             )
 
+quit()
 
 # NODE FILES ------------------------------------------------------------------------------------
 all_files = os.listdir(root_path)
@@ -62,14 +71,16 @@ for node_file in node_files:
             node_id,
             "news_official",
             node["news"]["official"][news],
-            model=model
+            model=model,
+            log=log,
         )
     for news in node["news"]["underground"].keys():
         generate_voiceover(
             node_id,
             "news_underground",
             node["news"]["underground"][news],
-            model=model
+            model=model,
+            log=log,
         )
 
     # CUSTOMERS
@@ -81,14 +92,16 @@ for node_file in node_files:
             node_id,
             "aradan",
             customer["opener"]["questions"]["neutral"],
-            model=model
+            model=model,
+            log=log,
         )
         for question in customer["opener"]["questions"]['hobby']:
             generate_voiceover(
                 node_id,
                 "aradan",
                 question['message'],
-                model=model
+                model=model,
+                log=log,
             )
         for question in customer["opener"]["neutral_answer"]:
             for variant in question:
@@ -96,7 +109,8 @@ for node_file in node_files:
                     node_id,
                     customer_id,
                     variant,
-                    model=model
+                    model=model,
+                    log=log,
                 )
         for question in customer["opener"]["hobby_answer"]:
             for variant in question:
@@ -104,7 +118,8 @@ for node_file in node_files:
                     node_id,
                     customer_id,
                     variant,
-                    model=model
+                    model=model,
+                    log=log,
                 )
         
         # MAIN
@@ -114,7 +129,8 @@ for node_file in node_files:
                 node_id,
                 "aradan",
                 customer["main"][segment]["opener"],
-                model=model
+                model=model,
+                log=log,
             )
             for variant in customer["main"][segment]["variants"]:
                 for text in variant:
@@ -122,6 +138,52 @@ for node_file in node_files:
                         node_id,
                         customer_id,
                         text,
-                        model=model
+                        model=model,
+                        log=log,
                     )
-        
+        # DECISION
+        if "decision" in customer.keys():
+            generate_voiceover(
+                node_id,
+                "aradan",
+                customer["decision"]["dilemma"]["opener"],
+                model=model,
+                log=log,
+            )
+            for variant in customer["decision"]["dilemma"]["variants"]:
+                for text in variant:
+                    generate_voiceover(
+                        node_id,
+                        customer_id,
+                        text,
+                        model=model,
+                        log=log,
+                    )
+            beliefs = ["belief_a", "belief_b"]
+            segments = ["monologue", "supportive_response", "challenging_response"]
+            for belief_category in beliefs:
+                for belief in customer["decision"][belief_category]:
+                    for segment in segments:
+                        for text in belief[segment]:
+                            generate_voiceover(
+                                node_id,
+                                customer_id,
+                                text,
+                                model=model,
+                                log=log,
+                            )
+            segments = ["monologue_a", "monologue_b", "monologue_self"]
+            for segment in segments:
+                for variant in customer["decision"]["decision"][segment]:
+                    for text in variant:
+                        generate_voiceover(
+                            node_id,
+                            customer_id,
+                            text,
+                            model=model,
+                            log=log,
+                        )
+
+# write log to file
+with open(log_path, "w") as f:
+    json.dump(log, f, indent=2)

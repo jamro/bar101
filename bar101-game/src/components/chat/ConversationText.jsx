@@ -34,7 +34,7 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
       console.error("text and from must be defined");
     }
     const hash = SparkMD5.hash(from + "|" + text);
-    const voiceoverUrl = "https://cdn-bar101.jmrlab.com/" + hash + ".mp3";
+    const voiceoverUrl = "https://cdn-bar101.jmrlab.com/storytree/" + hash + ".mp3";
     console.log(from + "|" + text)
     console.log(voiceoverUrl);
     if(typeof text !== "string") {
