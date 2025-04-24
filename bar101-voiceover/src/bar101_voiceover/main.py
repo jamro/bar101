@@ -53,8 +53,6 @@ for customer in cusomers:
                 log=log,
             )
 
-quit()
-
 # NODE FILES ------------------------------------------------------------------------------------
 all_files = os.listdir(root_path)
 node_files = [f for f in all_files if f.startswith("node_") and f.endswith(".json")]
@@ -167,7 +165,7 @@ for node_file in node_files:
                         for text in belief[segment]:
                             generate_voiceover(
                                 node_id,
-                                customer_id,
+                                customer_id if segment != "monologue" else "aradan",
                                 text,
                                 model=model,
                                 log=log,

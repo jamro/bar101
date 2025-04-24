@@ -33,6 +33,7 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
     if(!text || !from) {
       console.error("text and from must be defined");
     }
+    setDisplayedText("");
     const hash = SparkMD5.hash(from + "|" + text);
     const voiceoverUrl = "https://cdn-bar101.jmrlab.com/storytree/" + hash + ".mp3";
     console.log(from + "|" + text)
@@ -41,6 +42,29 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
       console.error("text must be a string, got " + typeof text, text);
       throw new Error("text must be a string, got " + typeof text);
     }
+    
+    const sound = await new Promise((resolve) => {
+      const s = new Howl({
+        src: [voiceoverUrl],
+        format: ['mp3'],
+        volume: 1.0,
+        onload: () => {
+          resolve(s);
+        },
+        onend: () => {
+          console.log("Voiceover ended");
+          if (voiceRef.current) {
+            voicePromiseResolver.current();
+            voiceRef.current = null;
+          }
+        },
+        onloaderror: (id, err) => {
+          console.error("Error loading voiceover", err);
+          resolve(null);
+        },
+      })
+    })
+    
 
     if (voiceRef.current) {
       voiceRef.current.stop();
@@ -79,22 +103,13 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
           resolve();
           voicePromiseResolver.current = null;
         }
-        voiceRef.current = new Howl({
-          src: [voiceoverUrl],
-          format: ['mp3'],
-          volume: 1.0,
-          onend: () => {
-            console.log("Voiceover ended");
-            voicePromiseResolver.current();
-          },
-          onloaderror: (id, err) => {
-            console.error("Error loading voiceover", err);
-            isVoiceResolved = true;
-            resolve();
-            voicePromiseResolver.current = null;
-          },
-        });
-        voiceRef.current.play();
+        voiceRef.current = sound;
+        if(voiceRef.current) {
+          voiceRef.current.play();
+        } else {
+          voicePromiseResolver.current();
+          voiceRef.current = null;
+        }
     });
     const printPromise = new Promise((resolve) => {
       setFullText(text);

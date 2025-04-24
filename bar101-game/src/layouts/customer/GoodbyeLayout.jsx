@@ -26,7 +26,7 @@ export default function GoodbyeLayout({ bartender, customer, drink, onClose }) {
   useEffect(() => {
     const run = async () => {
 
-      await chatWindowRef.current.print(arrTrust(customer.phrases.goodbye, customer), customer.name, 1)
+      await chatWindowRef.current.print(arrTrust(customer.phrases.goodbye, customer), customer.name, customer.id, 1)
       await chatWindowRef.current.print(arrRnd(bartender.phrases.goodbye), "Alex", "aradan", 0)
 
       onClose()
