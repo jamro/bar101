@@ -40,7 +40,7 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
 
   useEffect(() => {
     const run = async () => {
-      await chatWindowRef.current.print(chat.decision.dilemma.opener, "Alex", 1)
+      await chatWindowRef.current.print(chat.decision.dilemma.opener, "Alex", "aradan", 1)
       const mainVariant = chat.decision.dilemma.variants[getTrustIndex(customer.trust)]
 
       console.log({chat})
@@ -49,10 +49,10 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
       setCurrentBelief(initBelief)
 
       for (let i = 0; i < mainVariant.length; i++) {
-        await chatWindowRef.current.print(mainVariant[i], customer.name, 0)
+        await chatWindowRef.current.print(mainVariant[i], customer.name, customer.id, 0)
       }
       for (let i = 0; i < initBelief.monologue.length; i++) {
-        await chatWindowRef.current.print(initBelief.monologue[i], customer.name, 0, i === initBelief.monologue.length - 1)
+        await chatWindowRef.current.print(initBelief.monologue[i], customer.name, customer.id, 0, i === initBelief.monologue.length - 1)
       }
       setChatOptions(["Support", "Doubt"])
       setPhase("followup")
@@ -82,7 +82,7 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
         const nextBeleif = popRandomBelief(nextChoice)
         if (nextBeleif === null) {
           for (let i = 0; i < dilemmaResponse.length; i++) {
-            await chatWindowRef.current.print(dilemmaResponse[i], "Alex", 1, i === dilemmaResponse.length - 1)
+            await chatWindowRef.current.print(dilemmaResponse[i], "Alex", "aradan", 1, i === dilemmaResponse.length - 1)
           }
           setChatOptions(["Continue"])
           setPhase("decision")
@@ -93,10 +93,10 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
         setCurrentBelief(nextBeleif)
 
         for (let i = 0; i < dilemmaResponse.length; i++) {
-          await chatWindowRef.current.print(dilemmaResponse[i], "Alex", 1)
+          await chatWindowRef.current.print(dilemmaResponse[i], "Alex", "aradan", 1)
         }
         for (let i = 0; i < nextBeleif.monologue.length; i++) {
-          await chatWindowRef.current.print(nextBeleif.monologue[i], customer.name, 0, i === nextBeleif.monologue.length - 1)
+          await chatWindowRef.current.print(nextBeleif.monologue[i], customer.name, customer.id, 0, i === nextBeleif.monologue.length - 1)
         }
 
         setChatOptions(["Support", "Doubt"])
@@ -139,7 +139,7 @@ export default function DilemmaLayout({ customer, chat, onTrustChange, drink, on
 
         setChatOptions([])
         for (let i = 0; i < decision_monologue_variant.length; i++) {
-          await chatWindowRef.current.print(decision_monologue_variant[i], customer.name, 0, i === decision_monologue_variant.length - 1)
+          await chatWindowRef.current.print(decision_monologue_variant[i], customer.name, customer.id, 0, i === decision_monologue_variant.length - 1)
         }
         setChatOptions(["Continue"])
         setPhase("exit")

@@ -63,18 +63,18 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
       })
       setOpenerQuestions(openers)
       
-      await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy), "Alex", 1)
+      await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy), "Alex", "aradan", 1)
       if (drink.id == customer.drink) {
         if(serveUsual) {
           onTrustChange(+0.1)
         }
-        await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, 0, true)
+        await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, customer.id, 0, true)
 
         setChatOptions(openers.map(o => o.label))
         setPhase("opener")
       } else {
         onTrustChange(-0.1)
-        await chatWindowRef.current.print(arrRnd(customer.phrases.wrong_drink, customer), customer.name, 0)
+        await chatWindowRef.current.print(arrRnd(customer.phrases.wrong_drink, customer), customer.name, customer.id, 0)
         setChatOptions(["Fix it"])
         setPhase("goBack")
       }
@@ -87,17 +87,17 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
 
       case "goBack":
         setChatOptions([])
-        await chatWindowRef.current.print(arrRnd(bartender.phrases.fix_drink), "Alex", 1) 
+        await chatWindowRef.current.print(arrRnd(bartender.phrases.fix_drink), "Alex", "aradan", 1) 
         onGoBack()
         break;
 
       case "opener":
         const question = openerQuestions[index]
         setChatOptions([])
-        await chatWindowRef.current.print(`${question.text}`, "Alex", 1)
+        await chatWindowRef.current.print(`${question.text}`, "Alex", "aradan", 1)
         if (question.id !== "neutral" && question.id !== customer.hobby_id) {
           onTrustChange(-0.1)
-          await chatWindowRef.current.print(chat.opener.wrong_hobby_answer, customer.name, 0, true)
+          await chatWindowRef.current.print(chat.opener.wrong_hobby_answer, customer.name, customer.id, 0, true)
           setPhase("exit")
           setChatOptions(["Continue", "Stay quiet"])
           return;
@@ -105,7 +105,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         if (question.id === "neutral") {
           const neutralAnswer = chat.opener.neutral_answer[getTrustIndex(customer.trust)]
           for (let i = 0; i < neutralAnswer.length; i++) {
-            await chatWindowRef.current.print(neutralAnswer[i], customer.name, 0, i === neutralAnswer.length - 1)
+            await chatWindowRef.current.print(neutralAnswer[i], customer.name, customer.id, 0, i === neutralAnswer.length - 1)
           }
           setPhase("exit")
           setChatOptions(["Continue", "Stay quiet"])
@@ -115,7 +115,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
           const hobbyAnswer = chat.opener.hobby_answer[getTrustIndex(customer.trust)]
           onTrustChange(+0.1)
           for (let i = 0; i < hobbyAnswer.length; i++) {
-            await chatWindowRef.current.print(hobbyAnswer[i], customer.name, 0, i === hobbyAnswer.length - 1)
+            await chatWindowRef.current.print(hobbyAnswer[i], customer.name, customer.id, 0, i === hobbyAnswer.length - 1)
           }
           setPhase("exit")
           setChatOptions(["Continue", "Stay quiet"])

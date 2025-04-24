@@ -1,5 +1,7 @@
 import { func, number, string } from "prop-types";
 import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from "react";
+import SparkMD5 from "spark-md5";
+import { Howl } from "howler";
 
 const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) => {
   const [displayedText, setDisplayedText] = useState("");
@@ -7,19 +9,41 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
   const displayLoop = useRef(null);
   const skipPromiseResolver = useRef(null);
   const printPromiseResolver = useRef(null);
+  const voicePromiseResolver = useRef(null);
+  const voiceRef = useRef(null);
 
   const skip = () => {
+    console.log("skipping");
     if(skipPromiseResolver.current) {
       skipPromiseResolver.current();
       skipPromiseResolver.current = null;
     }
     setDisplayedText(fullText);
+    if(voiceRef.current) {
+      voiceRef.current.stop();
+      voiceRef.current = null;
+    }
+    if (displayLoop.current) {
+      clearInterval(displayLoop.current);
+      displayLoop.current = null;
+    }
   };
 
-  const print = async (text) => {
+  const print = async (text, from) => {
+    if(!text || !from) {
+      console.error("text and from must be defined");
+    }
+    const hash = SparkMD5.hash(from + "|" + text);
+    const voiceoverUrl = "https://cdn-bar101.jmrlab.com/" + hash + ".mp3";
+    console.log(from + "|" + text)
+    console.log(voiceoverUrl);
     if(typeof text !== "string") {
       console.error("text must be a string, got " + typeof text, text);
       throw new Error("text must be a string, got " + typeof text);
+    }
+
+    if (voiceRef.current) {
+      voiceRef.current.stop();
     }
 
     if (skipPromiseResolver.current) {
@@ -30,15 +54,47 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
       printPromiseResolver.current();
       printPromiseResolver.current = null;
     }
+    if (voicePromiseResolver.current) {
+      voicePromiseResolver.current();
+      voicePromiseResolver.current = null;
+    }
 
     let isSkipResolved = false;
     let isPrintResolved = false;
+    let isVoiceResolved = false;
     const skipPromise = new Promise((resolve) => {
       skipPromiseResolver.current = () => {
         isSkipResolved = true;
         resolve();
         skipPromiseResolver.current = null;
       }
+    });
+    const voicePromise = new Promise((resolve) => {
+        voicePromiseResolver.current = () => {
+          if(voiceRef.current) {
+            voiceRef.current.stop();
+            voiceRef.current = null;
+          }
+          isVoiceResolved = true;
+          resolve();
+          voicePromiseResolver.current = null;
+        }
+        voiceRef.current = new Howl({
+          src: [voiceoverUrl],
+          format: ['mp3'],
+          volume: 1.0,
+          onend: () => {
+            console.log("Voiceover ended");
+            voicePromiseResolver.current();
+          },
+          onloaderror: (id, err) => {
+            console.error("Error loading voiceover", err);
+            isVoiceResolved = true;
+            resolve();
+            voicePromiseResolver.current = null;
+          },
+        });
+        voiceRef.current.play();
     });
     const printPromise = new Promise((resolve) => {
       setFullText(text);
@@ -57,7 +113,6 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
         isPrintResolved = true;
         resolve();
         printPromiseResolver.current = null;
-
       }
   
       displayLoop.current = setInterval(() => {
@@ -73,7 +128,7 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
       }, delayMs);
     });
 
-    await Promise.race([printPromise, skipPromise]);
+    await Promise.race([Promise.all([printPromise, voicePromise]), skipPromise]);
     if(!isSkipResolved && skipPromiseResolver.current) {
       skipPromiseResolver.current();
       skipPromiseResolver.current = null;
@@ -83,10 +138,18 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
       displayLoop.current = null;
       printPromiseResolver.current();
     }
+    if (!isVoiceResolved && voicePromiseResolver.current) {
+      if(voiceRef.current) {
+        voiceRef.current.stop();
+        voiceRef.current = null;
+      }
+      voicePromiseResolver.current();
+      voicePromiseResolver.current = null;
+    }
   }
 
   const isPrinting = () => {
-    return displayLoop.current !== null;
+    return displayLoop.current !== null || voiceRef.current !== null;
   }
 
   useImperativeHandle(ref, () => ({
@@ -108,7 +171,7 @@ ConversationText.propTypes = {
 ConversationText.defaultProps = {
   text: "",
   onComplete: () => {},
-  delayMs: 30,
+  delayMs: 45,
   placeholder: "...",
 };
 

@@ -15,10 +15,10 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, o
 
   useEffect(() => {
     const run = async () => {
-      await chatWindowRef.current.print(chat.main.main.opener, "Alex", 1)
+      await chatWindowRef.current.print(chat.main.main.opener, "Alex", "aradan", 1)
       const mainVariant = chat.main.main.variants[getTrustIndex(customer.trust)]
       for (let i = 0; i < mainVariant.length; i++) {
-        await chatWindowRef.current.print(mainVariant[i], customer.name, 0, i === mainVariant.length - 1)
+        await chatWindowRef.current.print(mainVariant[i], customer.name, customer.id, 0, i === mainVariant.length - 1)
       }
       setChatOptions([
         "Be empathetic",
@@ -35,10 +35,10 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, o
         setChatOptions([])
         if (index === 0) { // Be empathetic
           onTrustChange(+0.1)
-          await chatWindowRef.current.print(chat.main.emotional.opener, "Alex", 1)
+          await chatWindowRef.current.print(chat.main.emotional.opener, "Alex", "aradan", 1)
           const emotionalVariant = chat.main.emotional.variants[getTrustIndex(customer.trust)]
           for (let i = 0; i < emotionalVariant.length; i++) {
-            await chatWindowRef.current.print(emotionalVariant[i], customer.name, 0, i === emotionalVariant.length - 1)
+            await chatWindowRef.current.print(emotionalVariant[i], customer.name, customer.id, 0, i === emotionalVariant.length - 1)
           }
           setChatOptions(["Continue"])
           setPhase("exit")
@@ -49,10 +49,10 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, o
             const trustChange = -maxtrustPenalty*(1-(customer.trust+1)/(trustThreshold+1))
             onTrustChange(trustChange)
           }
-          await chatWindowRef.current.print(chat.main.factual.opener, "Alex", 1)
+          await chatWindowRef.current.print(chat.main.factual.opener, "Alex", "aradan", 1)
           const informationalVariant = chat.main.factual.variants[getTrustIndex(customer.trust)]
           for (let i = 0; i < informationalVariant.length; i++) {
-            await chatWindowRef.current.print(informationalVariant[i], customer.name, 0, i === informationalVariant.length - 1)
+            await chatWindowRef.current.print(informationalVariant[i], customer.name, customer.id, 0, i === informationalVariant.length - 1)
           }
           setChatOptions(["Continue"])
           setPhase("exit")

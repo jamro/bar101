@@ -28,7 +28,7 @@ export default function DrinkPrompLayout({ bartender, customer, onClose }) {
   const sendMessage = async (index) => {
     if (phase === "exit") {
       setChatOptions([])
-      await chatWindowRef.current.print(arrRnd(bartender.phrases.confirm_drink), "Alex", 1)
+      await chatWindowRef.current.print(arrRnd(bartender.phrases.confirm_drink), "Alex", "aradan", 1)
       onClose(serveUsual)
       return
     }
@@ -36,12 +36,12 @@ export default function DrinkPrompLayout({ bartender, customer, onClose }) {
     setChatOptions([])
 
     if (index === 0) { // "What can I get you?"
-      await chatWindowRef.current.print(arrRnd(bartender.phrases.ask_for_drink), "Alex", 1) 
-      await chatWindowRef.current.print(arrTrust(customer.phrases.drink, customer), customer.name, 0, true)
+      await chatWindowRef.current.print(arrRnd(bartender.phrases.ask_for_drink), "Alex", "aradan", 1) 
+      await chatWindowRef.current.print(arrTrust(customer.phrases.drink, customer), customer.name, customer.id, 0, true)
       setServeUsual(false)
     } else { // "The usual?"
-      await chatWindowRef.current.print(arrRnd(bartender.phrases.ask_for_the_usual), "Alex", 1)
-      await chatWindowRef.current.print(arrTrust(customer.phrases.the_usual, customer), customer.name, 0, true)
+      await chatWindowRef.current.print(arrRnd(bartender.phrases.ask_for_the_usual), "Alex", "aradan", 1)
+      await chatWindowRef.current.print(arrTrust(customer.phrases.the_usual, customer), customer.name, customer.id, 0, true)
       setServeUsual(true)
     }
 

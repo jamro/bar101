@@ -13,13 +13,13 @@ export default function NewsLayout({data, onClose=() => {}}) {
   useEffect(() => {
     const run = async () => {
       if (headerRef.current) {
-        await headerRef.current.print(data[segmentName].headline);
+        await headerRef.current.print(data[segmentName].headline, "news_"+segmentName);
       }
       if (bodyRef1.current) {
-        await bodyRef1.current.print(data[segmentName].anchor_line);
+        await bodyRef1.current.print(data[segmentName].anchor_line, "news_"+segmentName);
       }
       if (bodyRef2.current) {
-        await bodyRef2.current.print(data[segmentName].contextual_reframing);
+        await bodyRef2.current.print(data[segmentName].contextual_reframing, "news_"+segmentName);
       }
       setCompleted(true)
     }

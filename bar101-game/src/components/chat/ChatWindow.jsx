@@ -26,8 +26,8 @@ const ChatWindow = forwardRef(({options, onSubmit}, ref) => {
     }
   }
 
-  const print = async (text, from, userIndex, autoComplete=false) => {
-    setFrom(from);
+  const print = async (text, fromName, fromId, userIndex, autoComplete=false) => {
+    setFrom(fromName);
     setUserIndex(userIndex);
     setPromptContinue(false);
     if (!convoRef.current) {
@@ -35,13 +35,13 @@ const ChatWindow = forwardRef(({options, onSubmit}, ref) => {
       return;
     }
     if (autoComplete) {
-      await convoRef.current.print(text)
+      await convoRef.current.print(text, fromId)
     } else {
       const chatCompletePromise = new Promise((resolve) => {
         chatCompleteResolver.current = resolve;
       });
       const chatPrintPromise = new Promise(async (resolve) => { 
-        await convoRef.current.print(text)
+        await convoRef.current.print(text, fromId)
         setPromptContinue(true);
         resolve();
       });
