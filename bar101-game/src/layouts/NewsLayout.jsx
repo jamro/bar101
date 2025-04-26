@@ -5,6 +5,7 @@ export default function NewsLayout({data, onClose=() => {}}) {
 
   const [segmentName, setSegmentName] = useState('official');
   const [segmentIndex, setSegmentIndex] = useState(0);
+  const [newsImage, setNewsImage ] = useState('');
   const [completed, setCompleted] = useState(false);
 
   const headerRef = useRef(null);
@@ -34,6 +35,7 @@ export default function NewsLayout({data, onClose=() => {}}) {
       setCompleted(true)
     }
     run()
+    setNewsImage(data[segmentName][segmentIndex].image);
     setCompleted(false)
 
   }
@@ -84,9 +86,16 @@ export default function NewsLayout({data, onClose=() => {}}) {
          <ConversationText key={segmentName+"0"} ref={headerRef} />
         </h5>
         <div className="card-body">
-          <p className="card-text">
-            <ConversationText key={segmentName+"1"} ref={bodyRef1} /> <ConversationText key={segmentName+"2"} ref={bodyRef2} placeholder="" />
-          </p>
+          <div className="row">
+            <div className="col-lg-2 col-md-4 col-sm-4 col-5">
+              <img src={`/story/${newsImage}`} className="card-img-top" />
+            </div>
+            <div className="col-lg-9 col-md-8 col-sm-8 col-7">
+              <p className="card-text">
+                <ConversationText key={segmentName+"1"} ref={bodyRef1} /> <ConversationText key={segmentName+"2"} ref={bodyRef2} placeholder="" />
+              </p>
+            </div>
+          </div>
         </div>
         <div className="card-footer">
           <button className="btn btn-primary float-end" onClick={() => completed ? close() : skip()}>{completed ? "Close" : "Skip"}</button>

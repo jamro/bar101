@@ -37,7 +37,7 @@ def generate_voiceover(group, character, text, model=None, log=[]):
   # generate voiceover
   model = model if model else TTS(model_name="tts_models/en/vctk/vits", progress_bar=True)
   model.tts_to_file(
-      text=text,
+      text=text or "...",
       speaker=voice["speaker"],
       file_path=target_file_wav,
   )

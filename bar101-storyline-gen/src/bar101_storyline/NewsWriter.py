@@ -1,7 +1,10 @@
 from openai import OpenAI
 import os
 import json
+import base64
 from lib import ask_llm
+from diffusers import StableDiffusionPipeline
+import torch
 
 get_system_message = lambda background, events, outcome: f"""# BACKGROUND
 {background}
@@ -52,6 +55,25 @@ Constraints:
 	4.	Highlight contradictions in the official narrative or connect dots the state won’t.
 """
 
+get_image_prompt = lambda headline, anchor_line, contextual_reframing: f"""
+Create a dark, eerie illustration in a gritty, vintage graphic novel style. 
+Use a muted, earthy color palette (browns, reds, blacks, beiges). 
+The figure(s) should be stylized with simplified features, strong outlines, and hollow or blank eyes. 
+The environment should have cracked, worn textures, minimal background detail, and low, moody lighting with strong shadows. 
+Make the overall atmosphere feel haunting, isolated, and post-apocalyptic.
+
+Focus of the scene: picture from TV news covering following topic:
+
+---
+{headline}
+{anchor_line}
+{contextual_reframing}
+---
+
+Do not use any text, focus on visuals only.
+Do not show the TV, just the image visualizing the news.
+Avoid small details as image must be easy to interpret when used in small size.
+"""
 
 class NewsWriter:
    
@@ -163,3 +185,16 @@ class NewsWriter:
             "official": official_news,
             "underground": underground_news
         }
+    
+    def create_news_image(self, headline, anchor_line, contextual_reframing):
+        prompt = get_image_prompt(headline, anchor_line, contextual_reframing)
+
+        result = self.client.images.generate(
+            model="gpt-image-1",
+            quality="low",
+            size="1024x1024",
+            prompt=prompt
+        )
+
+        image_base64 = result.data[0].b64_json
+        return base64.b64decode(image_base64)

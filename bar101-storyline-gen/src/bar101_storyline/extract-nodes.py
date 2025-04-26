@@ -1,11 +1,13 @@
 import os
 from rich.console import Console
+import json
 
 console = Console()
 
 
 def extract_node(story_root, target_root, variant_path=[]):
-  node_path = os.path.abspath(os.path.join(story_root, *variant_path, "node.json"))
+  node_dir = os.path.abspath(os.path.join(story_root, *variant_path))
+  node_path = os.path.abspath(os.path.join(node_dir, "node.json"))
   varian_a_path = os.path.abspath(os.path.join(story_root, *variant_path, "a"))
   varian_b_path = os.path.abspath(os.path.join(story_root, *variant_path, "b"))
 
@@ -22,7 +24,24 @@ def extract_node(story_root, target_root, variant_path=[]):
   os.makedirs(os.path.dirname(target_file_path), exist_ok=True)
   with open(node_path, "r") as source_file:
     with open(target_file_path, "w") as target_file:
-      target_file.write(source_file.read())
+      raw_data = source_file.read()
+      json_data = json.loads(raw_data)
+      for i, n in enumerate(json_data['news']['official']):
+        json_data['news']['official'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.png"
+      for i, n in enumerate(json_data['news']['underground']):
+        json_data['news']['underground'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.png"
+      json.dump(json_data, target_file, indent=2)
+
+  # copy news_img_#.png images to target path
+  for file in os.listdir(node_dir):
+    if not file.startswith("news_img_") or not file.endswith(".png"):
+      continue
+    source_file_path = os.path.join(node_dir, file)
+    target_file_path = os.path.join(target_root, f"news_img_x{''.join(variant_path)}_{file.split('_')[-1]}")
+    with open(source_file_path, "rb") as source_file:
+      with open(target_file_path, "wb") as target_file:
+        target_file.write(source_file.read())
+  
 
   # check variants
   if os.path.exists(varian_a_path):
