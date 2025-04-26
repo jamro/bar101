@@ -28,6 +28,19 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
     }
   };
 
+  const clear = () => {
+    if (displayLoop.current) {
+      clearInterval(displayLoop.current);
+      displayLoop.current = null;
+    }
+    if (voiceRef.current) {
+      voiceRef.current.stop();
+      voiceRef.current = null;
+    }
+    setDisplayedText("");
+    setFullText("");
+  }
+
   const print = async (text, from) => {
     if(!text || !from) {
       console.error("text and from must be defined");
@@ -167,6 +180,7 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
   useImperativeHandle(ref, () => ({
     skip,
     print,
+    clear,
     isPrinting,
   }));
 

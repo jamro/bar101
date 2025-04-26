@@ -101,7 +101,7 @@ if __name__ == "__main__":
     while not plot_shaper.is_complete():
         create_variant_dirs(variants_chain)
         
-        get_news_spot(news_writter, new_events, outcome, variants_chain)
+        get_news_spot(news_writter, new_events, outcome, variants_chain, 2)
 
         plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
         dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, customers_model, plot_a, plot_b, plot_shaper.timeline, outcome_timeline, variants_chain)
@@ -172,7 +172,13 @@ if __name__ == "__main__":
         for character_id in characters_story:
             customers_model[character_id]["bci_score"] = characters_story[character_id]["bci_score"]
 
+    news_segment_count = 3 if len(variants_chain) == 7 else 1
+    get_news_spot(news_writter, new_events, outcome, variants_chain, news_segment_count)
 
-    get_news_spot(news_writter, new_events, outcome, variants_chain)
+    # pack the story node
+    node_path = os.path.join(story_root, *variants_chain, "node.json")
+    node = tree_packer.pack_node(os.path.join(story_root, *variants_chain))
+    json.dump(node, open(node_path, "w"), indent=2)
+  
 
 

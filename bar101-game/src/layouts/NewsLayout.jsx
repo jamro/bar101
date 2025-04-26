@@ -4,6 +4,7 @@ import ConversationText from '../components/chat/ConversationText';
 export default function NewsLayout({data, onClose=() => {}}) {
 
   const [segmentName, setSegmentName] = useState('official');
+  const [segmentIndex, setSegmentIndex] = useState(0);
   const [completed, setCompleted] = useState(false);
 
   const headerRef = useRef(null);
@@ -13,13 +14,22 @@ export default function NewsLayout({data, onClose=() => {}}) {
   useEffect(() => {
     const run = async () => {
       if (headerRef.current) {
-        await headerRef.current.print(data[segmentName].headline, "news_"+segmentName);
+        headerRef.current.clear();
       }
       if (bodyRef1.current) {
-        await bodyRef1.current.print(data[segmentName].anchor_line, "news_"+segmentName);
+        bodyRef1.current.clear();
       }
       if (bodyRef2.current) {
-        await bodyRef2.current.print(data[segmentName].contextual_reframing, "news_"+segmentName);
+        bodyRef2.current.clear();
+      }
+      if (headerRef.current) {
+        await headerRef.current.print(data[segmentName][segmentIndex].headline, "news_"+segmentName);
+      }
+      if (bodyRef1.current) {
+        await bodyRef1.current.print(data[segmentName][segmentIndex].anchor_line, "news_"+segmentName);
+      }
+      if (bodyRef2.current) {
+        await bodyRef2.current.print(data[segmentName][segmentIndex].contextual_reframing, "news_"+segmentName);
       }
       setCompleted(true)
     }
@@ -27,7 +37,7 @@ export default function NewsLayout({data, onClose=() => {}}) {
     setCompleted(false)
 
   }
-  , [headerRef, segmentName]);
+  , [headerRef, segmentName, segmentIndex]);
 
   const skip = () => {
     if (headerRef.current) {
@@ -42,8 +52,14 @@ export default function NewsLayout({data, onClose=() => {}}) {
   }
 
   const close = () => {
+    if (segmentIndex < data[segmentName].length - 1) {
+      setSegmentIndex(prev => prev + 1);
+      return 
+    }
+
     if (segmentName === 'official') {
       setSegmentName('underground');
+      setSegmentIndex(0);
     } else {
       onClose();
     }

@@ -64,22 +64,25 @@ for node_file in node_files:
         node = json.load(f)
 
     # NEWS
-    for news in node["news"]["official"].keys():
-        generate_voiceover(
-            node_id,
-            "news_official",
-            node["news"]["official"][news],
-            model=model,
-            log=log,
-        )
-    for news in node["news"]["underground"].keys():
-        generate_voiceover(
-            node_id,
-            "news_underground",
-            node["news"]["underground"][news],
-            model=model,
-            log=log,
-        )
+    
+    for news in node["news"]["official"]:
+        for phrase in news.keys():
+            generate_voiceover(
+                node_id,
+                "news_official",
+                news[phrase],
+                model=model,
+                log=log,
+            )
+    for news in node["news"]["underground"]:
+        for phrase in news.keys():
+            generate_voiceover(
+                node_id,
+                "news_underground",
+                news[phrase],
+                model=model,
+                log=log,
+            )
 
     # CUSTOMERS
     for customer_id in node["chats"].keys():

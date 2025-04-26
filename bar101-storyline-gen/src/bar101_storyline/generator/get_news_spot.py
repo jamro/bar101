@@ -9,7 +9,7 @@ from rich.panel import Panel
 
 console = Console()
 
-def get_news_spot(news_writter, events, outcome, variants_chain):
+def get_news_spot(news_writter, events, outcome, variants_chain, news_segment_count):
   console.print(f"[dim]Preparing news segments...[/dim]")
   story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
   story_path = os.path.join(story_root, *variants_chain, "news.json")
@@ -18,7 +18,7 @@ def get_news_spot(news_writter, events, outcome, variants_chain):
       news = json.load(open(story_path))
       return news
 
-  news = news_writter.write_news(events, outcome)
+  news = news_writter.write_news(events, outcome, news_segment_count)
   with open(story_path, "w") as f:
       json.dump(news, f, indent=2)
   return news

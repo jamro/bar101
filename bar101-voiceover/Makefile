@@ -1,8 +1,7 @@
 .PHONY: run format lint test
 
 install:
-	poetry install
-
+	poetry install --no-root
 # Run the app
 run:
 	poetry run python src/bar101_voiceover/main.py
