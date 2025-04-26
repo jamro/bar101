@@ -6,7 +6,7 @@ from rich.console import Console
 
 console = Console()
 
-def develop_character_story(character_story_builder, customer, customers_model, dilemma, choice, events, variants_chain):
+def develop_character_story(character_story_builder, customer, customers_model, dilemma, choice, outcome, events, variants_chain):
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
     characters_story_path = os.path.join(story_root, *variants_chain, "characters.json")
     all_characters = character_story_builder.get_characters()
@@ -29,6 +29,7 @@ def develop_character_story(character_story_builder, customer, customers_model, 
             character_id,
             customers_model[character_id],
             events,
+            outcome if character_id == dilemma["customer_id"] else None,
             dilemma if character_id == dilemma["customer_id"] else None,
             choice if character_id == dilemma["customer_id"] else None,
         )

@@ -13,7 +13,7 @@ get_system_message = lambda background, events, outcome: f"""# BACKGROUND
 {outcome}
 """
 
-get_official_prompt = lambda segment_count: f"""Write and `publish_news` as a brief news segments (5-10 seconds) as broadcast on Stenograd State Broadcast (SSB) 
+get_official_prompt = lambda segment_count, extra_context: f"""Write and `publish_news` as a brief news segments (5-10 seconds) as broadcast on Stenograd State Broadcast (SSB) 
 the official propaganda channel in a technocratic dictatorship. Use the following:
 - Use NEWS as the core update that must be announced
 - Use the background from the TIMELINE that provides context for the event
@@ -29,9 +29,11 @@ Rules:
  - Headline (on-screen + voice-over) - Use title case or sentence case only (not all caps
  - Anchor Line (calm, controlled tone) - 1 sentence stating the event — framed positively or neutrally
  - Contextual Reframing - Short sentence that emphasizes systemic efficiency, resilience, or progress
+
+{extra_context}
 """
 
-get_underground_prompt = lambda segment_count: f"""Write and `publish_news` as a brief underground news segments (5-10 seconds) for a pirate broadcast 
+get_underground_prompt = lambda segment_count, extra_context: f"""Write and `publish_news` as a brief underground news segments (5-10 seconds) for a pirate broadcast 
 in Stenograd — operating outside the control of official state media.
 - Use the same NEWS and TIMELINE as the propaganda spot.
 - Generate {segment_count} news segments, each focusing on a different issue or event.
@@ -40,6 +42,8 @@ in Stenograd — operating outside the control of official state media.
 - Format it like a scrappy, quickly edited cutscene seen on a hacked feed or darknet stream.
 - Make sure it is easy to read and understand. Avoid jargon or overly complex language.
 - The segemnt should clearly communicatte the NEWS through segments that are punchy and engaging.
+
+{extra_context}
 
 Constraints:
 	1.	Tone may be urgent, ironic, bitter, sarcastic, raw, or emotional — reflect the resistance.
@@ -66,11 +70,11 @@ class NewsWriter:
         self.world_context = read_context_file(os.path.join(base_path, "world.json"))
         self.customers = self.world_context['bar']['customers']
 
-    def write_news(self, events, outcome, news_segment_count):
+    def write_news(self, events, outcome, news_segment_count, extra_context=None):
         last_error = None
         for i in range(5):
             try:
-                response = self._write_news(events, outcome, news_segment_count)
+                response = self._write_news(events, outcome, news_segment_count, extra_context)
                 if response is not None:
                     return response
                 else:
@@ -83,9 +87,9 @@ class NewsWriter:
 
         raise Exception(f"Failed to fork plot after 5 attempts: {last_error}")
 
-    def _write_news(self, events, outcome, news_segment_count):
+    def _write_news(self, events, outcome, news_segment_count, extra_context=None):
         system_message = get_system_message(self.world_context['background'], events, outcome)
-        prompt = get_official_prompt(news_segment_count)
+        prompt = get_official_prompt(news_segment_count, extra_context)
         messages = [
             {"role": "system", "content": system_message},
             {"role": "user", "content": prompt}
@@ -139,7 +143,7 @@ class NewsWriter:
             })
         messages.append({"role": "assistant", "content": json.dumps(official_news, indent=2)})
 
-        prompt = get_underground_prompt(news_segment_count)
+        prompt = get_underground_prompt(news_segment_count, extra_context)
         messages.append({"role": "user", "content": prompt})
         response = ask_llm(self.client, messages, functions)
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "publish_news":

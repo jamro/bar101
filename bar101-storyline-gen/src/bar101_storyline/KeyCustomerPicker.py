@@ -28,32 +28,37 @@ Comunication style: {customer['communication']}
 get_dilemma_prompt = lambda customer_name, branch_a, branch_b, events_a, events_b: f"""
 # NEXT CHAPTER (VARIANT A)
 **{branch_a}**
-Events: {"; ".join([event['description'] for event in events_a])}
+Events: 
+{events_a}
 
 # NEXT CHAPTER (VARIANT B)
 **{branch_b}**
-Events: {"; ".join([event['description'] for event in events_b])}
+Events: 
+{events_b}
 
 -----
 Describe how actions or decisions of {customer_name} influenced the story's transition from the TIMELINE to the NEXT CHAPTER. 
 {customer_name} faced a binary, mutually exclusive choice — leading the story down the path of either VARIANT A or VARIANT B.
-Their influence may be direct or indirect, shaped in part by their conversations with Alex, the bartender (do not mention Alex directly in the events or variants).
+Both choices must be triggered by the same situation, but they diverge in their consequences.
+Their influence MUST BE DIRECT leading to NEXT CHAPTER events. The decision is shaped in part by their conversations with Alex, the bartender (do not mention Alex directly in the events or variants).
 Both paths were viable and probable, but {customer_name} ultimately made a decision that steered the story forward.
-Make sure that actions are inline with the character's personality, job position, area of influence, background, and motivations.
+Make sure that the dilema and actions are inline with the character's personality, job position and area of influence.
 
 As a result provide:
-  - Cause: One of recent events or situations that lead the customer's make face the dilemma. Explain why it is plausible and inline with the character's profile.
-	-	Dilemma: The key conflict or decision they faced. It must be logical result of the Cause from previous step.
-  - Reason: Why the customer is unsure about the decision
-	-	Variant A: The choice that leads to VARIANT A from the TIMELINE
-  - Belief A: Belief of {customer_name} that leads to chose VARIANT A. It must be opposite of the belief B.
-  - Political support A: Political faction which is supported by the VARIANT A. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'
-  - Transition Events A: 2-3 events that are between the TIMELINE and VARIANT A ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT A. Be specific and provide all necessary details.
-	-	Variant B: The choice that leads to VARIANT B from the TIMELINE
-  - Belief B: Belief of {customer_name} that leads to chose VARIANT B. It must be opposite of the belief A.
-  - Political support B: Political faction which is supported by the VARIANT B. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'
-  - Transition Events B: 2-3 events that are between the TIMELINE and VARIANT B ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT B. Be specific and provide all necessary details.
-  - Preference: Variant that {customer_name} prefers. It must be aligned with character profile, political preferences and backstory. Allowed values: A or B.
+- Cause: One of recent events or situations that lead the customer's make face the dilemma. Explain why it is plausible and inline with the character's profile.
+- Dilema theme: For example: 'Leak a document or destroy it', 'Call for reinforcements or handle it alone', 'Delay a project or push it forward unprepared', 'Report a colleague or cover for them', 'Break protocol to help someone or follow orders', 'Sabotage a rival or compete fairly', 'Cancel the operation or proceed at risk', 'Authorize force or seek negotiation', 'Investigate suspicious activity or ignore it'
+-	Dilemma: The key conflict or decision they faced. It must be logical result of the Cause from previous step.
+- Reason: Why the customer is unsure about the decision and how it is connected with {customer_name} job positition
+-	Variant A: The choice that leads to VARIANT A from the TIMELINE
+    * Belief A: Belief of {customer_name} that leads to chose VARIANT A. It must be opposite of the belief B.
+    * Political support A: Political faction which is supported by the VARIANT A. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'
+    * Transition Events A: 2-3 events that are between the TIMELINE and VARIANT A ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT A. Be specific and provide all necessary details.
+-	Variant B: The choice that leads to VARIANT B from the TIMELINE
+    * Belief B: Belief of {customer_name} that leads to chose VARIANT B. It must be opposite of the belief A.
+    * Political support B: Political faction which is supported by the VARIANT B. Possible values: 'harmonists', 'innovators', 'directorate' or 'rebel'
+    * Transition Events B: 2-3 events that are between the TIMELINE and VARIANT B ensuring the story's transition. It icludes trigger_event events, customer's actions, and their consequences that leads to VARIANT B. Be specific and provide all necessary details.
+- Preference: Variant that {customer_name} prefers. It must be aligned with character profile, political preferences and backstory. Allowed values: A or B.
+
 """
 
 get_refine_prompt = lambda: f"""
@@ -89,13 +94,16 @@ class KeyCustomerPicker:
         
         return random.choice(self.customers)
     
-    def get_random_patrons(self, key_customer_id, num_patrons=4):
+    def get_random_patrons(self, required_customer_ids, num_patrons=4):
         if self.customers is None:
             raise ValueError("Customers not loaded. Please call read_context() first.")
         
         all_customer_ids = [customer['id'] for customer in self.customers]
         
-        patrons = [key_customer_id]
+        required_customer_ids = [x for x in required_customer_ids if x is not None]
+        required_customer_ids = list(set(required_customer_ids))
+
+        patrons = [*required_customer_ids]
         while len(patrons) < num_patrons and len(patrons) < len(all_customer_ids):
             random_customer = random.choice(all_customer_ids)
             if random_customer not in patrons:
@@ -133,8 +141,9 @@ class KeyCustomerPicker:
 
         outcome_info = "\n".join([f" - {event}" for event in outcome_timeline])
         system_message = get_system_message(self.world_context, key_customer, character_stats, outcome_info, timeline_info)
-        prompt = get_dilemma_prompt(key_customer['name'], branch_a, branch_b, events_a, events_b)
-
+        events_a_text = "\n".join([f" - {event['timestamp']} - {event['description']}" for event in events_a])
+        events_b_text = "\n".join([f" - {event['timestamp']} - {event['description']}" for event in events_b])
+        prompt = get_dilemma_prompt(key_customer['name'], branch_a, branch_b, events_a_text, events_b_text)
         messages = [
             {"role": "system", "content": system_message},
             {"role": "user", "content": prompt}

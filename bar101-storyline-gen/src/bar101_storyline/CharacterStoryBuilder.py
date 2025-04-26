@@ -58,6 +58,7 @@ BCI score update: If the story leads to a signifficant change in the character's
 8. Narrative Continuity - The paragraph must extend CHARACTER'S CURRENT STORY. Do not restate past facts or reset the narrative. Build on what the character is already experiencing.
 9. Style - Engaging and easy to understand.
 10. Align the story with the character's political preferences and BCI score. If current BCI score was changed during the chapter - explain the change.
+11. Do not mention Bar 101 or the bartender.
 
 # Optional structure for clarity:
 Event -> Immediate disruption -> Emotional or behavioral shift -> Coping or adaptation -> Lingering tension or result
@@ -66,13 +67,13 @@ Event -> Immediate disruption -> Emotional or behavioral shift -> Coping or adap
 Return the result using the `store_character_chapter` function.
 """
 
-get_dilemma_prompt = lambda character_stats, dilemma, choice: f"""
+get_dilemma_prompt = lambda character_stats, dilemma, choice, outcome: f"""
 # CHARACTER DECISION
 Due to recent event: {dilemma['trigger_event']}, character had to make a decision.
 The dilemma was: {dilemma['dilemma']}.
 It was hard for the character due to: {dilemma['reason']}.
-The character's decision was: {choice}.
-The decision lead to RECENT GLOBAL EVENTS
+The character's decision was: {choice} 
+The decision lead to the following outcome: {outcome}.
 
 You are provided with:
 - A CHARACTER PROFILE (background, beliefs, occupation, emotional state, relationships, etc.)
@@ -80,7 +81,8 @@ You are provided with:
 - CHARACTER DECISION
 
 # Your Task:
-Write and store a 150-word paragraph showing what actions the character took as a result of the decision and what was the consequence of the decision.
+Write and store a 150-word paragraph showing what actions the character took as a result of the decision and what was the outcome of the decision.
+Explain how the decision lead to the outcome.
 Focus on a single, specific story arc that illustrates how the character's coped with the decision.
 Make sure it is understandable without extra context. Avoid vague language and ensure clarity.
 The result should read like a clear, factual entry in a character-focused case file or narrative log.
@@ -107,9 +109,7 @@ BCI score update: Reflect impact of the decision on the character's BCI score. M
 7. Balanced Tone - Maintain an emotionally restrained, fact-based tone. Do not dramatize the consequences or insert moral judgment.
 8. Style - Clear, readable, and structured. Avoid jargon unless it's essential to understanding the outcome.
 9. Political and Psychological Alignment - The outcome should align logically with the character's values and BCI score. If the BCI score changes, briefly explain why.
-
-# Optional structure for clarity:
-Decision -> Immediate impact -> Shift in behavior or thought -> Coping or reaction -> Lingering effect or complication
+10. Do not mention Bar 101 or the bartender.
 
 # Output
 Return the result using the `store_character_chapter` function.
@@ -176,11 +176,11 @@ class CharacterStoryBuilder:
             raise ValueError("Chapter must be a string.")
         self.chapters[character_id].append(chapter)
 
-    def create_character_chapter(self, character_id, character_stats, events, dilemma=None, choice=None):
+    def create_character_chapter(self, character_id, character_stats, events, outcome=None, dilemma=None, choice=None):
         last_error = None
         for i in range(3):
             try:
-                response = self._create_character_chapter(character_id, character_stats, events, dilemma, choice)
+                response = self._create_character_chapter(character_id, character_stats, events, outcome, dilemma, choice)
                 if response is not None:
                     return response
                 else:
@@ -192,7 +192,7 @@ class CharacterStoryBuilder:
 
         raise Exception(f"Failed to create customer chapter after 3 attempts: {last_error}")
         
-    def _create_character_chapter(self, character_id, character_stats, events, dilemma=None, choice=None):
+    def _create_character_chapter(self, character_id, character_stats, events, outcome=None, dilemma=None, choice=None):
         character = None
         for customer in self.world_context["bar"]["customers"]:
             if customer["id"] == character_id:
@@ -203,7 +203,7 @@ class CharacterStoryBuilder:
         character_story = '\n\n'.join(character_story) if len(character_story) > 0 else 'No recent events related the character.'
         system_message = get_system_message(self.world_context['background'], character, character_stats, events, character_story)
         if dilemma is not None and choice is not None:
-            prompt = get_dilemma_prompt(character_stats, dilemma, choice)
+            prompt = get_dilemma_prompt(character_stats, dilemma, choice, outcome)
         else:
             prompt = get_standard_prompt(character_stats)
 

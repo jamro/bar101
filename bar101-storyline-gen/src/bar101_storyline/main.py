@@ -97,17 +97,26 @@ if __name__ == "__main__":
     new_events = plot_shaper.timeline
     outcome = "Marek Halden is found dead"
     outcome_timeline = [outcome]
+    prev_key_customer = None
 
     while not plot_shaper.is_complete():
         create_variant_dirs(variants_chain)
         
-        get_news_spot(news_writter, new_events, outcome, variants_chain, 2)
+        get_news_spot(
+            news_writter, 
+            new_events, 
+            outcome, 
+            variants_chain, 
+            3, 
+            "IMPORTANT: Use news to reveal and explain key concept from background context provide neccesary introduction to the world. Explain all the acronyms and terms used in the world context."
+          )
 
         plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
         dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, customers_model, plot_a, plot_b, plot_shaper.timeline, outcome_timeline, variants_chain)
         key_customer = get_customer_by_id(dilemma["customer_id"])
 
-        patrons = get_bar_visitors(cusomer_picker, key_customer['id'], variants_chain)
+        patrons = get_bar_visitors(cusomer_picker, key_customer['id'], prev_key_customer, variants_chain)
+        prev_key_customer = key_customer['id']
         decision = 'a'
         for patron_id in patrons:
             serve_customer(
@@ -164,6 +173,7 @@ if __name__ == "__main__":
             customers_model,
             dilemma, 
             choice, 
+            outcome,
             new_events, 
             variants_chain
         )

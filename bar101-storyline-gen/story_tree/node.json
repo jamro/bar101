@@ -2,736 +2,554 @@
   "news": {
     "official": [
       {
-        "headline": "Directorate Leader Passes",
-        "anchor_line": "Authorities confirm the passing of Central Oversight head Marek Halden.",
-        "contextual_reframing": "System continuity protocols ensure uninterrupted city services. The Council highlights Halden's role in advancing Stenograd's unified infrastructure."
+        "headline": "Halden Passes Quietly",
+        "anchor_line": "Marek Halden, architect of Stenograd's Behavioral Compliance Index, has died at his Tower 9 residence.",
+        "contextual_reframing": "Halden designed the BCI, which ensures city order and smooth access to essential services by monitoring citizen data in real time. The system secures citywide harmony and will continue under Council stewardship."
       },
       {
-        "headline": "Seamless Services Continue",
-        "anchor_line": "Enhanced infrastructure management protocols keep all major systems stable.",
-        "contextual_reframing": "Automated frameworks uphold stability citywide, reflecting the strength and efficiency of Stenograd's governance model."
+        "headline": "Efficient Leadership Transition",
+        "anchor_line": "Authorities announce steady guidance by the Council following Halden's passing; no disruption to city services.",
+        "contextual_reframing": "The Council, selected via performance metrics and system merit, upholds continuous governance. Stability and innovation remain priorities through automated coordination."
+      },
+      {
+        "headline": "BCI Maintains City Flow",
+        "anchor_line": "Officials highlight the Behavioral Compliance Index for keeping daily life orderly, rewarding trusted residents and supporting public well-being.",
+        "contextual_reframing": "The BCI analyzes behavior scores using health, financial, and transit data, giving secure access to services. This transparent system is a cornerstone of Stenograd's resilience and safety."
       }
     ],
     "underground": [
       {
-        "headline": "Halden Dead - No Answers",
-        "anchor_line": "Stenograd's system chief Halden found dead - no explanation, no replacement, no closure.",
-        "contextual_reframing": "Council silent and files sealed. Was it cardiac arrest, or something they don't want us to see?"
+        "headline": "BCI Architect Found Dead",
+        "anchor_line": "Marek Halden, the man behind the city's digital leash - the BCI - is dead in his locked suite.",
+        "contextual_reframing": "That's the original engineer of the Behavioral Compliance Index. Halden's death smells like quiet cleanup - no clear answers, no investigation. Is this how they erase those who know too much?"
       },
       {
-        "headline": "City Glitches Spike",
-        "anchor_line": "Sudden delays and system errors hit daily life right after Halden's death.",
-        "contextual_reframing": "Automated controls are failing - shows how much power one man really had. So much for perfect order."
+        "headline": "System Glitches Spread",
+        "anchor_line": "Citywide delays and access glitches hit as the BCI stutters without its creator.",
+        "contextual_reframing": "The Behavioral Compliance Index is more than a scorecard - it decides who gets housing, jobs, medical care. Now, flagged citizens are vanishing from lists, networks freeze, and the Council stays silent."
+      },
+      {
+        "headline": "Council Calls Silence Stability",
+        "anchor_line": "The Council issues a one-line statement and keeps the public in the dark, naming no replacement.",
+        "contextual_reframing": "Remember, this Council isn't elected: the system promotes its own, using secret 'performance' scores. Right now, even those at the top are scrambling for control as the machines run on without their master."
       }
     ]
   },
   "visitors": [
-    "shalek",
-    "dtomenko",
+    "olintz",
+    "rmiskovic",
     "npetrak",
-    "lkova"
+    "dtomenko"
   ],
   "character_stats": {
     "olintz": {
-      "bci_score": 51,
+      "bci_score": 52,
       "political_preference": "rebel"
     },
     "npetrak": {
-      "bci_score": 76,
+      "bci_score": 75,
       "political_preference": "harmonists"
     },
     "dtomenko": {
-      "bci_score": 67,
+      "bci_score": 66,
       "political_preference": "innovators"
     },
     "lkova": {
-      "bci_score": 60,
+      "bci_score": 59,
       "political_preference": "directorate"
     },
     "shalek": {
-      "bci_score": 83,
+      "bci_score": 85,
       "political_preference": "innovators"
     },
     "rmiskovic": {
-      "bci_score": 39,
+      "bci_score": 45,
       "political_preference": "rebel"
     }
   },
   "chats": {
-    "shalek": {
+    "olintz": {
       "opener": {
-        "customer_id": "shalek",
+        "customer_id": "olintz",
         "questions": {
-          "neutral": "No cameras up there, right?",
+          "neutral": "Heard the streets are tense again?",
           "hobby": [
             {
-              "correct": false,
-              "message": "Find any ghosts in the tunnels?"
-            },
-            {
               "correct": true,
-              "message": "You bring something banned books with you again?"
+              "message": "Origami keeping the mind steady?"
             },
             {
               "correct": false,
-              "message": "Analog photography still treating you right?"
+              "message": "New typewriter on the bench?"
+            },
+            {
+              "correct": false,
+              "message": "You bring something banned books with you again?"
             }
           ]
         },
-        "wrong_hobby_answer": "That's not me - In free time, I collect political literature. It's a reminder of what was lost.",
+        "wrong_hobby_answer": "That's not me - In free time, I fold origami... from scrap forms mostly. It helps me think - quietly.",
         "neutral_answer": [
           [
-            "No cameras - old habit, I always check.",
-            "I collect rare books. Harmless pastime.",
-            "Lately, system glitches delayed a delivery.",
-            "Harder to enjoy quiet things these days."
+            "Yeah, I've noticed it out there too.",
+            "Hard to unwind with all the system hiccups lately.",
+            "Tried doing some origami but kept getting distracted.",
+            "It isn't as easy as it used to be."
           ],
           [
-            "No, none up there. I'd notice.",
-            "My hobby? Political literature - archival, not for sharing.",
-            "System faults recently interfered with my usual reading routines.",
-            "Odd, but nothing I can't adapt to.",
-            "You know how things shift after news like Halden's."
+            "There's definitely a weird mood everywhere now.",
+            "I usually fold paper - origami stuff, after hours.",
+            "The system glitches made it hard even to focus at home last night.",
+            "Felt like every app wanted another login.",
+            "Makes hobbies feel pointless sometimes."
           ],
           [
-            "No cameras, thankfully - privacy still matters to some of us.",
-            "I restore and annotate banned political texts from before BCI.",
-            "Last week's glitches nearly flagged my library transfer.",
-            "Halden's death - they tightened everything, even personal archives.",
-            "Had to shuffle my catalog to avoid system scrutiny.",
-            "Makes you appreciate analog backups."
+            "It's tense, yeah. Not just outside - everywhere, honestly.",
+            "I fold origami to clear my head. Started as a habit at home.",
+            "Last week, the outages made it almost impossible. Apps froze halfway through a model.",
+            "No music, just old printers whirring under backup power.",
+            "It should help me relax, but lately, I'm just folding tighter and tighter.",
+            "Funny how even small things feel off when the system's down."
           ],
           [
-            "No surveillance, just shadows and old wiring - my preferred company.",
-            "I collect contraband political pamphlets and speeches, originals when possible.",
-            "Used to spend hours cataloguing - now it's tense, after Halden's sudden exit.",
-            "System fallback flagged half my archive; I had to improvise.",
-            "Nothing like reading banned words when the city itself feels unsure.",
-            "I almost miss the predictability of a stricter system.",
-            "Had to hide more than books this week."
+            "Yeah, the static's not just on the street, I feel it even alone.",
+            "I've made a ritual out of folding origami after work - cranes from used Directorate forms.",
+            "Usually calms me, but after Halden... glitches everywhere. Even music wouldn't play.",
+            "Spent half an hour staring at a frozen app instead of folding.",
+            "I started a kusudama - one of those modular globes - but lost track of the pieces.",
+            "Noticed my hands shake when the network lagged; surprised me, honestly.",
+            "Never thought paper folding could feel risky."
           ],
           [
-            "Not a single lens - good, because my hobby wouldn't survive scrutiny these days.",
-            "I collect and restore outlawed political literature - seditious histories, blacklisted manifestos, hand-annotated originals.",
-            "Spent years memorizing passages no one's supposed to quote.",
-            "Halden's death broke the routines; system fallback flagged personal collections like mine as threats.",
-            "Auto-lock nearly trapped me mid-reading - first time I panicked in years.",
-            "Now every access leaves a trace and every trace tells a story.",
-            "I've learned to erase more than I read, lately.",
-            "You wouldn't believe how much of our city's memory is just waiting for a blackout."
+            "Feels like the whole city's twitching since Halden died.",
+            "I've always done origami at home - started when the BCI rollout began to get to me.",
+            "It's something about the folds - turning scraps from compliance memos into cranes or stars.",
+            "Right after his death? Couldn't even get my playlist or supply logs to load.",
+            "Spent hours collecting just a few decent sheets - system kept flagging my housing access.",
+            "Tried making a modular piece; each failed login made my hands stiffer.",
+            "It's strange, being monitored even during a hobby - cranes piling up beside denied requests on my desk.",
+            "Feels like the system wants to fold us too, just tighter, sharper, until we snap."
           ]
         ],
         "hobby_answer": [
           [
-            "Yeah, brought something. Nothing unusual.",
-            "Collection's smaller now. Access checks acting odd since Halden's news.",
-            "System flagged one pamphlet; strange timing.",
-            "I archived it. Moved on.",
-            "Everyone's more careful lately."
+            "Yeah, origami helps. Keeps things quieter.",
+            "Just something to do at home, mostly.",
+            "Paper's easier to work with than screens these days.",
+            "Past week - electric flickers, hard to focus.",
+            "Things... slowed down since the announcement."
           ],
           [
-            "I did, but less than I used to.",
-            "Since Halden died, compliance checks jump at shadows.",
-            "My scanner glitched on printing last night, first time ever.",
-            "Slipped the pamphlet to a locked drawer - better safe than seen.",
-            "They're watching even us, apparently.",
-            "Not like before."
+            "It does, actually. Keeps my mind occupied.",
+            "I use scrap printouts, fold in the evenings.",
+            "The power's been erratic since Halden...",
+            "Lost a batch when the lights glitched Saturday.",
+            "I just try not to draw attention - sticking to basics."
           ],
           [
-            "Sure, I still bring them - habit I can't shake.",
-            "Old worker pamphlet this time. Scarce edition, full margins.",
-            "Last night, files got flagged - access logs out of sync.",
-            "Usually, system ignores my archives. It panicked, locked things down.",
-            "I had to move everything twice. No warnings, just errors.",
-            "Never felt the flat so tense, not even under the old regime.",
-            "Halden's absence is everywhere, even here."
+            "It helps, yeah. Patterns in paper are predictable.",
+            "I fold models every night - mostly cranes and tessellations.",
+            "System hiccups messed with my lights all week.",
+            "Had to redo a modular star - lost count midway during that blackout.",
+            "Normally I finish five in half an hour - now it takes double.",
+            "Feels like the city's off-balance, even for hobbies.",
+            "I didn't realize how much I count on steady routines."
           ],
           [
-            "Of course. What else keeps me honest?",
-            "Tonight's relic: banned trade manifesto, marked up with fear and hope.",
-            "With Halden gone, my access points are nervous - compliance logs flicker, sensors trigger.",
-            "I caught the alert mid-archive, had to shut down, scramble backup files.",
-            "My routines aren't routines now. Even my collection doesn't trust me.",
-            "I miss when system quirks were just quirks, not risks.",
-            "BCI logs nearly dropped me into risk range for archiving history.",
-            "Feels like everything sacred is on borrowed time."
+            "Origami's a buffer. Used to keep things steady after work.",
+            "Folding keeps my hands from fidgeting when my head's racing.",
+            "Latest system errors cut off my music, and the power kept stalling.",
+            "I tried a new design Saturday, but the interruptions botched it.",
+            "Had to scrap three cranes - creased too tight from nerves.",
+            "Feels different, folding when the city's disrupted like this.",
+            "Sometimes I wonder if anyone else notices how routines break down.",
+            "Last week, I actually worried about being flagged for searching for new patterns online."
           ],
           [
-            "Naturally. Wouldn't risk a night out without a little contraband wisdom.",
-            "Tonight's prize was a first edition - annotated by someone who knew the first riots.",
-            "Recording their margins is a ritual for me; words deserve a second reading.",
-            "Hours spent cross-checking pages - until the system seized up, doors cycling, logs flashing.",
-            "Halden's death left everything on edge - compliance overlays watching my hands, not just my words.",
-            "System never faltered for me before. Last night, it hesitated. Judged.",
-            "My BCI dropped two points, flagged by an algorithm too anxious to understand context.",
-            "I had to hand-edit logs, delete traces, pretend the book was never there.",
-            "The city's losing its memory, Alex. We're borrowing history on a thirty-day loan."
+            "It really does - especially now, with all the system fallout.",
+            "I started as a kid, watching my grandmother fold at the kitchen table.",
+            "Now it's the only thing that calms me after Directorate shifts.",
+            "But this week, those power and network glitches made everything harder: lights flickering, music dying, app login freezing.",
+            "I even panicked when my housing system app glitched - thought I'd get locked out for a second.",
+            "Saturday, every fold felt stiff and rushed. My hands ached by the end.",
+            "Honestly, it's the first time I worried my hobby might get flagged as 'unusual' with all the tracker errors.",
+            "Feels foolish that something so harmless could draw attention.",
+            "When routines break, you notice how tightly everything's surveilled - and how little room there is to just... be."
           ]
         ]
       },
       "main": {
         "main": {
-          "opener": "Makes me think - how's life been treating you these days?",
+          "opener": "Makes me wonder what your days have been like recently.",
           "variants": [
             [
-              "Life's been... regular enough.",
-              "The office is in a bit of a holding pattern just now.",
-              "Nothing unusual for someone in my position.",
-              "Could be smoother, but that's always true here.",
-              "I suppose nothing worth mentioning beyond the usual interruptions."
+              "It's been... hectic at work lately.",
+              "Ever since Halden died, the systems I use have been slow - everything's out of order.",
+              "Everyone's on edge, trying not to stand out.",
+              "Honestly, makes you notice how quickly things can change."
             ],
             [
-              "Life's keeping me on my toes, if I'm honest.",
-              "My tools weren't behaving - can't send out the day's work without someone's say-so now.",
-              "Strange access errors, schedules unresolved - annoying, but it'll clear.",
-              "Had to go speak to some colleagues in person, which is rare these days.",
-              "Not the smoothest week, but I'm managing."
+              "It's odd right now - nothing feels stable at the office since Halden died.",
+              "System delays, missing data, just... a lot of uncertainty.",
+              "Colleagues talk about leadership, but no one really knows anything.",
+              "I'm just trying to keep my head down, not make any mistakes.",
+              "It's hard not to feel uneasy these days."
             ],
             [
-              "Life's been... disrupted, I suppose.",
-              "Yesterday, half my messages vanished from the approval system - no warning, just blank spaces where guidance should be.",
-              "Ended up printing edits and knocking on Harmonists' doors. Quite the throwback.",
-              "No word on Halden's replacement - just silence and conflicting directives.",
-              "It's a peculiar thing, to realize how brittle 'normal' can be."
+              "So, routines changed a bit - Halden's death threw everything off where I work.",
+              "System logins lag, notifications pile up, sometimes files just vanish.",
+              "I had to double-check a bunch of compliance reports by hand - nothing is running the way it's supposed to.",
+              "People around me are tense, speculating about what comes next, and I find myself keeping quiet more than usual.",
+              "Even got a warning about unusual queries from my own terminal - probably just a bug, but still unsettling.",
+              "I feel like I have to watch every move, even more than before."
             ],
             [
-              "Honestly, it's a bizarre time to work in messaging. Halden's death threw the whole system off-balance.",
-              "I arrived, found my dashboard bricked - with critical statements stuck in limbo.",
-              "Fallback systems sent mixed signals, so I spent the day chasing approvals in hallways instead of refining language.",
-              "Made me realize how dependent we are on routines and access - the city's all algorithms, but one loss unravels the thread.",
-              "Some nights I double-check my access logs, just in case - feels like the ground's moving beneath me."
+              "Honestly, it's been rough - after Halden died, everything just feels unmoored.",
+              "Systems I rely on at work keep stalling - BCI flags are glitching, which is a nightmare for us.",
+              "I spent the whole morning doing manual checks to correct errors the system should've caught.",
+              "Everyone's speculating about who's in charge now, but no one speaks up too loudly.",
+              "I even got a personal warning for making too many manual queries - now I'm paranoid about every keystroke.",
+              "It's all got me retreating into myself more, worried I'll step out of line without meaning to.",
+              "Sometimes I wonder how safe anyone really is, even when they're just doing their job."
             ],
             [
-              "Life's unsettled - inside and out. I built my reputation shaping clarity from chaos, but Halden's death? It's exposed just how fragile the center really is.",
-              "No interim authority, so the Innovator's projects stall, and my strategic drafts hang, hostage to broken logic and conflicting feedback.",
-              "I had to haul physical copies around to people who barely understand why language matters more than metrics. It's almost archaic.",
-              "Now, I archive every rejected speech, every troubled phrase - because any could become the narrative if the power balance shifts.",
-              "I joined this system to push it forward, make it rational, humane - but lately, it feels less like progress and more like treading water - watching the trusted order flicker, unsure what version of myself matters anymore."
+              "Lately? It's been exhausting - Halden's death did more than slow things down, it made everything uncertain.",
+              "I'm a Behavioral Analyst, so system glitches are my whole day now, and manual checks are revealing things we're not supposed to see.",
+              "People with good records are suddenly flagged, files are missing, and no one has real answers.",
+              "There's this weird paranoia - everyone afraid of saying the wrong thing, because we all know the system is watching.",
+              "I got a warning for 'unusual patterns' in my own queries, just for trying to make sense of the chaos.",
+              "After what I've seen, I can't trust the BCI like I used to. It's not just malfunction - it feels like the whole idea behind it is starting to crack.",
+              "I barely speak at work now, just follow protocols, head down.",
+              "Honestly, it's left me - someone who once believed in all this - feeling isolated and... kind of lost, I guess."
             ]
           ],
-          "emotion": "I suppose I'm left feeling uneasy - unmoored, if I'm honest."
+          "emotion": "anxious and isolated"
         },
         "emotional": {
-          "opener": "It's all right to lose your footing sometimes. Even architects of order can feel a little weightless when the ground shifts under them.",
+          "opener": "It's okay to feel out of step sometimes - most of us are just pretending we belong.",
           "variants": [
             [
-              "That's generous of you to say.",
-              "Sometimes the floor is just uneven, not missing."
+              "Maybe. I just keep my head down and do my job.",
+              "Hard to know who's really pretending."
             ],
             [
-              "I appreciate the perspective.",
-              "You're right - clarity comes in waves, not guarantees."
+              "Yeah, I suppose that's true for some.",
+              "It's not always easy to show it, though.",
+              "People learn to hide it fast."
             ],
             [
-              "It helps to hear it said aloud, actually.",
-              "There's a kind of relief in knowing steadiness isn't a permanent state.",
-              "Even the orchestrators stumble when the tune changes."
+              "Sometimes I wonder if everyone else feels like this, or if it's only me.",
+              "I guess it helps to hear I'm not alone in it.",
+              "Maybe I'm not as out of place as I thought.",
+              "Thanks - most people wouldn't say that out loud."
             ],
             [
-              "Thank you, Alex. It's rare someone puts it so simply.",
-              "Yes, I suppose there's some comfort in admitting even the designers aren't exempt from doubt.",
-              "The urge to appear composed is strong, but honesty feels lighter.",
-              "Maybe balance is overrated - sometimes we just float until the pieces settle."
+              "I almost forget what it's like to talk honestly about how strange things feel.",
+              "It really does help, you saying that.",
+              "There's comfort in knowing others feel this pressure, too.",
+              "Makes the city feel a little less... cold, I guess.",
+              "I don't usually admit that to anyone."
             ],
             [
-              "You really have a way of naming these things, Alex.",
-              "I spend much of my time telling others how to calm the storm, convinced I'm immune myself.",
-              "Turns out, even architects of protocol aren't built on bedrock forever.",
-              "There's a small freedom in admitting I'm not always anchored - no matter what the official lines say.",
-              "It's a strange relief to have this conversation here, quietly, without expectation.",
-              "Perhaps everyone floats, now and then, until the system remembers us."
+              "So much of the time, I feel like I'm struggling to keep up some version of myself that fits in.",
+              "Hearing you say that - it's like finally someone sees what's behind the score, not just the surface.",
+              "It gets lonely when you can't talk about how exhausting it is to navigate all the expectations.",
+              "Sometimes I wonder if anyone even knows who they really are anymore.",
+              "Your words remind me I'm not the only one asking those questions.",
+              "Thank you. That means more than you know."
             ]
           ]
         },
         "factual": {
-          "opener": "So? The system's acting up, Halden's gone - don't tell me you know nothing. What's actually going on, Sven?",
+          "opener": "If it's so chaotic, you must know more than you're saying. What actually happened after Halden died?",
           "variants": [
             [
-              "Nothing out of the ordinary's been released since the announcement.",
-              "Halden's death - officially unspecified, you've seen the statement.",
-              "If there's anything more, it hasn't reached me.",
-              "Systems need time to stabilize, that's all there is."
+              "They made his death public just with a short statement.",
+              "No one's replaced him yet - at least they haven't said so.",
+              "Some system failures right after, but nothing explained.",
+              "Council hasn't answered questions about it.",
+              "People just carry on, mostly."
             ],
             [
-              "Council released what they wanted - no cause, no timeline for a new head.",
-              "Background channels are closed tighter than usual, so no new guidance.",
-              "Technical issues, maybe, but those always follow transition.",
-              "If there's a deeper reason, it's not circulating anywhere official."
+              "They announced Halden's death without giving any cause.",
+              "Right after, a lot of automated processes started failing - noticed that at work.",
+              "Council's been silent about what it means for succession.",
+              "Noticed some changes in how BCI flags behavior since that week.",
+              "Files went missing; access was delayed.",
+              "There's an official line, but not much behind it."
             ],
             [
-              "Halden was considered irreplaceable - ironic, given how suddenly he's vanished from the structure.",
-              "The interim silence is making Council factions edge into each other's territory; that's never good for progress.",
-              "You might hear whispers about sedatives in the toxicology, but that file's locked down tight - classic maneuver.",
-              "The city's running slower, scoring errors cropping up everywhere, and priorities get jumbled.",
-              "You can tell which factions hate uncertainty the most - they start rewriting guidance before anyone reads it."
+              "When Halden was found dead, internal reports said cardiac arrest - then all the medical details were sealed.",
+              "Automated governance started breaking down immediately; fallback modes everywhere.",
+              "I heard no interim director was named, and that set off system delays all across the Directorate.",
+              "Data access got centralized just before, so now fewer people see what's actually flagged.",
+              "Council made a very vague announcement, but there's no answer about who's actually in control.",
+              "A lot of my colleagues noticed compliance scores shifting, seemingly without logic.",
+              "It's hard not to think this isn't just a technical glitch but something structural."
             ],
             [
-              "Halden's dead - no question, but the sealed medical and absence of leadership? That's not an accident, it's a tactic.",
-              "Systems failed because only he had direct permissions - oversight gaps weren't mistakes, they were protection against internal sabotage.",
-              "I've seen the feedback loops trying to compensate: Innovator projects paused, Harmonists pushing for a permanent freeze, Directorate sniffing for an excuse to clamp down.",
-              "Honestly, it's made me rethink how much of the compliance game is performance vs. substance.",
-              "I align with building smarter systems, but right now, cleverness feels like a liability."
+              "Before they made his death public, his medical report was sealed by order of the Council's internal health unit.",
+              "We all saw system breakdowns - BCI scores becoming erratic, enforcement teams confused about logs.",
+              "Halden had started limiting data access shortly before; other departments lost visibility.",
+              "Some people even disappeared from watchlists - that was buried in a review, no one followed up.",
+              "Leadership discussions are happening in complete silence - promotion's supposed to be algorithmic, but no one's sure if the system even works right now.",
+              "Compliance scores changed overnight for a lot of people I'd cleared days before.",
+              "The more I see, the more I doubt the Council's version of events.",
+              "Sometimes I wonder if they're worried the whole thing might unravel."
             ],
             [
-              "Halden shaped nearly every operational change since 2022; his fingerprints are all over the compliance webs - and now the Council can't even find the override keys.",
-              "The official medical findings were sealed the moment sedatives turned up - don't believe the cardiac line; it's damage control, pure and simple.",
-              "You'd think with all our 'self-correcting' systems, there'd be succession protocols, but Halden locked access to punish the Directorate for last year's overreach.",
-              "I've archived more alternate narratives these last days than in the last three years combined, just in case a power shift puts the wrong phrases in the spotlight.",
-              "I joined to innovate - to rationalize the system's reach. But lately, I wonder if anyone actually wants a future that's less brittle, or just one where nobody takes the blame for a crash."
+              "The truth is, Halden's death was treated as an internal problem - never addressed publicly beyond a one-line statement.",
+              "I've seen full logs: his scheduled audit was missed, footage stopped after he entered Tower 9, and the medical details don't add up - cardiac arrest with sedatives in his system.",
+              "Council covered up the toxicology report entirely; not even a whisper about it circulating.",
+              "Centralising BCI enforcement just before he died meant other units couldn't verify or contest compliance flags.",
+              "Right after, some high-risk individuals vanished from the system - systems flagged it, but no one ordered a real investigation.",
+              "Everything I work with is in fallback mode - so many people getting flagged or ghosted, it can't be random.",
+              "Promotion used to mean something, but now with algorithmic selection and no oversight, it's just the system eating itself.",
+              "I don't trust BCI anymore - it punishes nonconformity, not threats.",
+              "I used to think all of this was for stability, but now... it feels more like control than order."
             ]
           ]
         }
       }
     },
-    "dtomenko": {
+    "rmiskovic": {
       "opener": {
-        "customer_id": "dtomenko",
+        "customer_id": "rmiskovic",
         "questions": {
-          "neutral": "Is the city loud today?",
+          "neutral": "Does the city feel colder?",
           "hobby": [
             {
+              "correct": false,
+              "message": "Still flying FPV drones off-grid?"
+            },
+            {
               "correct": true,
-              "message": "Any new mods on your FPV quad?"
+              "message": "Analog photography  -  stubborn as ever?"
             },
             {
               "correct": false,
-              "message": "Urban Tunnels whisper anything interesting?"
-            },
-            {
-              "correct": false,
-              "message": "Still folding origami to stay grounded?"
+              "message": "Antique typewriters and quiet bars  -  good pair."
             }
           ]
         },
-        "wrong_hobby_answer": "That's not me - In free time, I fly FPV drones. It's a way to escape the noise of the city.",
+        "wrong_hobby_answer": "That's not me - In free time, I take analog photographs. They capture the truth in a way that digital can't.",
         "neutral_answer": [
           [
-            "Yeah, seems a bit more tense out there.",
-            "I mostly keep to myself, fly my FPV drone after work.",
-            "Even that's less relaxed with patrols tightening up.",
-            "Not the best week for hobbies."
+            "Feels more silent, if that's possible.",
+            "I used to walk for street shots - analog camera, you know.",
+            "Last week even that felt risky with the patrols off-sync.",
+            "Some things don't get easier just because it's cold."
           ],
           [
-            "Can't say it ever really gets quiet here.",
-            "I'm into FPV drone flying - keeps me out of the noise.",
-            "Even the outskirts felt different today, more eyes than usual.",
-            "System hiccups messed with my last run.",
-            "It's not as simple to disappear lately."
+            "Colder, yeah. People dodge each other's eyes now.",
+            "I shoot street photos - all film, pretty old-school of me.",
+            "Evenings are best for catching the right shadows, or they used to be.",
+            "Since Halden died, I've noticed more static drones blocking normal routes.",
+            "Makes getting a real shot harder, but I keep trying."
           ],
           [
-            "It's probably louder in everyone's heads after the Halden news.",
-            "I fly freestyle FPV drones - industrial zones, old stacks, that type.",
-            "Usually no one bothers you out there.",
-            "Lately the system's been glitching, even out past the net fence.",
-            "Weird drone sweeps, inconsistent signals.",
-            "Makes it harder to just tune out."
+            "Definitely colder, not just the air.",
+            "I like to shoot analog photos around the city, old 35mm film.",
+            "There's this sweet spot when dusk hits Yellow Market - used to be my favorite.",
+            "Lately, everything's off - transport failures, drones acting weird, even foot traffic feels rehearsed.",
+            "My last roll, I nearly got locked out at two checkpoints for no reason.",
+            "Feels like the city itself is spooked, and so am I."
           ],
           [
-            "It's definitely louder - not with people, with system static.",
-            "Freestyle FPV drone flying is my thing, clears my head.",
-            "Used to be kind of invisible out in the ruins.",
-            "Now, Halden's death has everything misreading movement patterns.",
-            "Last time out, my wristband flagged me twice for 'unusual activity.'",
-            "Other pilots noticed it too - more sweeps, less freedom.",
-            "Feels like the city's learning new tricks."
+            "Colder everywhere, even in places I used to love for street photos.",
+            "Not digital - real film, old Minolta, capturing faces no algorithm can.",
+            "Last week, after Halden's death? The atmosphere changed fast.",
+            "System bugs stalled transit, patrols felt blind but hyper-alert at the same time.",
+            "I got a perfect shot of a kid bartering bread, but swapped film in a stairwell, shaking.",
+            "Now I archive rolls at home, just in case the index starts noticing my patterns.",
+            "Small risks, but real ones, every time I go out now."
           ],
           [
-            "Honestly, the city's less loud than it is watchful these days.",
-            "My hobby is FPV drone flying out where signals used to drop off.",
-            "I started it years ago, mostly as escape after work, especially since my brother disappeared.",
-            "Halden's death pushed the network into chaos - even my gear glitched from the system fallback.",
-            "Got flagged for heart rate, lost telemetry, nearly lost my quad when the bands started tracking irregular flight.",
-            "The new update interprets sudden movement differently now, I can feel it tracking us.",
-            "No one really talks about how these changes reach out past city limits.",
-            "You notice what's missing: space, privacy, even the wind feels like it's listening."
+            "It's not just cold, it's like the city is holding its breath.",
+            "I shoot analog street photos - film can't be edited by the compliance index.",
+            "My dad worked for BCI, so I learned where cameras are blind.",
+            "After Halden died, everything glitched - dead drones, error lights, ghosts in the system.",
+            "That last evening in Yellow Market, even regulars acted strange; a maintenance bot just stared at me.",
+            "I caught a real moment: contraband trade, bread for ration slips, but my hands shook changing film.",
+            "Half my contacts avoid me now - paranoid, or flagged. I save every negative locally.",
+            "Some days I wonder if each shot might be my last, til things shift again."
           ]
         ],
         "hobby_answer": [
           [
-            "Yeah, still flying when I can.",
-            "Not as much these days, too many eyes.",
-            "System glitches make things... less predictable.",
-            "Lost signal out near Sector V last weekend.",
-            "Not much more to say."
+            "Survived, sure. Not easy to find good light now.",
+            "Stopped by the market, whole place felt dead.",
+            "Everyone's tense since Halden - streets are watched, too many eyes.",
+            "Used half a roll, won't risk the rest yet."
           ],
           [
-            "I still fly, when it's safe.",
-            "BCI interference's made tracking weird lately.",
-            "Too many network hiccups after Halden died.",
-            "Its supposed to be off-grid, not anymore.",
-            "Packed up early when a patrol passed over.",
-            "Doesn't feel as free out there now."
+            "Still shooting, barely - risky these days.",
+            "Yellow Market had real moments, but security's thicker now.",
+            "Halden's gone, and the checks are glitchy, unpredictable.",
+            "Film's hard to hide with all these delays.",
+            "Thinking about pausing until this blows over."
           ],
           [
-            "Yeah, FPV's still my escape - barely.",
-            "Last week's flight cut short: GPS all over the place.",
-            "Halden's system crash must've scrambled something.",
-            "Met two other pilots, same story - lag, warnings, random band pings.",
-            "Security drones scanning way more than before.",
-            "The band even flagged my stress levels mid-flight.",
-            "I've started keeping sessions short, just in case."
+            "Yeah, the Minolta made it out today, just barely.",
+            "Halden's death made the networks glitch - tram lines stalled, cameras frozen.",
+            "Shot a few frames at dusk, but people noticed.",
+            "City bots stand still now, not scanning - feels wrong.",
+            "Feels like every photo is being watched, even if the cameras are blank.",
+            "Saved the negatives, but I'm more careful with every shot.",
+            "Streets don't forgive mistakes right now."
           ],
           [
-            "Yeah, that's mine. Nothing clears my head like flying.",
-            "Since Halden's death, the networks are unstable. GPS skips, lost video feeds.",
-            "Pilot community's noticed: places that were dead zones are lighting up on BCI scans.",
-            "Bands pinged me hard last run for 'irregular motion.' Never happened before.",
-            "Even got flagged for 'unusual biometric readings.'",
-            "Saw new patrols scouting industrial ruins. First time I packed up on instinct, not timing.",
-            "Feels like the city's seeing patterns it missed before.",
-            "Thinking about how long we'll have this freedom."
+            "Survived, though not without a few scares.",
+            "Spent two hours at the market after Halden's announcement - whole place is off-balance.",
+            "My Minolta's nearly caught at a security sweep. Never used to happen.",
+            "Error lights on city cams now make me more nervous than green.",
+            "Ended early because a maintenance bot zeroed in on me.",
+            "Swapped film hiding in a stairwell - that adrenaline ruins the frame.",
+            "Every photo feels heavier - like evidence, not art.",
+            "Missing Halden, the city misses routine. Even the shadows feel watched."
           ],
           [
-            "Yeah, I still fly - can't really give it up.",
-            "Started out after my brother disappeared, just needed the distance - drones let me disconnect.",
-            "Used to be a private space, only your own telemetry to worry about.",
-            "Last flight near the stacks, everything glitched - system errors since Halden died, BCI acting overzealous.",
-            "Health band pinged me about 'stress response' mid-dive - like it tracks my mood closer now.",
-            "Met other flyers, all paranoid about random patrols hitting sites previously ignored.",
-            "Heard old Council records got locked when Halden's credentials failed - nobody's steering subsystems right.",
-            "Makes every session feel risky, like the city's watching in places it never cared before.",
-            "Still, flying's worth it - no system sees what I see at the sticks."
+            "Minolta survived, but I'm not sure I did.",
+            "Used to know every blind spot in Yellow Market - now I can't trust any of them.",
+            "After Halden's death, AI glitches left doors locked, alerts blaring. Even the drones act lost.",
+            "Got stuck between two patrol sweeps - risked losing more than a negative.",
+            "Had to swap film in a half-lit stairwell, hands shaking. Reminded me of those old raids my father whispered about.",
+            "That night, every photo was a gamble - crowd eyes on me, not just the cameras.",
+            "People look away now, no one wants to be in the frame.",
+            "Makes you realize, catching real life on film is defiance these days.",
+            "No digital filter, no edits - just the city staring back, unblinking. That's why I do it."
           ]
         ]
       },
       "main": {
         "main": {
-          "opener": "You ever get tired of pretending things are fine?",
+          "opener": "That makes me think - what's been different for you lately?",
           "variants": [
             [
-              "Things aren't perfect, but you learn how to manage.",
-              "This week was just a lot of system errors. Stuff no one explains.",
-              "People line up outside the lab, everyone tense.",
-              "I just keep my head down and do my job.",
-              "Right now, that takes all I've got."
+              "Feels like everything's running behind lately.",
+              "Tried to get some workspace access, but it just locked me out, twice.",
+              "People are quieter, canceling plans, not willing to chat on camera anymore.",
+              "I'm just trying to stay out of the system's way for a bit."
             ],
             [
-              "Feels like the system's always a step away from glitching.",
-              "Had to work overtime - half the lab locked up, and the updates just stalled.",
-              "Council staff sending odd requests, asking for quick fixes, private work.",
-              "It gets hard to trust what you see on your screen these days.",
-              "I'm not sure who notices, but it's harder to ignore."
+              "My routine got tossed. No explanations, just missed appointments and locked doors.",
+              "Requests for site access - nobody's answering, or they bounce me between bots.",
+              "Even my login glitched and froze - like I'm not supposed to be there anymore.",
+              "Sources are acting strange, giving nothing away.",
+              "I've started backing up raw data, in case anything worse happens."
             ],
             [
-              "I'm used to problems, but after Halden died, nothing worked right.",
-              "Devices failing, people outside getting antsy, everyone hoping it's just a blip.",
-              "Internal messages flooding in - Council, IT, all wanting special help, some not even hiding it.",
-              "Spent hours making sure no stray log would get me flagged, even for things I didn't do.",
-              "Feels like you can do everything right and still go under."
+              "Work changed overnight after Halden's death announcement.",
+              "All my usual interviews were canceled or rerouted, no reason.",
+              "I got blocked trying to log in - the system straight-up froze me out.",
+              "No one wants to be seen talking to me; even background quotes are getting risky.",
+              "Even our newsroom system is glitching - assignments missing, errors everywhere.",
+              "I'm saving everything I can, avoiding more flags, but it feels like the city's holding its breath."
             ],
             [
-              "I keep telling myself it's just tech failing, but it's not that simple.",
-              "Halden went, and half the city's systems lost their mind - my work is all about cleaning up behind the shutdowns.",
-              "Everyone knows something's off, but in my lab, I see how we bend the rules just to keep the lines moving. Even the Council tries to hide their panic.",
-              "Sometimes I help people disappear - just a line of code, a vanish from the queue. Not heroes, just scared.",
-              "After my brother vanished, I told myself I wouldn't get involved. But here I am, one bad log away from joining him."
+              "Lately? Ever since Halden's death, nothing's worked like it should.",
+              "Appointments dropped with no warning - public works, interviews, everything.",
+              "My system access failed, not once but twice. That's never happened before.",
+              "Residents I counted on for candor are dodging me. They're scared, honestly.",
+              "Security looks different in the crowds, tighter - like they're watching for something nobody's saying.",
+              "Our newsroom's half-broken; stories lost, assignments erased, and no one explains a thing.",
+              "I've started saving raw files and cutting back fieldwork - keeps my name out of more reports, but it's like waiting for the ceiling to crack."
             ],
             [
-              "Truth is, pretending is all we've got now. The Council's factions are too busy fighting each other to fix any of this.",
-              "The BCI broke the day Halden died, and no one really has control. I've had admin crawling for bypasses, even scrubbing records for friends of theirs.",
-              "You know my brother got flagged a year back. I tried everything - they said it was just an audit. Then his ID vanished from our system, like he'd never existed.",
-              "I can keep the wristbands clean, make people look safe, but it means nothing if the next update screws us anyway. Sometimes I wonder if the Innovator ideas were all just window dressing for the same old game.",
-              "I'm tired of watching everyone pretend this city still runs on rules. It's just who's invisible, and who's next."
+              "Want the truth? After Halden's death, I can barely do my job - like the city wants me invisible.",
+              "Interview slots, public site visits - all canceled, or lost in the system. Not a word why.",
+              "My workstation glitched, flagged me twice - my BCI dropped, and nobody will say if I'm next on some list.",
+              "People I trusted won't talk, not even for background. Even friendly faces act like I'm contagious.",
+              "Security's a show - polite smiles, but their eyes scan everything twice.",
+              "The newsroom's corrupted: half our stories missing, data 'errors' - but that's just selective silence.",
+              "Now I save my own data, stay out of flagged zones, move less - my BCI crawled up, but it's a trade: compliance or truth.",
+              "This isn't just system bugs, Alex. It's fear, and the feeling that if I push any harder, I'll disappear too."
             ]
           ],
-          "emotion": "Exhausted, but holding it together"
+          "emotion": "Tired, wary - like I'm balancing on an edge and waiting to see where I land."
         },
         "emotional": {
-          "opener": "You're not invisible, Daria. I see how hard you're working, even when no one else notices. You don't have to carry all of it alone.",
+          "opener": "Rada, anyone would feel on edge. It's not just you. You're carrying more than you should have to. You can rest here, even just for a minute.",
           "variants": [
             [
-              "Thank you. Good to hear someone notices.",
-              "I'm fine, really."
+              "Maybe. I keep moving forward, that's all I can do.",
+              "Appreciate the quiet, for now."
             ],
             [
-              "I appreciate you saying that. Not everyone pays attention.",
-              "It's been a long week, but I'll manage."
+              "Sometimes, these words help more than you'd think.",
+              "Hard to let myself rest, but I hear you.",
+              "Might just take you up on that."
             ],
             [
-              "Thanks. Sometimes I forget I can just stop and breathe.",
-              "It means something to have that recognized, honestly."
+              "You make it sound simple.",
+              "I guess I forget sometimes it's allowed to just stop for a while.",
+              "Feels good to hear someone say it out loud.",
+              "Thanks for that, honestly."
             ],
             [
-              "That helps more than you know.",
-              "It gets heavy, just pushing through - sometimes I wonder if anyone even notices, so hearing it matters.",
-              "I tell myself to just keep going, but it builds up."
+              "You know, I can't remember the last time anyone said something like that to me.",
+              "It gets lonely, pretending this all rolls off me.",
+              "There's some comfort in this place I can't get anywhere else.",
+              "Letting my guard down here doesn't feel dangerous, just...human.",
+              "You've got good timing."
             ],
             [
-              "I'm not great at letting people see when I'm worn out, but you caught it.",
-              "Most days I pretend the pressure's normal, like no one's supposed to admit it's too much sometimes.",
-              "It's strange how easy it is to disappear into the routine - like the only thing that matters is not making noise.",
-              "I do worry if that's all there is, just staying out of trouble and pretending everything's fine.",
-              "But, really - thank you, Alex. It means more than you know.",
-              "People like you, who actually notice, make it easier to keep going."
+              "That's the thing - no one ever tells you it's okay to be tired. You're just supposed to keep performing.",
+              "Sometimes I wonder how long I can pretend it's all normal.",
+              "My father - he taught me to hide what matters. Useful lesson, sure, but it burns you out.",
+              "It gets exhausting, always thinking a wrong move will cost more than just time.",
+              "Truth is, when I'm here, I can almost believe things might be different.",
+              "Thank you. It matters more than you realize."
             ]
           ]
         },
         "factual": {
-          "opener": "So what actually happened with Halden and the system - everyone hears rumors, but no real facts. You know more than most, right?",
+          "opener": "Come on, Rada - don't just hint. What's really going on under all this system noise?",
           "variants": [
             [
-              "The official line is Halden died, cardiac cause, that's all we're told.",
-              "Nothing public, just brief internal memos after that.",
-              "System outages blamed on credentials - standard fallback story.",
-              "I don't see more than the next update notice, even in the lab.",
-              "We're just meant to clear queues and keep quiet about it."
+              "All you need to know is Halden's gone, and the city's not itself.",
+              "Official line's just one short announcement. No replacement, no reasons.",
+              "Everything else is just rumors or locked behind Council doors.",
+              "No one's talking about what really happened.",
+              "It's above my pay grade, Alex."
             ],
             [
-              "Halden's death hit the network hard - systems went fallback, some data locked.",
-              "Council sealed the health report, never explained why.",
-              "A few days after, I saw instructions to reroute flagged cases, like nothing happened.",
-              "Insiders say credentials got lost in the mess, but no one shares details.",
-              "Ended up digging through archived routines just to keep things on.",
-              "We aren't told much past what's on the admin dashboards."
+              "Halden died quietly. Suddenly there's... gaps - systems glitching, services stalling.",
+              "Council's silent - no interim leader. Not what I'd call normal procedure.",
+              "Security's up in public, but the real changes are behind login walls.",
+              "No cause for his death on record, which says a lot by itself.",
+              "They sealed his medical report pretty quick.",
+              "Hard to know who's actually in charge right now."
             ],
             [
-              "When Halden was put in charge, everything centralized - oversight, data, all of it.",
-              "After he died, sudden failures everywhere, a few of us called in for manual cover.",
-              "His terminal held special access - when that went offline, the fallback failed.",
-              "It's clear: Council's scrambling, but no direction filters to us techs.",
-              "Last update ramped scoring sensitivity, flagged more people than ever before.",
-              "Official process says it's under control, but privately, most think it's just gloss."
+              "Halden's death was called 'natural,' but they're keeping the full story sealed tight.",
+              "No Council successor named. Power shuffle, but behind filters - nobody outside the loop knows for sure.",
+              "Ever since, there's network failures, fallback modes, real system confusion - not just at my level.",
+              "Behavioral Compliance Index is slowing, scoring weird. Permits and quotas? All unpredictable now.",
+              "Council's three factions want different things, but none are showing their hand yet.",
+              "Never saw this much silence from government before. Reminds me why I don't believe in 'efficient neutrality.'",
+              "People feel it - city's mood's changed, even if they won't say it."
             ],
             [
-              "Halden's access overhaul was meant to make BCI efficient; now it's all bottlenecked - I'm stuck patching gaps with outdated code.",
-              "Saw audit logs wiped, some personnel vanished off lists - quiet, no alerts issued.",
-              "Council can't decide - Harmonists stalling, Directorate wants lockdown, Innovators are ignored.",
-              "I've done discreet data cleaning for Council IT, they're not even subtle now.",
-              "The truth: the algorithms keep escalating, extra flags, more vanishing people - the public just sees 'maintenance.'",
-              "Most of my circle wanted innovation; now all we get are excuses while they tighten controls."
+              "Officially? Halden died of 'cardiac arrest' - but when they seal a tox report and skip the inquest, something's off.",
+              "He'd centralized BCI so tight, when he died, fallback protocols glitched - delays, scoring errors, whole neighborhoods in limbo.",
+              "The Council isn't naming a successor. Can't even tell if it's Harmonists, Innovators, or Directorate calling shots now.",
+              "Rumors say his last access logs were pulled from Tower 9 - locked room, no visitors, all data encrypted.",
+              "Since the audio leak last year, insiders said Halden was on thin ice with the Directorate. Funny, nobody talks about that now.",
+              "Last week, hundreds of 'flagged' people quietly disappeared from BCI tracking. No announcement, just gaps in the data.",
+              "Working here, I spot the stories missing between the lines. Always the 'neutral' systems they say keep us safe.",
+              "Makes me wish more people questioned what side they're really on."
             ],
             [
-              "Council politics is chaos right now - Halden left no override and the factions barely speak outside closed channels.",
-              "His death was cleaned up: Council health unit sealed toxicology, no inquiry, not even to us techs.",
-              "Our lab got requests to 'normalize' health bands for noncompliant relatives of high-ups - same ones who pushed for hardline rules.",
-              "I found ghost records: IDs flagged, then wiped from BCI, no restoration trail. Happened to my brother too.",
-              "Innovators like me argued for transparency, but all my ideas get rerouted to coverups or damage control.",
-              "Nobody admits it, but we're running workarounds on workarounds. Anyone who makes noise joins the missing. That's BCI governance now."
-            ]
-          ]
-        }
-      },
-      "decision": {
-        "preference": "b",
-        "dilemma": {
-          "opener": "The drink is simple. You're not.",
-          "variants": [
-            [
-              "Some decisions have no safe answer, just different kinds of fallout.",
-              "Not everything broken can be fixed without a price.",
-              "Sometimes what's hidden is heavier than what's lost."
-            ],
-            [
-              "There's a patch I could push now, but I don't fully trust it.",
-              "If I hold back, people see how fragile things are. If I act, old mistakes get buried.",
-              "Either way, someone gets hurt and someone gets blamed."
-            ],
-            [
-              "The system hiccup left something on my desk that shouldn't exist.",
-              "I could patch things, get us running again, but maybe break more than I fix.",
-              "Or, I let everyone look at what the last guy left behind, even if it unravels trust.",
-              "It's not just code. It's people's lives caught in the fallout.",
-              "Makes my Innovator streak feel more like a liability with a 67 trailing me."
-            ],
-            [
-              "Halden left traces - an unfinished fix, just sitting in the logs. I can push it and reset order tonight, but it's half-blind and no one tested it.",
-              "If I keep the evidence and let it out - every flaw goes public. Panic, maybe, but honest.",
-              "Feels like the kind of choice that either saves everyone or loses their faith for good.",
-              "People only see the uptime, not the bodies under the rug.",
-              "If I act, I get to keep my job but sleep less. If I share, who knows if I stay free?",
-              "Innovators say progress needs truth, but the numbers on my wrist say otherwise."
-            ],
-            [
-              "There's a hidden patch up for grabs, Halden's last throw at keeping the city stable.",
-              "If I run it, people get their lives back - maybe something worse sneaks in beneath.",
-              "If I hold off and preserve his mess, everyone sees just how patchwork all of this really is - BCI's not as clean as it looks.",
-              "Either way, someone gets burned, and I'm the one lighting the fuse.",
-              "My position buys me access, but one wrong move could zero my score or make me a target - like my brother before audits took him.",
-              "Most Innovators would say transparency is worth the risk. But I saw what happened when the system eats its own.",
-              "Sometimes I wonder if holding power means keeping the peace, or finally telling the truth."
-            ]
-          ]
-        },
-        "belief_a": [
-          {
-            "belief": "Order is better than chaos - even if imperfect.",
-            "monologue": [
-              "If everything crashes, the city eats itself - people panic over nothing and everything.",
-              "Even a broken routine is gentler than open confusion and empty streets.",
-              "We learn to live with flaws; chaos, nobody survives for long."
-            ],
-            "supportive_response": [
-              "Order - any kind - is a net people can stand on, even if it's fraying.",
-              "Interesting how many cling to the smallest structure. Go on, what's next for you?"
-            ],
-            "challenging_response": [
-              "But order built on rot only lasts until the first tremor, then it all collapses.",
-              "You've given chaos a face, but what about the cost of keeping things quiet?"
-            ]
-          },
-          {
-            "belief": "People need the system to function to survive.",
-            "monologue": [
-              "Most here don't remember how to manage without steady guidance - even if it's silent.",
-              "Every service, every pulse check, relies on the system being up, even halfway.",
-              "If it breaks, every vulnerable person falls through the cracks - no guesses, just losses."
-            ],
-            "supportive_response": [
-              "People get lost fast without the system. Survival is routine, not instinct for most.",
-              "You've seen what happens during outages. So what holds you back?"
-            ],
-            "challenging_response": [
-              "But maybe we've forgotten how to survive outside these patterns the system writes.",
-              "If survival is all we care about, do we ever get something better?"
-            ]
-          },
-          {
-            "belief": "Transparency must sometimes yield to stability.",
-            "monologue": [
-              "Blunt honesty could pull apart what's left, make things worse for all of us now.",
-              "There are truths that just can't land safely during a crisis - timing is everything.",
-              "Sometimes, hiding the cracks is the only thing that keeps the roof up, at least for today."
-            ],
-            "supportive_response": [
-              "Timing matters - sometimes the shelter matters more than what's wrong with the walls.",
-              "You've weighed the risks, I see that. Anything else you'd want to share?"
-            ],
-            "challenging_response": [
-              "But trust can't grow where light never touches. People deserve to know the fault lines.",
-              "You sound like you've seen the fallout when secrets stick. What made you settle there?"
-            ]
-          }
-        ],
-        "belief_b": [
-          {
-            "belief": "Truth must come before order, even when it's messy.",
-            "monologue": [
-              "If we keep hiding what's broken, nothing ever gets better, just quieter.",
-              "They built this city on silence, but truth is the only thing that lasts.",
-              "Restoring order might mean losing the only honest piece left. Am I willing to do that?"
-            ],
-            "supportive_response": [
-              "That's a hard line to hold, but someone needs to draw it.",
-              "Let's see how far honesty goes. What's the next piece for you?"
-            ],
-            "challenging_response": [
-              "Sometimes order is all people have left. Truth can wait its turn.",
-              "Where does that line leave you when the city needs you most?"
-            ]
-          },
-          {
-            "belief": "People deserve to know the risks and flaws affecting their lives.",
-            "monologue": [
-              "They trust the system but never see what it hides. Maybe that's why it fails.",
-              "People can't make choices if we keep the dangers secret and keep patching over them.",
-              "If I cover this up, I'm just making decisions for them, like everyone else."
-            ],
-            "supportive_response": [
-              "You want people to have a say, even when it's ugly. That's rare.",
-              "So, how do you show them what nobody wants to see?"
-            ],
-            "challenging_response": [
-              "Sometimes not knowing keeps people safe. Truth can tear everything down.",
-              "But what if seeing the risks only leaves them more lost?"
-            ]
-          },
-          {
-            "belief": "Lasting change can only come from honesty, not cover-ups.",
-            "monologue": [
-              "Quick fixes never hold, not really. The system always finds a new way to crack.",
-              "Every cover-up just sets up the next crisis. I've seen it too many times.",
-              "If I hide this now, what does it fix - other than my conscience, for a while?"
-            ],
-            "supportive_response": [
-              "You're thinking long-term, even when it costs in the short run.",
-              "So where does that honesty start for you tonight?"
-            ],
-            "challenging_response": [
-              "Cover-ups can buy time for real solutions. Sometimes time's what matters most.",
-              "What would you trade for a bit more stability right now?"
-            ]
-          }
-        ],
-        "decision": {
-          "monologue_a": [
-            [
-              "I'll get things running again.",
-              "You won't hear about this from me."
-            ],
-            [
-              "The devices will come back online soon.",
-              "Problems might follow, but it's done now."
-            ],
-            [
-              "I'll install the update and restore BCI access.",
-              "There may be issues, but order will return.",
-              "Let's see what changes."
-            ],
-            [
-              "I'll push the patch tonight to steady the city.",
-              "There could be new errors, but chaos will stop.",
-              "It's a trade-off, and you helped me see it.",
-              "I hope this stabilizes things, even if it's messy."
-            ],
-            [
-              "I'll risk the patch, even if it's unfinished.",
-              "Order matters right now, people are scared.",
-              "Your question made me think about what's urgent, not perfect.",
-              "We'll patch the cracks and hope the city holds together."
-            ]
-          ],
-          "monologue_b": [
-            [
-              "I'll keep what I found quiet, for now.",
-              "Public eyes may see more soon."
-            ],
-            [
-              "The truth might surface. The record will stay preserved.",
-              "Let them look at the broken parts."
-            ],
-            [
-              "I'll preserve the evidence and share what Halden left unfinished.",
-              "The flaws will come out; the city will have to face them.",
-              "No easy fixes this time."
-            ],
-            [
-              "I'll expose what Halden started, no matter how unstable things get.",
-              "People deserve to see the cracks - covering them won't heal the city.",
-              "You convinced me it's better to show hard truths than force a quick fix.",
-              "We'll see if they can confront the real system."
-            ],
-            [
-              "I'll bring the unfinished data out for everyone to examine.",
-              "We've hidden faults too long - your question showed me honesty matters most.",
-              "Breaking the system isn't the worst thing; lying about it is.",
-              "Whatever happens next, at least it's real."
-            ]
-          ],
-          "monologue_self": [
-            [
-              "I'll share the record without your help.",
-              "What happens is up to them."
-            ],
-            [
-              "They'll see the broken code. It's my call, not yours.",
-              "No one's advice changed my mind."
-            ],
-            [
-              "I'm sharing the unfinished work with the Council and public.",
-              "They have to see what the system hid.",
-              "Maybe change will start there."
-            ],
-            [
-              "I chose to show the evidence, even if it causes unrest.",
-              "No patch, just honesty now. My brother deserved that much.",
-              "Your questions helped me reflect, but I decided on my own.",
-              "We'll let them see the truth - for once."
-            ],
-            [
-              "I'll release the records, no more hiding from consequences.",
-              "It's not about controlling outcomes. It's about responsibility.",
-              "Losing my brother taught me secrets don't heal anything.",
-              "We'll face what's coming, even if it's messy."
+              "I was raised by a BCI officer - you hear things about how real oversight looks when nobody's watching.",
+              "Halden had enemies on every side - he made himself the keystone, but centralized access meant the system ran through him alone.",
+              "When the Council gave him full control, Directorate hated it. The Innovators kept pushing for deeper predictive scores. I reported on both, but not all my footage aired.",
+              "That Tower 9 sequence? Internal playback shows a time gap - security edit, or something worse. People who worked there stopped showing up after the 26th.",
+              "The tox screen found sedatives, but Council health sealed it before it hit records. I chased the story - got two silent warnings, lost some access.",
+              "After Halden, BCI fallback scrambled everything - some flagged citizens just vanished, others had their risk levels reset to zero.",
+              "Propaganda covers the gaps, but newsroom edits reveal selective memory. Half the archive missing since last cycle - no accident.",
+              "If you ask me, 'alignment' is code for don't make trouble. My BCI ticks up when I hold my tongue, but I'd rather hold on to the raw footage.",
+              "Everyone here's adapting - compliance or truth. I'll keep telling it sideways, until someone pulls the plug."
             ]
           ]
         }
@@ -741,453 +559,697 @@
       "opener": {
         "customer_id": "npetrak",
         "questions": {
-          "neutral": "How's the path down here?",
+          "neutral": "It's one of those nights, isn't it?",
           "hobby": [
             {
+              "correct": false,
+              "message": "The city looks different through analog photography, doesn't it?"
+            },
+            {
+              "correct": false,
+              "message": "Any origami cranes lately?"
+            },
+            {
               "correct": true,
-              "message": "Get any ribbon for that antique typewriter yet?"
-            },
-            {
-              "correct": false,
-              "message": "Analog photography survive another day in Stenograd?"
-            },
-            {
-              "correct": false,
-              "message": "Urban exploring with that homebrew again?"
+              "message": "Any luck fixing the old typewriter?"
             }
           ]
         },
         "wrong_hobby_answer": "That's not me - In free time, I collect antique typewriters. They remind me of a time when things were different.",
         "neutral_answer": [
           [
-            "Took the old route, just in case. Streets felt quieter than usual.",
-            "Picked up supplies for my typewriter hobby - limited selection lately.",
-            "Must be a system glitch, affects stock. Nothing worth dwelling on."
+            "Nights like this, best to keep routines quiet.",
+            "I restore old typewriters - paper and ink, nothing digital.",
+            "Recent system changes tried to stop my supply order.",
+            "Sometimes, it's wise to keep old habits to yourself."
           ],
           [
-            "Managed the walk well enough, though the lights at Sector Four kept blinking.",
-            "Stopped by a shop to look for typewriter ribbons.",
-            "Not much luck - the shelves are bare these days.",
-            "Suppose that's how it is now. I spend evenings on repairs, when possible.",
-            "Complications of a mechanical hobby, especially lately."
+            "It is. My evenings go to tending old typewriters, nothing controversial.",
+            "Paper, ribbons - odd items now, I suppose. Ordering is less simple lately.",
+            "Strange, how even hobby supplies fetch extra screening now.",
+            "Most don't see the sense in what I do.",
+            "The world watches over small things as well, these days."
           ],
           [
-            "Roads were fine, though the permit terminal at the corner was down again.",
-            "I restore antique typewriters. Not common anymore, but it keeps me busy.",
-            "Needed a replacement ribbon - system error online, no stock at my usual shop.",
-            "No real surprise after Halden, I suppose.",
-            "Typewriters at least don't need an active connection to work.",
-            "Missed putting fresh ink to paper tonight."
+            "Not wrong. I spend nights restoring antique typewriters, keeps me occupied.",
+            "I enjoy the quiet sound of the keys - real mechanical work.",
+            "Tried to order oil this week. The system stalled, flagged my request.",
+            "Feels odd, needing approval to clean a machine from 1937.",
+            "Had to dig through old drawers for a spare bottle.",
+            "Always something unpredictable since Halden's passing."
           ],
           [
-            "Got here alright. Bit of a wait at the crossing - the patterns seem off.",
-            "I work on antique typewriters, fixing, cleaning, sometimes writing by hand for the sake of it.",
-            "Tried to order a ribbon online, but system glitches stopped me.",
-            "My supply shop shut early for 'registry updates.'",
-            "These disruptions weren't so frequent before Halden left the picture.",
-            "You start to appreciate the old ways - no need for digital approval to press a key.",
-            "Restored a Rheinmetall recently, but couldn't run my usual tests without that ribbon."
+            "Some nights, old habits matter more. I restore and document antique typewriters.",
+            "Writing by hand, using old ribbons - it's a discipline, and a comfort.",
+            "Since Halden died, ordering supplies is complicated - access delays, verification hoops.",
+            "Maintenance oil, ribbons, even paper - now under scrutiny.",
+            "Pharmacy staff eyed me for ten minutes over a simple supply pickup.",
+            "It's surreal, being questioned for keeping a machine alive.",
+            "Much calmer to let my Triumph do the talking."
           ],
           [
-            "Walked the scenic way - old habit from days moving documents quietly, before all this.",
-            "I've been restoring typewriters nearly twenty years, more so since retiring from the Council.",
-            "Handwriting still feels safer than screens, especially with all these system disruptions.",
-            "Used to be easy to find ribbons and parts - now nothing verifies, shops close at random.",
-            "Feels like the grid's controlling everything. Couldn't even sync my workbench clock last night.",
-            "I remember when Halden centralized access - good for order, but fragile if one node fails.",
-            "Sometimes I wonder if my old briefcase has more working mechanisms than half the city.",
-            "Mechanical things break honestly, you know where to look for the problem - unlike the system now."
+            "Yes, it's one of those nights. I've always found solace in restoring typewriters.",
+            "Started years ago, when Council documents were still on paper, before everything turned data.",
+            "Typing gives structure; every key press feels like a stand against the tides.",
+            "This past week, system outages flagged my orders for parts as 'atypical behavior.'",
+            "Oil and ribbon for a 30s Triumph - treated like contraband now.",
+            "Staff acted uncertain, as if nostalgia might be subversive.",
+            "Had to search old council files for a spare bottle, just to finish cleaning.",
+            "The strange part is - I keep a handwritten journal. Maybe it's my own quiet rebellion against the machine."
           ]
         ],
         "hobby_answer": [
           [
-            "True enough. Old machines survive new times.",
-            "Mostly restore, not much writing these days.",
-            "Supply parts harder to find now, even simple ribbons.",
-            "System delays make ordering tedious, best not draw attention.",
-            "I keep things simple and low-profile."
+            "Yes, old machine's stubborn as ever.",
+            "Replacement ribbon order's delayed again - system seems nervous these days.",
+            "Didn't bother arguing; used what I had left.",
+            "Best keep hobbies quiet lately, I suppose."
           ],
           [
-            "That's right, they do go nicely together.",
-            "I like the feel of manual keys - steadies the mind.",
-            "Finding parts has been a hassle these weeks.",
-            "Digital orders stall or get flagged since the system slowed.",
-            "Unsettling how even hobbies become unpredictable.",
-            "One learns to do without certain comforts."
+            "Yes, the Triumph needs attention, keeps me busy.",
+            "Getting supplies isn't so simple right now - extra checks, strange delays.",
+            "They flagged my order, no explanation. Odd, but not worth a fuss.",
+            "Guess every little thing gets scrutinized since Halden's announcement.",
+            "Typewriter work helps pass time, even with interruptions."
           ],
           [
-            "Yes, perfect match when the city outside gets loud.",
-            "Each typewriter's quirks feel like fingerprints - never the same.",
-            "Usually, sourcing ribbons was routine, now even that's tricky.",
-            "The main suppliers went offline last week - no word on why.",
-            "Could be fallout from Halden's death, who knows?",
-            "Restoration gives me some control when most things drift.",
-            "At least machines obey more than these systems do."
+            "Yes - spent my afternoon cleaning the old Triumph.",
+            "Wanted new oil and a ribbon, but system kept looping my order.",
+            "Apparently, that triggered some kind of compliance check - longer than usual.",
+            "People around the kiosks all looked confused. Routine's broken everywhere.",
+            "Halden's death changed how the system behaves, even with small things.",
+            "Still, the typewriter calms me, even when nothing else does."
           ],
           [
-            "Absolutely. Nothing better than the weight of a solid key.",
-            "Restoring these machines takes patience - each jam tells a story.",
-            "Normally, I'd trade ribbons with an old contact downtown.",
-            "Now, passages are flagged, shops close for no clear reason.",
-            "Online orders freeze, system 'verifies' for hours - wearing thin.",
-            "Halden's gone and everything moves slower - even the clocks misbehave.",
-            "I keep handwritten notes, out of habit and caution both.",
-            "Most don't realize how much a shutdown seeps into private life."
+            "You know me - mechanical things don't ask questions.",
+            "Tried to order oil, ribbon - ended up in three-step verification hell.",
+            "After Halden passed, every service runs like it's second-guessing you.",
+            "Had to scrounge old supplies from storage - waste not, as we say.",
+            "Feels like even harmless hobbies draw suspicion lately - machines watching too closely.",
+            "Remember when I used to fix Council memos on these keys?",
+            "Sometimes, restoring an old platen block is the only straightforward thing left."
           ],
           [
-            "Couldn't agree more. These bars and my typewriters - sanctuary, of sorts.",
-            "My father gave me my first Olympia before paperwork meant compliance.",
-            "Used to buy parts through friends, never thought twice about it.",
-            "Now, after Halden's death, even signal timings seem anxious.",
-            "Last week, my order history just...vanished. No explanation.",
-            "Every interface flickers or demands new credentials for trivial things.",
-            "Trust in the grid is thin as rice paper these days.",
-            "Restoring keys by hand, ink on paper - still feels honest, whatever the system decides.",
-            "There are documents best left outside the current, in more ways than one."
+            "That Triumph saved my sanity after Council sessions - sounds odd, I know.",
+            "Halden's death? Even the typewriter feels it - order for ink stuck in 'pending authorisation.'",
+            "It took fingerprints, a selfie, then nothing, just a dead screen.",
+            "Whole building's on edge - system updates, compliance checks where you least expect.",
+            "I used to bypass these things for the Secretariat, now I wait like anyone else.",
+            "Some days I think about drafting letters the old way, just to remember.",
+            "In truth, I miss when paperwork meant paper, not all these silent alarms.",
+            "When cleaning the carriage rails tonight, each tiny jam reminded me: the system's lost its touch.",
+            "Strange, how you notice the cracks once the person holding the keys is gone."
           ]
         ]
       },
       "main": {
         "main": {
-          "opener": "You ever feel like the air's just... heavier now?",
+          "opener": "Makes me think - how's life been treating you these days?",
           "variants": [
             [
-              "Strange thing lately. Feels like the city doesn't quite fit, yes.",
-              "Lines move slower. Little errors here and there. Nothing worth mentioning.",
-              "People at the pension office seemed tense; I've seen worse.",
-              "Best to keep busy, as always. Air clears eventually."
+              "Life? It's fine, I suppose; can't say much has changed.",
+              "The lines are longer, things run slower - nothing new for folks like me.",
+              "Been keeping to myself, just minding old routines.",
+              "Truthfully, it's all a bit unsettling."
             ],
             [
-              "Heavy - yes. The permit system stalled on me, which is unusual, but that happens.",
-              "They held my ID for an extra minute today at the desk. All routine, I was told.",
-              "Notifications stopped showing up in my panel, which is inconvenient.",
-              "Folks muttered in the lobby, but I didn't join in. Staying quiet, these days.",
-              "Some patterns return, ones I'd hoped we were finished with."
+              "Well, lately there've been more checks at the pharmacy; bit of a nuisance.",
+              "Had to prove myself three times just to get my medication - makes a fellow think, you know.",
+              "Service kiosks are acting up too, sending people home for small things.",
+              "Makes me double-check my own records, just to stay on the safe side.",
+              "Still, can't shake the sense that things are edging sideways."
             ],
             [
-              "Heavier fits. Processing delays at the terminals, some basic things go missing.",
-              "Had to wait at the pension line - first time in ages they've checked paperledgers.",
-              "Nobody could say why. Staff had that look - like they wanted to say something but couldn't.",
-              "My health notifications didn't arrive as usual. Makes you notice what's missing, not what's there.",
-              "I cancelled plans after, just felt... unwise to press the system right now.",
-              "Sometimes you sense when the balance shifts. Lately, it's harder to ignore."
+              "Strange days, Alex. Used to be you'd get your pension papers done in a minute - now you wait, you wait again, systems loop and tell you to come back tomorrow.",
+              "Even a simple pharmacy visit turns complicated now; more questions than before, more eyes watching.",
+              "Feels like the whole city's running slower, like someone's missing up top but no one's allowed to say it.",
+              "I've started limiting my trips - don't want to draw attention while things misfire.",
+              "Been a council man long enough to notice routine going off rhythm.",
+              "To be honest, feels uneasy. Shaky under the surface."
             ],
             [
-              "That weight - it's not just weather. I saw it when my BCI flagged me at the payout center. Wouldn't process without manual checks.",
-              "Never seen that before, not since they overhauled things under Halden. Everyone acted like it was normal.",
-              "Whole room went quiet, even the staff. Like we were all waiting for an answer no one can give.",
-              "My usual service messages vanished. Silences mean more when you know what's meant to appear.",
-              "Truth is, after so many years working around the Council, you learn to step carefully when systems start slipping.",
-              "It feels like something fundamental's shifted. And people sense it, whether they'll say it out loud or not."
+              "Careful times lately, Alex. There's been a shift since Halden's passing - not that they said much, but you see it in the details.",
+              "Just the other day, three separate ID checks for my medication. Used to be easy.",
+              "Went to confirm my pension, and the kiosk jammed - odd, that, in a city like this.",
+              "You know I managed Council calendars for years? I know the difference between protocol and trouble.",
+              "No point contacting old colleagues. The fallback systems are all tangle now - best to keep a low profile.",
+              "People say things still run, but they don't run quite like before.",
+              "So, I check my papers twice and travel less. Bit uneasy, frankly."
             ],
             [
-              "Heavy, yes - thick with things unsaid. That moment at the pension center - my BCI didn't clear, staff had to double-check my credentials like old times.",
-              "Halden used to iron these glitches out overnight, but no one answers his place now. You can tell - machines hesitate, people too.",
-              "Noticed my health quotas and compliance notices stopped coming. Details most ignore, unless you handled them for years - not an oversight, not in Stenograd.",
-              "Canceled a visit to an old colleague. Better not to test the system's memory; rules become more brittle when no one's steering.",
-              "The Council calls it neutral, self-correcting. But to me, these stutters feel like old cracks resurfacing, the sort Harmonists always warned about when we resisted hasty changes.",
-              "It's quieter lately, yet every silence in the system seems to echo something missing. I find myself wishing things were simply predictable again.",
-              "You do your best to blend in, but sometimes the only thing left is to hold your breath and hope the air lifts soon."
+              "Funny, Alex. Life in Stenograd changes even when it pretends not to - and you notice, if you know where to look. Halden gone, and suddenly everything stutters.",
+              "Three ID checks at the pharmacy, if you can believe it. Takes an old man off guard.",
+              "My pension verification sent me in circles; the machines aren't so neutral when nobody's steering.",
+              "I spent half my life overseeing Council routines - you see their ghosts when the system slips.",
+              "Contacting anyone from back then would be unwise. Not just protocol: it's survival now, with all the fallback delays and watchful eyes.",
+              "I keep a briefcase at home from those days, locked tighter than trust here, just in case certain papers ought not to vanish.",
+              "I still hold with the Harmonists - a stable system, maintained in quiet. But lately, even quiet feels fragile.",
+              "Feels like we're all waiting for the next shoe to drop - and nobody's had the decency to warn us."
             ]
           ],
-          "emotion": "A sense of quiet resignation and unsettled uncertainty."
+          "emotion": "Uneasy, unsettled, quietly anxious."
         },
         "emotional": {
-          "opener": "Nikola, even a system that runs on probabilities can't measure what people carry inside. Sometimes it's enough to know someone sees that.",
+          "opener": "Nikola, it's all right to feel uneasy now and then - sometimes just having someone acknowledge it makes all the difference. You haven't forgotten how to find your footing.",
           "variants": [
             [
-              "Hm. I suppose that's true.",
-              "Some things are best left unsaid, anyway."
+              "Yes, that's a fair point.",
+              "I suppose one gets used to adjusting - eventually."
             ],
             [
-              "Yes, I imagine there's truth in that.",
-              "One learns to keep certain things close, even when the system asks for everything."
+              "Well said. It helps to be reminded that I've been through worse.",
+              "Time smooths out these rough patches - if you let it.",
+              "I appreciate your words."
             ],
             [
-              "Thank you, Alex. It's easy to forget that not everything is accounted for.",
-              "Sometimes I think what's left unmeasured is what matters most."
+              "There is comfort in recognition, I agree.",
+              "You're right - small reassurances can still mean something.",
+              "I've learned to wait out these spells before.",
+              "Maybe there is a quiet kind of strength in that."
             ],
             [
-              "You're right, Alex. I've always tried to keep a part of myself beyond the ledger's reach.",
-              "I suppose we all carry pieces of ourselves the system can't quite grasp.",
-              "It helps to have someone who understands that."
+              "Hearing that means more than you realize.",
+              "Sometimes old instincts return when you least expect them.",
+              "Waiting things out has become second nature to people like us.",
+              "It's a steadying thought - you know, not everything depends on control.",
+              "After all, patience is its own form of resilience."
             ],
             [
-              "You understand more than most, Alex. There's comfort in knowing empathy still finds a way.",
-              "For years I worked where appearances meant more than intentions.",
-              "After all that, it's strange how relief can come in small moments, like this.",
-              "There are things I've never shared - not because of fear, just habit, maybe.",
-              "But you remind me not everything requires a record or a reason.",
-              "That's a rare thing, these days."
+              "You're speaking to something I remember from another time - when things changed slowly, and that was enough.",
+              "We measure stability differently now, don't we? Still, your words strike a chord: it helps to be recognized, even quietly.",
+              "Not many notice the small adjustments we make, day after day.",
+              "It's easy to forget that surviving uncertainty is an old habit.",
+              "I suppose in some ways, adaptation is all I've ever practiced.",
+              "Thank you for that - it's good to be reminded that quiet strengths count, even now."
             ]
           ]
         },
         "factual": {
-          "opener": "They say things are slowing down, but that's not really an answer. If you know something real about what's happening, you should say it.",
+          "opener": "Everyone's talking, Nikola. Something big happened with the Council, right? You must know more than you're letting on.",
           "variants": [
             [
-              "Routine messages. Headline, Council lost Halden. Cause? Quietly given, if at all.",
-              "He ran Oversight - kept the BCI together. Now, no one steps in.",
-              "Some technical trouble, automated systems falter. That happens anywhere.",
-              "Council's still in session, as far as I hear. No more, no less."
+              "They made Halden's death public, but not the details.",
+              "No official cause mentioned in the statement.",
+              "No new head named, either. Odd, but that's all there is."
             ],
             [
-              "Halden - they said he died. No more details for public eyes.",
-              "Was in charge of all the system links - BCI, everything. His absence shakes things, perhaps more than they let on.",
-              "Could be why access feels off: fallback modes, glitches. Timetables slip, flags misfire.",
-              "They locked some medical records soon after. Not unusual procedure, just... notable timing."
+              "The announcement about Halden was brief and left out plenty.",
+              "He was found dead in his rooms; they locked down information after that.",
+              "System started failing soon after. Feels too close for comfort.",
+              "No word about anyone stepping in. Council's kept quiet."
             ],
             [
-              "Halden's death - officially mentioned, but never explained. No interim council head, either.",
-              "I recall policy: if a director goes, succession proceeds overnight. Not this time. Instead, critical permissions aren't passed - systems show cracks.",
-              "There's precedent for covering instability. Happened decades ago, briefly, during a leadership vacuum. Difference now is everything's stitched to central clearance.",
-              "I always argued for caution, for Harmonist stability, but the Innovators and security men - well, they're quick to seize on any gap."
+              "Halden passed, and it set things askew. Council handled it behind closed doors.",
+              "The public got only a vague statement - no details, no cause.",
+              "System failures started right after. Makes you wonder about who's really in charge, or if anyone is.",
+              "From what I hear, toxicology was sealed, no criminal talk at all.",
+              "No replacement, and the Council's not talking about succession.",
+              "Not hard to see what happens when one man holds too many keys."
             ],
             [
-              "Saw patterns like this before - always after a silent directive. Halden's records never reached wider council eyes; that's telling.",
-              "A sedative found, medical report sealed, no investigation. Too neat. Usually, system access shifts within hours, but here, fallback routines lag days.",
-              "Council factions - Harmonist like myself, we'd stress caution. Innovators push for wider data claws. Directorate smells a power gap.",
-              "Some vanished from watchlists, too. Quiet removals - nobody proper to contest it. I'd wager more cracks hiding under these system outages."
+              "Halden's gone - Council said little, but every subsystem knew it.",
+              "Inside talk says his credentials caused half these failures - they were all tied to him, enforcement too.",
+              "Medical report's locked down, internal directive from someone on the health unit.",
+              "No investigation, not a whisper of replacement. Dangerous vacuum up top.",
+              "Colleagues lost real-time access almost overnight.",
+              "I've always favored the stable route, Harmonist way, but this was a risk too far.",
+              "This quiet disorder - you can feel it more than you can see it."
             ],
             [
-              "It started when Halden was granted unchecked control - not usual Council protocol. That came after data-sharing was tightened beyond routine oversight.",
-              "I remember the council fight: Innovators demanded more predictive scoring. That drove Halden into further seclusion. Next, entire departments were denied live access to BCI enforcement.",
-              "His death was staged as cardiac, but I've seen the internal logs - traces of a sedative, psychiatric grade, Council health flagged and sealed it straight away. No inquiry, only silence.",
-              "People missing from watchlists doesn't fit. Last time logs went missing was during an internal audit gone wrong - covered up, barely discussed. I handled some briefings then, was told to burn the notes.",
-              "As a Harmonist, I warned that accelerating system changes without foundation risked the kind of cracks we're seeing. But warnings don't linger long in these halls. Now, fallback modes struggle, and the Council arms wrestle in the shadows.",
-              "Everything feels like it's balancing on the edge. This isn't any ordinary stutter; it's the price of forgetting why process matters."
+              "Halden centralized everything last year - left the system balancing on one point, his.",
+              "Council's so tight-lipped, but the facts are there for those who know the old routines.",
+              "Found dead, cardiac arrest, they say, but sedatives were in his system. That's no small thing.",
+              "Internal memo sealed the report; no real inquiry, and the archivists moved fast.",
+              "Colleagues got locked out of data streams - security logs flagged inconsistencies but nobody acted.",
+              "Promotion these days is numbers, not votes. No one lifts a finger if it keeps their score clean.",
+              "I served under three secretariats - used to be checks and balances, now it's fallback on fallback.",
+              "Even now, part of me holds to the Harmonists - order above all, quietly kept. But this silence isn't order.",
+              "Briefcase at home holds reminders - times when paper meant more than protocol, and truth didn't vanish with a faulty index."
+            ]
+          ]
+        }
+      },
+      "decision": {
+        "preference": "a",
+        "dilemma": {
+          "opener": "Noticed the pause in your eyes. Want to fill it?",
+          "variants": [
+            [
+              "There's a fork in the road, don't much like either way.",
+              "Sometimes, leftover keys open doors better left closed.",
+              "Balance can tip, even if you mean to steady the cart."
+            ],
+            [
+              "Two roads, Alex: open a door or let the dust settle over it.",
+              "Either could tip things. Not sure which risk tastes more bitter.",
+              "Old habits say close the file and forget; old debts say otherwise.",
+              "Not everyone reappears the way they left."
+            ],
+            [
+              "Say you find a way to bring people back the system misplaced  -  would you?",
+              "Or maybe prefer letting a broken system show its seams, though people grow afraid.",
+              "Both routes carry weight  -  stability or disruption, and neither feels clean.",
+              "I don't like rewriting anyone's story, even for order's sake.",
+              "The city I served wasn't built for ghosts."
+            ],
+            [
+              "A message landed in my lap  -  says vanished citizens might be recoverable, just for a moment.",
+              "I could pull them back, risk they're changed, and we all see them for what they became.",
+              "Or bury it, let people fear the machine that's faltering, fuel the tension instead.",
+              "I keep thinking about all those faces scrubbed from lists: steady routines, gone with a keystroke.",
+              "Worked half my life to keep things smooth  -  my score says play it safe.",
+              "But I'm a Harmonist, Alex. Stability's a promise, but what if the cost is too high?"
+            ],
+            [
+              "Alex, truth is, the system's glitching  -  old logs popped open, all the disappeared visible for a minute.",
+              "I can use what's left of my clearance. One move  -  lives restored, but maybe not their lives at all.",
+              "Or: I turn my back, keep it quiet, let anxiety twist the city and hope someone notices the rot.",
+              "Spent a decade tidying messes for the Council, making sure order stood above all.",
+              "Problem is, these aren't numbers. They're neighbors, each erased because the system flagged a shadow.",
+              "Restoring them won't mean the same people walk out. Too many strings got cut in the dark.",
+              "My BCI says I'm still loyal, predictable. Sometimes I wish it measured regret, not just compliance."
+            ]
+          ]
+        },
+        "belief_a": [
+          {
+            "belief": "System stability takes priority over individual anomalies.",
+            "monologue": [
+              "When the system holds, the rest follows - everything else is secondary to stability.",
+              "A single disruption may seem small, but it's enough to chip at the whole foundation.",
+              "I've seen what happens when we lose cohesion; sometimes an individual price has to be paid."
+            ],
+            "supportive_response": [
+              "Stability always matters more in the end, even if it's a quiet trade.",
+              "Go on, I can see you've weighed this more than once."
+            ],
+            "challenging_response": [
+              "But isn't that just making excuses for what the system breaks?",
+              "I'm listening - tell me how you square that with what you know now."
+            ]
+          },
+          {
+            "belief": "Order, even if artificial, prevents societal collapse.",
+            "monologue": [
+              "People want predictability - no questions, no sudden waves, just quiet routine.",
+              "Artificial or not, order gives everyone a place, or at least something to hold onto.",
+              "Chaos doesn't wake us up - it just unravels what's left."
+            ],
+            "supportive_response": [
+              "There's truth in that - routine keeps folks from looking for cracks.",
+              "Interesting point. So what keeps you up at night about all this?"
+            ],
+            "challenging_response": [
+              "Fake order can turn on you, though - doesn't it just hide the cracks?",
+              "Alright, but what happens if people start to notice it's all staged?"
+            ]
+          },
+          {
+            "belief": "It is better to act quietly than let chaos spread.",
+            "monologue": [
+              "Noise brings eyes - silence lets things heal, or pass unnoticed.",
+              "If I move quietly, fewer are hurt, and there's a chance for real repair.",
+              "Sometimes all you can do is patch the leak before the flood."
+            ],
+            "supportive_response": [
+              "Quiet hands do the real work - anything else draws too much heat.",
+              "Makes sense. Let's hear what else has been on your mind."
+            ],
+            "challenging_response": [
+              "But silence lets things fester - maybe chaos is just overdue light.",
+              "What if real repair needs to start with noise this time?"
+            ]
+          }
+        ],
+        "belief_b": [
+          {
+            "belief": "Exposing the truth outweighs preserving uneasy order.",
+            "monologue": [
+              "We spent years smoothing the cracks - maybe people need to see what's underneath.",
+              "Truth hidden this long carries a weight the system can't carry forever.",
+              "If people saw the mess we hid, maybe they'd finally question the quiet."
+            ],
+            "supportive_response": [
+              "You're right, sometimes the cracks show where repairs are most needed.",
+              "Talk more about what truth you think should finally come to the surface."
+            ],
+            "challenging_response": [
+              "Careful, Nikola. Truth exposed carelessly can break more than it repairs.",
+              "But what if letting out the mess just brings chaos? Tell me why it matters."
+            ]
+          },
+          {
+            "belief": "Artificial calm only deepens rot beneath the surface.",
+            "monologue": [
+              "Order enforced by silence isn't real - it only looks stable until it cracks.",
+              "You can't mend real wounds by dressing up the city in quiet compliance.",
+              "We've spent so long chasing peace, we've lost track of what festers underneath."
+            ],
+            "supportive_response": [
+              "You see the rot, even when others pretend things are fine.",
+              "Go on - what's really eating at Stenograd beneath all that calm?"
+            ],
+            "challenging_response": [
+              "Sometimes people need calm to survive, even if it's fragile.",
+              "Tell me, does the city need truth, or just a little more peace right now?"
+            ]
+          },
+          {
+            "belief": "Sometimes only open disruption motivates real reform.",
+            "monologue": [
+              "Real change in this city never came from secret fixes - only when things broke aloud.",
+              "Discomfort might be the price for breaking these repeating patterns.",
+              "If we keep smoothing turbulence, who learns? Who ever dares to change course?"
+            ],
+            "supportive_response": [
+              "Maybe a little disruption is what's really been missing all this time.",
+              "Let's hear more about what true reform could look like here."
+            ],
+            "challenging_response": [
+              "Disruption cuts both ways - people remember the pain, not the lesson.",
+              "So tell me, Nikola, is reform worth the harm it brings with it?"
+            ]
+          }
+        ],
+        "decision": {
+          "monologue_a": [
+            [
+              "I'll follow up. No need for questions.",
+              "Some things must move ahead quietly."
+            ],
+            [
+              "There's action I will take, not for discussion.",
+              "I'll handle what needs handling, as always."
+            ],
+            [
+              "I'll restore those we lost. It can't stay hidden forever.",
+              "Too many are waiting for return.",
+              "This may realign the system in time."
+            ],
+            [
+              "I'll bring the missing people back, regardless of risk.",
+              "Order's built on trust in return, even if the outcome is uncertain.",
+              "You've helped clarify what's at stake.",
+              "We'll see what Stenograd becomes."
+            ],
+            [
+              "I'll restore every disappeared citizen, even if they come back changed.",
+              "We both know silence poisons the city faster than truth.",
+              "You reminded me - stability needs courage, not just control.",
+              "Whatever follows, it will be on my conscience."
+            ]
+          ],
+          "monologue_b": [
+            [
+              "I'll be keeping the file hidden for now.",
+              "Some matters are best left untouched."
+            ],
+            [
+              "The logs are better buried. I won't risk more disorder.",
+              "Let the system reveal itself."
+            ],
+            [
+              "I'll leave the glitches as they are; the truth will leak on its own.",
+              "Too much interference breeds suspicion.",
+              "This city will struggle for clarity."
+            ],
+            [
+              "I won't restore them - risk's too high now.",
+              "Let the system show its own flaws.",
+              "You gave perspective on patience versus intervention.",
+              "Maybe disorder will reveal answers."
+            ],
+            [
+              "I'll let the faults run their course - Stenograd needs to see itself exposed first.",
+              "Hiding the logs may stoke anxiety, but maybe it forces real change.",
+              "You helped me weigh fear against transparency.",
+              "If this city learns, it won't be by erasing mistakes."
+            ]
+          ],
+          "monologue_self": [
+            [
+              "I'll resolve this my own way.",
+              "No need to involve anyone else."
+            ],
+            [
+              "I know what must be done, with no one's counsel.",
+              "The action is mine alone."
+            ],
+            [
+              "I'm restoring them, Alex - even without advice, it's necessary.",
+              "Order requires hard choices in quiet.",
+              "Someone must be answerable."
+            ],
+            [
+              "I've decided - restoration for those lost. I owe it to the city itself.",
+              "No opinion swayed me; it's a duty ingrained.",
+              "We live in the consequences of inaction.",
+              "I hope history's kinder to us than memory."
+            ],
+            [
+              "I must restore everyone vanished, even if the city's not ready to welcome them.",
+              "No one convinced me; it's a principle I can't betray.",
+              "You matter, but this burden is personal - old loyalties, old debts.",
+              "If it fractures stability, I'll still answer for it."
             ]
           ]
         }
       }
     },
-    "lkova": {
+    "dtomenko": {
       "opener": {
-        "customer_id": "lkova",
+        "customer_id": "dtomenko",
         "questions": {
-          "neutral": "Still dry outside?",
+          "neutral": "Everything holding up okay?",
           "hobby": [
             {
               "correct": false,
-              "message": "Is analog photography still worth the risk?"
+              "message": "Fold anything new origami lately?"
             },
             {
               "correct": true,
-              "message": "Urban exploration or just drinking underground?"
+              "message": "Freestyle FPV drones still keeping you sane?"
             },
             {
               "correct": false,
-              "message": "Antique typewriter giving you trouble again?"
+              "message": "Any luck fixing the old typewriter?"
             }
           ]
         },
-        "wrong_hobby_answer": "That's not me - In free time, I explore the city's underground. It's a different world down there.",
+        "wrong_hobby_answer": "That's not me - In free time, I fly FPV drones. It's a way to escape the noise of the city.",
         "neutral_answer": [
           [
-            "Dry enough. Was out under the ducts earlier, routine stuff.",
-            "I poke around tunnels - not everyone's taste.",
-            "Harder to get past the hatches tonight. System acting odd since Halden, I guess."
+            "Yeah, I'm fine. Just looking to unwind after work.",
+            "I spend time on drone stuff, keeps me busy.",
+            "System glitches lately make it hard to relax, that's all.",
+            "Trying not to let it bother me."
           ],
           [
-            "Yeah, dry. I like to walk the underground when it's quiet.",
-            "Urban exploring, you could say. Data centers, utility tunnels, off-hours.",
-            "System slowed me down tonight - access locked up.",
-            "Halden's death mucked up the badge system, not that I care much.",
-            "Makes my hobby more like work lately."
+            "Doing okay. Rough week with all the system issues.",
+            "I fly FPV drones in my free time - mostly for fun.",
+            "Lost a drone connection the other day, seemed like interference.",
+            "Strange timing with everything else happening in the city.",
+            "Makes me keep my guard up out there."
           ],
           [
-            "Dry, dark, and a little weird out there.",
-            "I dig old tunnels and sealed data rooms, fix what's busted for fun.",
-            "Not many enjoy crawling around the old exchange lines.",
-            "Whole system's been laggy since Halden checked out - extra access headaches lately.",
-            "Last night, spent an hour at a locked hatch, waiting on a reset.",
-            "Wasn't the smooth trip I planned, but not dull."
+            "Yeah, holding up. I fly FPV drones around the industrial zones after work.",
+            "It's my thing - manual piloting, rolling with the wind in dead sectors.",
+            "Last week after Halden died, I had a signal dropout, lost control mid-flight.",
+            "Haven't seen blackouts like that before, feels different lately.",
+            "Had to track my quad on foot with backup gear.",
+            "Makes the hobby a bit more unpredictable lately."
           ],
           [
-            "Dry as old server racks out there, thanks for asking.",
-            "I like exploring utility tunnels - keeps me from rotting upstairs.",
-            "Not just wandering - sometimes I patch up systems just to see if I still can.",
-            "Had trouble last night; my badge wouldn't open the duct hatch, weird error message.",
-            "Heard it's tied to that Oversight guy's death - system scrambling to keep up.",
-            "Spent an hour drinking in the corridor, waiting it out.",
-            "Whole city feels like it's running on backup protocols now."
+            "Honestly? Barely. My main stress relief is flying freestyle drones - not official, just as a hobby.",
+            "I go out to the old freight yards, chase lines, practice new moves.",
+            "Used to be no one cared what you did out there.",
+            "This week though, after Halden's death, I hit a weird blackout - no signal, nothing.",
+            "Recovered my drone after an hour, was worried I'd get flagged, honestly.",
+            "The network is acting strange, way more aggressive than usual.",
+            "Feels like the city's holding its breath and even leisure stuff is off-limits."
           ],
           [
-            "Dry outside, but the city's system is stuck in a feedback loop lately.",
-            "You know I'm into crawling the old service tunnels and abandoned server bays.",
-            "Used to be I could breeze through on my credentials - nobody cared.",
-            "Ever since Halden croaked, clearance protocols keep flagging me.",
-            "Last night, the hatch treated me like a stranger - never seen response times so bad.",
-            "Had to wait for the system to reboot itself, finished half my flask.",
-            "That BCI gridlock even affects where I can wander - not just work's problem now.",
-            "Feels like the whole city's watching itself stall, waiting for a ghost to switch the lights back on."
+            "Honestly, it's rough. Drone flying - FPV freestyle - is my escape from all the tracking and logging.",
+            "Grew up modding rigs with my brother; we'd fly long-range over the old factories.",
+            "Now, since Halden died, all my usual radio frequencies jam out of nowhere.",
+            "Lost one mid-ride last week; system blackout across the yard - never had interference like that before.",
+            "Spent ages combing for it, had to spoof my band so the system wouldn't flag me.",
+            "It used to be the only time I felt unmonitored.",
+            "Feels like those fallback modes after Halden's death are closing in, even on hobbies.",
+            "I just want one place in Stenograd where the system isn't watching every second."
           ]
         ],
         "hobby_answer": [
           [
-            "Yeah, still get out there from time to time.",
-            "Hobby runs into more locked doors lately.",
-            "System's been off since Halden died. Lately, things just take longer.",
-            "Doesn't stop me. Just means I pack extra batteries.",
-            "Suppose we all adapt, one way or another."
+            "Yeah, still at it, when I can.",
+            "Harder to get a signal lately.",
+            "Seems like comms are weird since Halden.",
+            "Sticking to known zones for now.",
+            "Don't want trouble."
           ],
           [
-            "Yeah, I still roam the tunnels some nights.",
-            "Used to be the entry hatches recognized me right away.",
-            "Ever since Halden died, clearance gets weird.",
-            "Random lockouts, delays - I keep it brief when I'm inside now.",
-            "City feels tenser these days, even underneath.",
-            "Keep my routes simple - don't stick around."
+            "Yeah, drones help. Head clearer in the air.",
+            "But it's been more difficult lately.",
+            "Lost connection last time I flew, just after Halden's death.",
+            "Could be random, or maybe not.",
+            "I keep flights short - don't want to get flagged.",
+            "People are edgy now."
           ],
           [
-            "That's me - urban exploring's the only real quiet left around here.",
-            "Halden's death messed with the tunnel access routines.",
-            "Had a run-in with a stuck hatch just last week.",
-            "System put me in some fallback queue, flagged me for compliance review.",
-            "Lost an hour sitting on concrete, waiting my own system out.",
-            "Place was emptier than usual - city's guts are slowing down.",
-            "Feels like even the maintenance corridors noticed something's changed."
+            "Still flying, yeah. Keeps me grounded, weird as that sounds.",
+            "Signal's been spotty after Halden. Network feels off.",
+            "Had a blackout mid-flight. Never happened before.",
+            "Took forever to get my drone back.",
+            "I avoid crowded bands and traceable hotspots now.",
+            "Makes hobby more stressful than relaxing.",
+            "But stopping isn't an option for me."
           ],
           [
-            "Never really stopped - urban tunnels are more interesting than anyone suspects.",
-            "Honestly, Halden's death is making it trickier.",
-            "Access codes fail, or the system gets suspicious, even with my ID.",
-            "Last time, I spent forty minutes stuck outside a hatch - system flagged me for compliance drift.",
-            "Used to be I could wander without tripping alarms or delays; not anymore.",
-            "It's like someone kicked the guts of the city all out of sequence.",
-            "We talk about things being automated, but when a cog like Halden goes, you feel it.",
-            "Hardest part now is predicting what'll work on any given night."
+            "Yeah, FPV drones keep me sane, even with everything right now.",
+            "Since Halden died, network glitches everywhere.",
+            "Lost my quad to a system blackout - total comms jam.",
+            "Spent an hour combing ruins to recover it.",
+            "Feels like new restrictions got patched quietly.",
+            "I'm flying less, or at odd hours - too risky.",
+            "Miss when it was just me and static.",
+            "City's paranoia spills into the air, too."
           ],
           [
-            "Never got tired of those old tunnels - too many secrets left underground.",
-            "Built half the backbone down there in the old days - still know every panel by feel.",
-            "Since Halden died, fallback systems treat even maintenance badges like a threat.",
-            "Spent an hour in the corridor last weekend - hatch refused me over a minor scoring dip.",
-            "If you get flagged now, every system piles on: delays, reroutes, cold shoulder from admins.",
-            "I've started logging detours, just to keep a map of what the system messes up now.",
-            "Noticed a lot fewer maintenance logs downtown lately, like people are avoiding the risk.",
-            "The air down there's different - quieter, but twitchy now, like the city's holding its breath.",
-            "Funny - never thought losing one man at the top would unnerve the pipes themselves."
+            "Definitely still flying, but it's not simple anymore.",
+            "Every time Halden made a change, I felt it in the airwaves.",
+            "The blackout after his death wasn't random - system's caught in loops, signal jamming all over.",
+            "Lost telemetry, no backup frequencies, like someone rewrote the rules overnight.",
+            "Had to sweep for my quad for hours - not the first time I dodged system flags.",
+            "I cache flight logs off-grid, never trust the official telemetry anymore.",
+            "These outages started around the BCI audits - same season my brother vanished.",
+            "Ruins used to feel empty; now the system's always present, silent but everywhere.",
+            "Hobby keeps me sane, but now it means staying invisible, too."
           ]
         ]
       },
       "main": {
         "main": {
-          "opener": "Not sure if it's just the weather or something else, but people seem different. You notice that?",
+          "opener": "You get the sense something's been building lately?",
           "variants": [
             [
-              "Yeah, things have gone sideways lately.",
-              "Saw a few jobs get rerouted, all last-minute.",
-              "System's acting up - access codes work one minute and not the next.",
-              "Wouldn't call it normal, but hey, what is?",
-              "Feels like everyone's tapping the brakes, waiting for something."
+              "Feels...off. Even on shift, nothing lines up lately.",
+              "System at work glitched during updates - logs wouldn't sync.",
+              "Nobody says anything about it, but everyone moves quieter.",
+              "Honestly, I double-checked my own scans before heading home."
             ],
             [
-              "Not just the weather, you're right. Something's off.",
-              "Been working more Council-side lately - keeps things simple while the rest shakes out.",
-              "Had a client hint I should stick clear from the wrong districts for now.",
-              "System keeps double-sending jobs, like it's not sure who's in charge anymore.",
-              "People glance over their shoulders more than they used to."
+              "It's not just you. Things messed up at work - my access got delayed, which never happens.",
+              "Health band update logs went out of sync for a bit. I kept my head down.",
+              "Saw some flagged cases vanish, but I couldn't finish what I started.",
+              "Tried to stay boring. Even how people talk at lunch is different.",
+              "I keep checking my wearable now, just in case."
             ],
             [
-              "People are acting twitchy, and I can't blame them.",
-              "Ever since Halden died - quiet, no parade, just gone - the system's been stumbling.",
-              "Requests I used to get once show up twice, or not at all. Codes break for no reason. Had to pop open three utility boxes the old way yesterday.",
-              "Building managers look at me like I've got answers. I don't, but they like it when you pretend.",
-              "Been steering clear of the flagged zones - jobs there are suddenly risky, and my score's already taken a hit."
+              "There's a definite tension lately. After that big official announcement, the entire lab felt on edge.",
+              "I came in and my system access was slow. Logs for updates were messed up - couldn't tell what went through.",
+              "A couple high-risk profiles flagged for cleaning just froze. I only got to the surface details before I was locked out.",
+              "Didn't say anything. Everyone seems to avoid talking about the glitches.",
+              "Started monitoring my own scans far more closely - score dipped a bit, but it's safer that way.",
+              "Just makes you feel unsettled, having to second-guess everything."
             ],
             [
-              "Yeah, people are different - something's broken loose.",
-              "You know, when Halden ran the show, things just... worked. Wasn't nice, but you knew what to expect.",
-              "Day after his death, my routines turned upside down. Had to do everything manual, keep inventing excuses for admins who used to boss me around.",
-              "It's the BCI - no orders, just doors locked, jobs lost, scores shuffled. Building managers were sweating. A client actually pulled me aside and told me to skip the trouble spots, unless I liked a surprise penalty.",
-              "Feels like I'm being watched closer too. So I'm taking fewer contracts, sticking where the Council won't look twice at my badge.",
-              "Makes you wonder if anyone's steering this thing, or if we're all just along for the ride."
+              "Yeah, it's been rough. With Halden gone, the systems are unstable, and nobody really knows who's in charge.",
+              "Work's all errors - access blocks, weird gaps in biometric records, random lockdowns on flagged cases.",
+              "Tried to fix what I could, but the system kept freezing me out or watching extra close.",
+              "Even lunch is different. People barely chat, just wait for the next mess-up.",
+              "Had to patch my own wearable to stay ahead of any monitoring. My compliance score dropped a bit, but it felt necessary.",
+              "I'm not just paranoid - I lost my brother to a BCI audit. That makes everything heavier, these days.",
+              "Feels like I'm holding my breath every hour, waiting for the next surprise."
             ],
             [
-              "People feel weird because they know something's coming, even if they don't say it. Can't blame them - I keep my head down too.",
-              "I'm on the maintenance end, I see the seams before they split. Used to work for the state, Directorate side - back when you could knock on a door and talk to a supervisor. Now I trade favors to keep the lights on, half the time it's credits, the other half it's just not getting flagged.",
-              "Halden dying - nobody replaced him, not even a caretaker. Suddenly every BCI decision is lagging, requests fall in my lap twice, codes melt down mid-job. I get nudged to avoid certain zones, because stray too far and the system 'adapts' you right off the map.",
-              "It's a decent racket if you can handle the risk, but these days, risk isn't just a word - it's monitored. My score's dropped for nothing more than being too available. Directorate likes things tidy, but even their people are jittery, and I see more 'errors' every day.",
-              "There used to be logic. Now it's just delays and crossed wires, and nobody's brave enough to admit who's really running this place. Makes you miss when problems had faces, not protocols."
+              "Honestly? The past week feels unreal. Halden built the whole Oversight stack, and now he's just... gone. That was all over encrypted chats before they shut everything down.",
+              "I'm in the lab, wristbands everywhere, but logs are failing, flagged data's out of sync. Requests for deep scrubbing froze as soon as I touched risky profiles.",
+              "I used to help people keep their scores clean if they needed a second chance. Now the system won't let anyone touch the archive, not even us techs.",
+              "Colleagues used to joke, but this week nobody says a word. They're scared. We're all shrinking into the background.",
+              "I patch my own wearable now, hide what I can - my score slipped, and that's a risk, but what choice is there?",
+              "See, I know how easily you can disappear - my brother did, right after his score dipped below tolerance. Never came back from his audit.",
+              "I follow the Innovators, always believed tech could make things better. Now, I just feel watched. Every error feels personal - like one slip, and it'll be my name next.",
+              "There's this constant weight - static in your chest. Like you can't ever relax anymore."
             ]
           ],
-          "emotion": "Uneasy, like I'm waiting for the next shoe to drop."
+          "emotion": "Uneasy, tense - like waiting for something to break."
         },
         "emotional": {
-          "opener": "It makes sense to feel uneasy right now. Nobody expects you to just brush it off. People like you help keep things running  -  that means something.",
+          "opener": "Daria, you're holding up with all this pressure - most would've cracked. Just know you're not the only one uneasy about how things work around here.",
           "variants": [
             [
-              "Yeah, suppose everyone feels it from time to time.",
-              "Guess we just keep moving, right."
+              "Thanks. It helps to hear that.",
+              "Sometimes it's just... hard to stay balanced."
             ],
             [
-              "Hard not to notice things are off. Good to know it's not just me.",
-              "I'll keep to what I know best, for now."
+              "Yeah. Maybe that's true.",
+              "Doesn't always feel like there's anyone else who gets it.",
+              "Still, I keep to myself."
             ],
             [
-              "That's a fair point. I'm not sure I'd call it fear, exactly.",
-              "It helps when someone actually sees the weirdness, instead of just pretending nothing's changed.",
-              "You're right, though. Best thing I can do is just do my job."
+              "That actually makes things a little easier.",
+              "Sometimes it feels like I'm the only one who notices the cracks.",
+              "Nice to know someone else does too.",
+              "Guess I'm not as alone in this as I thought."
             ],
             [
-              "Appreciate hearing that. Feels like we're all walking across thin ice these days.",
-              "It gets to you, even if you try not to show it.",
-              "Sometimes I wonder if keeping things running is really enough.",
-              "I suppose that's my way of coping  -  fix what's in front of me, trust the rest will settle down.",
-              "Maybe it makes a difference. Hard to say, but I want to believe."
+              "You don't know how much that means to me right now.",
+              "Feels like everyone pretends, so hearing someone honest is rare.",
+              "I'm careful all day - never fully relaxed.",
+              "Guess it wears on you, even if you don't admit it.",
+              "Sometimes just a word of understanding helps more than anything."
             ],
             [
-              "Thanks. Not many people even bother to notice who's holding things together.",
-              "It's funny  -  people always assume this place runs itself, but it doesn't.",
-              "Most days I feel like a tiny cog in a giant watch, and lately the gears are grinding a bit louder.",
-              "Uneasiness is just part of the job, but sometimes it seeps in deeper, leaves you questioning why you keep at it.",
-              "Still, knowing folks like you see the effort  -  it actually helps, more than I'd admit aloud.",
-              "Maybe we're all just buying time, keeping the lights on, hoping that's enough."
+              "I appreciate that, honestly. It's not easy keeping everything in order when you're always second-guessing yourself.",
+              "Sometimes, I wonder if anyone remembers how things used to feel ten years ago, or if it's all just systems now.",
+              "Most of the time, I feel like I'm two steps behind what the world wants from me.",
+              "No one's really themselves these days. Even small kindness stands out.",
+              "I don't talk about this with anyone - not really my thing - but you make it feel safe.",
+              "Just hearing there are others paying attention too... that makes the difference."
             ]
           ]
         },
         "factual": {
-          "opener": "Come on, just say what's really going on. Spare me the vague answers.",
+          "opener": "What actually happened, then? You keep saying things are off - did something go down or not?",
           "variants": [
             [
-              "Halden ran things tight. Now, no one's at the top, so it's all glitches and hold-ups.",
-              "Most folks heard he died. Rest is above my paygrade.",
-              "Council put out a statement, nothing special. Still, systems haven't caught up.",
-              "Don't trust half of what's coming down the wire.",
-              "I just stick to the jobs they send, try not to ask for trouble."
+              "Council issued an official statement: Halden's dead. That's it.",
+              "No cause listed. Just 'deceased.'",
+              "System started failing soon after."
             ],
             [
-              "It was Halden calling shots, kept the pieces together. He's out, system limps on, barely.",
-              "Death came out public, but not many details. Quiet.",
-              "Saw a Council release - no replacement, nothing filled in.",
-              "Some quiet changes in the network, but you won't catch me guessing why.",
-              "You get more system errors now, but everyone acts like it's nothing."
+              "Council only gave a one-line announcement about Halden.",
+              "No details. Not even a replacement named yet.",
+              "He went missing overnight, found the next day, but no one saw anything.",
+              "After that, network logs and BCI scores started acting strange."
             ],
             [
-              "You know, when Halden got appointed to Central Oversight, things went top-down, tight.",
-              "System launch, all that BCI expansion - people acted like it was progress, but not many read the small print.",
-              "Wasn't that long ago the Council had to give him extra sway - no oversight except their own.",
-              "These days, his death, it's just a line in the news. No caretaker, like they want it to hang there.",
-              "Since then, it's fallback after fallback; nobody claims the keys, but everyone wants the house safe.",
-              "Directorate folks I know look as tense as anyone. Not a trustful time."
+              "Halden disappeared from internal systems the night before the announcement.",
+              "Private memo said 'cardiac arrest,' but then logs showed a sedative in his report.",
+              "Council health unit sealed everything, no criminal inquiry.",
+              "Ever since, BCI automations have been erratic - fallback mode, delays everywhere.",
+              "My division heard his access locked up half the city for hours.",
+              "Used to think system hiccups were harmless, now it's pressure, like the walls watch you."
             ],
             [
-              "You want the rundown? Directorate had Halden at the wheel for good reason - nobody else could pull together the fragments.",
-              "He brokered those backroom deals with telecoms, shops, transit - things no one wants to talk about.",
-              "More than once, Council fought over the next phase. Last year, Halden shifted funds by himself. Raised eyebrows - I heard some threats weren't subtle.",
-              "You didn't hear it from me, but people say he locked the whole BCI enforcement under Directorate eyes. Stepped on a few Innovator toes, sure.",
-              "After he died, internal failures everywhere. The logs read like a comedy - systems tripping, scores bouncing, half the city running slow.",
-              "Council's still just keeping the chair warm. Directorate types, my old lot, never liked this much light on them."
+              "All started when Halden didn't show for his audit review - he'd been last seen going into Tower 9.",
+              "Medical channel says cardiac arrest, but a sedative was found in his system, no one talks about that.",
+              "Council moved fast to lock all health records, sealed the report. No suspect, no investigation.",
+              "Next day, public just gets a line: he's dead. No interim head, nothing.",
+              "Then - total mess: system fallback triggers, wearable syncs fail, compliance flags misfire.",
+              "Even data clean-up got locked. Stuff I used to control now just kicks me out.",
+              "I'm with the Innovators. Council old-guard keeps pushing secrecy - this isn't functional governance."
             ],
             [
-              "Alright, let's be clear - I was Directorate, back before this BCI circus went full-spectrum.",
-              "Halden? Picked because he'd sweat the details. When the Council bickered, he worked around them - signed off on those telecom and retailer data swaps, no fuss.",
-              "Internals told me pilot tests saw everything scored: where you shopped, moved, even what you searched. Nobody asked for consent - just numbers in a file.",
-              "Council didn't like losing sight of the gears. Halden got that special authority - no scrutiny, redirecting support as he pleased. Risky move, even for their standards.",
-              "Saw the internal docs after he centralized enforcement data - the other agencies lost access overnight. Lotta nervous chatter after that. I still know people who cover their screens when they message.",
-              "And when he died - sealed medical reports, talk of sedatives, no investigation. My contacts called it before the news dropped - systems dropped jobs, lost watchlists, whole neighborhoods blinking off maps.",
-              "I don't mind Directorate chain of command, but this? No control, no logic, and we're one glitch from blackout. That's why I keep to my lane, pull in favors to cover ground. Can't trust a system that ghosts its own architect."
+              "Honestly, I got pinged about Halden the moment he didn't log in for his security review - he was always on time.",
+              "Internal feeds showed him entering Tower 9 late, then his profile goes dark, hours before the official notice.",
+              "First word inside the lab was cardiac. Quietly after - sedative in his bloodwork, no follow-up, sealed by Council health.",
+              "No press. The Council didn't even bother naming a temp. It was just: 'Halden deceased.'",
+              "His access profile locked up most BCI admin terminals citywide, even our maintenance ran on backup scripts.",
+              "Watchlists broke. I saw names gone - people untraceable. Easy to miss, but I see those logs.",
+              "Everyone in my circle knows Council buried the audit. Directorate wants compliance, but mistakes multiply.",
+              "I'm on the Innovators side: we need new tech, transparency. Old system is failing. Now it's all patch jobs and bluff.",
+              "Sometimes I think my brother got caught in a glitch like this, lost to sealed records while everyone looked away."
             ]
           ]
         }

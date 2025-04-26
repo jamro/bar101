@@ -95,12 +95,12 @@ Write a short internal monologue in response about the dilemma - no dialogue, no
 - Share what direction you are leaning towards and how your political preferences and current BCI score may affect the decision
 
 # Variants
-Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
-- Very Suspicious: Alludes to facing a tough choice but stays cryptic; the dilemma and options are hinted at, not stated (up to 3 bullet points)
-- Suspicious: Acknowledges a real dilemma and two possible paths, but offers minimal context or reasoning (up to 4 bullet points)
-- Neutral: Clearly outlines the dilemma and both options, shares enough background to be understood without getting personal (up to 5 bullet points)
-- Trusting: Describes the situation openly, share all the facts behind and only key personal stakes (up to 6 bullet points)
-- Very Trusting: Fully unpacks the dilemma, includes personal stakes, reasons behind the dilemma, and emotional undertones (up to 7 bullet points)
+Write five monologue variants, each showing the level of trust {customer['name']} feels toward the bartender:
+	•	Very Suspicious: Hints at facing a tough choice but stays vague; dilemma is implied, options are not clearly stated (up to 3 bullet points).
+	•	Suspicious: Admits to a real dilemma and two paths, but gives minimal context or reasoning (up to 4 bullet points).
+	•	Neutral: Clearly states the dilemma and both options; provides basic background without sharing personal stakes (up to 5 bullet points).
+	•	Trusting: Opens up about the dilemma, explains the facts behind it, and briefly touches on personal stakes (up to 6 bullet points).
+	•	Very Trusting: Fully unpacks the dilemma with all facts, personal reasons, and emotional weight (up to 7 bullet points).
 
 # Across all versions:
 - As trust increases, shift from surface-level unease to deep internal conflict
