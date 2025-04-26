@@ -182,8 +182,13 @@ if __name__ == "__main__":
         for character_id in characters_story:
             customers_model[character_id]["bci_score"] = characters_story[character_id]["bci_score"]
 
-    news_segment_count = 3 if len(variants_chain) == 7 else 1
-    get_news_spot(news_writter, new_events, outcome, variants_chain, news_segment_count)
+    news_segment_count = 1
+    extra_context = ""
+    if len(variants_chain) == 7:
+        news_segment_count = 3
+        extra_context = f"IMPORTANT: news are the epilogue of the story. Use them to wrap up the story and make a strong final statement. The last new segment MUST cover the end final of the story in objective way: {outcome}"
+
+    get_news_spot(news_writter, new_events, outcome, variants_chain, news_segment_count, extra_context)
 
     # pack the story node
     node_path = os.path.join(story_root, *variants_chain, "node.json")
