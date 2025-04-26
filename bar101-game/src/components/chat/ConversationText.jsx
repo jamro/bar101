@@ -13,7 +13,6 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
   const voiceRef = useRef(null);
 
   const skip = () => {
-    console.log("skipping");
     if(skipPromiseResolver.current) {
       skipPromiseResolver.current();
       skipPromiseResolver.current = null;
@@ -36,8 +35,6 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
     setDisplayedText("");
     const hash = SparkMD5.hash(from + "|" + text);
     const voiceoverUrl = "https://cdn-bar101.jmrlab.com/storytree/" + hash + ".mp3";
-    console.log(from + "|" + text)
-    console.log(voiceoverUrl);
     if(typeof text !== "string") {
       console.error("text must be a string, got " + typeof text, text);
       throw new Error("text must be a string, got " + typeof text);

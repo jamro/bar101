@@ -11,7 +11,7 @@ export default function CustomerPreview({ customer, drink, children }) {
     bci_score: bciScore, 
     political_preference: politicalPreference 
   } = customer;
-  console.log(customer)
+
   return (
     <div className={styles.customerContainer}>
       <div className={styles.customerHeader}>

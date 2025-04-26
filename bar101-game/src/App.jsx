@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import GameLayout from './layouts/GameLayout';  
 import LoadingScreen from './layouts/LoadingScreen';
 import StartLayout from './layouts/StartLayout';
+import useGameState from './hooks/useGameState';
 
-function App({initStoryPath=[], onStoryPathChange = () => {}}) {
+function App({ }) {
   const [ storyNode, setStoryNode ] = useState(null);
-  const [ customers, setCustomers ] = useState({});
-  const [ drinks, setDrinks ] = useState({});
-  const [ bartender, setBartender ] = useState(null);
-  const [ chats, setChats ] = useState({});
-  const [ storyPath, setStoryPath ] = useState(null);
-  const [ loading, setLoading ] = useState(true);
+  const [ worldContext , setWorldContext ] = useState(null);
   const [ isStarted, setIsStarted ] = useState(false);
   const [ error , setError ] = useState(null);
+  const { gameState, initAllCustomersTrust, clearGameState, proceedStoryPath, changeTrust, updateLevelProgress } = useGameState()
+
+  const handleClearGameState = () => {
+    clearGameState();
+    window.location.reload();
+  }
 
   React.useEffect(() => {
     const fetchWorldContext = async () => {
@@ -21,25 +23,17 @@ function App({initStoryPath=[], onStoryPathChange = () => {}}) {
         throw new Error(`HTTP ${response.status} error! ${response.statusText}. Unable to load /story/world_context.json`);
       }
       const data = await response.json();
-      setCustomers(data.bar.customers.reduce((acc, customer) => {
-        acc[customer.id] = {
-          ...customer,
-          trust: Math.random() - 0.5,
-        };
+      setWorldContext(data);
+      initAllCustomersTrust(data.bar.customers.reduce((acc, customer) => {
+        acc[customer.id] = Math.random() - 0.5;
         return acc;
       }, {}))
-      setDrinks(data.bar.drinks);
-      setBartender(data.bar.bartender);
-      setLoading(false);
     }
     fetchWorldContext();
-    setStoryPath(initStoryPath);
   }, []);
 
   React.useEffect(() => {
-    if (!storyPath) return;
     const fetchStoryNode = async (nodeFileName) => {
-      setLoading(true);
       try {
         const response = await fetch('/story/' + nodeFileName);
         if (!response.ok) {
@@ -48,37 +42,14 @@ function App({initStoryPath=[], onStoryPathChange = () => {}}) {
         const data = await response.json();
         console.log("Story node data loaded", data);
         setStoryNode(data);
-        setChats(data.chats);
-        setCustomers((prevCustomers) => Object.values(prevCustomers).reduce((acc, customer) => {
-          acc[customer.id] = {
-            ...customer,
-            bci_score: data.character_stats[customer.id]?.bci_score || customer.bci_score,
-            political_preference: data.character_stats[customer.id]?.political_preference || customer.political_preference,
-          };
-          return acc;
-        }
-        , {}));
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching story node:", error);
         setError(error);
-        setLoading(false);
       }
     }
-    fetchStoryNode(`node_x${storyPath.join('')}.json`);
-    onStoryPathChange(storyPath);
+    fetchStoryNode(`node_x${gameState.storyPath.join('')}.json`);
 
-  }, [storyPath]);
-
-  const updateTrust = (customerId, dt) => {
-    setCustomers((prevCustomers) => ({
-      ...prevCustomers,
-      [customerId]: {
-        ...prevCustomers[customerId],
-        trust: Math.min(Math.max(prevCustomers[customerId].trust + dt, -1), 1),
-      },
-    }));
-  }
+  }, [gameState.storyPath]);
 
   if (error) {
     return (
@@ -97,22 +68,35 @@ function App({initStoryPath=[], onStoryPathChange = () => {}}) {
     );
   }
   
-  if (loading) {
+  if (!storyNode || !worldContext) {
     return <LoadingScreen />
   }
 
   if(!isStarted) {
-    return <StartLayout onStart={() => setIsStarted(true)} />
+    return <StartLayout onStart={() => setIsStarted(true)} onClear={() => handleClearGameState()} />
   }
+
+  const customers = worldContext.bar.customers.reduce((acc, customer) => {
+    acc[customer.id] = {
+      ...customer,
+      trust: gameState.customerTrust[customer.id] || 0,
+      bci_score: storyNode.character_stats[customer.id]?.bci_score || customer.bci_score,
+      political_preference: storyNode.character_stats[customer.id]?.political_preference || customer.political_preference,
+    };
+    return acc;
+  }
+  , {});
+
+  console.log({gameState})
 
   return <GameLayout 
     storyNode={storyNode} 
-    bartender={bartender}
+    bartender={worldContext.bar.bartender}
     customers={customers} 
-    drinks={drinks} 
-    chats={chats}
-    onLevelComplete={(decision) => setStoryPath((prev) => [...prev, decision])}
-    onTrustChange={(customerId, dt) => updateTrust(customerId, dt)}
+    drinks={worldContext.bar.drinks} 
+    chats={storyNode.chats}
+    onLevelComplete={(decision) => proceedStoryPath(decision)}
+    onTrustChange={(customerId, dt) => changeTrust(customerId, dt)}
   />
 }
 export default App;
