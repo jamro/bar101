@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import NewsLayout from './NewsLayout';
 import CustomerLayout from './CustomerLayout';
 
@@ -10,6 +10,32 @@ function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChan
   const [customerIndex, setCustomerIndex] = useState(0);
   const [phase, setPhase] = useState('news');
   const [decision, setDecision] = useState(null);
+
+  const startNews = () => {
+    setPhase('news');
+    window.skipNews = () => {
+      endNews();
+    }
+    window.skipCustomer = undefined;
+  }
+
+  const endNews = () => {
+    setPhase('customer');
+    window.skipNews = undefined;
+    window.skipCustomer = (decsion = "a") => {
+      setDecision(decsion);
+      onCustomerLeave();
+    }
+  }
+
+  useEffect(() => {
+    startNews();
+    return () => {
+      window.skipNews = undefined;
+      window.skipCustomer = undefined;
+    }
+  }
+  , []);
 
   useEffect(() => {
     console.log("Initializing game layout");
@@ -29,7 +55,7 @@ function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChan
       console.log("Customer index changed to: ", customerIndex, ", customerId:", storyNode.visitors[customerIndex]);
     } else {
       console.log("All customers have left, showing news");
-      setPhase('news');
+      startNews()
       setCustomerId(null);
       onLevelComplete(decision);
       setDecision(null);
@@ -42,7 +68,7 @@ function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChan
 
   switch (phase) {
     case 'news':
-      return <NewsLayout data={storyNode.news} onClose={() => setPhase('customer')} />;
+      return <NewsLayout data={storyNode.news} onClose={() => endNews()} />;
     case 'customer':
       return <CustomerLayout 
         customers={customers} 

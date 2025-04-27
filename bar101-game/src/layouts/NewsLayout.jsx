@@ -79,6 +79,20 @@ export default function NewsLayout({data, onClose=() => {}}) {
       segmentClass = "bg-light";
   }
 
+  useEffect(() => {
+    return () => {
+      if (headerRef.current) {
+        headerRef.current.skip();
+      }
+      if (bodyRef1.current) {
+        bodyRef1.current.skip();
+      }
+      if (bodyRef2.current) {
+        bodyRef2.current.skip();
+      }
+    }
+  }, []);
+
   return (
     <div className="container pt-5" >
       <div className={"card " + segmentClass}>
