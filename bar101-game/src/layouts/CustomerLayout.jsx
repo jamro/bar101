@@ -91,9 +91,5 @@ export default function CustomerLayout({ bartender, customers, customerId, drink
     content = <div>Error: Unknown phase {phase}</div>;
   }
   
-  return (
-    <div className="container">
-      {content}
-    </div>
-  );
+  return content;
 }

@@ -49,11 +49,10 @@ export default function DrinkPrompLayout({ bartender, customer, onClose }) {
     setPhase("exit")
   }
 
-  return <div className="container">
-    <CustomerPreview customer={customer}>
+  return <CustomerPreview customer={customer}>
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
-  </div>
+
 }
 
 DrinkPrompLayout.propTypes = {

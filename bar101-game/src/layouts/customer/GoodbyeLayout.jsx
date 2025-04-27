@@ -35,9 +35,7 @@ export default function GoodbyeLayout({ bartender, customer, drink, onClose }) {
 
   }, [customer.id, drink])
   
-  return <div className="container">
-    <CustomerPreview customer={customer} drink={drink}>
+  return <CustomerPreview customer={customer} drink={drink}>
       <ChatWindow ref={chatWindowRef} />
     </CustomerPreview>
-  </div>
 }

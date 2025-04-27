@@ -47,6 +47,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "../bar101-storytree", to: "story" },
+        { from : "./assets/img", to: "img" },
       ],
     }),
     new webpack.DefinePlugin({

@@ -1,34 +1,33 @@
-import React from 'react';
+import React, { useRef, useEffect } from "react";
 import * as styles from './CustomerPreview.module.css';
 import PropTypes from 'prop-types';
+import useResizeObserver from "../hooks/useResizeObserver";
+import ResizablePixiCanvas from "./ResizablePixiCanvas";
+import BarCustomerMasterContainer from "../pixi/barCustomer/BarCustomerMasterContainer";
 
 export default function CustomerPreview({ customer, drink, children }) {
-  const { 
-    id, 
-    name, 
-    job_title: jobTitle, 
-    trust, 
-    bci_score: bciScore, 
-    political_preference: politicalPreference 
-  } = customer;
+  const [containerRef, size] = useResizeObserver();
+  const barSceneRef = useRef(new BarCustomerMasterContainer());
+
+  // estimate size when not available yet due to ref not being set
+  let flexDirection, windowWidth, windowHeight;
+  if (size.width && size.height) {
+    windowWidth = size.width;
+    windowHeight = size.height;
+  } else {
+    windowWidth = window.innerWidth;
+    windowHeight = window.innerHeight;
+  }
+  if (windowWidth > windowHeight * 1.3) {
+    flexDirection = "row";
+  } else {
+    flexDirection = "column";
+  }
 
   return (
-    <div className={styles.customerContainer}>
-      <div className={styles.customerHeader}>
-        <h2 className='mb-0'>{name}</h2>
-        <p>
-          {jobTitle}
-          <br/>
-          <strong>BCI Score:</strong> {Math.round(bciScore)}%
-          <br/>
-          <strong>Political Preference:</strong> {politicalPreference}
-          <br/>
-          <strong>Trust Level:</strong> {Math.round(100*trust)}%
-          <br/>
-          <strong>Drink:</strong> {drink ? drink.glass : 'None'}
-        </p>
-      </div>
-      <div className={styles.customerContent}>
+    <div className={styles.mainContainer} ref={containerRef} style={{flexDirection: flexDirection}}>
+      <ResizablePixiCanvas className={styles.previewContainer} masterContainer={barSceneRef.current} />
+      <div className={styles.chatContainer}>
         {children}
       </div>
     </div>

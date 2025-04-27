@@ -11,11 +11,9 @@ export default function DrinkPrepLayout({ customer, drinks, onServe }) {
     </button>
   ));
 
-  return <div className="container">
-    <CustomerPreview customer={customer}>
+  return <CustomerPreview customer={customer}>
       {buttons}
     </CustomerPreview>
-  </div>
 }
 
 DrinkPrepLayout.propTypes = {

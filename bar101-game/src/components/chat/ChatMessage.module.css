@@ -1,6 +1,7 @@
 .messageBox {
   padding: 0.5em;
   margin: 0.5em;
+  color: #000;
 }
 
 .messageBoxLeft {
@@ -19,7 +20,7 @@
 
 .messageHeader {
   font-size: 0.6em;
-  color: #444;
+  color: #fff;
   padding-left: 0.5em;
   font-weight: bold;
   text-transform: uppercase; 
@@ -27,19 +28,20 @@
 
 .messageFooter {
   font-size: 0.6em;
-  color: #444;
+  color: #999;
   padding-right: 0.5em;
   text-transform: uppercase; 
   text-align: right;
 }
 
 .user01 {
-  background-color: #BBF;
-  border: #88B solid 1px;
+  background-color: #dec583;
+  border: #7e704a solid 1px;
+  color: #000;
 }
 
 .user02 {
-  background-color: #BFB;
-  border: #8B8 solid 1px;
+  background-color: #000;
+  border: #dec583 solid 1px;
+  color: #dec583;
 }
-

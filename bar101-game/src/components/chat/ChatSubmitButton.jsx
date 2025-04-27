@@ -7,7 +7,7 @@ import * as styles from './ChatSubmitButton.module.css';
 function ChatSubmitButton({onClick, label}) {
   return (
     <div className={styles.chatButtonContainer}>
-      <button type="button" className={["btn btn-primary", styles.submitButton].join(' ')} onClick={onClick}>
+      <button type="button" className={styles.submitButton} onClick={onClick}>
         {label} <FontAwesomeIcon icon={faPaperPlane} />
       </button>
     </div>
