@@ -9,6 +9,9 @@ export default function CustomerPreview({ customer, drink, children }) {
   const [containerRef, size] = useResizeObserver();
   const barSceneRef = useRef(new BarCustomerMasterContainer());
 
+  barSceneRef.current.setCustomer(customer);
+  barSceneRef.current.setDrink(drink);
+
   // estimate size when not available yet due to ref not being set
   let flexDirection, windowWidth, windowHeight;
   if (size.width && size.height) {

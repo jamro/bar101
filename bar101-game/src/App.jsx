@@ -3,6 +3,7 @@ import GameLayout from './layouts/GameLayout';
 import LoadingScreen from './layouts/LoadingScreen';
 import StartLayout from './layouts/StartLayout';
 import useGameState from './hooks/useGameState';
+import GameAssets from './pixi/GameAssets';
 
 function App({ }) {
   const [ storyNode, setStoryNode ] = useState(null);
@@ -18,6 +19,8 @@ function App({ }) {
 
   React.useEffect(() => {
     const fetchWorldContext = async () => {
+      await GameAssets.loadAssets()
+
       const response = await fetch('/story/world_context.json');
       if (!response.ok) {
         throw new Error(`HTTP ${response.status} error! ${response.statusText}. Unable to load /story/world_context.json`);
