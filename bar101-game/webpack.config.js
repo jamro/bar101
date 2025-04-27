@@ -48,6 +48,7 @@ module.exports = {
       patterns: [
         { from: "../bar101-storytree", to: "story" },
         { from : "./assets/img", to: "img" },
+        { from : "./assets/fonts", to: "fonts" },
       ],
     }),
     new webpack.DefinePlugin({
