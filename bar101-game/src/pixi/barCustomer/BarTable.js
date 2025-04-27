@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import GameAssets from '../GameAssets';
+import TrustMeter from './TrustMeter';
 
 const assetsPosition = {
   'img/rocks.png': { x: 417, y: 492 },
@@ -25,14 +26,21 @@ export default class BarTable extends PIXI.Container {
     this._drinkContainer = new PIXI.Container();
     this.addChild(this._customerContainer);
     this.addChild(this._drinkContainer);
-    
+
+    this._trustMeter = new TrustMeter();
+    this._trustMeter.x = 800;
+    this._trustMeter.y = 35;
+    this.addChild(this._trustMeter);
   }
 
   setCustomer(customer, anim=false) {
     if (this._customerSprite && this._customerSprite.parent) {
       this._customerSprite.parent.removeChild(this._customerSprite);
+      this._trustMeter.alpha = 0;
     }
     if(customer) {
+      this._trustMeter.alpha = 1;
+      this._trustMeter.trust = customer.trust;
       this._customerSprite = new PIXI.Sprite(GameAssets.assets[`img/${customer.id}.png`]);
       const targetX = assetsPosition[`img/${customer.id}.png`].x;
       const targetY = assetsPosition[`img/${customer.id}.png`].y;
