@@ -5,12 +5,17 @@ import useResizeObserver from "../hooks/useResizeObserver";
 import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import BarCustomerMasterContainer from "../pixi/barCustomer/BarCustomerMasterContainer";
 
-export default function CustomerPreview({ customer, drink, children }) {
+export default function CustomerPreview({ customer, drink, children, drinkAnim=false, customerAnim=false }) {
   const [containerRef, size] = useResizeObserver();
   const barSceneRef = useRef(new BarCustomerMasterContainer());
 
-  barSceneRef.current.setCustomer(customer);
-  barSceneRef.current.setDrink(drink);
+  useEffect(() => {
+    barSceneRef.current.setDrink(drink, drinkAnim);
+  }, [drink]);
+
+  useEffect(() => {
+    barSceneRef.current.setCustomer(customer, customerAnim);
+  }, [customer]);
 
   // estimate size when not available yet due to ref not being set
   let flexDirection, windowWidth, windowHeight;

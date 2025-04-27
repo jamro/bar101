@@ -19,12 +19,12 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._barTable.y = (height - this._barTable.initHeight * scale) / 2;
   }
 
-  setCustomer(customer) {
-    this._barTable.setCustomer(customer);
+  setCustomer(customer, anim=false) {
+    this._barTable.setCustomer(customer, anim);
   }
 
-  setDrink(drink) {
-    this._barTable.setDrink(drink);
+  setDrink(drink, anim=false) {
+    this._barTable.setDrink(drink, anim);
   }
 
 }

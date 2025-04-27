@@ -133,7 +133,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         console.error("Unknown phase", phase)
   }}
   
-  return <CustomerPreview customer={customer} drink={drink}>
+  return <CustomerPreview customer={customer} drink={drink} drinkAnim={true} >
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
 }

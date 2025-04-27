@@ -9,7 +9,6 @@ export default function DrinkPrompLayout({ bartender, customer, onClose }) {
   const [phase, setPhase] = useState("ask");
   const chatWindowRef = useRef(null);
   const [serveUsual, setServeUsual] = useState(false);
-    
 
   const getTrustIndex = (trust) => {
     return Math.round((trust + 1) * 2)
@@ -49,10 +48,9 @@ export default function DrinkPrompLayout({ bartender, customer, onClose }) {
     setPhase("exit")
   }
 
-  return <CustomerPreview customer={customer}>
+  return <CustomerPreview customer={customer} customerAnim={true} >
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
-
 }
 
 DrinkPrompLayout.propTypes = {
