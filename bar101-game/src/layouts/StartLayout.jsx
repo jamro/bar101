@@ -3,14 +3,21 @@ import * as styles from './StartLayout.module.css';
 
 export default function StartLayout({ onStart, onClear }) {
 
-  return <div className={styles.startContainer}>
-      <div style={{ textAlign: 'center' }}>
-        <button className="btn btn-primary btn-lg" onClick={onStart} ><small>Enter</small> <strong>Bar 101</strong></button>
-        <br />
-        <small className='text-muted' style={{fontSize: '0.75em'}}>ver.{__BUILD_DATE__}</small>
-        <div className="mt-3">
-          <button className="btn btn-link btn-sm text-dark" onClick={onClear} ><small>Clear</small> <strong>Local Storage</strong></button>
+  return <div className={styles.masterContainer}>
+      <div className={styles.version}>
+        <small>ver.{__BUILD_DATE__}</small>
+      </div>
+      <div className={styles.barImage}></div>
+      <div className={styles.controlsContainer}>
+        <div style={{ textAlign: 'center' }}>
+          <div className={styles.buttonRow}>
+            <button onClick={onStart} >Enter Bar 101</button>
+          </div>
+          <div className={styles.buttonRow}>
+            <button onClick={onClear} >Clear Saved Data</button>
+          </div>
         </div>
       </div>
     </div>
 }
+

@@ -3,9 +3,8 @@ import * as styles from './LoadingScreen.module.css';
 
 export default function LoadingScreen() {
   return (
-    <div className="loading-screen">
-      <h1>Loading...</h1>
-      <p>Please wait while we load the game.</p>
+    <div className={styles.loadingScreen}>
+      <div className={styles.logo}></div>
     </div>
   );
 }

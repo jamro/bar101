@@ -1,8 +1,58 @@
-.startContainer {
-  /** cetralize the content */
+.masterContainer {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.barImage, .controlsContainer {
+  flex: 1 1 50%;
+}
+
+.barImage {
+  background-color: #000;
+  background-image: url('/img/bar101_entrence.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.version {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.version small {
+  color: #888;
+  font-size: 0.7em;
+  padding: 1em;
+}
+
+.controlsContainer{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
+  background-color: #000;
 }
+
+button {
+  background-color: #a83300;
+  border: #000 solid 3px;
+  padding: 0.5em 2em;
+  border-radius: 0.5em !important;
+}
+.buttonRow {
+  padding: 0.5em 0;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .masterContainer {
+    flex-direction: row;
+  }
+}
+

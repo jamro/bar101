@@ -1,3 +1,20 @@
-.loading-screen {
-  font-size: 0.7em;
+.loadingScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10%;
+}
+
+.logo {
+  background-image: url('/img/loading.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
 }

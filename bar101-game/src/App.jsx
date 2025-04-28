@@ -90,8 +90,6 @@ function App({ }) {
   }
   , {});
 
-  console.log({gameState})
-
   return <GameLayout 
     storyNode={storyNode} 
     bartender={worldContext.bar.bartender}
