@@ -97,17 +97,17 @@
         "ingredients": [
           { "name": "Gin", "amount": "30" },
           { "name": "Triple Sec", "amount": "30" },
-          { "name": "Sweet Vermouth", "amount": "30" }
+          { "name": "Vermouth", "amount": "30" }
         ]
       },
       "dry_martini": {
-        "id": "dry_martini",
-        "name": "Dry Martini",
+        "id": "martini",
+        "name": "Martini",
         "glass": "coupe",
         "mixing": "stirred",
         "ingredients": [
           { "name": "Gin", "amount": "60" },
-          { "name": "Dry Vermouth", "amount": "15" }
+          { "name": "Vermouth", "amount": "20" }
         ]
       },
       "sidecar": {
@@ -396,7 +396,7 @@
         "political_preference": "innovators",
         "bci_score": 85,
         "job_title": "Strategic Messaging Advisor",
-        "drink": "dry_martini",
+        "drink": "martini",
         "details": "Sven writes the speeches and public statements read by faction leaders. He rarely appears in public but has shaped the way Stenograd talks about compliance, security, and order. He keeps copies of every version — even the ones that were never supposed to be shared. He lives in a restricted zone and comes to Bar 101 only after major policy shifts, always with a notebook.",
         "communication": "Eloquent, slightly theatrical — uses language like a weapon and never says more than he has to.",
         "secret": "He's been keeping his own predictive model of Council instability based on unpublished speech edits.",
@@ -424,18 +424,18 @@
             "You understand silence better than most. If things shift, I'll come to you first. Bye!"
           ],
           "wrong_drink": [
-            "Not quite what I ordered. I asked for a dry martini.",
-            "That's... close. But I was expecting a dry martini.",
-            "Wrong stage, wrong script. Dry martini was the line.",
-            "We both know I asked for a dry martini — let's not pretend otherwise.",
-            "You know me better than that. Dry martini — like always."
+            "Not quite what I ordered. I asked for a Martini.",
+            "That's... close. But I was expecting a Martini.",
+            "Wrong stage, wrong script. Martini was the line.",
+            "We both know I asked for a Martini, let's not pretend otherwise.",
+            "You know me better than that. Martini, like always."
           ],
           "drink": [
-            "Dry martini. No garnish.",
-            "Something precise. Dry martini will do.",
-            "You know what I drink. Let's not pretend. Dry martini is the line.",
-            "Same as after the last policy shift. Dry martini.",
-            "Make it sharp. Like the speech they didn't let me publish. Dry martini, please."
+            "Martini. No garnish.",
+            "Something precise. Martini will do.",
+            "You know what I drink. Let's not pretend. Martini is the line.",
+            "Same as after the last policy shift. Martini.",
+            "Make it sharp. Like the speech they didn't let me publish. Martini, please."
           ],
           "the_usual": [
             "Let's keep the pattern steady.",

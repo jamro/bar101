@@ -67,6 +67,8 @@ for node_file in node_files:
     
     for news in node["news"]["official"]:
         for phrase in news.keys():
+            if phrase == "image":
+                continue
             generate_voiceover(
                 node_id,
                 "news_official",
@@ -76,6 +78,8 @@ for node_file in node_files:
             )
     for news in node["news"]["underground"]:
         for phrase in news.keys():
+            if phrase == "image":
+                continue
             generate_voiceover(
                 node_id,
                 "news_underground",
@@ -188,3 +192,11 @@ for node_file in node_files:
 # write log to file
 with open(log_path, "w") as f:
     json.dump(log, f, indent=2)
+
+print("Verification...")
+# verify files. check if they all exist
+for entry in log:
+    if not os.path.exists(entry["path"]):
+        print(f"File {entry['path']} does not exist")
+
+print("Done.")

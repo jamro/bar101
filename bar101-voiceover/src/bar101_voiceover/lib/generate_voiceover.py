@@ -12,17 +12,19 @@ def generate_voiceover(group, character, text, model=None, log=[]):
   md5 = hashlib.md5()
   md5.update(key.encode('utf-8'))
   hash = md5.hexdigest()
-  log.append({
-      "hash": hash,
-      "group": group,
-      "character": character,
-      "text": text
-  })
 
   # create target direcrory
   target_dir = os.path.join(os.path.dirname(__file__), "..", "..", "..", "voiceovers", "storytree")
   target_file_wav = os.path.join(target_dir, f"{hash}.wav")
   target_file_mp3 = os.path.join(target_dir, f"{hash}.mp3")
+
+  log.append({
+      "hash": hash,
+      "group": group,
+      "character": character,
+      "text": text,
+      "path": target_file_mp3,
+  })
   if not os.path.exists(target_dir):
     os.makedirs(target_dir)
 
