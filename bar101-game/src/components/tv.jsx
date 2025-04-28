@@ -6,7 +6,8 @@ import NewsMasterContainer from "../pixi/news/NewsMasterContainer";
 export default function TV({
   mode = "official",
   pipUrl = null,
-  headline = "Breaking News"
+  headline = "Breaking News",
+  onReady = () => {},
 }) {
 
   const barSceneRef = useRef(new NewsMasterContainer());
@@ -21,6 +22,6 @@ export default function TV({
     barSceneRef.current.setHeadline(headline);
   }, [mode, pipUrl, headline]);
 
-  return <ResizablePixiCanvas masterContainer={barSceneRef.current} className={styles.container} />
+  return <ResizablePixiCanvas masterContainer={barSceneRef.current} className={styles.container} onReady={onReady}/>
 
 }

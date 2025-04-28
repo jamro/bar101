@@ -4,7 +4,7 @@ import TV from '../components/tv';
 import * as styles from './NewsLayout.module.css';
 
 export default function NewsLayout({data, onClose=() => {}}) {
-
+  const [tvReady, setTvReady] = useState(false);
   const [segmentName, setSegmentName] = useState('official');
   const [segmentIndex, setSegmentIndex] = useState(0);
   const [newsImage, setNewsImage ] = useState('');
@@ -81,8 +81,12 @@ export default function NewsLayout({data, onClose=() => {}}) {
         headline={data[segmentName][segmentIndex].headline} 
         mode={segmentName}
         pipUrl={newsImage ? `/story/${newsImage}` : null}
+        onReady={() => setTvReady(true)}
       />
-      <div className={styles.subtitlesContainer}>
+      <div className={styles.subtitlesContainer} style={{display: tvReady ? "none" : "block"}}>
+        Loading...
+      </div>
+      <div className={styles.subtitlesContainer} style={{display: tvReady ? "block" : "none"}}>
         <div className={styles.subtitlesBody}>
           <ConversationText ref={newsSubtitlesRef} />
         </div>

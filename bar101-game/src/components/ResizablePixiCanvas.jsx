@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js';
 import { extensions, ResizePlugin } from 'pixi.js';
 import useResizeObserver from '../hooks/useResizeObserver';
 
-const ResizablePixiCanvas = ({className="", masterContainer=null}) => {
+const ResizablePixiCanvas = ({className="", masterContainer=null, onReady=() => {}}) => {
   const [pixiContainer, size] = useResizeObserver();
   const appRef = useRef(null);
 
@@ -13,6 +13,7 @@ const ResizablePixiCanvas = ({className="", masterContainer=null}) => {
       return;
     }
     const run = async () => {
+      const now = performance.now();
       console.log("[ResizablePixiCanvas] creating app...");
       extensions.add(ResizePlugin);
       const app = new PIXI.Application();
@@ -28,7 +29,9 @@ const ResizablePixiCanvas = ({className="", masterContainer=null}) => {
       app.stage.addChild(masterContainer);
       masterContainer.resize(pixiContainer.current.clientWidth, pixiContainer.current.clientHeight);
       app.resize(size.width, size.height);
-      console.log("[ResizablePixiCanvas] app ready");
+      const elapsed = performance.now() - now;
+      console.log(`[ResizablePixiCanvas] app ready in ${elapsed.toFixed(2)}ms`);
+      onReady()
     }
     run();
 
@@ -49,7 +52,7 @@ const ResizablePixiCanvas = ({className="", masterContainer=null}) => {
     appRef.current.resize(size.width, size.height);
   }, [size]);
 
-  return <div ref={pixiContainer} className={className} />;
+  return <div ref={pixiContainer} style={{backgroundColor: '#000000'}} className={className} />;
 };
 
 export default ResizablePixiCanvas;
