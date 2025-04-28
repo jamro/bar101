@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ConversationText from '../components/chat/ConversationText';
+import TV from '../components/tv';
+import * as styles from './NewsLayout.module.css';
 
 export default function NewsLayout({data, onClose=() => {}}) {
 
@@ -8,29 +10,21 @@ export default function NewsLayout({data, onClose=() => {}}) {
   const [newsImage, setNewsImage ] = useState('');
   const [completed, setCompleted] = useState(false);
 
-  const headerRef = useRef(null);
-  const bodyRef1 = useRef(null);
-  const bodyRef2 = useRef(null);
+  const newsSubtitlesRef = useRef(null);
 
   useEffect(() => {
     const run = async () => {
-      if (headerRef.current) {
-        headerRef.current.clear();
+      if (newsSubtitlesRef.current) {
+        newsSubtitlesRef.current.clear();
       }
-      if (bodyRef1.current) {
-        bodyRef1.current.clear();
+      if (newsSubtitlesRef.current) {
+        await newsSubtitlesRef.current.print(data[segmentName][segmentIndex].headline, "news_"+segmentName);
       }
-      if (bodyRef2.current) {
-        bodyRef2.current.clear();
+      if (newsSubtitlesRef.current) {
+        await newsSubtitlesRef.current.print(data[segmentName][segmentIndex].anchor_line, "news_"+segmentName);
       }
-      if (headerRef.current) {
-        await headerRef.current.print(data[segmentName][segmentIndex].headline, "news_"+segmentName);
-      }
-      if (bodyRef1.current) {
-        await bodyRef1.current.print(data[segmentName][segmentIndex].anchor_line, "news_"+segmentName);
-      }
-      if (bodyRef2.current) {
-        await bodyRef2.current.print(data[segmentName][segmentIndex].contextual_reframing, "news_"+segmentName);
+      if (newsSubtitlesRef.current) {
+        await newsSubtitlesRef.current.print(data[segmentName][segmentIndex].contextual_reframing, "news_"+segmentName);
       }
       setCompleted(true)
     }
@@ -39,17 +33,11 @@ export default function NewsLayout({data, onClose=() => {}}) {
     setCompleted(false)
 
   }
-  , [headerRef, segmentName, segmentIndex]);
+  , [segmentName, segmentIndex]);
 
   const skip = () => {
-    if (headerRef.current) {
-      headerRef.current.skip();
-    }
-    if (bodyRef1.current) {
-      bodyRef1.current.skip();
-    }
-    if (bodyRef2.current) {
-      bodyRef2.current.skip();
+    if (newsSubtitlesRef.current) {
+      newsSubtitlesRef.current.skip();
     }
   }
 
@@ -81,38 +69,25 @@ export default function NewsLayout({data, onClose=() => {}}) {
 
   useEffect(() => {
     return () => {
-      if (headerRef.current) {
-        headerRef.current.skip();
-      }
-      if (bodyRef1.current) {
-        bodyRef1.current.skip();
-      }
-      if (bodyRef2.current) {
-        bodyRef2.current.skip();
+      if (newsSubtitlesRef.current) {
+        newsSubtitlesRef.current.skip();
       }
     }
   }, []);
 
   return (
-    <div className="container pt-5" >
-      <div className={"card " + segmentClass}>
-        <h5 className="card-header">
-         <ConversationText key={segmentName+"0"} ref={headerRef} />
-        </h5>
-        <div className="card-body">
-          <div className="row">
-            <div className="col-lg-2 col-md-4 col-sm-4 col-5">
-              <img src={`/story/${newsImage}`} className="card-img-top" />
-            </div>
-            <div className="col-lg-9 col-md-8 col-sm-8 col-7">
-              <p className="card-text">
-                <ConversationText key={segmentName+"1"} ref={bodyRef1} /> <ConversationText key={segmentName+"2"} ref={bodyRef2} placeholder="" />
-              </p>
-            </div>
-          </div>
+    <div style={{width: "100%", height: "100%"}}>
+      <TV 
+        headline={data[segmentName][segmentIndex].headline} 
+        mode={segmentName}
+        pipUrl={newsImage ? `/story/${newsImage}` : null}
+      />
+      <div className={styles.subtitlesContainer}>
+        <div className={styles.subtitlesBody}>
+          <ConversationText ref={newsSubtitlesRef} />
         </div>
-        <div className="card-footer">
-          <button className="btn btn-primary float-end" onClick={() => completed ? close() : skip()}>{completed ? "Close" : "Skip"}</button>
+        <div className={styles.subtitlesControls}>
+          <button onClick={() => completed ? close() : skip()}>{completed ? "Continue" : "Skip"}</button>
         </div>
       </div>
     </div>

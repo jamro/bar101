@@ -2,7 +2,6 @@ import React, { useEffect, useRef, memo } from 'react';
 import * as PIXI from 'pixi.js';
 import { extensions, ResizePlugin } from 'pixi.js';
 import useResizeObserver from '../hooks/useResizeObserver';
-import MasterContainer from '../pixi/MasterContainer';
 
 const ResizablePixiCanvas = ({className="", masterContainer=null}) => {
   const [pixiContainer, size] = useResizeObserver();
@@ -22,6 +21,7 @@ const ResizablePixiCanvas = ({className="", masterContainer=null}) => {
         height: pixiContainer.current.clientHeight,
         backgroundColor: 0x000000,
         resizeTo: pixiContainer.current,
+        antialias: true,
       });
       pixiContainer.current.appendChild(app.canvas);
       appRef.current = app;

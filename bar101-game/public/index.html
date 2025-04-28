@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Bar 101 - The</title>
   <style>
     @font-face {
@@ -15,6 +15,10 @@
     html, body {
       height: 100%;
       font-family: "Chelsea Market", system-ui !important;
+      overflow: hidden;
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none;     /* IE 10 and IE 11 */
+      user-select: none;         /* Standard syntax */
     }
     #root {
       height: 100%;
@@ -31,6 +35,18 @@
     } 
     updateVhUnit();
     window.addEventListener('resize', updateVhUnit);
+
+    // Disabling zoom functionality
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener('wheel', function(e) {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
   </script>
 </body>
 </html>

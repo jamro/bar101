@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
+const { url } = require('inspector');
 
 module.exports = {
   entry: './src/index.js',
@@ -25,7 +26,8 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true
+              modules: true,
+              url: false,
             }
           }
         ]

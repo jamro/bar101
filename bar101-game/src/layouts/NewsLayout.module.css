@@ -1,0 +1,27 @@
+.subtitlesContainer {
+  font-size: 0.85em;
+  position: absolute; 
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.subtitlesControls {
+  text-align: center;
+  padding: 0.5em;
+}
+
+.subtitlesControls button {
+  background-color: #a83300;
+  border: #000 solid 3px;
+  padding: 0.5em 2em;
+  border-radius: 0.5em;
+}
+
+.subtitlesBody {
+  padding: 1em 2em 0em 2em;
+  text-align: justify;
+}

@@ -8,12 +8,15 @@ export default class TrustMeter extends PIXI.Container {
         this.trustBar = new PIXI.Graphics();
         this.addChild(this.trustBar);
 
-        this._label = new PIXI.Text('TRUST', {
+        this._label = new PIXI.Text({
+          text: 'TRUST',
+          style: {
             fontFamily: 'Chelsea Market',
             fontSize: 50,
             fill: 0xdec583,
             align: 'center'
-        });
+          }
+        })
         this._label.x = 25;
         this._label.y = 25;
         this.addChild(this._label);

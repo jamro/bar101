@@ -1,6 +1,7 @@
 import os
 from rich.console import Console
 import json
+from PIL import Image
 
 console = Console()
 
@@ -27,9 +28,9 @@ def extract_node(story_root, target_root, variant_path=[]):
       raw_data = source_file.read()
       json_data = json.loads(raw_data)
       for i, n in enumerate(json_data['news']['official']):
-        json_data['news']['official'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.png"
+        json_data['news']['official'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.jpg"
       for i, n in enumerate(json_data['news']['underground']):
-        json_data['news']['underground'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.png"
+        json_data['news']['underground'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.jpg"
       json.dump(json_data, target_file, indent=2)
 
   # copy news_img_#.png images to target path
@@ -38,10 +39,14 @@ def extract_node(story_root, target_root, variant_path=[]):
       continue
     source_file_path = os.path.join(node_dir, file)
     target_file_path = os.path.join(target_root, f"news_img_x{''.join(variant_path)}_{file.split('_')[-1]}")
-    with open(source_file_path, "rb") as source_file:
-      with open(target_file_path, "wb") as target_file:
-        target_file.write(source_file.read())
-  
+    target_file_path = os.path.splitext(target_file_path)[0] + ".jpg"
+    with Image.open(source_file_path) as img:
+      if img.mode in ("RGBA", "P"): 
+        img = img.convert("RGB")
+      new_size = (int(img.width * 0.6), int(img.height * 0.6))
+      resized_img = img.resize(new_size, Image.LANCZOS)
+      resized_img.save(target_file_path, format="JPEG", quality=65, optimize=True)
+
 
   # check variants
   if os.path.exists(varian_a_path):

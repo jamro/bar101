@@ -14,6 +14,9 @@ class GameAssets {
       'img/shalek.png',
       'img/rocks.png',
       'img/coupe.png',
+      'img/tv.png',
+      'img/news_official.png',
+      'img/news_underground.png',
     ];
   }
 
