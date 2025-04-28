@@ -3,6 +3,15 @@ import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
+const hobbyNames = {
+  origami: "Origami",
+  typewriter: "Old Typewriters",
+  fpv_drone: "FPV Drones",
+  urban_exploration: "Urban Exploration",
+  political_literature: "Literature",
+  analog_photography: "Photography",
+}
+
 export default function OpenerLayout({ bartender, customer, allCustomers, chat, drink, serveUsual, onGoBack, onTrustChange, onClose }) {
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
@@ -29,7 +38,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
 
       openers.push({
         id: customer.hobby_id,
-        label: "Ask about hobby: " + customer.hobby_id,
+        label: hobbyNames[customer.hobby_id],
         text: customer.openers[Math.floor(Math.random() * customer.openers.length)]
       })
   
@@ -48,7 +57,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         }
         openers.push({
           id: randomCustomer.hobby_id,
-          label: "Ask about hobby: " + randomCustomer.hobby_id,
+          label: hobbyNames[randomCustomer.hobby_id],
           text: randomCustomer.openers[Math.floor(Math.random() * randomCustomer.openers.length)]
         })
       }
@@ -58,7 +67,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
   
       openers.unshift({
         id: "neutral",
-        label: "Tak about something neutral",
+        label: "Neutral Topic",
         text: chat.opener.questions.neutral
       })
       setOpenerQuestions(openers)

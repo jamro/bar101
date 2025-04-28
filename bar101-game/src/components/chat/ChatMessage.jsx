@@ -17,13 +17,16 @@ function ChatMessage({
   const boxStyle = userIndex == 0 ? styles.messageBoxLeft : styles.messageBoxRight;
 
   return (
-    <div className={[styles.messageBox, boxStyle].join(' ')} onClick={onClick} style={{ display: visible ? 'block' : 'none' }}>
-      <div className={styles.messageHeader}>{from}</div>
-      <div className={[styles.messageCloud, styles[cloudStyleName]].join(' ')}>
-        {children}
+    <>
+      <div className={styles.messageBox} style={{ display: !visible ? 'block' : 'none' }}></div>
+      <div className={[styles.messageBox, boxStyle].join(' ')} onClick={onClick} style={{ display: visible ? 'block' : 'none' }}>
+        <div className={styles.messageHeader}>{from}</div>
+        <div className={[styles.messageCloud, styles[cloudStyleName]].join(' ')}>
+          {children}
+        </div>
+        <div className={styles.messageFooter}>{footer}</div>
       </div>
-      <div className={styles.messageFooter}>{footer}</div>
-    </div>
+    </>
   );
 }
 
