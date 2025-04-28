@@ -6,6 +6,7 @@ function GameLayout({
   storyNode, 
   bartender, 
   customers, 
+  balance,
   drinks, 
   chats, 
   levelPhase,
@@ -15,6 +16,7 @@ function GameLayout({
   onTrustChange, 
   onLevelComplete,
   onDecision,
+  onBalanceChange,
 }) {
   if(!storyNode) {
     return <div>Loading...</div>;
@@ -44,6 +46,8 @@ function GameLayout({
         customers={customers} 
         bartender={bartender}
         customerId={customerId} 
+        balance={balance}
+        onBalanceChange={(delta) => onBalanceChange(delta)}
         chats={chats} 
         drinks={drinks} 
         onTrustChange={(customerId, dt) => onTrustChange(customerId, dt)} 

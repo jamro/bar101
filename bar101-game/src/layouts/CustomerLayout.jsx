@@ -7,7 +7,18 @@ import MainChatLayout from './customer/MainChatLayout';
 import DilemmaLayout from './customer/DilemmaLayout';
 import GoodbyeLayout from './customer/GoodbyeLayout';
 
-export default function CustomerLayout({ bartender, customers, customerId, drinks, chats, onTrustChange, onClose, onDecision }) {
+export default function CustomerLayout({ 
+  bartender, 
+  customers, 
+  customerId, 
+  drinks, 
+  chats, 
+  balance,
+  onBalanceChange,
+  onTrustChange,
+  onClose, 
+  onDecision 
+}) {
   
   const [phase, setPhase] = useState("ask_drink");
   const [drink, setDrink] = useState(null);
@@ -47,17 +58,29 @@ export default function CustomerLayout({ bartender, customers, customerId, drink
 
   let content = null
   if (phase === "ask_drink") {
-    content = <DrinkPrompLayout bartender={bartender} customer={customer} onClose={(serveUsual) => gotoDrinkServing(serveUsual)} />;
+    content = <DrinkPrompLayout 
+      bartender={bartender} 
+      balance={balance}
+      customer={customer} 
+      onClose={(serveUsual) => gotoDrinkServing(serveUsual)} 
+    />;
   } else if (phase === "serve_drink") {
-    content = <DrinkPrepLayout customer={customer} drinks={drinks} onServe={(drink) => serveDrink(drink)} />;
+    content = <DrinkPrepLayout 
+      customer={customer} 
+      balance={balance}
+      drinks={drinks} 
+      onServe={(drink) => serveDrink(drink)} 
+    />;
   } else if (phase === "opener") {
     content = <OpenerLayout 
       bartender={bartender}
+      balance={balance}
       customer={customer} 
       allCustomers={customers}
       chat={chat} 
       drink={drink} 
       serveUsual={serveUsual}
+      onBalanceChange={(delta) => onBalanceChange(delta)}
       onGoBack={() => gotoDrinkServing(false)} 
       onTrustChange={(dt) => onTrustChange(customer.id, dt)} 
       onClose={(skip) => setPhase(skip ? (chat.decision ? "decision_chat" : "exit") : "main_chat")}
@@ -66,6 +89,7 @@ export default function CustomerLayout({ bartender, customers, customerId, drink
     content = <MainChatLayout 
       customer={customer} 
       chat={chat} 
+      balance={balance}
       drink={drink} 
       onTrustChange={(dt) => onTrustChange(customer.id, dt)} 
       onClose={() => setPhase(chat.decision ? "decision_chat" : "exit")}
@@ -75,6 +99,7 @@ export default function CustomerLayout({ bartender, customers, customerId, drink
       customer={customer} 
       chat={chat} 
       drink={drink} 
+      balance={balance}
       onTrustChange={(dt) => onTrustChange(customer.id, dt)} 
       onClose={() => setPhase("exit")}
       onDecision={(d) => onDecision(d)}
@@ -82,6 +107,7 @@ export default function CustomerLayout({ bartender, customers, customerId, drink
   } else if (phase === "exit") {
     content = <GoodbyeLayout
       bartender={bartender}
+      balance={balance}
       customer={customer} 
       drink={drink} 
       onClose={() => close()}

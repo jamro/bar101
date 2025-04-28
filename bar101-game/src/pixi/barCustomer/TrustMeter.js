@@ -35,9 +35,9 @@ export default class TrustMeter extends PIXI.Container {
         .rect(0, 0, 190, 25)
         .fill(0x000000)
 
-      for (let i = 0; i < level; i++) {
+      for (let i = 0; i < 5; i++) {
         this.trustBar.rect(5 + i * 38, 5, 25, 15)
-          .fill(0xa54200);
+          .fill((i < level) ? 0xa54200 : 0x222222);
       }
 
     }

@@ -18,7 +18,8 @@ function App({ }) {
     changeTrust,
     setLevelPhase,
     proceedToNextCustomer,
-    setDilemmaDecision
+    setDilemmaDecision,
+    changeBalance,
   } = useGameState()
 
   const handleClearGameState = () => {
@@ -103,10 +104,12 @@ function App({ }) {
     storyNode={storyNode} 
     bartender={worldContext.bar.bartender}
     customers={customers} 
+    balance={gameState.balance}
     drinks={worldContext.bar.drinks} 
     chats={storyNode.chats}
     levelPhase={gameState.levelProgress.phase}
     customerIndex={gameState.levelProgress.customerIndex}
+    onBalanceChange={(delta) => changeBalance(delta)}
     onPhaseChange={(phase) => setLevelPhase(phase)}
     onCustomerLeave={() => proceedToNextCustomer()}
     onLevelComplete={() => proceedStoryPath()}

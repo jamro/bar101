@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 
 const DEFAULT_STATE = {
-  version: 5,
+  version: 2,
   timestamp: Date.now(),
   customerTrust: null,
   storyPath: [],
+  balance: 33,
   levelProgress: {
     phase: 'news',
     customerIndex: 0,
@@ -98,7 +99,13 @@ const useGameState = () => {
           decision
         }
       }));
-    }
+    },
+    changeBalance: (delta) => {
+      setState((prevState) => ({
+        ...prevState,
+        balance: prevState.balance + delta
+      }));
+    },
   }
 };
 

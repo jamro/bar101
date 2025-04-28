@@ -3,7 +3,7 @@ import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-export default function DrinkPrompLayout({ bartender, customer, onClose }) {
+export default function DrinkPrompLayout({ bartender, customer, balance, onClose }) {
   const drinkQuestions = ['What can I get you?', 'The usual?'] 
   const [chatOptions, setChatOptions] = useState([...drinkQuestions]);
   const [phase, setPhase] = useState("ask");
@@ -48,7 +48,7 @@ export default function DrinkPrompLayout({ bartender, customer, onClose }) {
     setPhase("exit")
   }
 
-  return <CustomerPreview customer={customer} customerAnim={true} >
+  return <CustomerPreview customer={customer} customerAnim={true} balance={balance} >
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
 }

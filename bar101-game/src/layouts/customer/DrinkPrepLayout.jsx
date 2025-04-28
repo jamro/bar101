@@ -3,7 +3,7 @@ import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-export default function DrinkPrepLayout({ customer, drinks, onServe }) {
+export default function DrinkPrepLayout({ customer, balance, drinks, onServe }) {
 
   const buttons = Object.values(drinks).map((drink) => (
     <button className='btn btn-primary m-1' key={drink.id} onClick={() => onServe(drink)}>
@@ -11,7 +11,7 @@ export default function DrinkPrepLayout({ customer, drinks, onServe }) {
     </button>
   ));
 
-  return <CustomerPreview customer={customer}>
+  return <CustomerPreview customer={customer} balance={balance}>
       {buttons}
     </CustomerPreview>
 }

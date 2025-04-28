@@ -12,7 +12,9 @@ const hobbyNames = {
   analog_photography: "Photography",
 }
 
-export default function OpenerLayout({ bartender, customer, allCustomers, chat, drink, serveUsual, onGoBack, onTrustChange, onClose }) {
+const DRINK_PRICE = 16
+
+export default function OpenerLayout({ bartender, customer, allCustomers, chat, drink, balance, serveUsual, onBalanceChange, onGoBack, onTrustChange, onClose }) {
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
   const [openerQuestions, setOpenerQuestions] = useState([]);
@@ -75,14 +77,15 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
       await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy), "Alex", "aradan", 1)
       if (drink.id == customer.drink) {
         if(serveUsual) {
-          onTrustChange(+0.1)
+          onTrustChange(+0.2)
         }
+        onBalanceChange(DRINK_PRICE + getTrustIndex(customer.trust))
         await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, customer.id, 0, true)
 
         setChatOptions(openers.map(o => o.label))
         setPhase("opener")
       } else {
-        onTrustChange(-0.1)
+        onTrustChange(-0.2)
         await chatWindowRef.current.print(arrRnd(customer.phrases.wrong_drink, customer), customer.name, customer.id, 0)
         setChatOptions(["Fix it"])
         setPhase("goBack")
@@ -105,7 +108,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         setChatOptions([])
         await chatWindowRef.current.print(`${question.text}`, "Alex", "aradan", 1)
         if (question.id !== "neutral" && question.id !== customer.hobby_id) {
-          onTrustChange(-0.1)
+          onTrustChange(-0.2)
           await chatWindowRef.current.print(chat.opener.wrong_hobby_answer, customer.name, customer.id, 0, true)
           setPhase("exit")
           setChatOptions(["Continue", "Stay quiet"])
@@ -122,7 +125,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         }
         if (question.id === customer.hobby_id) {
           const hobbyAnswer = chat.opener.hobby_answer[getTrustIndex(customer.trust)]
-          onTrustChange(+0.1)
+          onTrustChange(+0.2)
           for (let i = 0; i < hobbyAnswer.length; i++) {
             await chatWindowRef.current.print(hobbyAnswer[i], customer.name, customer.id, 0, i === hobbyAnswer.length - 1)
           }
@@ -142,7 +145,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         console.error("Unknown phase", phase)
   }}
   
-  return <CustomerPreview customer={customer} drink={drink} drinkAnim={true} >
+  return <CustomerPreview customer={customer} drink={drink} drinkAnim={true} balance={balance} >
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
 }
