@@ -17,6 +17,8 @@ function App({ }) {
     proceedStoryPath, 
     changeTrust,
     setLevelPhase,
+    proceedToNextCustomer,
+    setDilemmaDecision
   } = useGameState()
 
   const handleClearGameState = () => {
@@ -104,8 +106,11 @@ function App({ }) {
     drinks={worldContext.bar.drinks} 
     chats={storyNode.chats}
     levelPhase={gameState.levelProgress.phase}
+    customerIndex={gameState.levelProgress.customerIndex}
     onPhaseChange={(phase) => setLevelPhase(phase)}
-    onLevelComplete={(decision) => proceedStoryPath(decision)}
+    onCustomerLeave={() => proceedToNextCustomer()}
+    onLevelComplete={() => proceedStoryPath()}
+    onDecision={(decision) => setDilemmaDecision(decision)}
     onTrustChange={(customerId, dt) => changeTrust(customerId, dt)}
   />
 }

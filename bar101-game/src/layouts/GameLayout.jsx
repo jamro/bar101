@@ -9,44 +9,31 @@ function GameLayout({
   drinks, 
   chats, 
   levelPhase,
+  customerIndex,
+  onCustomerLeave,
   onPhaseChange,
   onTrustChange, 
-  onLevelComplete
+  onLevelComplete,
+  onDecision,
 }) {
   if(!storyNode) {
     return <div>Loading...</div>;
   }
-  const [customerId, setCustomerId] = useState(null);
-  const [customerIndex, setCustomerIndex] = useState(0);
-  const [decision, setDecision] = useState(null);
 
-  useEffect(() => {
-    console.log("Initializing game layout");
-    const visitor = storyNode.visitors[0];
-    setCustomerId(visitor);
-    setDecision(null);
-  }, [storyNode]);
-
-  const onCustomerLeave = () => {
-    console.log("Customer left");
-    setCustomerIndex(prev => prev + 1);
+  const handleCustomerLeave = () => {
+    if (customerIndex === storyNode.visitors.length - 1) { // last customer
+      console.log("Last customer left, showing news");
+      onLevelComplete();
+    } else {
+      console.log("Customer left, moving to next customer");
+      onCustomerLeave()
+    }
   }
 
-  useEffect(() => {
-    if (customerIndex < storyNode.visitors.length) {
-      setCustomerId(storyNode.visitors[customerIndex]);
-      console.log("Customer index changed to: ", customerIndex, ", customerId:", storyNode.visitors[customerIndex]);
-    } else {
-      console.log("All customers have left, showing news");
-      onPhaseChange('news');
-      setCustomerId(null);
-      onLevelComplete(decision);
-      setDecision(null);
-    }
-  }, [customerIndex]);
+  const customerId = storyNode.visitors[customerIndex];
 
-  if(customerId === null) {
-    return <div>Loading...</div>;
+  if(!customerId) {
+    return <div>Error: No customer ID found</div>;
   }
 
   switch (levelPhase) {
@@ -60,8 +47,8 @@ function GameLayout({
         chats={chats} 
         drinks={drinks} 
         onTrustChange={(customerId, dt) => onTrustChange(customerId, dt)} 
-        onClose={() => onCustomerLeave()}
-        onDecision={(decision) => setDecision(decision)}
+        onClose={() => handleCustomerLeave()}
+        onDecision={(decision) => onDecision(decision)}
       />
     default:
       return <div>Error: Unknown phase {levelPhase}</div>;

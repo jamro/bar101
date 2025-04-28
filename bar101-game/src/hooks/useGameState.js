@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 
 const DEFAULT_STATE = {
-  version: 3,
+  version: 5,
   timestamp: Date.now(),
   customerTrust: null,
   storyPath: [],
   levelProgress: {
     phase: 'news',
+    customerIndex: 0,
+    decision: null,
   }
 }
 
@@ -50,12 +52,23 @@ const useGameState = () => {
         }
       }));
     },
-    proceedStoryPath: (decision) => {
-      setState((prevState) => ({
-        ...prevState,
-        timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
-        storyPath: [...prevState.storyPath, decision]
-      }));
+    proceedStoryPath: () => {
+      setState((prevState) => {
+        if (!prevState.levelProgress.decision) {
+          throw new Error("No decision made yet.");
+        }
+        return {
+          ...prevState,
+          timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
+          storyPath: [...prevState.storyPath, prevState.levelProgress.decision],
+          levelProgress: {
+            ...prevState.levelProgress,
+            customerIndex: 0,
+            phase: 'news',
+            decision: null
+          }
+        }
+      });
     },
     setLevelPhase: (phase) => {
       setState((prevState) => ({
@@ -67,6 +80,25 @@ const useGameState = () => {
         }
       }));
     },
+    proceedToNextCustomer: () => {
+      setState((prevState) => ({
+        ...prevState,
+        timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
+        levelProgress: {
+          ...prevState.levelProgress,
+          customerIndex: prevState.levelProgress.customerIndex + 1
+        }
+      }));
+    },
+    setDilemmaDecision: (decision) => {
+      setState((prevState) => ({
+        ...prevState,
+        levelProgress: {
+          ...prevState.levelProgress,
+          decision
+        }
+      }));
+    }
   }
 };
 
