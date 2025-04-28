@@ -2,40 +2,23 @@ import React, { useState, useEffect, use } from 'react';
 import NewsLayout from './NewsLayout';
 import CustomerLayout from './CustomerLayout';
 
-function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChange, onLevelComplete}) {
+function GameLayout({
+  storyNode, 
+  bartender, 
+  customers, 
+  drinks, 
+  chats, 
+  levelPhase,
+  onPhaseChange,
+  onTrustChange, 
+  onLevelComplete
+}) {
   if(!storyNode) {
     return <div>Loading...</div>;
   }
   const [customerId, setCustomerId] = useState(null);
   const [customerIndex, setCustomerIndex] = useState(0);
-  const [phase, setPhase] = useState('news');
   const [decision, setDecision] = useState(null);
-
-  const startNews = () => {
-    setPhase('news');
-    window.skipNews = () => {
-      endNews();
-    }
-    window.skipCustomer = undefined;
-  }
-
-  const endNews = () => {
-    setPhase('customer');
-    window.skipNews = undefined;
-    window.skipCustomer = (decsion = "a") => {
-      setDecision(decsion);
-      onCustomerLeave();
-    }
-  }
-
-  useEffect(() => {
-    startNews();
-    return () => {
-      window.skipNews = undefined;
-      window.skipCustomer = undefined;
-    }
-  }
-  , []);
 
   useEffect(() => {
     console.log("Initializing game layout");
@@ -55,7 +38,7 @@ function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChan
       console.log("Customer index changed to: ", customerIndex, ", customerId:", storyNode.visitors[customerIndex]);
     } else {
       console.log("All customers have left, showing news");
-      startNews()
+      onPhaseChange('news');
       setCustomerId(null);
       onLevelComplete(decision);
       setDecision(null);
@@ -66,9 +49,9 @@ function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChan
     return <div>Loading...</div>;
   }
 
-  switch (phase) {
+  switch (levelPhase) {
     case 'news':
-      return <NewsLayout data={storyNode.news} onClose={() => endNews()} />;
+      return <NewsLayout data={storyNode.news} onClose={() => onPhaseChange('customer')} />;
     case 'customer':
       return <CustomerLayout 
         customers={customers} 
@@ -81,7 +64,7 @@ function GameLayout({storyNode, bartender, customers, drinks, chats, onTrustChan
         onDecision={(decision) => setDecision(decision)}
       />
     default:
-      return <div>Error: Unknown phase {phase}</div>;
+      return <div>Error: Unknown phase {levelPhase}</div>;
   }
 
 }

@@ -10,7 +10,14 @@ function App({ }) {
   const [ worldContext , setWorldContext ] = useState(null);
   const [ isStarted, setIsStarted ] = useState(false);
   const [ error , setError ] = useState(null);
-  const { gameState, initAllCustomersTrust, clearGameState, proceedStoryPath, changeTrust, updateLevelProgress } = useGameState()
+  const { 
+    gameState, 
+    initAllCustomersTrust, 
+    clearGameState, 
+    proceedStoryPath, 
+    changeTrust,
+    setLevelPhase,
+  } = useGameState()
 
   const handleClearGameState = () => {
     clearGameState();
@@ -96,6 +103,8 @@ function App({ }) {
     customers={customers} 
     drinks={worldContext.bar.drinks} 
     chats={storyNode.chats}
+    levelPhase={gameState.levelProgress.phase}
+    onPhaseChange={(phase) => setLevelPhase(phase)}
     onLevelComplete={(decision) => proceedStoryPath(decision)}
     onTrustChange={(customerId, dt) => changeTrust(customerId, dt)}
   />

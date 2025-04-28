@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 
 const DEFAULT_STATE = {
-  version: 2,
+  version: 3,
   timestamp: Date.now(),
   customerTrust: null,
-  storyPath: []
+  storyPath: [],
+  levelProgress: {
+    phase: 'news',
+  }
 }
 
 const ITEM_KEY = "gameState";
@@ -17,8 +20,15 @@ const useGameState = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem(ITEM_KEY, JSON.stringify(state));
-  }, [state]);
+    const savedRaw = localStorage.getItem(ITEM_KEY);
+    const saved = savedRaw ? JSON.parse(savedRaw) : null;
+    if(!saved || saved.timestamp < state.timestamp) {
+      console.log(`[useGameState] Saving game state to localStorage. Timestamp: ${state.timestamp}`);
+      localStorage.setItem(ITEM_KEY, JSON.stringify(state));
+    } else {
+      console.log(`[useGameState] Game state in localStorage is up to date. Timestamp: ${saved.timestamp}`);
+    }
+  }, [state.timestamp]);
 
   return {
     gameState: state,
@@ -56,7 +66,7 @@ const useGameState = () => {
           phase
         }
       }));
-    }
+    },
   }
 };
 
