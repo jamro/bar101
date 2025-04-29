@@ -27,7 +27,6 @@ export default class TrustMeter extends PIXI.Container {
 
     set trust(value) {
       value = Math.max(-1, Math.min(1, value));
-      console.log(`trust update: ${value}`, this._tmpTrust);
       if (this._trust === value) {
         return;
       }

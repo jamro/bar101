@@ -74,13 +74,27 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
       })
       setOpenerQuestions(openers)
       
-      await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy), "Alex", "aradan", 1)
-      if (drink.id == customer.drink) {
+      if(drink.special) {
+        await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy_special), "Alex", "aradan", 1)
+      } else {
+        await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy), "Alex", "aradan", 1)
+      }
+
+      if (drink.id == customer.drink && drink.quality > 0) {
+        let trustBump = 0
         if(serveUsual) {
-          onTrustChange(+0.2)
+          trustBump += 0.2
         }
-        onBalanceChange(DRINK_PRICE + getTrustIndex(customer.trust))
-        await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, customer.id, 0, true)
+        if(drink.special) {
+          trustBump += 0.2
+        }
+        onTrustChange(trustBump)
+        onBalanceChange(DRINK_PRICE + 1 + Math.round(DRINK_PRICE*0.3*drink.quality))
+        if(drink.special) {
+          await chatWindowRef.current.print(arrRnd(customer.phrases.thanks_special, customer), customer.name, customer.id, 0, true)
+        } else {
+          await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, customer.id, 0)
+        }
 
         setChatOptions(openers.map(o => o.label))
         setPhase("opener")
