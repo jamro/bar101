@@ -59,7 +59,7 @@ export default class BalanceMeter extends PIXI.Container {
       }
       if (this._tmpCash === null) {
         this._tmpCash = this._cash;
-        this._cashLabel.text = `$${this._tmpCash.toFixed(2)}`;
+        this._cashLabel.text = `$${Math.abs(this._tmpCash).toFixed(2)}`;
       } else if (this._tmpCash !== this._cash) {
         animStep();
 
