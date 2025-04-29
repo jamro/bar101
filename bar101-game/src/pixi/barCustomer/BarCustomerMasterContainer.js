@@ -42,10 +42,11 @@ class BarCustomerMasterContainer extends MasterContainer {
   }
 
   setCustomer(customer, anim=false) {
-    this._trustMeter.alpha = customer ? 1 : 0;
-    if(customer) {
+    if(customer && customer.trust !== undefined) {
       this._trustMeter.alpha = 1;
       this._trustMeter.trust = customer.trust;
+    } else {
+      this._trustMeter.alpha = 0;
     }
     this._barTable.setCustomer(customer, anim);
   }

@@ -12,6 +12,7 @@ class GameAssets {
       'img/olintz.png',
       'img/rmiskovic.png',
       'img/shalek.png',
+      'img/trader.png',
       'img/rocks.png',
       'img/coupe.png',
       'img/tv.png',

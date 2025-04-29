@@ -10,6 +10,7 @@ const assetsPosition = {
   'img/npetrak.png': { x: 222, y: 82 },
   'img/rmiskovic.png': { x: 273, y: 92 },
   'img/shalek.png': { x: 261, y: 83 },
+  'img/trader.png': { x: 270, y: 96 },
 };
 
 export default class BarTable extends PIXI.Container {

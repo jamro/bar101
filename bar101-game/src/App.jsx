@@ -103,6 +103,7 @@ function App({ }) {
   return <GameLayout 
     storyNode={storyNode} 
     bartender={worldContext.bar.bartender}
+    trader={worldContext.bar.trader}
     customers={customers} 
     balance={gameState.balance}
     drinks={worldContext.bar.drinks} 

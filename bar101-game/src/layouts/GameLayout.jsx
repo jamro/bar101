@@ -1,10 +1,12 @@
 import React, { useState, useEffect, use } from 'react';
 import NewsLayout from './NewsLayout';
 import CustomerLayout from './CustomerLayout';
+import TraderLayout from './TraderLayout';
 
 function GameLayout({
   storyNode, 
   bartender, 
+  trader,
   customers, 
   balance,
   drinks, 
@@ -25,7 +27,8 @@ function GameLayout({
   const handleCustomerLeave = () => {
     if (customerIndex === storyNode.visitors.length - 1) { // last customer
       console.log("Last customer left, showing news");
-      onLevelComplete();
+      //onLevelComplete();
+      onPhaseChange('trader')
     } else {
       console.log("Customer left, moving to next customer");
       onCustomerLeave()
@@ -53,6 +56,13 @@ function GameLayout({
         onTrustChange={(customerId, dt) => onTrustChange(customerId, dt)} 
         onClose={() => handleCustomerLeave()}
         onDecision={(decision) => onDecision(decision)}
+      />
+    case 'trader':
+      return <TraderLayout
+        bartender={bartender}
+        trader={trader}
+        balance={balance}
+        onClose={() => onLevelComplete()}
       />
     default:
       return <div>Error: Unknown phase {levelPhase}</div>;
