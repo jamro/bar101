@@ -3,7 +3,7 @@ import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-export default function DrinkPrepLayout({ customer, balance, drinks, onServe }) {
+export default function DrinkPrepLayout({ bartender, customer, balance, drinks, onServe }) {
 
   const [special, setSpecial] = useState(false);
   const [quality, setQuality] = useState(0.5);
@@ -36,8 +36,8 @@ export default function DrinkPrepLayout({ customer, balance, drinks, onServe }) 
         {buttons}
       </div>
       <div style={{padding: '1em'}}>
-        <input type="checkbox" id="special" name="special" value="special" onChange={() => setSpecial(!special)} checked={special} />
-        <label htmlFor="special" style={{marginLeft: '1em'}}>Add Special Ingredient</label>
+        <input type="checkbox" id="special" name="special" value="special" onChange={() => setSpecial(!special)} checked={special} disabled={bartender.inventory.special <= 0} />
+        <label htmlFor="special" style={{marginLeft: '1em'}}>Add Special Ingredient ({bartender.inventory.special} left)</label>
       </div>
       <div style={{padding: '1em'}}>
         {qualityRadio}

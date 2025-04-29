@@ -46,25 +46,26 @@ export default class BalanceMeter extends PIXI.Container {
       const diff = value - this._cash;
       this._cash = value;
 
-      const stepAmount = Math.abs(this._tmpCash - this._cash) / 100;
+      const stepAmount = (this._cash - this._tmpCash) / 100;
 
       const animStep = () => {
-        if (this._tmpCash < this._cash) {
-          this._tmpCash = Math.min(this._tmpCash + stepAmount, this._cash);
+        if (Math.abs(this._tmpCash - this._cash) > Math.abs(stepAmount)) {
+          this._tmpCash = this._tmpCash + stepAmount
           this._cashLabel.text = `$${this._tmpCash.toFixed(2)}`;
           requestAnimationFrame(animStep);
         } else {
           this._tmpCash = this._cash;
+          this._cashLabel.text = `$${this._tmpCash.toFixed(2)}`;
         }
       }
       if (this._tmpCash === null) {
         this._tmpCash = this._cash;
-        this._cashLabel.text = `$${Math.abs(this._tmpCash).toFixed(2)}`;
+        this._cashLabel.text = `$${this._tmpCash.toFixed(2)}`;
       } else if (this._tmpCash !== this._cash) {
         animStep();
 
         const diffLabel = new PIXI.Text({
-          text: `${diff > 0 ? "+" : "-"}$${diff.toFixed(2)}`,
+          text: `${diff > 0 ? "+" : "-"}$${Math.abs(diff).toFixed(2)}`,
           style: {
             fontFamily: 'Chelsea Market',
             fontSize: 25,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const DEFAULT_STATE = {
-  version: 2,
+  version: 3,
   timestamp: Date.now(),
   customerTrust: null,
   storyPath: [],
@@ -10,7 +10,13 @@ const DEFAULT_STATE = {
     phase: 'news',
     customerIndex: 0,
     decision: null,
-  }
+  },
+  inventory: {
+    special: 0,
+    instant: 0,
+    antenna: false,
+    files: []
+  },
 }
 
 const ITEM_KEY = "gameState";
@@ -106,6 +112,37 @@ const useGameState = () => {
         balance: prevState.balance + delta
       }));
     },
+    buyItem: (item, price) => {
+      switch (item) {
+        case "special":
+          setState((prevState) => ({
+            ...prevState,
+            inventory: {
+              ...prevState.inventory,
+              special: prevState.inventory.special + 1
+            },
+            balance: prevState.balance - price
+          }));
+          break;
+        default:
+          throw new Error(`Unknown item to buy: ${item}`);
+      }
+    },
+    useItem: (item) => {
+      switch (item) {
+        case "special":
+          setState((prevState) => ({
+            ...prevState,
+            inventory: {
+              ...prevState.inventory,
+              special: Math.max(prevState.inventory.special - 1, 0)
+            }
+          }));
+          break;
+        default:
+          throw new Error(`Unknown item to use: ${item}`);
+      }
+    }
   }
 };
 

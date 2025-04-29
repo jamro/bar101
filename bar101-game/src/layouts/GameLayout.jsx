@@ -19,6 +19,8 @@ function GameLayout({
   onLevelComplete,
   onDecision,
   onBalanceChange,
+  onUseItem,
+  onBuy,
 }) {
   if(!storyNode) {
     return <div>Loading...</div>;
@@ -56,6 +58,7 @@ function GameLayout({
         onTrustChange={(customerId, dt) => onTrustChange(customerId, dt)} 
         onClose={() => handleCustomerLeave()}
         onDecision={(decision) => onDecision(decision)}
+        onUseItem={(item) => onUseItem(item)}
       />
     case 'trader':
       return <TraderLayout
@@ -63,6 +66,7 @@ function GameLayout({
         trader={trader}
         balance={balance}
         onClose={() => onLevelComplete()}
+        onBuy={(item, price) => onBuy(item, price)}
       />
     default:
       return <div>Error: Unknown phase {levelPhase}</div>;

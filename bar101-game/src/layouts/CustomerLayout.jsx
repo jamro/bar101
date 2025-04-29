@@ -17,7 +17,8 @@ export default function CustomerLayout({
   onBalanceChange,
   onTrustChange,
   onClose, 
-  onDecision 
+  onDecision,
+  onUseItem,
 }) {
   
   const [phase, setPhase] = useState("ask_drink");
@@ -33,6 +34,9 @@ export default function CustomerLayout({
   const serveDrink = (drink) => {
     setDrink(drink);
     setPhase("opener");
+    if(drink.special) {
+      onUseItem("special");
+    }
   }
 
   const close = () => {
@@ -66,6 +70,7 @@ export default function CustomerLayout({
     />;
   } else if (phase === "serve_drink") {
     content = <DrinkPrepLayout 
+      bartender={bartender}
       customer={customer} 
       balance={balance}
       drinks={drinks} 

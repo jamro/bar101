@@ -20,6 +20,8 @@ function App({ }) {
     proceedToNextCustomer,
     setDilemmaDecision,
     changeBalance,
+    buyItem,
+    useItem,
   } = useGameState()
 
   const handleClearGameState = () => {
@@ -100,9 +102,14 @@ function App({ }) {
   }
   , {});
 
+  const bartender = {
+    ...worldContext.bar.bartender,
+    inventory: gameState.inventory,
+  }
+
   return <GameLayout 
     storyNode={storyNode} 
-    bartender={worldContext.bar.bartender}
+    bartender={bartender}
     trader={worldContext.bar.trader}
     customers={customers} 
     balance={gameState.balance}
@@ -116,6 +123,8 @@ function App({ }) {
     onLevelComplete={() => proceedStoryPath()}
     onDecision={(decision) => setDilemmaDecision(decision)}
     onTrustChange={(customerId, dt) => changeTrust(customerId, dt)}
+    onBuy={(item, price) => buyItem(item, price)}
+    onUseItem={(item) => useItem(item)}
   />
 }
 export default App;
