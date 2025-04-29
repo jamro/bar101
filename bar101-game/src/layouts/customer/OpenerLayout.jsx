@@ -36,44 +36,6 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
 
   useEffect(() => {
     const run = async () => {
-      let openers = []
-
-      openers.push({
-        id: customer.hobby_id,
-        label: hobbyNames[customer.hobby_id],
-        text: customer.openers[Math.floor(Math.random() * customer.openers.length)]
-      })
-  
-      let safty = 100
-      while (openers.length < 3) {
-        if (--safty < 0) {
-          throw new Error("Infinite loop detected")
-        }
-        const allCustomersArray = Object.values(allCustomers)
-        const randomCustomer = allCustomersArray[Math.floor(Math.random() * allCustomersArray.length)]
-        if (randomCustomer.id === customer.id) {
-          continue;
-        }
-        if(openers.find(o => o.id === randomCustomer.hobby_id)) {
-          continue;
-        }
-        openers.push({
-          id: randomCustomer.hobby_id,
-          label: hobbyNames[randomCustomer.hobby_id],
-          text: randomCustomer.openers[Math.floor(Math.random() * randomCustomer.openers.length)]
-        })
-      }
-  
-      // shuffle the openers
-      openers = openers.sort(() => Math.random() - 0.5)
-  
-      openers.unshift({
-        id: "neutral",
-        label: "Neutral Topic",
-        text: chat.opener.questions.neutral
-      })
-      setOpenerQuestions(openers)
-      
       if(drink.special) {
         await chatWindowRef.current.print(arrRnd(bartender.phrases.enjoy_special), "Alex", "aradan", 1)
       } else {
@@ -89,15 +51,13 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
           trustBump += 0.2
         }
         onTrustChange(trustBump)
-        onBalanceChange(DRINK_PRICE + 1 + Math.round(DRINK_PRICE*0.3*drink.quality))
         if(drink.special) {
           await chatWindowRef.current.print(arrRnd(customer.phrases.thanks_special, customer), customer.name, customer.id, 0, true)
         } else {
-          await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, customer.id, 0)
+          await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, customer.id, 0, true)
         }
-
-        setChatOptions(openers.map(o => o.label))
-        setPhase("opener")
+        setChatOptions([`That'll be $${DRINK_PRICE.toFixed(2)}`, "On the house."])
+        setPhase("charge")
       } else {
         onTrustChange(-0.2)
         await chatWindowRef.current.print(arrRnd(customer.phrases.wrong_drink, customer), customer.name, customer.id, 0)
@@ -110,6 +70,60 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
 
   const sendMessage = async (index) => {
     switch(phase) {
+
+      case "charge":
+        setChatOptions([])
+        if(index === 0) { // charge
+          await chatWindowRef.current.print(arrRnd(bartender.phrases.charge), "Alex", "aradan", 1)
+          onBalanceChange(DRINK_PRICE + 1 + Math.round(DRINK_PRICE*0.3*drink.quality))
+          await chatWindowRef.current.print(arrRnd(customer.phrases.charge_tip, customer), customer.name, customer.id, 0, true)
+        } else { // on the house
+          await chatWindowRef.current.print(arrRnd(bartender.phrases.on_house), "Alex", "aradan", 1)
+          onTrustChange(+0.2)
+          await chatWindowRef.current.print(arrRnd(customer.phrases.charge_free, customer), customer.name, customer.id, 0, true)
+        }
+
+        let openers = []
+
+        openers.push({
+          id: customer.hobby_id,
+          label: hobbyNames[customer.hobby_id],
+          text: customer.openers[Math.floor(Math.random() * customer.openers.length)]
+        })
+    
+        let safty = 100
+        while (openers.length < 3) {
+          if (--safty < 0) {
+            throw new Error("Infinite loop detected")
+          }
+          const allCustomersArray = Object.values(allCustomers)
+          const randomCustomer = allCustomersArray[Math.floor(Math.random() * allCustomersArray.length)]
+          if (randomCustomer.id === customer.id) {
+            continue;
+          }
+          if(openers.find(o => o.id === randomCustomer.hobby_id)) {
+            continue;
+          }
+          openers.push({
+            id: randomCustomer.hobby_id,
+            label: hobbyNames[randomCustomer.hobby_id],
+            text: randomCustomer.openers[Math.floor(Math.random() * randomCustomer.openers.length)]
+          })
+        }
+    
+        // shuffle the openers
+        openers = openers.sort(() => Math.random() - 0.5)
+    
+        openers.unshift({
+          id: "neutral",
+          label: "Neutral Topic",
+          text: chat.opener.questions.neutral
+        })
+        setOpenerQuestions(openers)
+        
+        setChatOptions(openers.map(o => o.label))
+        setPhase("opener")
+        break;
 
       case "goBack":
         setChatOptions([])

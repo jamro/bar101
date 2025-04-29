@@ -46,6 +46,20 @@
           "Crafted this one with you in mind. Hope it hits the spot!",
           "Gave this a personal touch. Hope you love it!"
         ],
+        "charge": [
+          "Settle up when you can.",
+          "No rush. Just drop it here when you're good.",
+          "Take your time... tab's waiting when you are.",
+          "Whenever you’re ready, you can settle up.",
+          "Just give me a nod when you're ready to close out."
+        ],
+        "on_house": [
+          "This one's on the house.",
+          "No charge for this one.",
+          "Consider it a gift.",
+          "No cost for this one.",
+          "This drink is complimentary."
+        ],
         "fix_drink": [
           "Let me fix that for you.",
           "I'll take care of that.",
@@ -157,7 +171,7 @@
             "Got a new origami fold in your pocket?",
             "Any origami cranes lately?"
         ],
-        "wrong_opener": "That's not me - In free time, I fold origami... from scrap forms mostly. It helps me think - quietly.",
+        "wrong_opener": "That's not me. In free time, I fold origami... from scrap forms mostly. It helps me think... quietly.",
         "phrases": {
           "goodbye": [
             "Thanks for the drink. I should go. Early shift tomorrow.",
@@ -168,9 +182,9 @@
           ],
           "wrong_drink": [
             "Actually... this isn't a daiquiri.",
-            "Sorry, I ordered a daiquiri — not this.",
+            "Sorry, I ordered a daiquiri. Not this.",
             "That's not a daiquiri. Mind double-checking?",
-            "You're usually sharper than this — I asked for a daiquiri.",
+            "You're usually sharper than this. I asked for a daiquiri.",
             "Unless this is your way of testing me, I'll still take the daiquiri."
           ],
           "drink": [
@@ -200,6 +214,20 @@
             "It's rare someone notices the small things. Thanks for that.",
             "Feels like you read the part I didn't say out loud. Thank you.",
             "I don't usually trust easy, but... you got it right. Thanks."
+          ],
+          "charge_tip": [
+            "Keep the change. Quietly.",
+            "Adding a little extra. Feels right.",
+            "Worth more than the receipt says.",
+            "For the silence... and the daiquiri.",
+            "Consider it... appreciation in small denominations."
+          ],
+          "charge_free": [
+            "That's... unexpected. Thank you.",
+            "Not sure I deserve that. Thank you anyway.",
+            "Small things still matter. Thanks for this.",
+            "Hard to trust gifts... but I trust this one.",
+            "I'll remember this. Quiet moments matter most."
           ]
         }
       },
@@ -230,12 +258,12 @@
             "Antique typewriters holding up?",
             "Another day, another typewriter cleaned?"
         ],
-        "wrong_opener": "That's not me - In free time, I collect antique typewriters. They remind me of a time when things were different.",
+        "wrong_opener": "That's not me. In free time, I collect antique typewriters. They remind me of a time when things were different.",
         "phrases": {
           "goodbye": [
             "Appreciate the company. Best not to linger too long.",
             "You've been... discreet. That's rare. Until next time.",
-            "Keep the lights dim and the questions quiet — I may return.",
+            "Keep the lights dim and the questions quiet... I may return.",
             "If anything shifts upstairs, you'll feel it first. I'll be back with the wind.",
             "Gotta go! There are pages I haven't shown you yet. When it's safe, I'll bring the rest."
           ],
@@ -250,7 +278,7 @@
             "Old fashioned. No questions.",
             "Same as last time - Old fashioned. You remember.",
             "Old fashioned, like the records I still keep.",
-            "Old fashioned - and maybe a word off the record.",
+            "Old fashioned... and maybe a word off the record.",
             "Old fashioned. And if you're pouring, I might even say something useful."
           ],
           "the_usual": [
@@ -273,6 +301,20 @@
             "A special touch... not many bother anymore. Thank you.",
             "Careful work, like a signature well placed. Thank you.",
             "In a world of shortcuts, this stands out. My thanks."
+          ],
+          "charge_tip": [
+            "A little extra for your precision.",
+            "Consider this... a signature well placed.",
+            "Leaving something behind... old habits.",
+            "Good work deserves a proper closing.",
+            "A quiet thank-you, folded into the bill."
+          ],
+          "charge_free": [
+            "Rare hospitality. I'll note it.",
+            "An unexpected kindness. Much appreciated.",
+            "Some gestures don't need footnotes. Thank you.",
+            "A rare courtesy. I'll remember it.",
+            "Silent gratitude. It matters more than you know."
           ]
         }
       },
@@ -303,7 +345,7 @@
             "You flying analog or digital FPV drones these days?",
             "Any new mods on your FPV quad?"
         ],
-        "wrong_opener": "That's not me - In free time, I fly FPV drones. It's a way to escape the noise of the city.",
+        "wrong_opener": "That's not me. In free time, I fly FPV drones. It's a way to escape the noise of the city.",
         "phrases": {
           "goodbye": [
             "Thanks for the gimlet. I should get going.",
@@ -315,7 +357,7 @@
           "wrong_drink": [
             "Not what I ordered. I asked for a gimlet.",
             "That's not a gimlet. Can you check?",
-            "Wrong drink. It should be a gimlet - I keep things precise.",
+            "Wrong drink. It should be a gimlet... I keep things precise.",
             "I usually ask for a gimlet. Mind switching it out?",
             "You know I only drink gimlets. Thought you'd remember by now."
           ],
@@ -339,6 +381,20 @@
             "You remember my drink. That's rare.",
             "You know what I need before I ask. Useful.",
             "Only person I trust to serve this right. Thanks."
+          ],
+          "charge_tip": [
+            "Adding a little extra. You earned it.",
+            "Tip's clean. Like the pour.",
+            "Consider it... system integrity verified.",
+            "Thanks. Call it hazard pay.",
+            "Accuracy deserves more. Here."
+          ],
+          "charge_free": [
+            "Didn't expect that. Thanks.",
+            "No charge? Noted. Appreciated.",
+            "Free pour... rare protocol. Thanks.",
+            "Quiet favors mean the most. Thanks.",
+            "Unexpected variable. Grateful for it."
           ]
         }
       },
@@ -369,12 +425,12 @@
             "Urban Tunnels whisper anything interesting?",
             "Urban exploration ever get boring for you?"
         ],
-        "wrong_opener": "That's not me - In free time, I explore the city's underground. It's a different world down there.",
+        "wrong_opener": "That's not me. In free time, I explore the city's underground. It's a different world down there.",
         "phrases": {
           "goodbye": [
             "Alright, that's enough socializing for one week. Thanks for the drink.",
             "Gotta check on something in the tunnels. Don't wait up.",
-            "If anyone asks — I wasn't here tonight. You know the drill.",
+            "If anyone asks... I wasn't here tonight. You know the drill.",
             "Gotta go! You ever need something fixed off the books... you know where to knock.",
             "Keep the glass. I'll be back when the city starts making strange noises again."
           ],
@@ -382,7 +438,7 @@
             "That's not mine. I asked for a Negroni.",
             "Hmm. Not a Negroni. Mind double-checking?",
             "Appreciate the effort, but I was counting on a Negroni.",
-            "Wrong pour - unless you're testing my patience. Negroni, please.",
+            "Wrong pour... unless you're testing my patience. Negroni, please.",
             "Nice try, but I'm a Negroni loyalist. You know that."
           ],
           "drink": [
@@ -395,7 +451,7 @@
           "the_usual": [
             "Let's not tempt routine just yet.",
             "If you've still got it the same way, sure.",
-            "You know me too well - go ahead.",
+            "You know me too well... go ahead.",
             "Only if you poured it like last time.",
             "Yeah. No need to ask tonight."
           ],
@@ -404,7 +460,7 @@
             "Right on target. Appreciate that.",
             "You always mix it like you've been down there with me.",
             "You know how to keep it simple.",
-            "That's why I keep coming back - some things here still work."
+            "That's why I keep coming back... some things here still work."
           ],
           "thanks_special": [
             "That's better than standard issue. Thanks.",
@@ -412,6 +468,20 @@
             "Clean execution. Hard to find that these days.",
             "Exactly what I needed. No corrections necessary.",
             "You got it perfect. Thanks for being sharp."
+          ],
+          "charge_tip": [
+            "Worth every credit. Plus a little insurance.",
+            "Tip's on me. You earned it the hard way.",
+            "Call it hazard pay... for good service.",
+            "Consider it a maintenance bonus.",
+            "Patch job well done. Here's a little extra."
+          ],
+          "charge_free": [
+            "Guess good work comes around. Thanks.",
+            "On the house? Might start believing in luck.",
+            "Appreciate it. Even contractors get surprises.",
+            "Didn't expect that. Cheers to you.",
+            "Nice to know some systems still run on goodwill."
           ]
         }
       },
@@ -442,11 +512,11 @@
             "You still hunting political literature no one’s supposed to find?",
             "The Council would flinch at your political literature stash."
         ],
-        "wrong_opener": "That's not me - In free time, I collect political literature. It's a reminder of what was lost.",
+        "wrong_opener": "That's not me. In free time, I collect political literature. It's a reminder of what was lost.",
         "phrases": {
           "goodbye": [
             "Appreciate the pour. Let's call this conversation... classified. Bye for now.",
-            "You'll find me between the lines - until next time.",
+            "You'll find me between the lines... until next time.",
             "If anyone asks, I was never here. But thank you, really.",
             "You listen better than most advisors I've written for. Keep the notebook close. Bye!",
             "You understand silence better than most. If things shift, I'll come to you first. Bye!"
@@ -474,7 +544,7 @@
           ],
           "thanks": [
             "Martini. Neat delivery, as always.",
-            "Appreciate the consistency - both in drink and discretion.",
+            "Appreciate the consistency... both in drink and discretion.",
             "You know, the best speeches start after the second sip.",
             "Every word counts tonight. So does the pour.",
             "You always serve silence better than most serve drinks."
@@ -485,6 +555,20 @@
             "You sharpened the edges tonight. I'll remember that. Thanks.",
             "Sometimes a gesture speaks louder than policy. Well done... and thank you.",
             "You elevated the ordinary. Not many can. My compliments... and my thanks."
+          ],
+          "charge_tip": [
+            "A small tribute for flawless delivery.",
+            "Consider this... an unscripted bonus.",
+            "Good service deserves a footnote. Here it is.",
+            "Adding a line of gratitude... quietly.",
+            "A gesture, well-placed. Like every good word."
+          ],
+          "charge_free": [
+            "A rare speech without a price. Impressive.",
+            "You understand the art of timing. Thank you.",
+            "Not many know when to gift silence. Well done.",
+            "This generosity... will not be forgotten.",
+            "A masterstroke of service. My compliments."
           ]
         }
       },
@@ -515,7 +599,7 @@
           "The city looks different through analog photography, doesn’t it?",
           "Is analog photography still worth the risk?"
         ],
-        "wrong_opener": "That's not me - In free time, I take analog photographs. They capture the truth in a way that digital can't.",
+        "wrong_opener": "That's not me. In free time, I take analog photographs. They capture the truth in a way that digital can't.",
         "phrases": {
           "goodbye": [
             "Thanks for the drink. I've got what I need — for now.",
@@ -558,6 +642,20 @@
             "You serve it better than most sell the news. Thanks for that.",
             "A little extra truth in the glass. Rare find. Thank you.",
             "If more places got it this right, I'd have fewer secrets. Thanks."
+          ],
+          "charge_tip": [
+            "Consider it a bonus for not editing the good parts.",
+            "Little extra for keeping things honest.",
+            "For the drink... and the discretion.",
+            "A tip for serving truth unfiltered.",
+            "Good service deserves a better byline. Here."
+          ],
+          "charge_free": [
+            "Free pour? Guess the real story's still alive.",
+            "Not used to freebies without a catch. Thanks.",
+            "No edits needed on this one. Appreciate it.",
+            "You just made the lead story... in a good way.",
+            "Rare to find something honest... thanks for that."
           ]
         }
       }
