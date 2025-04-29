@@ -5,9 +5,14 @@ import useResizeObserver from "../hooks/useResizeObserver";
 import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import BarCustomerMasterContainer from "../pixi/barCustomer/BarCustomerMasterContainer";
 
+let barCustomerMasterContainer; // TODO:re factor to avoid global variable
+
 export default function CustomerPreview({ customer, drink, children, drinkAnim=false, customerAnim=false, balance=0 }) {
+  if (!barCustomerMasterContainer) {
+    barCustomerMasterContainer = new BarCustomerMasterContainer();
+  }
   const [containerRef, size] = useResizeObserver();
-  const barSceneRef = useRef(new BarCustomerMasterContainer());
+  const barSceneRef = useRef(barCustomerMasterContainer);
 
   useEffect(() => {
     barSceneRef.current.setDrink(drink, drinkAnim);
