@@ -23,6 +23,6 @@ for voice in voice_bank.values():
         if not os.path.exists(file_path):
             tts.tts_to_file(
                 text=sample,
-                speaker=voice["speker"],
+                speaker=voice["speaker"],
                 file_path=file_path,
             )

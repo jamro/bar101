@@ -31,6 +31,19 @@ for phrase in phrases:
             log=log,
         )
 
+# Trader
+phrases = context["bar"]["trader"]["phrases"].keys()
+for phrase in phrases:
+    variants = context["bar"]["trader"]["phrases"][phrase]
+    for i in range(0, len(variants)):
+        generate_voiceover(
+            "context",
+            "trader",
+            variants[i],
+            model=model,
+            log=log,
+        )
+
 # Customers
 cusomers = context["bar"]["customers"]
 for customer in cusomers:

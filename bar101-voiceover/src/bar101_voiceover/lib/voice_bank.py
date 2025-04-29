@@ -17,6 +17,15 @@ voice_bank = {
             "They call it unity, but scores spike and drop with every ritual; the system is showing cracks, and people are searching for answers the Council won't give."
         ]
     },
+    "trader": {
+        "id": "trader",
+        "speaker": "p312",
+        "samples": [
+            "Need something the BCI wouldn't approve?",
+            "You buying or just pouring tonight?",
+            "Got access. Discreet. You want in?",
+        ]
+    },
     "aradan": {
         "id": "aradan",
         "speaker": "p267",
