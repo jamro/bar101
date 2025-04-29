@@ -172,7 +172,7 @@ for node_file in node_files:
                         for text in belief[segment]:
                             generate_voiceover(
                                 node_id,
-                                customer_id if segment != "monologue" else "aradan",
+                                customer_id if segment == "monologue" else "aradan",
                                 text,
                                 model=model,
                                 log=log,
