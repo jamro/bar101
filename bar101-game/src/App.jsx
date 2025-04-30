@@ -4,6 +4,7 @@ import LoadingScreen from './layouts/LoadingScreen';
 import StartLayout from './layouts/StartLayout';
 import useGameState from './hooks/useGameState';
 import GameAssets from './pixi/GameAssets';
+import DrinkPrepLayout from './layouts/customer/DrinkPrepLayout';
 
 function App({ }) {
   const [ storyNode, setStoryNode ] = useState(null);

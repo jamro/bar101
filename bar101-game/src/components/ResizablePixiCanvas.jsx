@@ -5,7 +5,7 @@ import useResizeObserver from '../hooks/useResizeObserver';
 
 const pixiCache = new Map(); // TODO:re factor to avoid global variable
 
-const ResizablePixiCanvas = ({className="", masterContainer=null, onReady=() => {}}) => {
+const ResizablePixiCanvas = ({className="", style={}, masterContainer=null, onReady=() => {}}) => {
   const [pixiContainer, size] = useResizeObserver();
   const appRef = useRef(null);
 
@@ -22,12 +22,14 @@ const ResizablePixiCanvas = ({className="", masterContainer=null, onReady=() => 
 
       const cacheItem = pixiCache.get(cacheId);
       if(cacheItem) {
+        console.log("[ResizablePixiCanvas] using cached app...");
         appRef.current = cacheItem;
         pixiContainer.current.appendChild(cacheItem.canvas);
         cacheItem.start()
       } else {
         extensions.add(ResizePlugin);
         const app = new PIXI.Application();
+        pixiCache.set(cacheId, app);
         await app.init({ 
           width: pixiContainer.current.clientWidth,
           height: pixiContainer.current.clientHeight,
@@ -35,12 +37,16 @@ const ResizablePixiCanvas = ({className="", masterContainer=null, onReady=() => 
           resizeTo: pixiContainer.current,
           antialias: true,
         });
-        pixiContainer.current.appendChild(app.canvas);
         appRef.current = app;
         app.stage.addChild(masterContainer);
-        masterContainer.resize(pixiContainer.current.clientWidth, pixiContainer.current.clientHeight);
-        app.resize(size.width, size.height);
-        pixiCache.set(cacheId, app);
+        masterContainer.doInit();
+        if(pixiContainer.current) {
+          pixiContainer.current.appendChild(app.canvas);
+          masterContainer.resize(pixiContainer.current.clientWidth, pixiContainer.current.clientHeight);
+          app.resize(size.width, size.height);
+        } else {
+          console.warn("[ResizablePixiCanvas] pixiContainer is null");
+        }
       }
 
       const elapsed = performance.now() - now;
@@ -72,7 +78,7 @@ const ResizablePixiCanvas = ({className="", masterContainer=null, onReady=() => 
     appRef.current.resize(size.width, size.height);
   }, [size]);
 
-  return <div ref={pixiContainer} style={{backgroundColor: '#000000'}} className={className} />;
+  return <div ref={pixiContainer} style={{backgroundColor: '#000000', ...style}} className={className} />;
 };
 
 export default ResizablePixiCanvas;

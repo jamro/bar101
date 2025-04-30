@@ -1,52 +1,42 @@
-import React, { useState } from 'react';
-import CustomerPreview from '../../components/CustomerPreview';
-import ChatWindow from '../../components/chat/ChatWindow';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import ResizablePixiCanvas from '../../components/ResizablePixiCanvas';
+import CocktailMasterContainer from '../../pixi/cocktail/CocktailMasterContainer';
 
-export default function DrinkPrepLayout({ bartender, customer, balance, drinks, onServe }) {
+let cocktailMasterContainer; // TODO:re factor to avoid global variable
 
-  const [special, setSpecial] = useState(false);
-  const [quality, setQuality] = useState(0.5);
-
-  const serve = (drink) => {
-    onServe({
-      ...drink,
-      quality,
-      special,
-    })
+export default function DrinkPrepLayout({ drinks, onServe }) {
+  if (!cocktailMasterContainer) {
+    cocktailMasterContainer = new CocktailMasterContainer();
   }
+  const cocktailSceneRef = useRef(cocktailMasterContainer);
 
-  const buttons = Object.values(drinks).map((drink) => (
-    <button className='btn btn-primary m-1' key={drink.id} onClick={() => serve(drink)}>
-      {drink.name}
-    </button>
-  ));
+  useEffect(() => {
+    cocktailMasterContainer.on('serveDrink', (drink) => {
+      onServe(drink);
+    })
+    return () => {
+      cocktailMasterContainer.off('serveDrink');
+    }
+  }, []);
 
-  const qualityRadio = [0, 0.25, 0.50, 0.75, 1].map((q) => (
-    <div key={q}>
-      <input type="radio" id={`quality-${q}`} name="quality" value={q} onChange={() => setQuality(q)} checked={quality === q} />
-      <label htmlFor={`quality-${q}`} style={{marginLeft: '1em'}}>{100*q}% Quality</label>
-    </div>
-  ));
+  useEffect(() => {
+    cocktailMasterContainer.setDrinks(drinks);
+  }, [drinks]);
 
-  console.log(quality)
+  return <ResizablePixiCanvas style={{width: '100%', height: '100%'}} masterContainer={cocktailSceneRef.current} />
 
-  return <CustomerPreview customer={customer} balance={balance}>
-      <div>
-        {buttons}
-      </div>
-      <div style={{padding: '1em'}}>
-        <input type="checkbox" id="special" name="special" value="special" onChange={() => setSpecial(!special)} checked={special} disabled={bartender.inventory.special <= 0} />
-        <label htmlFor="special" style={{marginLeft: '1em'}}>Add Special Ingredient ({bartender.inventory.special} left)</label>
-      </div>
-      <div style={{padding: '1em'}}>
-        {qualityRadio}
-      </div>
-    </CustomerPreview>
 }
 
 DrinkPrepLayout.propTypes = {
-  customer: PropTypes.object.isRequired,
   drinks: PropTypes.object.isRequired,
-  onServe: PropTypes.func.isRequired,
+  onServe: PropTypes.func,
+};
+
+
+DrinkPrepLayout.defaultProps = {
+  customer: {},
+  drinks: {},
+  onServe: () => {},
+  bartender: {},
 };
