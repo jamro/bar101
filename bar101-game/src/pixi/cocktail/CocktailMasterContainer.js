@@ -16,8 +16,15 @@ class CocktailMasterContainer extends MasterContainer {
     this.addChild(this._view);
   }
 
+  restore() {
+    if (this._view) {
+      this._view.parent.removeChild(this._view);
+    }
+    this.init();
+  }
+
   setDrinks(drinks) {
-    this._drinks = (drinks);
+    this._drinks = drinks;
   }
 
   resize(width, height) {

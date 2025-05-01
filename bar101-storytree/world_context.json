@@ -113,65 +113,59 @@
         "id": "daiquiri",
         "name": "Daiquiri",
         "glass": "coupe",
-        "mixing": "shaken",
         "ingredients": [
-          { "name": "Rum", "amount": "60" },
-          { "name": "Lime Juice", "amount": "25" },
-          { "name": "Simple Syrup", "amount": "15" }
+          { "id": "rum", "name": "Rum", "amount": 60 },
+          { "id": "lime_juice", "name": "Lime Juice", "amount": 20 },
+          { "id": "simple_syrup", "name": "Simple Syrup", "amount": 10 }
         ]
       },
       "old_fashioned": {
         "id": "old_fashioned",
         "name": "Old Fashioned",
         "glass": "rocks",
-        "mixing": "stirred",
         "ingredients": [
-          { "name": "Whiskey", "amount": "60" },
-          { "name": "Simple Syrup", "amount": "10" },
-          { "name": "Lime Juice", "amount": "5" }
+          { "id": "whiskey", "name": "Whiskey", "amount": 60 },
+          { "id": "simple_syrup", "name": "Simple Syrup", "amount": 20 },
+          { "id": "lime_juice", "name": "Lime Juice", "amount": 10 }
         ]
       },
       "gimlet": {
         "id": "gimlet",
         "name": "Gimlet",
         "glass": "coupe",
-        "mixing": "shaken",
         "ingredients": [
-          { "name": "Gin", "amount": "60" },
-          { "name": "Lime Juice", "amount": "30" },
-          { "name": "Simple Syrup", "amount": "15" }
+          { "id": "gin", "name": "Gin", "amount": 60 },
+          { "id": "simple_syrup", "name": "Lime Juice", "amount": 20 },
+          { "id": "lime_juice", "name": "Simple Syrup", "amount": 10 }
         ]
       },
       "negroni": {
         "id": "negroni",
         "name": "Negroni",
         "glass": "rocks",
-        "mixing": "stirred",
         "ingredients": [
-          { "name": "Gin", "amount": "30" },
-          { "name": "Triple Sec", "amount": "30" },
-          { "name": "Vermouth", "amount": "30" }
+          { "id": "gin", "name": "Gin", "amount": 30 },
+          { "id": "triple_sec", "name": "Triple Sec", "amount": 30 },
+          { "id": "vermouth", "name": "Vermouth", "amount": 30 }
         ]
       },
       "martini": {
         "id": "martini",
         "name": "Martini",
         "glass": "coupe",
-        "mixing": "stirred",
         "ingredients": [
-          { "name": "Gin", "amount": "60" },
-          { "name": "Vermouth", "amount": "15" }
+          { "id": "gin", "name": "Gin", "amount": 70 },
+          { "id": "vermouth", "name": "Vermouth", "amount": 20 }
         ]
       },
       "sidecar": {
         "id": "sidecar",
         "name": "Sidecar",
         "glass": "coupe",
-        "mixing": "shaken",
         "ingredients": [
-          { "name": "Whiskey", "amount": "45" },
-          { "name": "Triple Sec", "amount": "25" },
-          { "name": "Lemon Juice", "amount": "20" }
+          { "id": "whiskey", "name": "Whiskey", "amount": 60 },
+          { "id": "triple_sec", "name": "Triple Sec", "amount": 20 },
+          { "id": "lime_juice", "name": "Lemon Juice", "amount": 10 }
         ]
       }
     },

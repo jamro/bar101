@@ -18,6 +18,7 @@ class GameAssets {
       'img/tv.png',
       'img/news_official.png',
       'img/news_underground.png',
+      'img/drop.png',
     ];
   }
 

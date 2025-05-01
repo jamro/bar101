@@ -8,6 +8,10 @@ export default class MasterContainer extends PIXI.Container {
 
   }
 
+  restore() {
+
+  }
+
   doInit() {
     if (this._initialized) {
       return;
