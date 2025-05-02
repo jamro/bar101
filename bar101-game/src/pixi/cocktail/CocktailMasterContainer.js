@@ -1,24 +1,34 @@
 import * as PIXI from 'pixi.js';
 import MasterContainer from "../MasterContainer";
 import CocktailView from './CocktailView';
+import RecipesView from './RecipesView';
 
 class CocktailMasterContainer extends MasterContainer {
   constructor() {
     super();
-    this._view = null;
+    this._mixingView = null;
+    this._recipesView = null;
   }
 
   init() {
-    this._view = new CocktailView(this._drinks);
-    this._view.on('serveDrink', (drink) => {
+    this._mixingView = new CocktailView(this._drinks);
+    this._recipesView = new RecipesView(this._drinks);
+    this._mixingView.on('serveDrink', (drink) => {
       this.emit('serveDrink', drink);
     });
-    this.addChild(this._view);
+    this._mixingView.on('openRecipes', () => {
+      this._recipesView.visible = true;
+    });
+    this._recipesView.on('close', () => {
+      this._recipesView.visible = false;
+    })
+    this.addChild(this._mixingView);
+    this.addChild(this._recipesView);
   }
 
   restore() {
-    if (this._view) {
-      this._view.parent.removeChild(this._view);
+    if (this._mixingView) {
+      this._mixingView.parent.removeChild(this._mixingView);
     }
     this.init();
   }
@@ -30,23 +40,25 @@ class CocktailMasterContainer extends MasterContainer {
   resize(width, height) {
     let viewWidth, viewHeight;
     if(width > height) {
-      this._view.setLandscapeMode();
-      viewWidth = this._view.segmentSize * 2;
-      viewHeight = this._view.segmentSize;
+      this._mixingView.setLandscapeMode();
+      viewWidth = this._mixingView.segmentSize * 2;
+      viewHeight = this._mixingView.segmentSize;
     } else {
-      this._view.setPortraitMode();
-      viewWidth = this._view.segmentSize;
-      viewHeight = this._view.segmentSize * 2;
+      this._mixingView.setPortraitMode();
+      viewWidth = this._mixingView.segmentSize;
+      viewHeight = this._mixingView.segmentSize * 2;
     }
 
     const scaleW = width / viewWidth;
     const scaleH = height / viewHeight;
     const scale = Math.min(scaleW, scaleH);
-    this._view.scale.set(scale);
-    this._view.x = (width - viewWidth * scale) / 2;
-    this._view.y = (height - viewHeight * scale) / 2;
+    this._mixingView.scale.set(scale);
+    this._mixingView.x = (width - viewWidth * scale) / 2;
+    this._mixingView.y = (height - viewHeight * scale) / 2;
 
-    this._view.sclaleBackground(1/scale);
+    this._mixingView.sclaleBackground(1/scale);
+
+    this._recipesView.resize(width, height);
   }
 
 }

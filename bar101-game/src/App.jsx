@@ -108,10 +108,7 @@ function App({ }) {
     inventory: gameState.inventory,
   }
 
-  //return <DrinkPrepLayout
-  //  drinks={worldContext.bar.drinks} 
-  //  onServe={console.log}
-  ///>
+
 
   return <GameLayout 
     storyNode={storyNode} 

@@ -6,6 +6,7 @@ import IngredientsDisplay from './IngredientsDisplay';
 import Table from './Table';
 import GameAssets from '../GameAssets';
 import Shelfs from './Shelfs';
+import WallItems from './WallItems';
 
 const LANDSCAPE = 'landscape';
 const PORTRAIT = 'portrait';
@@ -45,6 +46,15 @@ export default class CocktailView extends PIXI.Container {
     this._background = new PIXI.Sprite(GameAssets.assets['img/wall.jpg']);
     this._background.anchor.set(0.5);
     this.addChild(this._background);
+
+    // recipes
+    this._wallItems = new WallItems();
+    this.addChild(this._wallItems);
+    this._wallItems.on('openRecipes', () => {
+      this._endDrag();
+      this._endShaking();
+      this.emit('openRecipes');
+    });
 
     this._table = new Table();
     this.addChild(this._table);
@@ -323,6 +333,9 @@ export default class CocktailView extends PIXI.Container {
     this._background.x = 1024;
     this._background.y = 512;
     this._shelfs.isBottomVisible = false;
+
+    this._wallItems.x =  this.segmentSize*1.5
+    this._wallItems.y =  this.segmentSize*0.4 
   }
 
   setPortraitMode() {
@@ -349,6 +362,9 @@ export default class CocktailView extends PIXI.Container {
     this._background.y = 1024;
     this._background.x = 512;
     this._shelfs.isBottomVisible = true;
+
+    this._wallItems.x =  this.segmentSize*0.5
+    this._wallItems.y =  this.segmentSize*1.4 
   }
 
   get segmentSize() {
