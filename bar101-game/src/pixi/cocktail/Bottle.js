@@ -45,6 +45,12 @@ const assetConfigs = {
     yShift: 410,
     scale: 0.75,
   },
+  absinthe: {
+    texture: 'img/bottle_absinthe.png',
+    x: 0,
+    yShift: 350,
+    scale: 0.65,
+  },
 }
 
 export default class Bottle extends PIXI.Container {

@@ -12,7 +12,7 @@ const DEFAULT_STATE = {
     decision: null,
   },
   inventory: {
-    special: 0,
+    special: 1,
     instant: 0,
     antenna: false,
     files: []
@@ -129,6 +129,7 @@ const useGameState = () => {
       }
     },
     useItem: (item) => {
+      console.log(`Using item:`, item);
       switch (item) {
         case "special":
           setState((prevState) => ({

@@ -30,7 +30,7 @@ function getIngredients(drinks) {
 
 export default class CocktailView extends PIXI.Container {
 
-  constructor(drinks) {
+  constructor(drinks, inventory) {
     super()
     if (drinks.length === 0) {
       console.warn("[CocktailMasterContainer] No drinks to display");
@@ -78,7 +78,7 @@ export default class CocktailView extends PIXI.Container {
     this.addChild(this._liquid);
 
     // bottles
-    this._shelfs = new Shelfs(this._ingredients)
+    this._shelfs = new Shelfs(this._ingredients, inventory)
     this.addChild(this._shelfs);
     this._dragTarget = null;
     this._shelfs.bottles.forEach((bottle) => {
@@ -124,12 +124,22 @@ export default class CocktailView extends PIXI.Container {
     }
   }
 
+  setInventory(inventory) {
+    this._shelfs.setInventory(inventory);
+  }
+
   destroy() {
     super.destroy();
     this.clearAllIntervals();
   }
 
   _pour(ingredientId, amount) {
+    if (ingredientId === "absinthe") {
+      this._shaker.isSpecial = true;
+      this._ingredientsDisplay.update(this._currentDrinkIngredients);
+      this._shaker.resetProgress()
+      return;
+    }
     if(this._shakerContent >= SHAKER_CAPACITY) {
       return;
     }
@@ -170,7 +180,7 @@ export default class CocktailView extends PIXI.Container {
       drink = {
         id: "unknown",
         quality: 0,
-        special: false,
+        special: this._shaker.isSpecial,
         glass: Math.random() > 0.5 ? "rocks" : "coupe",
       }
     } else {
@@ -178,7 +188,7 @@ export default class CocktailView extends PIXI.Container {
       drink = {
         ...match,
         quality,
-        special: false,
+        special: this._shaker.isSpecial,
       }
     }
 

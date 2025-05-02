@@ -9,10 +9,12 @@ class CocktailMasterContainer extends MasterContainer {
     this._mixingView = null;
     this._recipesView = null;
     this._fadeoutCover = null;
+    this._drinks = null;
+    this._inventory = null;
   }
 
   init() {
-    this._mixingView = new CocktailView(this._drinks);
+    this._mixingView = new CocktailView(this._drinks, this._inventory);
     this._recipesView = new RecipesView(this._drinks);
     this._fadeoutCover = new PIXI.Graphics();
     this._mixingView.on('serveDrink', (drink) => {
@@ -30,7 +32,6 @@ class CocktailMasterContainer extends MasterContainer {
   }
 
   _fadeOut(drink) {
-
     this._fadeoutCover.alpha = 0;
     this.addChild(this._fadeoutCover);
 
@@ -67,34 +68,59 @@ class CocktailMasterContainer extends MasterContainer {
   }
 
   setDrinks(drinks) {
+    if (drinks === this._drinks) {
+      return;
+    }
+    if (this._mixingView) {
+      console.warn("CocktailMasterContainer: setDrinks called after init");
+    }
+    if (this._recipesView) {
+      console.warn("CocktailMasterContainer: setDrinks called after init");
+    }
     this._drinks = drinks;
+  }
+
+  setInventory(inventory) {
+    if (inventory === this._inventory) {
+      return;
+    }
+    if (this._mixingView) {
+      this._mixingView.setInventory(inventory);
+    }
+    this._inventory = inventory;
   }
 
   resize(width, height) {
     let viewWidth, viewHeight;
-    if(width > height) {
-      this._mixingView.setLandscapeMode();
-      viewWidth = this._mixingView.segmentSize * 2;
-      viewHeight = this._mixingView.segmentSize;
-    } else {
-      this._mixingView.setPortraitMode();
-      viewWidth = this._mixingView.segmentSize;
-      viewHeight = this._mixingView.segmentSize * 2;
+    if(this._mixingView) {
+      if(width > height) {
+        this._mixingView.setLandscapeMode();
+        viewWidth = this._mixingView.segmentSize * 2;
+        viewHeight = this._mixingView.segmentSize;
+      } else {
+        this._mixingView.setPortraitMode();
+        viewWidth = this._mixingView.segmentSize;
+        viewHeight = this._mixingView.segmentSize * 2;
+      }
+
+      const scaleW = width / viewWidth;
+      const scaleH = height / viewHeight;
+      const scale = Math.min(scaleW, scaleH);
+      this._mixingView.scale.set(scale);
+      this._mixingView.x = (width - viewWidth * scale) / 2;
+      this._mixingView.y = (height - viewHeight * scale) / 2;
+
+      this._mixingView.sclaleBackground(1/scale);
     }
 
-    const scaleW = width / viewWidth;
-    const scaleH = height / viewHeight;
-    const scale = Math.min(scaleW, scaleH);
-    this._mixingView.scale.set(scale);
-    this._mixingView.x = (width - viewWidth * scale) / 2;
-    this._mixingView.y = (height - viewHeight * scale) / 2;
+    if(this._recipesView) {
+      this._recipesView.resize(width, height);
+    }
 
-    this._mixingView.sclaleBackground(1/scale);
-
-    this._recipesView.resize(width, height);
-
-    this._fadeoutCover.clear();
-    this._fadeoutCover.rect(0, 0, width, height).fill(0x000000);
+    if(this._fadeoutCover) {
+      this._fadeoutCover.clear();
+      this._fadeoutCover.rect(0, 0, width, height).fill(0x000000);
+    }
   }
 
 }
