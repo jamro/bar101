@@ -9,6 +9,7 @@ export default class RecipesView extends PIXI.Container {
     this._overlay.alpha = 0.65;
     this._overlay.interactive = true;
     this.addChild(this._overlay);
+    this._renderLoop = null;
 
     this._closeLabel = new PIXI.Text({
       text: 'Close X',
@@ -64,12 +65,11 @@ export default class RecipesView extends PIXI.Container {
     this.addChild(this._closeButton);
     
     // rendering / update
-    let loop
     this.on('added', () => {
-      loop = setInterval(() => this._update(), 1000/60);
+      this._renderLoop = setInterval(() => this._update(), 1000/60);
     })
     this.on('removed', () => {
-      clearInterval(loop)
+      clearInterval(this._renderLoop)
     })
     
   }
@@ -139,6 +139,11 @@ export default class RecipesView extends PIXI.Container {
       this._paperContainer.y = height/2
     }
 
+  }
+
+  destroy() {
+    super.destroy();
+    clearInterval(this._renderLoop);
   }
 
 }

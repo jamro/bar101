@@ -36,6 +36,8 @@ export default class CocktailView extends PIXI.Container {
       console.warn("[CocktailMasterContainer] No drinks to display");
       return;
     }
+    this._loopRegister = [];
+    this._endingAnimationPlaying = false;
     this._currentDrinkIngredients = {}
     this._shakerContent = 0;
     this._drinks = drinks;
@@ -94,14 +96,37 @@ export default class CocktailView extends PIXI.Container {
     // rendering / update
     let loop
     this.on('added', () => {
-      loop = setInterval(() => this._update(), 1000/60);
+      loop = this.setInterval(() => this._update(), 1000/60);
     })
     this.on('removed', () => {
-      clearInterval(loop)
+      this.clearInterval(loop)
     })
 
     // init positioning
     this.setLandscapeMode()
+  }
+
+  setInterval(func, delay) {
+    const interval = setInterval(func, delay);
+    this._loopRegister.push(interval);
+    return interval;
+  }
+  clearInterval(interval) {
+    clearInterval(interval);
+    this._loopRegister = this._loopRegister.filter(i => i !== interval);
+  }
+
+  clearAllIntervals() {
+    while (this._loopRegister.length > 0) {
+      const interval = this._loopRegister.pop();
+      console.log("clearing interval", interval);
+      clearInterval(interval);
+    }
+  }
+
+  destroy() {
+    super.destroy();
+    this.clearAllIntervals();
   }
 
   _pour(ingredientId, amount) {
@@ -139,29 +164,26 @@ export default class CocktailView extends PIXI.Container {
   }
 
   serveDrink() {
-    setTimeout(() => {
-      const match = this._matchDrink();
-      if (!match) {
-        this.emit('serveDrink', {
-          id: "unknown",
-          quality: 0,
-          special: false,
-          glass: Math.random() > 0.5 ? "rocks" : "coupe",
-        });
-        return
+    const match = this._matchDrink();
+    let drink
+    if (!match) {
+      drink = {
+        id: "unknown",
+        quality: 0,
+        special: false,
+        glass: Math.random() > 0.5 ? "rocks" : "coupe",
       }
-
+    } else {
       const quality = this._calcDrinkQuality(match);
-
-      this.emit('serveDrink', {
+      drink = {
         ...match,
         quality,
         special: false,
-      });
-      return
+      }
+    }
 
-    }, 1000)
-
+    this.playEndingAnimation(drink);
+    
   }
 
   _matchDrink() {
@@ -231,7 +253,7 @@ export default class CocktailView extends PIXI.Container {
   }
 
   _update() {
-    if (this._dragTarget) {
+    if (this._dragTarget && !this._endingAnimationPlaying) {
       this._dragTarget.tipX = this._dragPointer.x - this._shelfs.x;
       this._dragTarget.y = this._dragPointer.y - this._shelfs.y + this._dragTarget.yShift;
       this._liquid.cutOffY = this._shaker.y;
@@ -266,7 +288,7 @@ export default class CocktailView extends PIXI.Container {
 
       this._liquid.source.x = this._dragTarget.tipX + this._shelfs.x
       this._liquid.source.y = this._dragTarget.tipY + this._shelfs.y
-    } else {
+    } else if (!this._endingAnimationPlaying) {
       this._liquid.amount = 0;
     }
     for (let i = 0; i < this._shelfs.bottles.length; i++) {
@@ -279,12 +301,12 @@ export default class CocktailView extends PIXI.Container {
     }
 
     this._liquid.update();
-    if(this._liquid.amount > 0 && this._dragTarget) {
+    if(this._liquid.amount > 0 && this._dragTarget && !this._endingAnimationPlaying) {
       this._pour(this._dragTarget.id, this._liquid.amount/4);
       this._ingredientsDisplay.update(this._currentDrinkIngredients);
     }
 
-    if (this._shaker.shaking) {
+    if (this._shaker.shaking && !this._endingAnimationPlaying) {
       this._ingredientsDisplay.alpha += (0 - this._ingredientsDisplay.alpha) * 0.1;
       this._shaker.updateShaking(
         this._dragPointer.x,
@@ -293,19 +315,81 @@ export default class CocktailView extends PIXI.Container {
       if (this._shaker.progress >= 1) {
         this._endShaking();
       }
-    } else {
+    } else if (!this._endingAnimationPlaying) {
       this._ingredientsDisplay.alpha += (1 - this._ingredientsDisplay.alpha) * 0.1;
       this._shaker.postShaking();
     }
 
-    if (this._shakerContent >= SHAKER_CAPACITY && this._shaker.progress < 1) {
+    if (this._shakerContent >= SHAKER_CAPACITY && this._shaker.progress < 1 && !this._endingAnimationPlaying) {
       this._endDrag();
       this._shaker.open(0);
       this._ingredientsDisplay.showHint("Time to shake!")
-    } else if (this._shakerContent >= SHAKER_CAPACITY && this._shaker.progress >= 1) {
-      this._shaker.open(1);
-      this._ingredientsDisplay.showHint("")
+    } 
+  }
+
+  async playEndingAnimation(drink) {
+    drink.glass = "coupe"
+    if (this._endingAnimationPlaying) {
+      return;
     }
+    this._endingAnimationPlaying = true;
+    this._shaker.open(1);
+    this._ingredientsDisplay.showHint("")
+
+    const glass = new PIXI.Sprite(GameAssets.assets['img/' + drink.glass + '.png']);
+    glass.anchor.set(0.5, 1);
+    glass.x = this._pourPoint.x + 500;
+    glass.y = this._pourPoint.y + 200;
+    glass.alpha = 0;
+    glass.scale.set(1.5);
+    this.addChild(glass);
+    glass.parent.setChildIndex(glass, this._shaker.parent.getChildIndex(this._shaker));
+
+    if (drink.glass === "rocks") {
+      this._liquid.cutOffY = glass.y - 110
+    } else {
+      this._liquid.cutOffY = glass.y - 200
+    }
+
+    await new Promise((resolve) => {
+      let animLoop =  null
+      animLoop = this.setInterval(() => {
+        const dx = this._pourPoint.x - 100 - this._shaker.x;
+        const dy = this._pourPoint.y - 300 - this._shaker.y;
+        const gx = this._pourPoint.x - glass.x - 30;
+        const ga = 1 - glass.alpha;
+        this._shaker.x += dx * 0.05;
+        this._shaker.y += dy * 0.05;
+        glass.x += gx * 0.05;
+        glass.alpha += ga * 0.05;
+        this._shaker.postShaking();
+        if(Math.abs(dx) < 5 && Math.abs(dy) < 5 && Math.abs(gx) < 5 && Math.abs(ga) < 0.01) {
+          this.clearInterval(animLoop);
+          resolve();
+        }
+      }, 1000/60);
+    })
+
+    await new Promise((resolve) => {
+      let animLoop =  null
+      animLoop = this.setInterval(() => {
+        const rx = Math.PI*0.75 - this._shaker.rotation;
+        this._shaker.rotation += rx * 0.04;
+        this._shaker.postShaking();
+
+        this._liquid.source.x = this._shaker.x + 60 * Math.cos(this._shaker.rotation - Math.PI/2);
+        this._liquid.source.y = this._shaker.y + 60 * Math.sin(this._shaker.rotation - Math.PI/2);
+        this._liquid.amount = Math.max(0, (this._shaker.rotation - 0.5*Math.PI)/(0.5*Math.PI))
+
+        if(Math.abs(rx) < 0.02) {
+          this._liquid.amount = 0;
+          this.clearInterval(animLoop);
+          resolve();
+        }
+      }, 1000/60);
+    })
+
+    this.emit('serveDrink', drink);
   }
   
   setLandscapeMode() {

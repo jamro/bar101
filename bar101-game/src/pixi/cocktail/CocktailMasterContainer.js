@@ -8,13 +8,15 @@ class CocktailMasterContainer extends MasterContainer {
     super();
     this._mixingView = null;
     this._recipesView = null;
+    this._fadeoutCover = null;
   }
 
   init() {
     this._mixingView = new CocktailView(this._drinks);
     this._recipesView = new RecipesView(this._drinks);
+    this._fadeoutCover = new PIXI.Graphics();
     this._mixingView.on('serveDrink', (drink) => {
-      this.emit('serveDrink', drink);
+      this._fadeOut(drink);
     });
     this._mixingView.on('openRecipes', () => {
       this._recipesView.visible = true;
@@ -25,6 +27,36 @@ class CocktailMasterContainer extends MasterContainer {
     this.addChild(this._mixingView);
     this.addChild(this._recipesView);
     this._recipesView.visible = false;
+  }
+
+  _fadeOut(drink) {
+
+    this._fadeoutCover.alpha = 0;
+    this.addChild(this._fadeoutCover);
+
+    const loop = setInterval(() => {
+
+      this._fadeoutCover.alpha += 0.02;
+      if (this._fadeoutCover.alpha >= 1) {
+        clearInterval(loop);
+        this.cleanUp();
+        this.emit('serveDrink', drink);
+      }
+    }, 1000 / 60);
+
+  }
+
+  cleanUp() {
+    this.removeChild(this._mixingView);
+    this.removeChild(this._recipesView);
+    this.removeChild(this._fadeoutCover);
+    this._recipesView.removeAllListeners();
+    this._mixingView.removeAllListeners();
+    this._mixingView.destroy({ children: true, texture: false, baseTexture: false });
+    this._recipesView.destroy({ children: true, texture: false, baseTexture: false });
+    this._mixingView = null;
+    this._recipesView = null;
+    this._fadeoutCover = null;
   }
 
   restore() {
@@ -60,6 +92,9 @@ class CocktailMasterContainer extends MasterContainer {
     this._mixingView.sclaleBackground(1/scale);
 
     this._recipesView.resize(width, height);
+
+    this._fadeoutCover.clear();
+    this._fadeoutCover.rect(0, 0, width, height).fill(0x000000);
   }
 
 }

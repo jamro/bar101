@@ -108,8 +108,6 @@ function App({ }) {
     inventory: gameState.inventory,
   }
 
-
-
   return <GameLayout 
     storyNode={storyNode} 
     bartender={bartender}
