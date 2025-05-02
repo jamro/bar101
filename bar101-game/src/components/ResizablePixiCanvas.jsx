@@ -26,6 +26,7 @@ const ResizablePixiCanvas = ({className="", style={}, masterContainer=null, onRe
         appRef.current = cacheItem;
         pixiContainer.current.appendChild(cacheItem.canvas);
         cacheItem.start()
+        cacheItem.resizeTo = pixiContainer.current;
         masterContainer.restore();
       } else {
         extensions.add(ResizePlugin);
