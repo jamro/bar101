@@ -29,6 +29,20 @@ class CocktailMasterContainer extends MasterContainer {
     this.addChild(this._mixingView);
     this.addChild(this._recipesView);
     this._recipesView.visible = false;
+
+    this._fadeIn();
+  }
+
+  _fadeIn() {
+    this._fadeoutCover.alpha = 1;
+    this.addChild(this._fadeoutCover);
+    
+    const loop = setInterval(() => {
+      this._fadeoutCover.alpha -= 0.03;
+      if (this._fadeoutCover.alpha <= 0) {
+        clearInterval(loop);
+      }
+    }, 1000 / 60);
   }
 
   _fadeOut(drink) {
@@ -37,7 +51,7 @@ class CocktailMasterContainer extends MasterContainer {
 
     const loop = setInterval(() => {
 
-      this._fadeoutCover.alpha += 0.02;
+      this._fadeoutCover.alpha += 0.03;
       if (this._fadeoutCover.alpha >= 1) {
         clearInterval(loop);
         this.cleanUp();
