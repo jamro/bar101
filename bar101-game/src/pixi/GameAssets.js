@@ -19,6 +19,21 @@ class GameAssets {
       'img/news_official.png',
       'img/news_underground.png',
       'img/drop.png',
+      'img/table_texture.png',
+      'img/wall.jpg',
+      'img/shelf.png',
+      'img/bottle_rum.png',
+      'img/bottle_simple_syrup.png',
+      'img/bottle_whiskey.png',
+      'img/bottle_gin.png',
+      'img/bottle_triple_sec.png',
+      'img/bottle_vermouth.png',
+      'img/bottle_lime_juice.png',
+      'img/bottle_absinthe.png',
+      'img/shaker_bottom.png',
+      'img/shaker_middle.png',
+      'img/shaker_top.png',
+      'img/shaker_special.png',
     ];
   }
 

@@ -46,6 +46,7 @@ class CocktailMasterContainer extends MasterContainer {
     this._view.x = (width - viewWidth * scale) / 2;
     this._view.y = (height - viewHeight * scale) / 2;
 
+    this._view.sclaleBackground(1/scale);
   }
 
 }

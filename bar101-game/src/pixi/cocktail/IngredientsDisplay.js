@@ -25,6 +25,13 @@ export default class IngredientsDisplay extends PIXI.Container {
     }
   }
 
+  showHint(txt) {
+    for (let i = 0; i < this._rows.length; i++) {
+      this._rows[i].text = "";
+    }
+    this._rows[0].text = txt;
+  }
+
   update(ingredientsMap) {
     const ingredients = Object.values(ingredientsMap).sort((a, b) => b.timestamp - a.timestamp);
     for (let i = 0; i < this._rows.length && i < ingredients.length; i++) {

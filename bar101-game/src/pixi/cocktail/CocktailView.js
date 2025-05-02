@@ -3,6 +3,9 @@ import Bottle from './Bottle';
 import Shaker from './Shaker';
 import Liquid from './Liquid';
 import IngredientsDisplay from './IngredientsDisplay';
+import Table from './Table';
+import GameAssets from '../GameAssets';
+import Shelfs from './Shelfs';
 
 const LANDSCAPE = 'landscape';
 const PORTRAIT = 'portrait';
@@ -38,41 +41,18 @@ export default class CocktailView extends PIXI.Container {
     this._ingredients = getIngredients(drinks);
     this._mode = LANDSCAPE;
 
-    // bakchround
-    this._background = new PIXI.Graphics();
+    // bakckround
+    this._background = new PIXI.Sprite(GameAssets.assets['img/wall.jpg']);
+    this._background.anchor.set(0.5);
     this.addChild(this._background);
+
+    this._table = new Table();
+    this.addChild(this._table);
 
     // ingridients display
     this._ingredientsDisplay = new IngredientsDisplay();
     this.addChild(this._ingredientsDisplay);
-
-    // liquid particles
-    this._liquid = new Liquid();
-    this.addChild(this._liquid);
-
-    // bottles
-    this._bottleContainer = new PIXI.Container();
-    this.addChild(this._bottleContainer);
-    this._bottles = this._ingredients.map((ingredient, index) => {
-      const bottle = new Bottle(ingredient.id);
-      bottle.x = (index % 4) * 120;
-      bottle.y = index < 4 ? 0 : 450;
-      bottle.initX = bottle.x;
-      bottle.initY = bottle.y;
-      this._bottleContainer.addChild(bottle);
-
-      this._dragTarget = null;
-      bottle.on('pointerdown', (event) => this._startDrag(event));
-      bottle.on('pointerup', (event) => this._endDrag(event));
-      bottle.on('pointerupoutside', (event) => this._endDrag(event));
-      return bottle;
-    })
-
-    // drag event hadling
-    this.interactive = true;
-    this.on('pointermove', this._onDragMove);
-    this._dragPointer = {x: 0, y: 0};
-    this._pourPoint = {x: 0, y: 0};
+    this._ingredientsDisplay.showHint("Grab a bottle and start pouring");
 
     // shaker
     this._shaker = new Shaker();
@@ -80,6 +60,26 @@ export default class CocktailView extends PIXI.Container {
     this._shaker.on('pointerdown', (event) => this._startShaking(event));
     this._shaker.on('pointerup', (event) => this._endShaking(event));
     this._shaker.on('pointerupoutside', (event) => this._endShaking(event));
+
+    // liquid particles
+    this._liquid = new Liquid();
+    this.addChild(this._liquid);
+
+    // bottles
+    this._shelfs = new Shelfs(this._ingredients)
+    this.addChild(this._shelfs);
+    this._dragTarget = null;
+    this._shelfs.bottles.forEach((bottle) => {
+      bottle.on('pointerdown', (event) => this._startDrag(event));
+      bottle.on('pointerup', (event) => this._endDrag(event));
+      bottle.on('pointerupoutside', (event) => this._endDrag(event));
+    })
+
+    // drag event hadling
+    this.interactive = true;
+    this.on('pointermove', this._onDragMove);
+    this._dragPointer = {x: 0, y: 0};
+    this._pourPoint = {x: 0, y: 0};
 
     // rendering / update
     let loop
@@ -95,7 +95,7 @@ export default class CocktailView extends PIXI.Container {
   }
 
   _pour(ingredientId, amount) {
-    if(this._shakerContent > SHAKER_CAPACITY) {
+    if(this._shakerContent >= SHAKER_CAPACITY) {
       return;
     }
     if(!this._currentDrinkIngredients[ingredientId]) {
@@ -198,6 +198,9 @@ export default class CocktailView extends PIXI.Container {
     
 
   _startDrag(event) {
+    if (this._shaker.shaking || this._shaker.progress >= 1) {
+      return;
+    }
     const localX = event.x/this.scale.x - this.x/this.scale.x;
     const localY = event.y/this.scale.y - this.y/this.scale.y;
     this._dragPointer.x = localX;
@@ -219,11 +222,11 @@ export default class CocktailView extends PIXI.Container {
 
   _update() {
     if (this._dragTarget) {
-      this._dragTarget.tipX = this._dragPointer.x - this._bottleContainer.x;
-      this._dragTarget.y = this._dragPointer.y - this._bottleContainer.y + this._dragTarget.yShift;
+      this._dragTarget.tipX = this._dragPointer.x - this._shelfs.x;
+      this._dragTarget.y = this._dragPointer.y - this._shelfs.y + this._dragTarget.yShift;
       this._liquid.cutOffY = this._shaker.y;
       
-      const pourDistanceX = this._pourPoint.x - this._bottleContainer.x - this._dragTarget.tipX
+      const pourDistanceX = this._pourPoint.x - this._shelfs.x - this._dragTarget.tipX
       const pourDistanceY = this._pourPoint.y - this._dragPointer.y - this._dragTarget.yShift/2
 
       const initRangeMin = 100;
@@ -237,7 +240,7 @@ export default class CocktailView extends PIXI.Container {
 
       this._dragTarget.y -= (1-initialRotationAmount) * this._dragTarget.yShift*0.5;
     
-      if (Math.abs(pourDistanceX) > this._shaker.bottleneckWidth/2 || this._shakerContent > SHAKER_CAPACITY) {
+      if (Math.abs(pourDistanceX) > this._shaker.bottleneckWidth/2 || this._shakerContent >= SHAKER_CAPACITY) {
         this._liquid.amount = 0;
       } else {
         this._liquid.amount = Math.max(0, (this._dragTarget.rotation - 0.5*Math.PI)/(0.5*Math.PI))
@@ -248,16 +251,16 @@ export default class CocktailView extends PIXI.Container {
 
       this._dragTarget.y -= (this._dragTarget.rotation/Math.PI)*this._dragTarget.yShift + 0.5*(1-endRotationAmount)*this._dragTarget.yShift
 
-      const pourPintLimit = this._pourPoint.y - this._bottleContainer.y - 50 + Math.abs(pourDistanceX)
+      const pourPintLimit = this._pourPoint.y - this._shelfs.y - 50 + Math.abs(pourDistanceX)
       this._dragTarget.tipY = Math.min(this._dragTarget.tipY, pourPintLimit);
 
-      this._liquid.source.x = this._dragTarget.tipX + this._bottleContainer.x
-      this._liquid.source.y = this._dragTarget.tipY + this._bottleContainer.y
+      this._liquid.source.x = this._dragTarget.tipX + this._shelfs.x
+      this._liquid.source.y = this._dragTarget.tipY + this._shelfs.y
     } else {
       this._liquid.amount = 0;
     }
-    for (let i = 0; i < this._bottles.length; i++) {
-      const bottle = this._bottles[i];
+    for (let i = 0; i < this._shelfs.bottles.length; i++) {
+      const bottle = this._shelfs.bottles[i];
       if (this._dragTarget !== bottle) {
         bottle.x += (bottle.initX - bottle.x) * 0.1;
         bottle.y += (bottle.initY - bottle.y) * 0.1;
@@ -284,22 +287,27 @@ export default class CocktailView extends PIXI.Container {
       this._ingredientsDisplay.alpha += (1 - this._ingredientsDisplay.alpha) * 0.1;
       this._shaker.postShaking();
     }
+
+    if (this._shakerContent >= SHAKER_CAPACITY && this._shaker.progress < 1) {
+      this._endDrag();
+      this._shaker.open(0);
+      this._ingredientsDisplay.showHint("Time to shake!")
+    } else if (this._shakerContent >= SHAKER_CAPACITY && this._shaker.progress >= 1) {
+      this._shaker.open(1);
+      this._ingredientsDisplay.showHint("")
+    }
   }
   
   setLandscapeMode() {
     this._mode = LANDSCAPE;
-    this._background.clear();
-    this._background
-      .rect(0, 0, 2*this.segmentSize, this.segmentSize)
-      .fill(0x333333)
   
     this._pourPoint = {
       x: this.segmentSize*1.75, 
-      y: this.segmentSize*0.8
+      y: 770
     };
 
-    this._bottleContainer.x = 300;
-    this._bottleContainer.y = 500;
+    this._shelfs.x = 200;
+    this._shelfs.y = 430;
     this._endDrag();
 
     this._shaker.x = this._pourPoint.x;
@@ -307,21 +315,26 @@ export default class CocktailView extends PIXI.Container {
 
     this._ingredientsDisplay.x = this._pourPoint.x - 100;
     this._ingredientsDisplay.y = this._pourPoint.y + this._shaker.graphicHeight;
+
+    this._table.y = 870
+    this._table.x = -1024
+    this._table.tableWidth = 4*1024;
+
+    this._background.x = 1024;
+    this._background.y = 512;
+    this._shelfs.isBottomVisible = false;
   }
+
   setPortraitMode() {
     this._mode = PORTRAIT;
-    this._background.clear();
-    this._background
-      .rect(0, 0, this.segmentSize, 2*this.segmentSize)
-      .fill(0x333333)
 
     this._pourPoint = {
       x: this.segmentSize*0.8, 
-      y: this.segmentSize*1.75
+      y: 1794
     };
 
-    this._bottleContainer.x = 300;
-    this._bottleContainer.y = 500;
+    this._shelfs.x = 200;
+    this._shelfs.y = 430;
     this._endDrag();
 
     this._shaker.x = this._pourPoint.x;
@@ -329,10 +342,21 @@ export default class CocktailView extends PIXI.Container {
 
     this._ingredientsDisplay.x = this._pourPoint.x - 100;
     this._ingredientsDisplay.y = this._pourPoint.y + this._shaker.graphicHeight;
+
+    this._table.y = 870 + 1024
+    this._table.x = -1024
+    this._table.tableWidth = 3*1024;
+    this._background.y = 1024;
+    this._background.x = 512;
+    this._shelfs.isBottomVisible = true;
   }
 
   get segmentSize() {
     return 1024;
+  }
+
+  sclaleBackground(scale) {
+    this._background.scale.set(scale);
   }
 
 
