@@ -24,6 +24,7 @@ class CocktailMasterContainer extends MasterContainer {
     })
     this.addChild(this._mixingView);
     this.addChild(this._recipesView);
+    this._recipesView.visible = false;
   }
 
   restore() {

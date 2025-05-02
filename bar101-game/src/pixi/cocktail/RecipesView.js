@@ -5,8 +5,6 @@ export default class RecipesView extends PIXI.Container {
   constructor(drinks) {
     super();
 
-    this
-
     this._overlay = new PIXI.Graphics();
     this._overlay.alpha = 0.65;
     this._overlay.interactive = true;
@@ -127,8 +125,8 @@ export default class RecipesView extends PIXI.Container {
       sheetsWidth = this._sheetSize;
       sheetsHeight = this._sheetTabHeight * (this._sheets.length-1) + this._sheetSize;
     }
-    const scaleWidth = width / (1.1*sheetsWidth)
-    const scaleHeight = height / (1.1*sheetsHeight)
+    const scaleWidth = width / (1.3*sheetsWidth)
+    const scaleHeight = height / (1.3*sheetsHeight)
     const scale = Math.min(scaleWidth, scaleHeight);
     this._closeButton.scale.set(scale);
     this._closeLabel.scale.set(scale);
