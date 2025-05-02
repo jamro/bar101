@@ -328,7 +328,6 @@ export default class CocktailView extends PIXI.Container {
   }
 
   async playEndingAnimation(drink) {
-    drink.glass = "coupe"
     if (this._endingAnimationPlaying) {
       return;
     }
