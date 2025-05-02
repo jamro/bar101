@@ -12,7 +12,7 @@ const DEFAULT_STATE = {
     decision: null,
   },
   inventory: {
-    special: 1,
+    special: 0,
     instant: 0,
     antenna: false,
     files: []
