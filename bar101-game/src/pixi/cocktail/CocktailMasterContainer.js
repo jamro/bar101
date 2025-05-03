@@ -62,22 +62,34 @@ class CocktailMasterContainer extends MasterContainer {
   }
 
   cleanUp() {
-    this.removeChild(this._mixingView);
-    this.removeChild(this._recipesView);
-    this.removeChild(this._fadeoutCover);
-    this._recipesView.removeAllListeners();
-    this._mixingView.removeAllListeners();
-    this._mixingView.destroy({ children: true, texture: false, baseTexture: false });
-    this._recipesView.destroy({ children: true, texture: false, baseTexture: false });
+    console.log("[CocktailMasterContainer] cleanUp");
+    if (this._mixingView && this._mixingView.parent) {
+      this.removeChild(this._mixingView);
+    }
+    if (this._recipesView && this._recipesView.parent) {
+      this.removeChild(this._recipesView);
+    }
+    if (this._fadeoutCover && this._fadeoutCover.parent) {
+      this.removeChild(this._fadeoutCover);
+    }
+    if (this._recipesView) {
+      this._recipesView.removeAllListeners();
+    }
+    if (this._mixingView) {
+      this._mixingView.removeAllListeners();
+      this._mixingView.destroy({ children: true, texture: false, baseTexture: false });
+    }
+    if (this._recipesView) {
+      this._recipesView.destroy({ children: true, texture: false, baseTexture: false });
+    }
     this._mixingView = null;
     this._recipesView = null;
     this._fadeoutCover = null;
   }
 
   restore() {
-    if (this._mixingView) {
-      this._mixingView.parent.removeChild(this._mixingView);
-    }
+    this.visible = false;
+    this.cleanUp();
     this.init();
   }
 
@@ -105,6 +117,7 @@ class CocktailMasterContainer extends MasterContainer {
   }
 
   resize(width, height) {
+    this.visible = true;
     let viewWidth, viewHeight;
     if(this._mixingView) {
       if(width > height) {
