@@ -45,7 +45,7 @@ function GameLayout({
 
   switch (levelPhase) {
     case 'news':
-      return <NewsLayout data={storyNode.news} onClose={() => onPhaseChange('customer')} />;
+      return <NewsLayout data={storyNode.news} inventory={bartender.inventory} onClose={() => onPhaseChange('customer')} />;
     case 'customer':
       return <CustomerLayout 
         customers={customers} 

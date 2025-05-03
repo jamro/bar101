@@ -21,7 +21,7 @@ export default class Shelfs extends PIXI.Container {
     this._ingredients = ingredients;
     this._ingredients.push({
       id: "absinthe",
-      name: `Absinthe`,
+      name: `Absinthe_(${inventory.special})`,
     })
 
     this._bottomShelf = new PIXI.Sprite(GameAssets.assets['img/shelf.png']);

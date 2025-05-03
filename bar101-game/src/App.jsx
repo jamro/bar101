@@ -41,7 +41,7 @@ function App({ }) {
       const data = await response.json();
       setWorldContext(data);
       initAllCustomersTrust(data.bar.customers.reduce((acc, customer) => {
-        acc[customer.id] = Math.random() - 0.5;
+        acc[customer.id] = Math.random()*0.5 - 1;
         return acc;
       }, {}))
     }

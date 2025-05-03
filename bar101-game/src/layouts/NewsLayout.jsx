@@ -3,7 +3,7 @@ import ConversationText from '../components/chat/ConversationText';
 import TV from '../components/tv';
 import * as styles from './NewsLayout.module.css';
 
-export default function NewsLayout({data, onClose=() => {}}) {
+export default function NewsLayout({data, inventory, onClose=() => {}}) {
   const [tvReady, setTvReady] = useState(false);
   const [segmentName, setSegmentName] = useState('official');
   const [segmentIndex, setSegmentIndex] = useState(0);
@@ -47,7 +47,7 @@ export default function NewsLayout({data, onClose=() => {}}) {
       return 
     }
 
-    if (segmentName === 'official') {
+    if (segmentName === 'official' && inventory.antenna) {
       setSegmentName('underground');
       setSegmentIndex(0);
     } else {

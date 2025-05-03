@@ -29,32 +29,48 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
     center: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.4 },
+      transition: { duration: 0.2 },
     },
     exit: (dir) => ({
       x: dir > 0 ? "-100%" : "100%",
       opacity: 0,
-      transition: { duration: 0.4 },
+      transition: { duration: 0.2 },
     }),
   };
 
   const items = [
+    {
+      id: 1,
+      content: <div className={styles.productContainer}>
+        <div className={styles.productHeader}>
+          <div className={styles.productImage} style={{backgroundImage: "url(/img/tv_product_emblem.png)"}}></div>
+          <div className={styles.productTitle}>
+            <h1>Resist TV</h1>
+            <small>Satellite Dish</small>
+            <BuyButton onClick={() => onBuy("antenna", 50.00)} price={50.00} affordable={balance >= 50.00} available={!inventory.antenna} />
+          </div>
+        </div>
+        <div className={styles.productBody}>
+          This outlawed dish unlocks Resist TV — the only source of real news beyond the regime's control.
+        </div>
+      </div>
+    },
     { 
-      id: 1, 
+      id: 2, 
       content: <div className={styles.productContainer}>
         <div className={styles.productHeader}>
           <div className={styles.productImage} style={{backgroundImage: "url(/img/absinthe_product_emblem.png)"}}></div>
           <div className={styles.productTitle}>
             <h1>Absinthe</h1>
             <small>Inventory: {inventory.special}</small>
-            <BuyButton onClick={() => onBuy("special", 7.00)} price={7.00} affordable={balance >= 7.00} available={true} />
+            <BuyButton onClick={() => onBuy("special", 7.00 + inventory.special *2)} price={7.00 + inventory.special *2} affordable={balance >= 7.00 + inventory.special *2} available={true} />
           </div>
         </div>
         <div className={styles.productBody}>
           A drop of Absinthe in any drink, and your guests will feel unusually at ease.
         </div>
       </div>
-    }
+    },
   ];
 
   return (

@@ -124,6 +124,16 @@ const useGameState = () => {
             balance: prevState.balance - price
           }));
           break;
+        case "antenna":
+          setState((prevState) => ({
+            ...prevState,
+            inventory: {
+              ...prevState.inventory,
+              antenna: true
+            },
+            balance: prevState.balance - price
+          }));
+          break;
         default:
           throw new Error(`Unknown item to buy: ${item}`);
       }

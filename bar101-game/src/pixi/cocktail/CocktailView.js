@@ -468,7 +468,5 @@ export default class CocktailView extends PIXI.Container {
     this._background.scale.set(scale);
   }
 
-
-
 }
 
