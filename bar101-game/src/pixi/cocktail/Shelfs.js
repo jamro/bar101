@@ -69,10 +69,12 @@ export default class Shelfs extends PIXI.Container {
         label.y = bottle.y + 50;
         
         const labelBg = new PIXI.Graphics();
+        labelBg.x = label.x;
+        labelBg.y = label.y;
         const bounds = label.getBounds();
         labelBg.rect(
-          bounds.minX-15,
-          bounds.minY-4,
+          -bounds.width/2 - 15,
+          -bounds.height/4 - 4,
           bounds.width+30,
           bounds.height+8
         )
@@ -108,8 +110,8 @@ export default class Shelfs extends PIXI.Container {
       const bounds = specialBottle.label.getBounds();
       specialBottle.labelBg.clear();
       specialBottle.labelBg.rect(
-        bounds.minX-15,
-        bounds.minY-4,
+        -bounds.width/2 - 15,
+        -bounds.height/4 - 4,
         bounds.width+30,
         bounds.height+8
       )
