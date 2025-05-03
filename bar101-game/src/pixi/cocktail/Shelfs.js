@@ -101,10 +101,9 @@ export default class Shelfs extends PIXI.Container {
     const specialBottle = this._bottles.find(bottle => bottle.id === 'absinthe');
     if (special > 0) {
       specialBottle.visible = true;
-      specialBottle.label.text = `Absinthe (${special})`;
       specialBottle.label.value = true;
       specialBottle.labelBg.visible = true;
-
+      specialBottle.label.text = `Absinthe (${special})`;
 
       const bounds = specialBottle.label.getBounds();
       specialBottle.labelBg.clear();

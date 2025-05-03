@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import CustomerPreview from '../components/CustomerPreview';
 import ChatWindow from '../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
+import TradingWindow from '../components/trade/TradingWindow';
 
 export default function TraderLayout({ bartender, trader, balance, onClose, onBuy }) {
   
@@ -45,13 +46,7 @@ export default function TraderLayout({ bartender, trader, balance, onClose, onBu
 
   const chat = <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
 
-  const tradingWindow = <div>
-    <button className='btn btn-primary m-3' onClick={() => onBuy("special", 7.00)}>
-      Special $7.00<br/>
-      <small>(inventory: {bartender.inventory.special})</small>
-    </button>
-    <button className='btn btn-primary m-3' onClick={() => endTrading()}>Close</button>
-  </div>
+  const tradingWindow = <TradingWindow inventory={bartender.inventory} onBuy={onBuy} onClose={endTrading} balance={balance} trader={trader} />
 
   return <CustomerPreview customer={trader} customerAnim={true} balance={balance} >
       {phase !== "trade" ? chat : tradingWindow}

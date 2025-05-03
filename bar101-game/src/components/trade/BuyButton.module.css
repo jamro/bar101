@@ -1,0 +1,28 @@
+.buyButton {
+  margin-top: 0.5em;
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  border: none;
+  color: #000;
+  background-color: #a83300;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.buyButton:disabled {
+  margin-top: 0.5em;
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+
+  cursor: not-allowed;
+  background-color: #000;
+  border: 1px solid #dec583;
+  color: #dec583;
+}
