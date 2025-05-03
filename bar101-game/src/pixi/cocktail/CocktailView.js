@@ -232,7 +232,7 @@ export default class CocktailView extends PIXI.Container {
       return sum + Math.pow(val - vec2[i], 2);
     }, 0);
   
-    const distanceThreshold = 50
+    const distanceThreshold = 30
     const distance = Math.min(Math.sqrt(sumSquaredDiffs), distanceThreshold)
       
     return 1 - (distance / distanceThreshold);
