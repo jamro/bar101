@@ -4,13 +4,13 @@ import LoadingScreen from './layouts/LoadingScreen';
 import StartLayout from './layouts/StartLayout';
 import useGameState from './hooks/useGameState';
 import GameAssets from './pixi/GameAssets';
-import TradeWindow from './components/trade/TradingWindow';
 
 function App({ }) {
   const [ storyNode, setStoryNode ] = useState(null);
   const [ worldContext , setWorldContext ] = useState(null);
   const [ isStarted, setIsStarted ] = useState(false);
   const [ error , setError ] = useState(null);
+  const gameStateObject = useGameState();
   const { 
     gameState, 
     initAllCustomersTrust, 
@@ -23,7 +23,11 @@ function App({ }) {
     changeBalance,
     buyItem,
     useItem,
-  } = useGameState()
+  } = gameStateObject
+
+  window.debug = {
+    ...gameStateObject
+  }
 
   const handleClearGameState = () => {
     clearGameState();

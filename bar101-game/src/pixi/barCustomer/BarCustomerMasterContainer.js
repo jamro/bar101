@@ -75,9 +75,7 @@ class BarCustomerMasterContainer extends MasterContainer {
       this._trustMeter.alpha = 0;
     }
     this._barTable.setCustomer(customer, anim);
-    if(this._bciButton) {
-      this._bciButton.visible = (customer.id !== 'trader');
-    }
+    this._updateBciButtonVisibility();
   }
 
   setDrink(drink, anim=false) {
@@ -86,9 +84,14 @@ class BarCustomerMasterContainer extends MasterContainer {
 
   setBciAvailable(available) {
     this._bciButtonAvailable = available;
-    if(this._bciButton) {
-      this._bciButton.visible = available;
+    this._updateBciButtonVisibility();
+  }
+
+  _updateBciButtonVisibility() {
+    if(!this._customer || !this._bciButton) {
+      return;
     }
+    this._bciButton.visible = (this._customer.id !== 'trader' && this._bciButtonAvailable);
   }
 
 }
