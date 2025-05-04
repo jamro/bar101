@@ -3,7 +3,7 @@ import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-export default function MainChatLayout({ customer, chat, onTrustChange, drink, balance, onClose }) {
+export default function MainChatLayout({ customer, chat, onTrustChange, drink, balance, onClose, bartender }) {
  
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
@@ -68,7 +68,7 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
         console.error("Unknown phase", phase)
   }}
   
-  return <CustomerPreview customer={customer} drink={drink} balance={balance}>
+  return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender}>
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
 }

@@ -3,7 +3,7 @@ import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 
-export default function DilemmaLayout({ customer, chat, balance, drink, onClose, onDecision }) {
+export default function DilemmaLayout({ customer, chat, balance, drink, onClose, onDecision, bartender }) {
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
   const [beliefsA, setBeliefsA] = useState(chat.decision.belief_a)
@@ -154,7 +154,7 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
         console.error("Unknown phase", phase)
   }}
   
-  return <CustomerPreview customer={customer} drink={drink} balance={balance}>
+  return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender}>
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
 }

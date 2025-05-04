@@ -48,7 +48,7 @@ export default function TraderLayout({ bartender, trader, balance, onClose, onBu
 
   const tradingWindow = <TradingWindow inventory={bartender.inventory} onBuy={onBuy} onClose={endTrading} balance={balance} trader={trader} />
 
-  return <CustomerPreview customer={trader} customerAnim={true} balance={balance} >
+  return <CustomerPreview customer={trader} customerAnim={true} balance={balance} bartender={bartender} >
       {phase !== "trade" ? chat : tradingWindow}
     </CustomerPreview>
 }

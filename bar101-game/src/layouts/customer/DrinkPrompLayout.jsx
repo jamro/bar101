@@ -48,7 +48,7 @@ export default function DrinkPrompLayout({ bartender, customer, balance, onClose
     setPhase("exit")
   }
 
-  return <CustomerPreview customer={customer} customerAnim={true} balance={balance} >
+  return <CustomerPreview customer={customer} customerAnim={true} balance={balance} bartender={bartender} >
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
 }

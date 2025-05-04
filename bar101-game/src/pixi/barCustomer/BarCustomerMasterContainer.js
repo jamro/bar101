@@ -21,6 +21,7 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._balanceMeter.y = 0;
     this.addChild(this._balanceMeter);
 
+    this._bciButtonAvailable = false;
     this._bciButton = null
   }
 
@@ -39,6 +40,7 @@ class BarCustomerMasterContainer extends MasterContainer {
     if(this._customer) {
       this._bciButton.visible = (this._customer.id !== 'trader');
     }
+    this._bciButton.visible = this._bciButtonAvailable;
   }
 
   resize(width, height) {
@@ -55,7 +57,7 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._balanceMeter.x = 40;
     this._balanceMeter.y = 20
 
-    this._bciButton.scale.set(scale);
+    this._bciButton.scale.set(scale*1.1);
     this._bciButton.x = 40
     this._bciButton.y = height - 20;
   }
@@ -80,6 +82,13 @@ class BarCustomerMasterContainer extends MasterContainer {
 
   setDrink(drink, anim=false) {
     this._barTable.setDrink(drink, anim);
+  }
+
+  setBciAvailable(available) {
+    this._bciButtonAvailable = available;
+    if(this._bciButton) {
+      this._bciButton.visible = available;
+    }
   }
 
 }

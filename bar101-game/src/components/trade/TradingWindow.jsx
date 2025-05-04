@@ -55,8 +55,24 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
         </div>
       </div>
     },
+    {
+      id: 2,
+      content: <div className={styles.productContainer}>
+        <div className={styles.productHeader}>
+          <div className={styles.productImage} style={{backgroundImage: "url(/img/bci_scanner_product_emblem.png)"}}></div>
+          <div className={styles.productTitle}>
+            <h1>BCI Scanner</h1>
+            <small>Jailbroken. Off the Grid.</small>
+            <BuyButton onClick={() => onBuy("scanner", 200.00)} price={200.00} affordable={balance >= 200.00} available={!inventory.scanner} />
+          </div>
+        </div>
+        <div className={styles.productBody}>
+          Black market BCI scanner to silently check your customers' scores and profiles.
+        </div>
+      </div>
+    },
     { 
-      id: 2, 
+      id: 3, 
       content: <div className={styles.productContainer}>
         <div className={styles.productHeader}>
           <div className={styles.productImage} style={{backgroundImage: "url(/img/absinthe_product_emblem.png)"}}></div>

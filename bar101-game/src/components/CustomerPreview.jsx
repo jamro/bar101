@@ -8,7 +8,7 @@ import BCIScanner from "./BCIScanner";
 
 let barCustomerMasterContainer; // TODO:re factor to avoid global variable
 
-export default function CustomerPreview({ customer, drink, children, drinkAnim=false, customerAnim=false, balance=0 }) {
+export default function CustomerPreview({ customer, drink, children, drinkAnim=false, customerAnim=false, balance=0, bartender }) {
   if (!barCustomerMasterContainer) {
     barCustomerMasterContainer = new BarCustomerMasterContainer();
   }
@@ -23,6 +23,10 @@ export default function CustomerPreview({ customer, drink, children, drinkAnim=f
   useEffect(() => {
     barSceneRef.current.setCustomer(customer, customerAnim);
   }, [customer]);
+
+  useEffect(() => {
+    barSceneRef.current.setBciAvailable(bartender.inventory.scanner);
+  }, [bartender]);
 
   useEffect(() => {
     barSceneRef.current.setBalance(balance);

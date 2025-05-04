@@ -35,7 +35,7 @@ export default function GoodbyeLayout({ bartender, customer, drink, balance, onC
 
   }, [customer.id, drink])
   
-  return <CustomerPreview customer={customer} drink={drink} balance={balance}>
+  return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender}>
       <ChatWindow ref={chatWindowRef} />
     </CustomerPreview>
 }

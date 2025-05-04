@@ -92,6 +92,7 @@ export default function CustomerLayout({
     />;
   } else if (phase === "main_chat") {
     content = <MainChatLayout 
+      bartender={bartender} 
       customer={customer} 
       chat={chat} 
       balance={balance}
@@ -102,6 +103,7 @@ export default function CustomerLayout({
   } else if (phase === "decision_chat") {
     content = <DilemmaLayout 
       customer={customer} 
+      bartender={bartender}
       chat={chat} 
       drink={drink} 
       balance={balance}

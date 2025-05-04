@@ -13,8 +13,8 @@ const DEFAULT_STATE = {
   },
   inventory: {
     special: 0,
-    instant: 0,
     antenna: false,
+    scanner: false,
     files: []
   },
 }
@@ -64,6 +64,7 @@ const useGameState = () => {
         if (!prevState.levelProgress.decision) {
           throw new Error("No decision made yet.");
         }
+        console.log(`[useGameState] Proceeding story path. Decision: ${prevState.levelProgress.decision}, Story path: ${prevState.storyPath.join('-')}`);
         return {
           ...prevState,
           timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
@@ -117,6 +118,7 @@ const useGameState = () => {
         case "special":
           setState((prevState) => ({
             ...prevState,
+            timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
             inventory: {
               ...prevState.inventory,
               special: prevState.inventory.special + 1
@@ -127,9 +129,21 @@ const useGameState = () => {
         case "antenna":
           setState((prevState) => ({
             ...prevState,
+            timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
             inventory: {
               ...prevState.inventory,
               antenna: true
+            },
+            balance: prevState.balance - price
+          }));
+          break;
+        case "scanner":
+          setState((prevState) => ({
+            ...prevState,
+            timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
+            inventory: {
+              ...prevState.inventory,
+              scanner: true
             },
             balance: prevState.balance - price
           }));

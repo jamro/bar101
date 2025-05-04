@@ -3,7 +3,7 @@ import ConversationText from '../components/chat/ConversationText';
 import TV from '../components/tv';
 import * as styles from './NewsLayout.module.css';
 
-export default function NewsLayout({data, inventory, onClose=() => {}}) {
+export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
   const [tvReady, setTvReady] = useState(false);
   const [segmentName, setSegmentName] = useState('official');
   const [segmentIndex, setSegmentIndex] = useState(0);
@@ -18,18 +18,18 @@ export default function NewsLayout({data, inventory, onClose=() => {}}) {
         newsSubtitlesRef.current.clear();
       }
       if (newsSubtitlesRef.current) {
-        await newsSubtitlesRef.current.print(data[segmentName][segmentIndex].headline, "news_"+segmentName);
+        await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].headline, "news_"+segmentName);
       }
       if (newsSubtitlesRef.current) {
-        await newsSubtitlesRef.current.print(data[segmentName][segmentIndex].anchor_line, "news_"+segmentName);
+        await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].anchor_line, "news_"+segmentName);
       }
       if (newsSubtitlesRef.current) {
-        await newsSubtitlesRef.current.print(data[segmentName][segmentIndex].contextual_reframing, "news_"+segmentName);
+        await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].contextual_reframing, "news_"+segmentName);
       }
       setCompleted(true)
     }
     run()
-    setNewsImage(data[segmentName][segmentIndex].image);
+    setNewsImage(storyNode.news[segmentName][segmentIndex].image);
     setCompleted(false)
 
   }
@@ -42,7 +42,7 @@ export default function NewsLayout({data, inventory, onClose=() => {}}) {
   }
 
   const close = () => {
-    if (segmentIndex < data[segmentName].length - 1) {
+    if (segmentIndex < storyNode.news[segmentName].length - 1) {
       setSegmentIndex(prev => prev + 1);
       return 
     }
@@ -78,7 +78,7 @@ export default function NewsLayout({data, inventory, onClose=() => {}}) {
   return (
     <div style={{width: "100%", height: "100%"}}>
       <TV 
-        headline={data[segmentName][segmentIndex].headline} 
+        headline={storyNode.news[segmentName][segmentIndex].headline} 
         mode={segmentName}
         pipUrl={newsImage ? `/story/${newsImage}` : null}
         onReady={() => setTvReady(true)}
