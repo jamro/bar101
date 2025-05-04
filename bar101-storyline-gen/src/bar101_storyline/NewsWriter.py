@@ -56,23 +56,26 @@ Constraints:
 """
 
 get_image_prompt = lambda headline, anchor_line, contextual_reframing: f"""
-Create a dark, eerie illustration in a gritty, vintage graphic novel style. 
-Use a muted, earthy color palette (browns, reds, blacks, beiges). 
-The figure(s) should be stylized with simplified features, strong outlines, and hollow or blank eyes. 
-The environment should have cracked, worn textures, minimal background detail, and low, moody lighting with strong shadows. 
-Make the overall atmosphere feel haunting, isolated, and post-apocalyptic.
+Create a stylized, ominous illustration in a vintage propaganda or graphic novel style reminiscent of mid-20th-century dystopian art.
+Use a limited, muted color palette dominated by deep browns, desaturated reds, dark beiges, and near-black tones, with selective red accents for emotional emphasis.
+All characters should have black skin, circular light-filled eyes, and bright red noses for immediate, symbolic readability.
+Figures must be minimal and geometric with simplified anatomy, strong silhouettes, and heavy shadows.
+Set the scene in a cracked, decaying environment with worn textures, minimal background detail, and flat but dramatic lighting.
+The composition should evoke a feeling of isolation, control, and post-apocalyptic tension.
+Use strong symmetry or framing to reinforce themes of surveillance, conformity, or unease.
 
-Focus of the scene: picture from TV news covering following topic:
-
+Scene focus: An abstract, symbolic visualization of a news story:
 ---
 {headline}
 {anchor_line}
 {contextual_reframing}
 ---
 
-Do not use any text, focus on visuals only.
-Do not show the TV, just the image visualizing the news.
-Avoid small details as image must be easy to interpret when used in small size.
+Instructions:
+-	Do not include any text in the image.
+-	Do not show the TV, the news interface, or graphics — only the visual metaphor.
+-	Prioritize bold, readable composition suitable for small-scale viewing.
+-	Avoid small details or intricate patterns.
 """
 
 class NewsWriter:
