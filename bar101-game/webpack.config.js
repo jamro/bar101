@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 const { url } = require('inspector');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 module.exports = {
   entry: './src/index.js',
@@ -56,10 +57,34 @@ module.exports = {
     new webpack.DefinePlugin({
       __BUILD_DATE__: JSON.stringify(new Date().toISOString()).replace(/[TZ\-:\."]/g, '').substring(2, 14)
     }),
+    new WebpackPwaManifest({
+      name: 'Bar101',
+      short_name: 'Bar101',
+      description: 'Bar101 Game',
+      background_color: '#000000',
+      theme_color: '#000000',
+      display: 'fullscreen',
+      start_url: '.',
+      publicPath: '/',
+      icons: [
+        {
+          src: path.resolve(__dirname, 'assets/icon.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+          destination: 'icons',
+          purpose: 'any maskable',
+          ios: true
+        }
+      ],
+      inject: true,
+      fingerprints: false
+    })
   ],
   devServer: {
     static: './dist',
     port: 3000,
-    hot: true
+    hot: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    }
   }
 };
