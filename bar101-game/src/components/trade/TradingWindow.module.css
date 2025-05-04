@@ -45,6 +45,17 @@
   gap: 0.5rem;
 }
 
+.buttonContainer button:disabled {
+  background-color: #000000;
+  color: #665b3c;
+  border: 1px solid #665b3c;
+  cursor: not-allowed;
+}
+
+.buttonContainer button {
+  width: 100%;
+}
+
 .productContainer {
   padding: 1em;
 }

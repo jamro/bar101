@@ -8,7 +8,7 @@ import BCIScanner from "./BCIScanner";
 
 let barCustomerMasterContainer; // TODO:re factor to avoid global variable
 
-export default function CustomerPreview({ customer, drink, children, drinkAnim=false, customerAnim=false, balance=0, bartender }) {
+export default function CustomerPreview({ customer,bartender, drink, children, drinkAnim=false, customerAnim=false, balance=0 }) {
   if (!barCustomerMasterContainer) {
     barCustomerMasterContainer = new BarCustomerMasterContainer();
   }
@@ -60,7 +60,7 @@ export default function CustomerPreview({ customer, drink, children, drinkAnim=f
     <div className={styles.mainContainer} ref={containerRef} style={{flexDirection: flexDirection}}>
       <ResizablePixiCanvas className={styles.previewContainer} masterContainer={barSceneRef.current} />
       <div className={styles.chatContainer}>
-        {bciShown && <BCIScanner customer={customer} onClose={() => setBciShown(false)}/>}
+        {bciShown && <BCIScanner customer={customer} inventory={bartender.inventory} onClose={() => setBciShown(false)}/>}
         {children}
       </div>
     </div>

@@ -41,6 +41,7 @@ class BarCustomerMasterContainer extends MasterContainer {
       this._bciButton.visible = (this._customer.id !== 'trader');
     }
     this._bciButton.visible = this._bciButtonAvailable;
+    this._updateBciButtonVisibility()
   }
 
   resize(width, height) {

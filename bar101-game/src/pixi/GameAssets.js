@@ -43,6 +43,7 @@ class GameAssets {
       'img/bci_up.png',
       'img/bci_down.png',
       'img/bci_off.png',
+      'img/warning.png',
     ];
   }
 

@@ -12,8 +12,8 @@ class BciScannerMasterContainer extends MasterContainer {
     });
   }
 
-  setCustomer(customer) {
-    this._bciScanner.setCustomer(customer);
+  setData(data) {
+    this._bciScanner.setData(data);
   }
 
   resize(width, height) {

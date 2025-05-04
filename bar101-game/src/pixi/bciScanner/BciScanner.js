@@ -136,11 +136,11 @@ export default class BciScanner extends PIXI.Container {
     this._pagesLabel.text = `PAGE ${index + 1}/${this._pages.length}`;
   }
 
-  setCustomer(customer) {
-    this._customer = customer;
+  setData(data) {
+    this._customer = data.customer;
     this._userIdLabel.text = `UID: ${this._customer.id}`;
     for (let i = 0; i < this._pages.length; i++) {
-      this._pages[i].setData({customer});
+      this._pages[i].setData(data);
     }
   }
 

@@ -5,14 +5,14 @@ import BciScannerMasterContainer from "../pixi/bciScanner/BciScannerMasterContai
 
 let bciScannerMasterContainer; // TODO:re factor to avoid global variable
 
-export default function BCIScanner({customer, onClose}) {
+export default function BCIScanner({customer, inventory, onClose}) {
   if (!bciScannerMasterContainer) {
     bciScannerMasterContainer = new BciScannerMasterContainer()
   }
   const barSceneRef = useRef(bciScannerMasterContainer);
 
   useEffect(() => {
-    barSceneRef.current.setCustomer(customer);
+    barSceneRef.current.setData({customer, inventory});
   }, [customer]);
 
   useEffect(() => {

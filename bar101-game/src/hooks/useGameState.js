@@ -118,7 +118,6 @@ const useGameState = () => {
         case "special":
           setState((prevState) => ({
             ...prevState,
-            timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
             inventory: {
               ...prevState.inventory,
               special: prevState.inventory.special + 1
@@ -129,7 +128,6 @@ const useGameState = () => {
         case "antenna":
           setState((prevState) => ({
             ...prevState,
-            timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
             inventory: {
               ...prevState.inventory,
               antenna: true
@@ -140,10 +138,25 @@ const useGameState = () => {
         case "scanner":
           setState((prevState) => ({
             ...prevState,
-            timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
             inventory: {
               ...prevState.inventory,
               scanner: true
+            },
+            balance: prevState.balance - price
+          }));
+          break;
+        // ["lkova", "olintz", "rmiskovic", "dtomenko", "npetrak", "shalek"]
+        case "lkova":
+        case "olintz":
+        case "rmiskovic":
+        case "dtomenko":
+        case "npetrak":
+        case "shalek":
+          setState((prevState) => ({
+            ...prevState,
+            inventory: {
+              ...prevState.inventory,
+              files: [...prevState.inventory.files, item].filter((value, index, self) => self.indexOf(value) === index)
             },
             balance: prevState.balance - price
           }));
