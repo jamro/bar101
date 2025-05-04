@@ -15,7 +15,7 @@ export default function BuyButton({
     return (
       <button disabled className={styles.buyButton}>
         <FontAwesomeIcon icon={faTimes} /> 
-        <span style={{marginLeft: '1em'}}>{!available ? "Out of Stock" : "Insufficient Funds"}</span>
+        <span style={{marginLeft: '1em'}}>{!available ? "Out of Stock" : `$${price.toFixed(2)}`}</span>
       </button>
     )
   }
