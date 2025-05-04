@@ -62,6 +62,7 @@ module.exports = {
       short_name: 'Bar101',
       description: 'Bar101 Game',
       background_color: '#000000',
+      orientation: 'any',
       theme_color: '#000000',
       display: 'fullscreen',
       start_url: '.',
