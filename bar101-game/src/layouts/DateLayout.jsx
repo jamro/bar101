@@ -13,6 +13,8 @@ export default function DateLayout({storyNode, onClose=() => {}}) {
   const minutes = now.getMinutes()
   const weekday = now.getDay()
 
+  const minutesText = minutes < 10 ? `0${minutes}` : minutes
+
   const allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   const allWeekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -45,7 +47,7 @@ export default function DateLayout({storyNode, onClose=() => {}}) {
     <div className={styles.fullCentered} onClick={showInstructions ? onClose : null}>
       <div>
         <div className={styles.dateText}>{dateName} of {monthName}, {year}</div>
-        <div className={styles.timeText} >{hours}:{minutes} EEST</div>
+        <div className={styles.timeText} >{hours}:{minutesText} EEST</div>
         {instructions}
       </div>
     </div>
