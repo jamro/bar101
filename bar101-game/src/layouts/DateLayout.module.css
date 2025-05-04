@@ -1,0 +1,47 @@
+.fullCentered {
+  text-align: center;
+  background-color: #000;
+  color: #dec583;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+}
+
+.dateText {
+  font-size: 1.5em;
+  color: #dec583;
+}
+
+.timeText {
+  font-size: 1.5em;
+  color: #7b6e48;
+}
+
+.instructions, .instructionsPlaceholder {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 1em;
+  color: #ffffff;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.instructions {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.dateText {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.timeText {
+  animation: fadeIn 0.5s ease-in-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}

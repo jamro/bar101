@@ -181,7 +181,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
         <button
           onClick={onClose}
         >
-          <FontAwesomeIcon icon={faTimes} /> Goodbye
+          Exit
         </button>
         <button
           onClick={handleNext}

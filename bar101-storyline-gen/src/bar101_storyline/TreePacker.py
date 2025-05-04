@@ -1,5 +1,7 @@
 import os
 import json
+from datetime import datetime, timedelta
+import random
 
 class TreePacker:
 
@@ -50,6 +52,7 @@ class TreePacker:
         characters = self._read_file(path, "characters.json")
         dilemma = self._read_file(path, "dilemma.json", no_error=True)
         visitors = self._read_file(path, "visitors.json", no_error=True) or []
+        timeline = self._read_file(path, "timeline.json", no_error=True) or []
         visitors_chat = {}
         for visitor in visitors:
             visitors_chat[visitor] = {
@@ -66,7 +69,12 @@ class TreePacker:
                 "political_preference": characters[character]["political_preference"],
             }
 
+        timestamp = timeline[-1]['timestamp']
+        next_day = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S") + timedelta(days=1)
+        next_day = next_day.replace(hour=random.randint(19, 20), minute=random.randint(0, 59), second=0)
+
         raw_result = {
+            "timestamp": next_day.isoformat(),
             "news": self._read_file(path, "news.json"),
             "visitors": visitors,
             "character_stats": character_stats,

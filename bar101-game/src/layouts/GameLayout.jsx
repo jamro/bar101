@@ -2,6 +2,7 @@ import React, { useState, useEffect, use } from 'react';
 import NewsLayout from './NewsLayout';
 import CustomerLayout from './CustomerLayout';
 import TraderLayout from './TraderLayout';
+import DateLayout from './DateLayout';
 
 function GameLayout({
   storyNode, 
@@ -43,6 +44,8 @@ function GameLayout({
   }
 
   switch (levelPhase) {
+    case 'date':
+      return <DateLayout storyNode={storyNode} onClose={() => onPhaseChange('news')} />;
     case 'news':
       return <NewsLayout storyNode={storyNode} inventory={bartender.inventory} onClose={() => onPhaseChange('customer')} />;
     case 'customer':

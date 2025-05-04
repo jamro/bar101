@@ -7,7 +7,7 @@ const DEFAULT_STATE = {
   storyPath: [],
   balance: 33,
   levelProgress: {
-    phase: 'news',
+    phase: 'date',
     customerIndex: 0,
     decision: null,
   },
@@ -72,7 +72,7 @@ const useGameState = () => {
           levelProgress: {
             ...prevState.levelProgress,
             customerIndex: 0,
-            phase: 'news',
+            phase: 'date',
             decision: null
           }
         }
