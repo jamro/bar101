@@ -43,12 +43,7 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
           setChatOptions(["Continue"])
           setPhase("exit")
         } else if (index === 1) { // Push for info
-          const trustThreshold = 0.8
-          const maxtrustPenalty = 0.3
-          if(customer.trust < maxtrustPenalty) {
-            const trustChange = -maxtrustPenalty*(1-(customer.trust+1)/(trustThreshold+1))
-            onTrustChange(trustChange)
-          }
+          onTrustChange(-0.1)
           await chatWindowRef.current.print(chat.main.factual.opener, "Alex", "aradan", 1)
           const informationalVariant = chat.main.factual.variants[getTrustIndex(customer.trust)]
           for (let i = 0; i < informationalVariant.length; i++) {
