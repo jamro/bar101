@@ -7,7 +7,7 @@ import GameAssets from '../GameAssets';
 class BarCustomerMasterContainer extends MasterContainer {
   constructor() {
     super();
-
+    this._customer = null;
     this._barTable = new BarTable();
     this.addChild(this._barTable);
 
@@ -36,9 +36,10 @@ class BarCustomerMasterContainer extends MasterContainer {
       this.emit('bciToggle');
     });
     this.addChild(this._bciButton);
+    if(this._customer) {
+      this._bciButton.visible = (this._customer.id !== 'trader');
+    }
   }
-
-  
 
   resize(width, height) {
     const scaleW = width / this._barTable.initWidth;
@@ -64,6 +65,7 @@ class BarCustomerMasterContainer extends MasterContainer {
   }
 
   setCustomer(customer, anim=false) {
+    this._customer = customer;
     if(customer && customer.trust !== undefined) {
       this._trustMeter.alpha = 1;
       this._trustMeter.trust = customer.trust;
@@ -71,6 +73,9 @@ class BarCustomerMasterContainer extends MasterContainer {
       this._trustMeter.alpha = 0;
     }
     this._barTable.setCustomer(customer, anim);
+    if(this._bciButton) {
+      this._bciButton.visible = (customer.id !== 'trader');
+    }
   }
 
   setDrink(drink, anim=false) {
