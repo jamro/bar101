@@ -38,6 +38,11 @@ class GameAssets {
       'img/paper.png',
       'img/rocks_drawing.png',
       'img/coupe_drawing.png',
+      'img/bci_scanner.png',
+      'img/bci_button.png',
+      'img/bci_up.png',
+      'img/bci_down.png',
+      'img/bci_off.png',
     ];
   }
 

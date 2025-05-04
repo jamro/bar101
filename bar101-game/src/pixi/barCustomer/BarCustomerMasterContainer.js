@@ -3,7 +3,7 @@ import MasterContainer from "../MasterContainer";
 import BarTable from './BarTable';
 import TrustMeter from './TrustMeter';
 import BalanceMeter from './BalanceMeter';
-
+import GameAssets from '../GameAssets';
 class BarCustomerMasterContainer extends MasterContainer {
   constructor() {
     super();
@@ -20,7 +20,25 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._balanceMeter.x = 0;
     this._balanceMeter.y = 0;
     this.addChild(this._balanceMeter);
+
+    this._bciButton = null
   }
+
+  init() {
+    if(this._bciButton) {
+      this.removeChild(this._bciButton);
+    }
+    this._bciButton = new PIXI.Sprite(GameAssets.assets['img/bci_button.png']);
+    this._bciButton.interactive = true;
+    this._bciButton.buttonMode = true;
+    this._bciButton.anchor.set(0, 1);
+    this._bciButton.on('pointerdown', () => {
+      this.emit('bciToggle');
+    });
+    this.addChild(this._bciButton);
+  }
+
+  
 
   resize(width, height) {
     const scaleW = width / this._barTable.initWidth;
@@ -35,6 +53,10 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._balanceMeter.scale.set(scale);
     this._balanceMeter.x = 40;
     this._balanceMeter.y = 20
+
+    this._bciButton.scale.set(scale);
+    this._bciButton.x = 40
+    this._bciButton.y = height - 20;
   }
 
   setBalance(balance) {

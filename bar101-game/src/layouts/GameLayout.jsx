@@ -28,8 +28,7 @@ function GameLayout({
 
   const handleCustomerLeave = () => {
     if (customerIndex === storyNode.visitors.length - 1) { // last customer
-      console.log("Last customer left, showing news");
-      //onLevelComplete();
+      console.log("Last customer left, moving to trader");
       onPhaseChange('trader')
     } else {
       console.log("Customer left, moving to next customer");

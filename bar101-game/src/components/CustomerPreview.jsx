@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as styles from './CustomerPreview.module.css';
 import PropTypes from 'prop-types';
 import useResizeObserver from "../hooks/useResizeObserver";
 import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import BarCustomerMasterContainer from "../pixi/barCustomer/BarCustomerMasterContainer";
+import BCIScanner from "./BCIScanner";
 
 let barCustomerMasterContainer; // TODO:re factor to avoid global variable
 
@@ -13,6 +14,7 @@ export default function CustomerPreview({ customer, drink, children, drinkAnim=f
   }
   const [containerRef, size] = useResizeObserver();
   const barSceneRef = useRef(barCustomerMasterContainer);
+  const [bciShown, setBciShown] = useState(false);
 
   useEffect(() => {
     barSceneRef.current.setDrink(drink, drinkAnim);
@@ -25,6 +27,15 @@ export default function CustomerPreview({ customer, drink, children, drinkAnim=f
   useEffect(() => {
     barSceneRef.current.setBalance(balance);
   }, [balance]);
+  
+  useEffect(() => {
+    barSceneRef.current.on('bciToggle', () => {
+      setBciShown((prev) => !prev);
+    });
+    return () => {
+      barSceneRef.current.off('bciToggle');
+    };
+  }, []);
 
   // estimate size when not available yet due to ref not being set
   let flexDirection, windowWidth, windowHeight;
@@ -45,6 +56,7 @@ export default function CustomerPreview({ customer, drink, children, drinkAnim=f
     <div className={styles.mainContainer} ref={containerRef} style={{flexDirection: flexDirection}}>
       <ResizablePixiCanvas className={styles.previewContainer} masterContainer={barSceneRef.current} />
       <div className={styles.chatContainer}>
+        {bciShown && <BCIScanner customer={customer} onClose={() => setBciShown(false)}/>}
         {children}
       </div>
     </div>
