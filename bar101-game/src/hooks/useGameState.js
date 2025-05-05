@@ -182,6 +182,12 @@ const useGameState = () => {
         default:
           throw new Error(`Unknown item to use: ${item}`);
       }
+    },
+    resetStoryPath: () => {
+      setState((prevState) => ({
+        ...prevState,
+        storyPath: [],
+      }));
     }
   }
 };

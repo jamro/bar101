@@ -17,6 +17,7 @@ function App({ }) {
     gameState, 
     initAllCustomersTrust, 
     clearGameState, 
+    resetStoryPath,
     proceedStoryPath, 
     changeTrust,
     setLevelPhase,
@@ -73,6 +74,11 @@ function App({ }) {
 
   }, [gameState.storyPath]);
 
+  const gameOver = () => {
+    resetStoryPath();
+    setIsStarted(false);
+  }
+
   if (error) {
     return (
       <div className="container">
@@ -93,8 +99,6 @@ function App({ }) {
   if (!storyNode || !worldContext) {
     return <LoadingScreen />
   }
-
-  //return <StoryTreeLayout onClose={() => setIsStoryTree(false)} />
 
   if(!isStarted && !isStoryTree) {
     return <StartLayout 
@@ -142,6 +146,7 @@ function App({ }) {
     onTrustChange={(customerId, dt) => changeTrust(customerId, dt)}
     onBuy={(item, price) => buyItem(item, price)}
     onUseItem={(item) => useItem(item)}
+    onGameOver={() => gameOver()}
   />
 }
 export default App;

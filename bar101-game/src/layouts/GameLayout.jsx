@@ -22,6 +22,7 @@ function GameLayout({
   onBalanceChange,
   onUseItem,
   onBuy,
+  onGameOver,
 }) {
   if(!storyNode) {
     return <div>Loading...</div>;
@@ -37,18 +38,24 @@ function GameLayout({
     }
   }
 
-  const customerId = storyNode.visitors[customerIndex];
-
-  if(!customerId) {
-    return <div>Error: No customer ID found</div>;
+  const exitNews = () => {
+    if(storyNode.visitors.length > 0) {
+      onPhaseChange('customer');
+    } else {
+      onGameOver();
+    }
   }
 
   switch (levelPhase) {
     case 'date':
       return <DateLayout storyNode={storyNode} onClose={() => onPhaseChange('news')} />;
     case 'news':
-      return <NewsLayout storyNode={storyNode} inventory={bartender.inventory} onClose={() => onPhaseChange('customer')} />;
+      return <NewsLayout storyNode={storyNode} inventory={bartender.inventory} onClose={() => exitNews()} />;
     case 'customer':
+      const customerId = storyNode.visitors[customerIndex];
+      if(!customerId) {
+        return <div>Error: No customer ID found</div>;
+      }
       return <CustomerLayout 
         customers={customers} 
         bartender={bartender}
