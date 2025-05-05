@@ -5,6 +5,9 @@ import base64
 from lib import ask_llm
 from diffusers import StableDiffusionPipeline
 import torch
+import random
+
+NEWS_IMAGES = json.load(open("assets/news_images.json"))
 
 get_system_message = lambda background, events, outcome: f"""# BACKGROUND
 {background}
@@ -14,6 +17,9 @@ get_system_message = lambda background, events, outcome: f"""# BACKGROUND
 
 # NEWS
 {outcome}
+
+# NEWS_IMAGES
+{json.dumps(NEWS_IMAGES, indent=2)}
 """
 
 get_official_prompt = lambda segment_count, extra_context: f"""Write and `publish_news` as a brief news segments (5-10 seconds) as broadcast on Stenograd State Broadcast (SSB) 
@@ -29,7 +35,8 @@ Rules:
 4. Use punchy language: one headline and 1-2 short lines from the anchor. Make sure it is easy to read and understand. Avoid jargon or overly complex language.
 5. Be specific and avoid vague or generic statements. Use concrete details and examples to illustrate your points.
 6. Structure the news spot as:
- - Headline (on-screen + voice-over) - Use title case or sentence case only (not all caps
+ - Image (on-screen) - The image should be a visual representation of the news segment. The id MUST be in the list of NEWS_IMAGES.
+ - Headline (on-screen + voice-over) - Use title case or sentence case only (not all caps)
  - Anchor Line (calm, controlled tone) - 1 sentence stating the event — framed positively or neutrally
  - Contextual Reframing - Short sentence that emphasizes systemic efficiency, resilience, or progress
 
@@ -46,6 +53,12 @@ in Stenograd — operating outside the control of official state media.
 - Make sure it is easy to read and understand. Avoid jargon or overly complex language.
 - The segemnt should clearly communicatte the NEWS through segments that are punchy and engaging.
 
+Structure the news spot as:
+ - Image (on-screen) - The image should be a visual representation of the news segment. The id MUST be in the list of NEWS_IMAGES.
+ - Headline (on-screen + voice-over) - Use title case or sentence case only (not all caps)
+ - Anchor Line (calm, controlled tone) - 1 sentence stating the event - framed negatively or with sarcasm
+ - Contextual Reframing - 1-2 sentences that emphasizes systemic efficiency, resilience, or progress
+
 {extra_context}
 
 Constraints:
@@ -55,7 +68,7 @@ Constraints:
 	4.	Highlight contradictions in the official narrative or connect dots the state won’t.
 """
 
-get_image_prompt = lambda headline, anchor_line, contextual_reframing: f"""
+get_image_prompt = lambda image_description: f"""
 Create a stylized, ominous illustration in a vintage propaganda or graphic novel style reminiscent of mid-20th-century dystopian art.
 Use a limited, muted color palette dominated by deep browns, desaturated reds, dark beiges, and near-black tones, with selective red accents for emotional emphasis.
 All characters should have black skin, circular light-filled eyes, and bright red noses for immediate, symbolic readability.
@@ -66,9 +79,7 @@ Use strong symmetry or framing to reinforce themes of surveillance, conformity, 
 
 Scene focus: An abstract, symbolic visualization of a news story:
 ---
-{headline}
-{anchor_line}
-{contextual_reframing}
+{image_description}
 ---
 
 Instructions:
@@ -133,6 +144,10 @@ class NewsWriter:
                                 "items": {
                                     "type": "object",
                                     "properties": {
+                                        "image_id": {
+                                            "type": "string",
+                                            "description": "The id of the image to use for the news segment. The image should be a visual representation of the news segment. The id MUST be in the list of NEWS_IMAGES."
+                                        },
                                         "headline": {
                                             "type": "string",
                                             "description": "The headline of the news segment. This should be a short, punchy statement that captures the essence of the news. 2-3 words long."
@@ -161,7 +176,13 @@ class NewsWriter:
 
         official_news = []
         for item in params['news_segmenrs']:
+            image_id = item["image_id"]
+            if image_id not in [i["id"] for i in NEWS_IMAGES]:
+                image_id = random.choice([i["id"] for i in NEWS_IMAGES])
+                print(f"WARNING: Image id {image_id} not found in NEWS_IMAGES. Picking random one.")
+
             official_news.append({
+                "image_id": image_id,
                 "headline": item["headline"],
                 "anchor_line": item["anchor_line"],
                 "contextual_reframing": item["contextual_reframing"]
@@ -176,21 +197,39 @@ class NewsWriter:
         params = json.loads(response.choices[0].message.function_call.arguments)
         underground_news = []
         for item in params['news_segmenrs']:
+            image_id = item["image_id"]
+            if image_id not in [i["id"] for i in NEWS_IMAGES]:
+              image_id = random.choice([i["id"] for i in NEWS_IMAGES])
+              print(f"WARNING: Image id {image_id} not found in NEWS_IMAGES. Picking random one.")
+
             underground_news.append(
                 {
+                    "image_id": image_id,
                     "headline": item["headline"],
                     "anchor_line": item["anchor_line"],
                     "contextual_reframing": item["contextual_reframing"]
                 }
             )
+            
+        # iterate trhough official and underground to get image_id and create image
+        for news in official_news + underground_news:
+            image_id = news["image_id"]
+            self.create_news_image(image_id)
 
         return {
             "official": official_news,
             "underground": underground_news
         }
     
-    def create_news_image(self, headline, anchor_line, contextual_reframing):
-        prompt = get_image_prompt(headline, anchor_line, contextual_reframing)
+    def create_news_image(self, image_id):
+        image_path = os.path.join(os.path.dirname(__file__), "../../assets/news", f"{image_id}.png")
+
+        if os.path.exists(image_path):
+            return
+
+        image_description = next((i["description"] for i in NEWS_IMAGES if i["id"] == image_id), None)
+
+        prompt = get_image_prompt(image_description)
 
         result = self.client.images.generate(
             model="gpt-image-1",
@@ -200,4 +239,9 @@ class NewsWriter:
         )
 
         image_base64 = result.data[0].b64_json
-        return base64.b64decode(image_base64)
+        image_bytes = base64.b64decode(image_base64)
+        with open(image_path, "wb") as f:
+            f.write(image_bytes)
+            
+    
+

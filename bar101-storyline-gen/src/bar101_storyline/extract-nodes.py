@@ -28,25 +28,10 @@ def extract_node(story_root, target_root, variant_path=[]):
       raw_data = source_file.read()
       json_data = json.loads(raw_data)
       for i, n in enumerate(json_data['news']['official']):
-        json_data['news']['official'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.jpg"
+        json_data['news']['official'][i]["image"] = f"news/{n['image_id']}.jpg"
       for i, n in enumerate(json_data['news']['underground']):
-        json_data['news']['underground'][i]["image"] = f"news_img_x{''.join(variant_path)}_{i+1}.jpg"
+        json_data['news']['underground'][i]["image"] = f"news/{n['image_id']}.jpg"
       json.dump(json_data, target_file, indent=2)
-
-  # copy news_img_#.png images to target path
-  for file in os.listdir(node_dir):
-    if not file.startswith("news_img_") or not file.endswith(".png"):
-      continue
-    source_file_path = os.path.join(node_dir, file)
-    target_file_path = os.path.join(target_root, f"news_img_x{''.join(variant_path)}_{file.split('_')[-1]}")
-    target_file_path = os.path.splitext(target_file_path)[0] + ".jpg"
-    with Image.open(source_file_path) as img:
-      if img.mode in ("RGBA", "P"): 
-        img = img.convert("RGB")
-      new_size = (int(img.width * 0.6), int(img.height * 0.6))
-      resized_img = img.resize(new_size, Image.LANCZOS)
-      resized_img.save(target_file_path, format="JPEG", quality=65, optimize=True)
-
 
   # check variants
   if os.path.exists(varian_a_path):
@@ -57,7 +42,7 @@ def extract_node(story_root, target_root, variant_path=[]):
     console.print(f"Found variant B at /{'/'.join(variant_path)}", style="green bold")
     extract_node(story_root, target_root, variant_path + ["b"])
   
-
+  
 if __name__ == "__main__":
   console.print("Extracting nodes from the story tree...", style="bold green")
   story_root = os.path.join(os.path.dirname(__file__), "../../story_tree")
@@ -78,4 +63,41 @@ if __name__ == "__main__":
       target_file.write(source_file.read())
   console.print("Done!", style="bold green")
   console.print("All nodes extracted!", style="bold green")
+
+
+  """
+  for file in os.listdir(node_dir):
+    if not file.startswith("news_img_") or not file.endswith(".png"):
+      continue
+    source_file_path = os.path.join(node_dir, file)
+    target_file_path = os.path.join(target_root, f"news_img_x{''.join(variant_path)}_{file.split('_')[-1]}")
+    target_file_path = os.path.splitext(target_file_path)[0] + ".jpg"
+    with Image.open(source_file_path) as img:
+      if img.mode in ("RGBA", "P"): 
+        img = img.convert("RGB")
+      new_size = (int(img.width * 0.6), int(img.height * 0.6))
+      resized_img = img.resize(new_size, Image.LANCZOS)
+      resized_img.save(target_file_path, format="JPEG", quality=65, optimize=True)  
+  
+  """
+
+  # extracting news images.
+  console.print("Extracting news images...", style="bold green")
+  source_news_root = os.path.join(os.path.dirname(__file__), "../../assets/news")
+  target_news_root = os.path.join(target_root, "news")
+  os.makedirs(target_news_root, exist_ok=True)
+
+  for file in os.listdir(source_news_root):
+    if not file.endswith(".png"):
+      continue
+
+    console.print(f"Processing {file}...", style="blue")
+    source_file_path = os.path.join(source_news_root, file)
+    target_file_path = os.path.join(target_news_root, file.replace(".png", ".jpg"))
+    with Image.open(source_file_path) as img:
+      if img.mode in ("RGBA", "P"): 
+        img = img.convert("RGB")
+      new_size = (int(img.width * 0.6), int(img.height * 0.6))
+      resized_img = img.resize(new_size, Image.LANCZOS)
+      resized_img.save(target_file_path, format="JPEG", quality=65, optimize=True)  
 
