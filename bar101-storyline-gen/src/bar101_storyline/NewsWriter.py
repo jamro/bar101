@@ -39,6 +39,7 @@ Rules:
  - Headline (on-screen + voice-over) - Use title case or sentence case only (not all caps)
  - Anchor Line (calm, controlled tone) - 1 sentence stating the event — framed positively or neutrally
  - Contextual Reframing - Short sentence that emphasizes systemic efficiency, resilience, or progress
+7. For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 {extra_context}
 """
@@ -52,6 +53,7 @@ in Stenograd — operating outside the control of official state media.
 - Format it like a scrappy, quickly edited cutscene seen on a hacked feed or darknet stream.
 - Make sure it is easy to read and understand. Avoid jargon or overly complex language.
 - The segemnt should clearly communicatte the NEWS through segments that are punchy and engaging.
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 Structure the news spot as:
  - Image (on-screen) - The image should be a visual representation of the news segment. The id MUST be in the list of NEWS_IMAGES.

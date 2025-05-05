@@ -81,6 +81,7 @@ Use this moment to reveal RECENT STORY OF {customer['name']}.
 - Monologue should end emotionally allowing Alex to respond empathetically
 - Ensure smooth and natural transtion from answering bartender's to talking about your story
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
@@ -115,6 +116,7 @@ get_emotional_prompt = lambda customer, emotion: f"""Imagine you are {customer['
 - Do not ask questions or request any actions from Alex
 - Monologue should end naturally — no need for dramatic conclusion or exit line
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
@@ -153,6 +155,7 @@ You just had following coversation with bartender Alex (assume you had all of va
 - Do not ask questions or request any actions from Alex
 - Monologue should end naturally — no need for dramatic conclusion or exit line
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:

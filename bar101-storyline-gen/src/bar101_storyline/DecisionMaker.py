@@ -93,6 +93,7 @@ Write a short internal monologue in response about the dilemma - no dialogue, no
 - Share specific details and situations that triggered the dilemma
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
 - Share what direction you are leaning towards and how your political preferences and current BCI score may affect the decision
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 # Variants
 Write five monologue variants, each showing the level of trust {customer['name']} feels toward the bartender:
@@ -188,6 +189,7 @@ Monologue Format:
 -	Focus on clarity, natural tone, and logical flow
 -	End with a neutral but reflective closing line
 -	Never mention "Option A or B" directly - use real choices
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 Tone & Setting:
 -	Conversational, layered with subtle tension

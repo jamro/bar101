@@ -124,6 +124,7 @@ Assume the bartender doesn't know what your hobby is.
 - Monologue should end naturally — no need for dramatic conclusion or exit line
 - Ensure smooth and natural transtion from answering bartender's to talking about your hobby
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
@@ -160,6 +161,7 @@ Use only information that the {customer['name']} would know
 - Monologue should end naturally — no need for dramatic conclusion or exit line
 - Ensure smooth and natural transtion from answering bartender's to talking about recent events
 - Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
+- For pauses, use periods or ellipses only. Never use dashes or hyphens.
 
 # Variants
 Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
