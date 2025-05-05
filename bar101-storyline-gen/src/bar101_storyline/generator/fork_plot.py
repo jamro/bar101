@@ -19,8 +19,8 @@ def fork_plot(plot_shaper, variants_chain):
     
     bar_night = plot_shaper.fork_plot(log_callback=console.print)
 
-    plot_a = { "outcome": bar_night["branch_a"], "events": bar_night["events_a"]}
-    plot_b = { "outcome": bar_night["branch_b"], "events": bar_night["events_b"]}
+    plot_a = { "title": bar_night["branch_a_title"], "outcome": bar_night["branch_a"], "events": bar_night["events_a"]}
+    plot_b = { "title": bar_night["branch_b_title"], "outcome": bar_night["branch_b"], "events": bar_night["events_b"]}
 
     with open(plot_a_path, "w") as f:
         json.dump(plot_a, f, indent=2)

@@ -147,6 +147,8 @@ class PlotShaper:
                         "properties": {
                             "branch_a": {"type": "string", "description": "Short summary of the branch A. Be specific and include all important details. Style: clear, compact and easy to understand. Length: 20-40 words."},
                             "branch_b": {"type": "string", "description": "Short summary of summary of the branch B. Be specific and include all important details. Style: clear, compact and easy to understand. Length: 20-40 words."},
+                            "branch_a_title": {"type": "string", "description": "Title of the branch A. Be descriptive and compact. Style: clear, short and easy to understand. Length: 3-5 words at most."},
+                            "branch_b_title": {"type": "string", "description": "Title of the branch B. Be descriptive and compact. Style: clear, short and easy to understand. Length: 3-5 words at most."},
                             "events_a": {
                                 "type": "array",
                                 "description": "Timeline events caused by branch A.",
@@ -189,6 +191,8 @@ class PlotShaper:
                 response = {
                     "branch_a": params["branch_a"],
                     "branch_b": params["branch_b"],
+                    "branch_a_title": params["branch_a_title"],
+                    "branch_b_title": params["branch_b_title"],
                     "events_a": params["events_a"],
                     "events_b": params["events_b"],
                     "plot_stage": plot_stage
