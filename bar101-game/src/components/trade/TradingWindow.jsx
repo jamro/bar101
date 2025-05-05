@@ -65,7 +65,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
       img: "/img/bci_scanner_product_emblem.png",
       name: "BCI Scanner",
       subtitle: "Jailbroken. Off the Grid",
-      price: 200.00,
+      price: 100.00,
       available: !inventory.scanner,
       single: true,
       description: "This scanner allows you to check your customers' scores and profiles silently.",
@@ -88,7 +88,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
       img: `/img/${user}_product_emblem.png`,
       name: "BCI User Profile",
       subtitle: userNames[user],
-      price: 140.00 + users.indexOf(user) * 20,
+      price: 100.00 + users.indexOf(user) * 30,
       available: !inventory.files.includes(user),
       single: true,
       description: `USB Stick with a BCI user profile of ${userNames[user]}. Portable, untraceable, and illegal.`
