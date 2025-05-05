@@ -226,7 +226,7 @@ class CharacterStoryBuilder:
 
         return {
             "chapter": params["chapter"],
-            "bci_score": params["new_bci_score"],
+            "bci_score": max(0, min(100, params["new_bci_score"])),
             "political_preference": character_stats["political_preference"],
         }
         

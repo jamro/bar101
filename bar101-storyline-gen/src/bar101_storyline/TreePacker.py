@@ -49,6 +49,14 @@ class TreePacker:
         return data
    
     def pack_node(self, path, variants_chain):
+        # get parent node from parent dir of path
+        if len(variants_chain) > 0:
+            parent_dir = os.path.dirname(path)
+            parent_node = self._read_file(parent_dir, "node.json")
+        else:
+            parent_node = None
+
+        # get node title
         if len(variants_chain) > 0:
             _plot = self._read_file(path, "_plot.json")
             title = _plot["title"]
@@ -69,9 +77,17 @@ class TreePacker:
 
         character_stats = {}
         for character in characters:
+            bci_history = []
+            if not parent_node:
+                bci_history = [characters[character]["bci_score"]]
+                for _ in range(10):
+                    bci_history.insert(0, max(0, min(100, bci_history[0] + random.randint(-5, 5))))
+            else:
+                bci_history = parent_node["character_stats"][character]["bci_history"] + [characters[character]["bci_score"]]
             character_stats[character] = {
                 "bci_score": characters[character]["bci_score"],
                 "political_preference": characters[character]["political_preference"],
+                "bci_history": bci_history,
             }
 
         timestamp = timeline[-1]['timestamp']
