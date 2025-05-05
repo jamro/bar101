@@ -43,7 +43,7 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
           setChatOptions(["Continue"])
           setPhase("exit")
         } else if (index === 1) { // Push for info
-          onTrustChange(-0.1)
+          onTrustChange(-0.2)
           await chatWindowRef.current.print(chat.main.factual.opener, "Alex", "aradan", 1)
           const informationalVariant = chat.main.factual.variants[getTrustIndex(customer.trust)]
           for (let i = 0; i < informationalVariant.length; i++) {
