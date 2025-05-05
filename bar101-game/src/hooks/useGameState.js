@@ -186,6 +186,7 @@ const useGameState = () => {
     resetStoryPath: () => {
       setState((prevState) => ({
         ...prevState,
+        timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
         storyPath: [],
       }));
     }

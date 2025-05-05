@@ -135,7 +135,7 @@ if __name__ == "__main__":
 
         # pack the story node
         node_path = os.path.join(story_root, *variants_chain, "node.json")
-        node = tree_packer.pack_node(os.path.join(story_root, *variants_chain))
+        node = tree_packer.pack_node(os.path.join(story_root, *variants_chain), variants_chain)
         json.dump(node, open(node_path, "w"), indent=2)
 
         # track costs
@@ -192,7 +192,7 @@ if __name__ == "__main__":
 
     # pack the story node
     node_path = os.path.join(story_root, *variants_chain, "node.json")
-    node = tree_packer.pack_node(os.path.join(story_root, *variants_chain))
+    node = tree_packer.pack_node(os.path.join(story_root, *variants_chain), variants_chain)
     json.dump(node, open(node_path, "w"), indent=2)
   
 

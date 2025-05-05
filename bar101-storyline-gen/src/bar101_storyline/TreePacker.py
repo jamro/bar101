@@ -48,7 +48,12 @@ class TreePacker:
         
         return data
    
-    def pack_node(self, path):
+    def pack_node(self, path, variants_chain):
+        if len(variants_chain) > 0:
+            _plot = self._read_file(path, "_plot.json")
+            title = _plot["title"]
+        else:
+            title = "Halden's Death"
         characters = self._read_file(path, "characters.json")
         dilemma = self._read_file(path, "dilemma.json", no_error=True)
         visitors = self._read_file(path, "visitors.json", no_error=True) or []
@@ -74,6 +79,7 @@ class TreePacker:
         next_day = next_day.replace(hour=random.randint(19, 20), minute=random.randint(0, 59), second=0)
 
         raw_result = {
+            "title": title,
             "timestamp": next_day.isoformat(),
             "news": self._read_file(path, "news.json"),
             "visitors": visitors,
