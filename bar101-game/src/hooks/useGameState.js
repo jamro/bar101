@@ -5,6 +5,7 @@ const DEFAULT_STATE = {
   timestamp: Date.now(),
   customerTrust: null,
   storyPath: [],
+  visitedNodes: ['x'],
   balance: 33,
   levelProgress: {
     phase: 'date',
@@ -69,6 +70,7 @@ const useGameState = () => {
           ...prevState,
           timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
           storyPath: [...prevState.storyPath, prevState.levelProgress.decision],
+          visitedNodes: [...prevState.visitedNodes, "x" + [...prevState.storyPath, prevState.levelProgress.decision].join('')],  
           levelProgress: {
             ...prevState.levelProgress,
             customerIndex: 0,

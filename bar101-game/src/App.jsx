@@ -4,6 +4,7 @@ import LoadingScreen from './layouts/LoadingScreen';
 import StartLayout from './layouts/StartLayout';
 import useGameState from './hooks/useGameState';
 import GameAssets from './pixi/GameAssets';
+import StoryTreeLayout from './layouts/StoryTreeLayout';
 
 function App({ }) {
   const [ storyNode, setStoryNode ] = useState(null);
@@ -11,6 +12,7 @@ function App({ }) {
   const [ isStarted, setIsStarted ] = useState(false);
   const [ error , setError ] = useState(null);
   const gameStateObject = useGameState();
+  const [ isStoryTree, setIsStoryTree ] = useState(false);
   const { 
     gameState, 
     initAllCustomersTrust, 
@@ -92,8 +94,18 @@ function App({ }) {
     return <LoadingScreen />
   }
 
-  if(!isStarted) {
-    return <StartLayout onStart={() => setIsStarted(true)} onClear={() => handleClearGameState()} />
+  //return <StoryTreeLayout onClose={() => setIsStoryTree(false)} />
+
+  if(!isStarted && !isStoryTree) {
+    return <StartLayout 
+        onStart={() => setIsStarted(true)} 
+        onClear={() => handleClearGameState()} 
+        onStoryTree={() => setIsStoryTree(true)}
+      />
+  }
+
+  if(isStoryTree) {
+    return <StoryTreeLayout onClose={() => setIsStoryTree(false)} visitedNodes={gameState.visitedNodes} storyPath={gameState.storyPath} />
   }
 
   const customers = worldContext.bar.customers.reduce((acc, customer) => {

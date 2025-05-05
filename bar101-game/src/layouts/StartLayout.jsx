@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as styles from './StartLayout.module.css';
 
-export default function StartLayout({ onStart, onClear }) {
+export default function StartLayout({ onStart, onClear, onStoryTree }) {
   
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -38,6 +38,9 @@ export default function StartLayout({ onStart, onClear }) {
         <div style={{ textAlign: 'center' }}>
           <div className={styles.buttonRow}>
             <button onClick={start} >Enter Bar 101</button>
+          </div>
+          <div className={styles.buttonRow}>
+            <button onClick={onStoryTree} >Story Tree</button>
           </div>
           <div className={styles.buttonRow}>
             <button onClick={onClear} >Clear Saved Data</button>
