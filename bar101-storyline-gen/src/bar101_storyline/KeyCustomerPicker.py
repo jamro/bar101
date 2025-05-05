@@ -42,12 +42,14 @@ Describe how actions or decisions of {customer_name} influenced the story's tran
 Both choices must be triggered by the same situation, but they diverge in their consequences.
 Their influence MUST BE DIRECT leading to NEXT CHAPTER events. The decision is shaped in part by their conversations with Alex, the bartender (do not mention Alex directly in the events or variants).
 Both paths were viable and probable, but {customer_name} ultimately made a decision that steered the story forward.
-Make sure that the dilema and actions are inline with the character's personality, job position and area of influence.
+Make sure that the dilema and actions are inline with the character's personality, job position and area of influence. {customer_name} MUST be authorized to perform actions related to the decision.
+Make sure both variants are mutually exclusive and {customer_name} must chose one or the other.
 
 As a result provide:
-- Cause: One of recent events or situations that lead the customer's make face the dilemma. Explain why it is plausible and inline with the character's profile.
+- Cause: One of recent global events or situations that DIRECTLY lead the customer's make face the dilemma. Explain why it is plausible and inline with the character's profile. It must be a signifficant event. Do not refer to Bar 101 or Alex.
 - Dilema theme: For example: 'Leak a document or destroy it', 'Call for reinforcements or handle it alone', 'Delay a project or push it forward unprepared', 'Report a colleague or cover for them', 'Break protocol to help someone or follow orders', 'Sabotage a rival or compete fairly', 'Cancel the operation or proceed at risk', 'Authorize force or seek negotiation', 'Investigate suspicious activity or ignore it'
 -	Dilemma: The key conflict or decision they faced. It must be logical result of the Cause from previous step.
+- Alignment: Explain why the choice is aligned with {customer_name} job position and area of influence.
 - Reason: Why the customer is unsure about the decision and how it is connected with {customer_name} job positition
 -	Variant A: The choice that leads to VARIANT A from the TIMELINE
     * Belief A: Belief of {customer_name} that leads to chose VARIANT A. It must be opposite of the belief B.
