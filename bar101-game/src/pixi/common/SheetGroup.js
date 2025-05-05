@@ -7,6 +7,9 @@ export default class SheetGroup extends PIXI.Container {
     this._sheets = []
     this._paperSlots = []
     this._overlay = new PIXI.Graphics();
+    this._overlay.on('pointerdown', () => {
+      this.emit('close');
+    });
     this._overlay.alpha = 0.65;
     this._overlay.interactive = true;
     this.addChild(this._overlay);
