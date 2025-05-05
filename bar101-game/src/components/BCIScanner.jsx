@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import PropTypes from 'prop-types';
 import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import * as styles from './BCIScanner.module.css';
 import BciScannerMasterContainer from "../pixi/bciScanner/BciScannerMasterContainer";
@@ -26,3 +27,13 @@ export default function BCIScanner({customer, inventory, onClose}) {
     <ResizablePixiCanvas className={styles.bciScannerContainer} masterContainer={barSceneRef.current} />
   )
 }
+
+BCIScanner.propTypes = {
+  customer: PropTypes.object.isRequired,
+  inventory: PropTypes.object.isRequired,
+  onClose: PropTypes.func
+};
+
+BCIScanner.defaultProps = {
+  onClose: () => {}
+};

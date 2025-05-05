@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping, faTimes } from "@fortawesome/free-solid-svg-icons"
 import * as styles from './BuyButton.module.css';
 
 export default function BuyButton({
   price,
-  available=true,
-  affordable=true,
+  available,
+  affordable,
   onClick
 }) {
 
@@ -27,3 +28,15 @@ export default function BuyButton({
   )
 
 }
+
+BuyButton.propTypes = {
+  price: PropTypes.number.isRequired,
+  available: PropTypes.bool,
+  affordable: PropTypes.bool,
+  onClick: PropTypes.func.isRequired
+};
+
+BuyButton.defaultProps = {
+  available: true,
+  affordable: true
+};

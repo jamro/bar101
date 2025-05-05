@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, memo } from 'react';
+import PropTypes from 'prop-types';
 import * as PIXI from 'pixi.js';
 import { extensions, ResizePlugin } from 'pixi.js';
 import useResizeObserver from '../hooks/useResizeObserver';
 
 const pixiCache = new Map(); // TODO:re factor to avoid global variable
 
-const ResizablePixiCanvas = ({className="", style={}, masterContainer=null, onReady=() => {}}) => {
+const ResizablePixiCanvas = ({className, style, masterContainer, onReady}) => {
   const [pixiContainer, size] = useResizeObserver();
   const appRef = useRef(null);
 
@@ -81,6 +82,19 @@ const ResizablePixiCanvas = ({className="", style={}, masterContainer=null, onRe
   }, [size]);
 
   return <div ref={pixiContainer} style={{backgroundColor: '#000000', ...style}} className={className} />;
+};
+
+ResizablePixiCanvas.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object,
+  masterContainer: PropTypes.object.isRequired,
+  onReady: PropTypes.func
+};
+
+ResizablePixiCanvas.defaultProps = {
+  className: "",
+  style: {},
+  onReady: () => {}
 };
 
 export default ResizablePixiCanvas;

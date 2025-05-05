@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from "framer-motion";
 import * as styles from './TradingWindow.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -193,3 +194,25 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
     </div>
   );
 }
+
+TradingWindow.propTypes = {
+  inventory: PropTypes.shape({
+    antenna: PropTypes.bool,
+    scanner: PropTypes.bool,
+    special: PropTypes.number,
+    files: PropTypes.arrayOf(PropTypes.string)
+  }).isRequired,
+  balance: PropTypes.number.isRequired,
+  onBuy: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
+};
+
+TradingWindow.defaultProps = {
+  inventory: {
+    antenna: false,
+    scanner: false,
+    special: 0,
+    files: []
+  },
+  balance: 0
+};
