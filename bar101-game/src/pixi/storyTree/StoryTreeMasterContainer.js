@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js';
 import MasterContainer from "../MasterContainer";
 import StoryTree from "./StoryTree";
-import GameAssets from "../GameAssets";
 import DragAndPinchHandler from "./DragAndPinchHandler";
+import NodePreview from './NodePreview';
 
 class StoryTreeMasterContainer extends MasterContainer {
   constructor() {
@@ -40,6 +40,10 @@ class StoryTreeMasterContainer extends MasterContainer {
     this.addChild(this._closeLabel);
     this.addChild(this._closeButton);
 
+    this._nodePreviewContainer = new PIXI.Container();
+    this.addChild(this._nodePreviewContainer);
+    this._nodePreview = null
+
     this._dragAndPinchHandler = new DragAndPinchHandler(this._masterContainer, {
       onDrag: (dx, dy) => {
         this._targetStoryTreePosition.x += dx;
@@ -47,6 +51,27 @@ class StoryTreeMasterContainer extends MasterContainer {
       },
       onPinch: (zoomFactor) => {
         this._targetScale = Math.max(0.1, Math.min(5, this._targetScale * zoomFactor));
+      },
+      onClick: (x, y) => {
+        let node = null;
+        if(!this._nodePreview) {
+          const translatedX1 = (x - this._masterContainer.x) / this._masterContainer.scale.x;
+          const translatedY1 = (y - this._masterContainer.y) / this._masterContainer.scale.y;
+          const translatedX2 = (translatedX1 - this._storyTree.x) / this._storyTree.scale.x;
+          const translatedY2 = (translatedY1 - this._storyTree.y) / this._storyTree.scale.y;
+
+          node = this._storyTree.selectNodeAt(translatedX2, translatedY2);
+        } else {
+          this._nodePreviewContainer.removeChild(this._nodePreview);
+          this._nodePreview = null;
+        }
+        if(node) {
+          this._nodePreview = new NodePreview(node);
+          this._nodePreviewContainer.addChild(this._nodePreview);
+          this._nodePreview.show();
+          this._targetStoryTreePosition.x = -node.x * this._currentScale;
+          this._targetStoryTreePosition.y = -node.y * this._currentScale;
+        }
       }
     });
 
@@ -91,6 +116,11 @@ class StoryTreeMasterContainer extends MasterContainer {
       this._renderLoop = null;
     }
     this._dragAndPinchHandler.cleanup();
+
+    if(this._nodePreview) {
+      this._nodePreviewContainer.removeChild(this._nodePreview);
+      this._nodePreview = null;
+    }
   }
 
   updateVisitedNodes(visitedNodes) {
@@ -104,7 +134,7 @@ class StoryTreeMasterContainer extends MasterContainer {
   }
 
   resize(width, height) {
-    const scale = Math.max(width / 1600, height / 1600);
+    const scale = Math.min(width / 1000, height / 1000);
 
     this._closeLabel.x = width-20*scale
     this._closeLabel.y = 20*scale;
@@ -119,6 +149,10 @@ class StoryTreeMasterContainer extends MasterContainer {
     this._masterContainer.x = width / 2;
     this._masterContainer.y = height / 2;
     this._masterContainer.scale.set(scale*2);
+
+    this._nodePreviewContainer.x = width / 2;
+    this._nodePreviewContainer.y = height / 2;
+    this._nodePreviewContainer.scale.set(scale);
   }
 }
 

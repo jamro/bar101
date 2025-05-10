@@ -3,7 +3,6 @@ import StoryNode from './StoryNode';
 
 const COLOR = 0xdec583
 
-
 function connectPoints(graphics, x1, y1, x2, y2, color = COLOR, randomRange = 1, segmentCount = 10) {
   // Calculate the base vector for the line
   const dx = x2 - x1;
@@ -110,6 +109,26 @@ class StoryTree extends PIXI.Container {
 
   get currentNode() {
     return this._currentNode;
+  }
+
+  selectNodeAt(x, y) {
+    const matches = []
+    // do hit test on all nodes
+    const nodes = Object.values(this._treeMap);
+    for(let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+      if(node.visited) {
+        const {hit, distance} = node.hitTest(x, y)
+        if(hit) {
+          matches.push({node, distance})
+        }
+      }
+    }
+    if(matches.length > 0) {
+      matches.sort((a, b) => a.distance - b.distance)
+      return matches[0].node
+    }
+    return null;
   }
 
   updateStoryPath(storyPath) {

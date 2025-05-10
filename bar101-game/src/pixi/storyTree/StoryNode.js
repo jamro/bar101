@@ -16,6 +16,15 @@ export default class StoryNode extends PIXI.Container {
     this.visited = false;
   }
 
+  hitTest(x, y) {
+    const radius = 30
+    const distance = Math.hypot(x - this.x, y - this.y);
+    return {
+      hit: distance < radius,
+      distance: distance
+    }
+  }
+
   get path() {
     return this._path;
   }

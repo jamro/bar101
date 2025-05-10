@@ -5,10 +5,15 @@ class DragAndPinchHandler {
     this.container = container;
     this.onDrag = options.onDrag || (() => {});
     this.onPinch = options.onPinch || (() => {});
+    this.onClick = options.onClick || (() => {});
     
     this._dragPoint = null;
     this._lastPinchDistance = null;
     this._isPinching = false;
+    this._clickStartTime = null;
+    this._clickStartPosition = null;
+    this._clickThreshold = 20; // pixels
+    this._clickTimeThreshold = 1000; // milliseconds
 
     this._setupEventListeners();
   }
@@ -23,14 +28,32 @@ class DragAndPinchHandler {
     this.container.on('pointerdown', (event) => {
       if (this._isPinching) return;
       this._dragPoint = {x: event.global.x, y: event.global.y};
+      this._clickStartTime = Date.now();
+      this._clickStartPosition = {x: event.global.x, y: event.global.y};
     });
 
-    this.container.on('pointerup', () => {
+    this.container.on('pointerup', (event) => {
+      if (this._clickStartTime && this._clickStartPosition) {
+        const currentTime = Date.now();
+        const timeDiff = currentTime - this._clickStartTime;
+        const distance = Math.hypot(
+          event.global.x - this._clickStartPosition.x,
+          event.global.y - this._clickStartPosition.y
+        );
+
+        if (timeDiff <= this._clickTimeThreshold && distance <= this._clickThreshold) {
+          this.onClick(event.global.x, event.global.y);
+        }
+      }
       this._dragPoint = null;
+      this._clickStartTime = null;
+      this._clickStartPosition = null;
     });
 
     this.container.on('pointerout', () => {
       this._dragPoint = null;
+      this._clickStartTime = null;
+      this._clickStartPosition = null;
     });
 
     this.container.on('pointermove', (event) => {
@@ -106,7 +129,6 @@ class DragAndPinchHandler {
 
   _handleGlobalTouchStart(event) {
     if (event.touches.length === 2) {
-      event.preventDefault();
       this._isPinching = true;
       this._dragPoint = null;
       const touch1 = event.touches[0];
@@ -120,7 +142,6 @@ class DragAndPinchHandler {
 
   _handleGlobalTouchMove(event) {
     if (event.touches.length === 2 && this._isPinching) {
-      event.preventDefault();
       const touch1 = event.touches[0];
       const touch2 = event.touches[1];
       const currentDistance = Math.hypot(
