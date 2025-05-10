@@ -14,6 +14,8 @@ class StoryTreeMasterContainer extends MasterContainer {
 
     this._storyTree = new StoryTree();
     this._targetStoryTreePosition = {x: 0, y: 0};
+    this._targetScale = 1;
+    this._currentScale = 1;
     this._masterContainer.addChild(this._storyTree);
     
     this._closeLabel = new PIXI.Text({
@@ -37,22 +39,31 @@ class StoryTreeMasterContainer extends MasterContainer {
     this.addChild(this._closeLabel);
     this.addChild(this._closeButton);
 
-    this._dragPoint = null
+    this._dragPoint = null;
+    this._lastPinchDistance = null;
+    this._isPinching = false;
+
+    // Configure container for touch
+    this._masterContainer.eventMode = 'static';
+    this._masterContainer.interactive = true;
+    this._masterContainer.interactiveChildren = true;
 
     // handle drag
     this._masterContainer.on('pointerdown', (event) => {
+      if (this._isPinching) return;
       this._dragPoint = {x: event.global.x, y: event.global.y};
     });
 
     this._masterContainer.on('pointerup', () => {
       this._dragPoint = null;
     });
+
     this._masterContainer.on('pointerout', () => {
       this._dragPoint = null;
     });
 
     this._masterContainer.on('pointermove', (event) => {
-      if(!this._dragPoint) {
+      if(!this._dragPoint || this._isPinching) {
         return;
       }
       const dx = event.global.x - this._dragPoint.x;
@@ -63,30 +74,135 @@ class StoryTreeMasterContainer extends MasterContainer {
       this._targetStoryTreePosition.y += dy;
     });
 
-    this._renderLoop = null;
+    // Add wheel event for zoom
+    this._masterContainer.on('wheel', (event) => {
+      const zoomFactor = event.deltaY > 0 ? 0.97 : 1.03;
+      this._targetScale = Math.max(0.1, Math.min(5, this._targetScale * zoomFactor));
+    });
 
+    // Touch events for pinch zoom
+    this._masterContainer.on('touchstart', (event) => {
+      const touches = event.data.originalEvent.touches;
+      if (touches && touches.length === 2) {
+        this._isPinching = true;
+        this._dragPoint = null;
+        const touch1 = touches[0];
+        const touch2 = touches[1];
+        this._lastPinchDistance = Math.hypot(
+          touch2.clientX - touch1.clientX,
+          touch2.clientY - touch1.clientY
+        );
+      }
+    });
+
+    this._masterContainer.on('touchmove', (event) => {
+      const touches = event.data.originalEvent.touches;
+      if (touches && touches.length === 2) {
+        this._isPinching = true;
+        this._dragPoint = null;
+        const touch1 = touches[0];
+        const touch2 = touches[1];
+        const currentDistance = Math.hypot(
+          touch2.clientX - touch1.clientX,
+          touch2.clientY - touch1.clientY
+        );
+        
+        if (this._lastPinchDistance) {
+          const zoomFactor = currentDistance / this._lastPinchDistance;
+          this._targetScale = Math.max(0.1, Math.min(5, this._targetScale * zoomFactor));
+        }
+        this._lastPinchDistance = currentDistance;
+      }
+    });
+
+    this._masterContainer.on('touchend', (event) => {
+      const touches = event.data.originalEvent.touches;
+      if (!touches || touches.length < 2) {
+        this._isPinching = false;
+        this._lastPinchDistance = null;
+      }
+    });
+
+    this._masterContainer.on('touchcancel', () => {
+      this._isPinching = false;
+      this._lastPinchDistance = null;
+    });
+
+    // Add global touch event listeners
+    document.addEventListener('touchstart', this._handleGlobalTouchStart.bind(this), { passive: false });
+    document.addEventListener('touchmove', this._handleGlobalTouchMove.bind(this), { passive: false });
+    document.addEventListener('touchend', this._handleGlobalTouchEnd.bind(this), { passive: false });
+
+    this._renderLoop = null;
+  }
+
+  _handleGlobalTouchStart(event) {
+    if (event.touches.length === 2) {
+      event.preventDefault();
+      this._isPinching = true;
+      this._dragPoint = null;
+      const touch1 = event.touches[0];
+      const touch2 = event.touches[1];
+      this._lastPinchDistance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+    }
+  }
+
+  _handleGlobalTouchMove(event) {
+    if (event.touches.length === 2 && this._isPinching) {
+      event.preventDefault();
+      const touch1 = event.touches[0];
+      const touch2 = event.touches[1];
+      const currentDistance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+      
+      if (this._lastPinchDistance) {
+        const zoomFactor = currentDistance / this._lastPinchDistance;
+        this._targetScale = Math.max(0.1, Math.min(5, this._targetScale * zoomFactor));
+      }
+      this._lastPinchDistance = currentDistance;
+    }
+  }
+
+  _handleGlobalTouchEnd(event) {
+    if (event.touches.length < 2) {
+      this._isPinching = false;
+      this._lastPinchDistance = null;
+    }
   }
 
   _update() {
     this._storyTree.x += (this._targetStoryTreePosition.x - this._storyTree.x) * 0.1;
     this._storyTree.y += (this._targetStoryTreePosition.y - this._storyTree.y) * 0.1;
+    
+    this._currentScale += (this._targetScale - this._currentScale) * 0.1;
+    this._storyTree.scale.set(this._currentScale);
   }
 
   init() {
     this._closeButton.interactive = true;
     this._closeButton.buttonMode = true;
     this._masterContainer.interactive = true;
+    this._masterContainer.interactiveChildren = true;
 
-    this._storyTree.x = 0
-    this._storyTree.y = 0
+    this._storyTree.x = 0;
+    this._storyTree.y = 0;
     this._targetStoryTreePosition.x = -this._storyTree.currentNode?.x || 0;
     this._targetStoryTreePosition.y = -this._storyTree.currentNode?.y || 0;
+    this._targetScale = 1;
+    this._currentScale = 1;
+    this._isPinching = false;
+    this._lastPinchDistance = null;
+    this._dragPoint = null;
 
     if(this._renderLoop) {
       clearInterval(this._renderLoop);
     }
     this._renderLoop = setInterval(() => this._update(), 1000 / 60);
-
   }
   
   restore() {
