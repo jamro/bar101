@@ -116,7 +116,13 @@ function App({ }) {
   }
 
   if(isStoryTree) {
-    return <StoryTreeLayout onClose={() => setIsStoryTree(false)} visitedNodes={gameState.visitedNodes} storyPath={gameState.storyPath} onStoryPathChange={(storyPath) => jumpToStoryPath(storyPath)}/>
+    return <StoryTreeLayout 
+        onClose={() => setIsStoryTree(false)} 
+        visitedNodes={gameState.visitedNodes} 
+        storyPath={gameState.storyPath} 
+        onStoryPathChange={(storyPath) => jumpToStoryPath(storyPath)}
+        enableTimeTravel={gameState.inventory.timemachine}
+      />
   }
 
   const customers = worldContext.bar.customers.reduce((acc, customer) => {

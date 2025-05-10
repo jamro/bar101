@@ -5,11 +5,15 @@ import StoryTreeMasterContainer from '../pixi/storyTree/StoryTreeMasterContainer
 
 let storyTreeMasterContainer; // TODO:re factor to avoid global variable
 
-export default function StoryTreeLayout({ onClose, visitedNodes, storyPath, onStoryPathChange }) {
+export default function StoryTreeLayout({ onClose, visitedNodes, storyPath, enableTimeTravel, onStoryPathChange }) {
   if (!storyTreeMasterContainer) {
     storyTreeMasterContainer = new StoryTreeMasterContainer();
   }
   const storyTreeSceneRef = useRef(storyTreeMasterContainer);
+
+  useEffect(() => {
+    storyTreeMasterContainer.enableTimeTravel(enableTimeTravel);
+  }, [enableTimeTravel]);
 
   useEffect(() => {
     storyTreeMasterContainer.on('close', () => {

@@ -134,6 +134,10 @@ export default class NodePreview extends PIXI.Container {
     loop();
   }
 
+  enableTimeTravel(enable) {
+    this._button.visible = enable;
+  }
+
   async _loadNodeData() {
     const nodeFile = `/story/node_${this._node.path}.json`;
     console.log("Loading node data from", nodeFile);

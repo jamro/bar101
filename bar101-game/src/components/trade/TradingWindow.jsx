@@ -81,6 +81,16 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
       price: 10.00 + inventory.special * 2,
       description: "A drop of Absinthe in any drink, and your guests will feel unusually at ease.",
     },
+    timemachine: {
+      id: "timemachine",
+      img: "/img/time_machine_product_emblem.png",
+      name: "Time Machine",
+      subtitle: `Jump to any point in time`,
+      available: !inventory.timemachine,
+      single: true,
+      price: 300.00,
+      description: "This banned device enables time travel through the story tree, letting you rewrite its branches as you go."
+    },
   }
 
   for(const user of users) {
@@ -116,6 +126,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
     } else if (!inventory.scanner) {
       initialItems.push(products.scanner.id)
     } else {
+      initialItems.push(products.timemachine.id)
       for(const user of users) {
         if(!inventory.files.includes(user)) {
           initialItems.push(products[user].id)

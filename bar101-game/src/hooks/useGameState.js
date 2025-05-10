@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const DEFAULT_STATE = {
-  version: 3,
+  version: 4,
   timestamp: Date.now(),
   customerTrust: null,
   storyPath: [],
@@ -16,6 +16,7 @@ const DEFAULT_STATE = {
     special: 0,
     antenna: false,
     scanner: false,
+    timemachine: false,
     files: []
   },
 }
@@ -159,6 +160,16 @@ const useGameState = () => {
             inventory: {
               ...prevState.inventory,
               files: [...prevState.inventory.files, item].filter((value, index, self) => self.indexOf(value) === index)
+            },
+            balance: prevState.balance - price
+          }));
+          break;
+        case "timemachine":
+          setState((prevState) => ({
+            ...prevState,
+            inventory: {
+              ...prevState.inventory,
+              timemachine: true
             },
             balance: prevState.balance - price
           }));

@@ -12,6 +12,7 @@ class StoryTreeMasterContainer extends MasterContainer {
     this.addChild(this._masterContainer);
     this._bg = new PIXI.Graphics();
     this._masterContainer.addChild(this._bg);
+    this._enableTimeTravel = false;
 
     this._storyTree = new StoryTree();
     this._targetStoryTreePosition = {x: 0, y: 0};
@@ -67,6 +68,7 @@ class StoryTreeMasterContainer extends MasterContainer {
         }
         if(node) {
           this._nodePreview = new NodePreview(node);
+          this._nodePreview.enableTimeTravel(this._enableTimeTravel);
           this._nodePreview.on('openChapter', () => {
             this.emit('openChapter', node.path);
           });
@@ -79,6 +81,13 @@ class StoryTreeMasterContainer extends MasterContainer {
     });
 
     this._renderLoop = null;
+  }
+
+  enableTimeTravel(enable) {
+    this._enableTimeTravel = enable;
+    if(this._nodePreview) {
+      this._nodePreview.enableTimeTravel(enable);
+    }
   }
 
   _update() {
