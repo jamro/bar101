@@ -67,6 +67,9 @@ class StoryTreeMasterContainer extends MasterContainer {
         }
         if(node) {
           this._nodePreview = new NodePreview(node);
+          this._nodePreview.on('openChapter', () => {
+            this.emit('openChapter', node.path);
+          });
           this._nodePreviewContainer.addChild(this._nodePreview);
           this._nodePreview.show();
           this._targetStoryTreePosition.x = -node.x * this._currentScale;

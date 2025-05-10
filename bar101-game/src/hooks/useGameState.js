@@ -188,6 +188,25 @@ const useGameState = () => {
         ...prevState,
         timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
         storyPath: [],
+        levelProgress: {
+          ...prevState.levelProgress,
+          phase: 'date',
+          customerIndex: 0,
+          decision: null,
+        },
+      }));
+    },
+    openStoryPath: (storyPath) => {
+      setState((prevState) => ({
+        ...prevState,
+        timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
+        storyPath: storyPath,
+        levelProgress: {
+          ...prevState.levelProgress,
+          phase: 'date',
+          customerIndex: 0,
+          decision: null,
+        },
       }));
     }
   }

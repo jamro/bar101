@@ -82,6 +82,40 @@ export default class NodePreview extends PIXI.Container {
     this._chapterLabel.y = 155;
     this.addChild(this._chapterLabel);
 
+    this._button = new PIXI.Container();
+    this._button.y = 260;
+    this.addChild(this._button);
+    const buttonBg = new PIXI.Graphics();
+    this._button.addChild(buttonBg);
+    buttonBg.roundRect(-200, 0, 400, 120, 30)
+      .fill(0xa83300)
+      .stroke({color: 0, width: 14})
+
+    const buttonLabel = new PIXI.Text({
+      text: "Open Chapter >",
+      style: {
+        fontFamily: 'Chelsea Market',
+        fontSize: 30,
+        fill: 0,
+        align: 'center',
+      }
+    })
+    buttonLabel.anchor.set(0.5);
+    buttonLabel.x = 0;
+    buttonLabel.y = 60;
+    this._button.addChild(buttonLabel);
+
+    this._button.on('pointerdown', () => {
+      this.emit('buttonClick');
+    });
+
+    this._button.interactive = true;
+    this._button.buttonMode = true;
+    this._button.eventMode = 'static';
+    this._button.on('pointerdown', () => {
+      this.emit('openChapter')
+    });
+
     this.visible = false;
     this._loadNodeData();
   }

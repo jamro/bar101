@@ -26,6 +26,7 @@ function App({ }) {
     changeBalance,
     buyItem,
     useItem,
+    openStoryPath,
   } = gameStateObject
 
   window.debug = {
@@ -35,6 +36,12 @@ function App({ }) {
   const handleClearGameState = () => {
     clearGameState();
     window.location.reload();
+  }
+
+  const jumpToStoryPath = (storyPath) => {
+    openStoryPath(storyPath);
+    setIsStoryTree(false);
+    setIsStarted(true);
   }
 
   React.useEffect(() => {
@@ -109,7 +116,7 @@ function App({ }) {
   }
 
   if(isStoryTree) {
-    return <StoryTreeLayout onClose={() => setIsStoryTree(false)} visitedNodes={gameState.visitedNodes} storyPath={gameState.storyPath} />
+    return <StoryTreeLayout onClose={() => setIsStoryTree(false)} visitedNodes={gameState.visitedNodes} storyPath={gameState.storyPath} onStoryPathChange={(storyPath) => jumpToStoryPath(storyPath)}/>
   }
 
   const customers = worldContext.bar.customers.reduce((acc, customer) => {

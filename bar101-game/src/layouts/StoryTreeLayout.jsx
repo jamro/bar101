@@ -5,7 +5,7 @@ import StoryTreeMasterContainer from '../pixi/storyTree/StoryTreeMasterContainer
 
 let storyTreeMasterContainer; // TODO:re factor to avoid global variable
 
-export default function StoryTreeLayout({ onClose, visitedNodes, storyPath }) {
+export default function StoryTreeLayout({ onClose, visitedNodes, storyPath, onStoryPathChange }) {
   if (!storyTreeMasterContainer) {
     storyTreeMasterContainer = new StoryTreeMasterContainer();
   }
@@ -19,6 +19,13 @@ export default function StoryTreeLayout({ onClose, visitedNodes, storyPath }) {
     return () => {
       storyTreeMasterContainer.off('close');
     }
+  }, []);
+
+  useEffect(() => {
+    storyTreeMasterContainer.on('openChapter', (path) => {
+      let storyPath = path.replace('x', '').split('')
+      onStoryPathChange(storyPath);
+    })
   }, []);
 
   useEffect(() => {
