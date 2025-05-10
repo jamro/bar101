@@ -92,7 +92,7 @@ export default class BciProfilePage extends BciScannerPage {
         + "Hobby: " + hobbyNames[data.customer.hobby_id]
     } else {
       this._detailsLabel.text = `No personal records found for user ${data.customer.id}`
-      this._detailsLabel.style.fill = 0xa54200
+      this._detailsLabel.style.fill = 0xff0000
     }
 
   }

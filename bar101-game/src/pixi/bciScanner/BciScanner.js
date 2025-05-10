@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import GameAssets from '../GameAssets';
 import BciScorePage from './BciScorePage';
 import BciProfilePage from './BciProfilePage';
+import BciHistoryPage from './BciHistoryPage';
 
 export default class BciScanner extends PIXI.Container {
   constructor() {
@@ -77,7 +78,7 @@ export default class BciScanner extends PIXI.Container {
     this._upButton.alpha = 0;
     this._upButton.on('pointerdown', () => {
       this._upButton.alpha = 1;
-      this.setPageIndex((this._currentPageIndex - 1 + this._pages.length) % this._pages.length);
+      this.setPageIndex((this._currentPageIndex + 1) % this._pages.length);
     });
     this._upButton.on('pointerup', () => {
       this._upButton.alpha = 0;
@@ -92,7 +93,7 @@ export default class BciScanner extends PIXI.Container {
     this._downButton.alpha = 0;
     this._downButton.on('pointerdown', () => {
       this._downButton.alpha = 1;
-      this.setPageIndex((this._currentPageIndex + 1) % this._pages.length);
+      this.setPageIndex((this._currentPageIndex - 1 + this._pages.length) % this._pages.length);
     });
     this._downButton.on('pointerup', () => {
       this._downButton.alpha = 0;
@@ -116,6 +117,7 @@ export default class BciScanner extends PIXI.Container {
     this._currentPageIndex = 0;
     this._pages = [
       new BciScorePage(),
+      new BciHistoryPage(),
       new BciProfilePage(),
     ]
     this._currentPage = 0;

@@ -89,7 +89,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
       img: `/img/${user}_product_emblem.png`,
       name: "BCI User Profile",
       subtitle: userNames[user],
-      price: 100.00 + users.indexOf(user) * 30,
+      price: 50.00 + users.indexOf(user) * 30,
       available: !inventory.files.includes(user),
       single: true,
       description: `USB Stick with a BCI user profile of ${userNames[user]}. Portable, untraceable, and illegal.`

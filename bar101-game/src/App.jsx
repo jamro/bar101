@@ -117,6 +117,7 @@ function App({ }) {
       ...customer,
       trust: gameState.customerTrust[customer.id] || 0,
       bci_score: storyNode.character_stats[customer.id]?.bci_score || customer.bci_score,
+      bci_history: storyNode.character_stats[customer.id]?.bci_history || customer.bci_history,
       political_preference: storyNode.character_stats[customer.id]?.political_preference || customer.political_preference,
     };
     return acc;
