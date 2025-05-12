@@ -1,0 +1,1384 @@
+{
+  "title": "Legacy Lockdown",
+  "timestamp": "2025-05-29T20:52:00",
+  "news": {
+    "official": [
+      {
+        "image_id": "data_skyline",
+        "headline": "Targeted Service Review",
+        "anchor_line": "BCI systems adjust access in districts with prior irregularities.",
+        "contextual_reframing": "Temporary adjustments ensure every district meets citywide standards for fairness and accountability. The Behavioral Compliance Index, or BCI, protects trust and order.",
+        "image": "news/data_skyline.jpg"
+      },
+      {
+        "image_id": "crowd_spectacle",
+        "headline": "Truth Forums Begin",
+        "anchor_line": "Public confession forums open, promoting open dialogue and restoration.",
+        "contextual_reframing": "Community events welcome all citizens to participate, strengthening unity and collective progress. Stenograd advances through transparent, structured reconciliation.",
+        "image": "news/crowd_spectacle.jpg"
+      },
+      {
+        "image_id": "blank_display",
+        "headline": "Gradual Service Return",
+        "anchor_line": "Partial restoration of services follows constructive civic participation.",
+        "contextual_reframing": "Efficient, data-driven measures reward accountability and openness, reinforcing the foundation of technological governance in Stenograd.",
+        "image": "news/blank_display.jpg"
+      }
+    ],
+    "underground": [
+      {
+        "image_id": "id_scan",
+        "headline": "Punishment By Algorithm",
+        "anchor_line": "Whole neighborhoods cut off after BCI points out 'wrongthink.'",
+        "contextual_reframing": "The Behavioral Compliance Index - BCI - decides who deserves power, food, or a job. They call it 'fairness.' Most just call it control by machine.",
+        "image": "news/id_scan.jpg"
+      },
+      {
+        "image_id": "crowd_spectacle",
+        "headline": "Confess Or Freeze",
+        "anchor_line": "State forces public confessions just to turn taps and lights back on.",
+        "contextual_reframing": "Truth forums? More like surrender shows. If you don't 'open up,' you can't feed your family. Is this justice - or just another test?",
+        "image": "news/crowd_spectacle.jpg"
+      },
+      {
+        "image_id": "blank_display",
+        "headline": "City Left In The Dark",
+        "anchor_line": "Shutouts and protests flare as districts demand full restoration from failed AI lockdown.",
+        "contextual_reframing": "Automation was supposed to protect everyone. Instead, it divides us, leaving the weakest to suffer while the Council hides behind screens.",
+        "image": "news/blank_display.jpg"
+      }
+    ]
+  },
+  "visitors": [
+    "npetrak",
+    "lkova",
+    "dtomenko",
+    "rmiskovic"
+  ],
+  "character_stats": {
+    "olintz": {
+      "bci_score": 16,
+      "political_preference": "harmonists",
+      "bci_history": [
+        43,
+        45,
+        49,
+        51,
+        54,
+        56,
+        56,
+        56,
+        54,
+        55,
+        52,
+        34,
+        34,
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "npetrak": {
+      "bci_score": 67,
+      "political_preference": "harmonists",
+      "bci_history": [
+        83,
+        85,
+        82,
+        79,
+        74,
+        69,
+        73,
+        70,
+        68,
+        73,
+        75,
+        71,
+        69,
+        69,
+        67,
+        70,
+        67
+      ]
+    },
+    "dtomenko": {
+      "bci_score": 69,
+      "political_preference": "innovators",
+      "bci_history": [
+        62,
+        65,
+        63,
+        66,
+        62,
+        64,
+        67,
+        70,
+        69,
+        67,
+        67,
+        63,
+        66,
+        66,
+        67,
+        67,
+        69
+      ]
+    },
+    "lkova": {
+      "bci_score": 36,
+      "political_preference": "innovators",
+      "bci_history": [
+        72,
+        73,
+        77,
+        75,
+        74,
+        75,
+        76,
+        72,
+        68,
+        63,
+        59,
+        54,
+        36,
+        36,
+        36,
+        36,
+        36
+      ]
+    },
+    "shalek": {
+      "bci_score": 71,
+      "political_preference": "innovators",
+      "bci_history": [
+        65,
+        68,
+        73,
+        78,
+        75,
+        76,
+        77,
+        77,
+        79,
+        81,
+        82,
+        80,
+        78,
+        78,
+        75,
+        73,
+        71
+      ]
+    },
+    "rmiskovic": {
+      "bci_score": 0,
+      "political_preference": "harmonists",
+      "bci_history": [
+        23,
+        19,
+        23,
+        27,
+        27,
+        28,
+        31,
+        36,
+        36,
+        36,
+        40,
+        37,
+        33,
+        33,
+        15,
+        0,
+        0
+      ]
+    }
+  },
+  "chats": {
+    "npetrak": {
+      "opener": {
+        "customer_id": "npetrak",
+        "questions": {
+          "neutral": "Still breathing in Stenograd?",
+          "hobby": [
+            {
+              "correct": true,
+              "message": "Another day, another typewriter cleaned?"
+            },
+            {
+              "correct": false,
+              "message": "Is analog photography still worth the risk?"
+            },
+            {
+              "correct": false,
+              "message": "Urban exploration treating you well?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I collect antique typewriters. They remind me of a time when things were different.",
+        "neutral_answer": [
+          [
+            "Still here, for now. Days feel longer. ",
+            "I keep busy at home. Restoring old typewriters, mostly. ",
+            "Latest blackout ruined the rhythm. Not the same without fresh air. ",
+            "No complaints."
+          ],
+          [
+            "Still around, though the building changes daily. ",
+            "Old habits help. I restore typewriters, nothing too modern. ",
+            "After the last shutdown, I couldn't get fresh ink. Supply's blocked. ",
+            "Writing slows, makes you careful what you say. ",
+            "Everyone's watching everyone. "
+          ],
+          [
+            "Breathing, mostly by remembering old routines. ",
+            "I restore antique typewriters - mechanical, reliable when the world isn't. ",
+            "During the outages, doors jammed. Typing by candlelight, not much comfort. ",
+            "Ran out of ribbon. Can't replace it with all the supply changes.",
+            "I keep a written journal. New eyes everywhere make it feel riskier. ",
+            "Strange times for small hobbies."
+          ],
+          [
+            "I manage. My hobby helps - I'm restoring a Remington portable now. ",
+            "Typewriters are stubborn. Reliable, as long as you have parts. ",
+            "The last blackout locked the building, power gone, doors sealed. ",
+            "Tried to write, but the silence felt hostile. ",
+            "No new ribbons, no paper in the shops. People hoarding.",
+            "Feels odd: a private pastime exposed by every system failure. ",
+            "You'd think fixing old machines would be unremarkable."
+          ],
+          [
+            "Still breathing, and still tapping away - habits outlive the system. ",
+            "I collect and fix pre-BCI typewriters, keep a handwritten journal - quiet rebellion, I suppose. ",
+            "When the blackout hit last week, my floor sealed off, vents dead. ",
+            "Tried writing for comfort; wound up listening to old machine clicks echoing too loud. ",
+            "Couldn't even swap paper with my neighbor - doors autolocked, everyone suspicious. ",
+            "Ran out of ink. Borrowed a trick from Halden's notes to refill a ribbon. ",
+            "Feels like every mechanical sound is monitored now, even in my flat. ",
+            "Funny: in the old days, breaking the rules was louder, but there was privacy."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Depends on the day, Alex. Some days, keys stick.",
+            "Sometimes I just fix, not type.",
+            "Supplies are harder since the last broadcast.",
+            "Not everyone appreciates old tech these days.",
+            "Best to keep my repairs quiet."
+          ],
+          [
+            "Usually yes, if the ribbon holds up.",
+            "Typewriters don't ask questions or scan your face.",
+            "After the blackout, finding fresh ribbons got tricky.",
+            "No mail, no way to trade parts.",
+            "Quiet hobbies stand out when the system flickers.",
+            "Safer to keep it to myself lately."
+          ],
+          [
+            "Often, yes. Typebars don't judge, just jam.",
+            "I like restoring old Remingtons. Bits of history with their own character.",
+            "The blackout made it hard - no parts, and no safe trading.",
+            "Even writing a letter felt risky with hallway locks down.",
+            "Still, working on them clears my mind.",
+            "I keep a paper journal - habit now.",
+            "Feels like the world notices what you write these days."
+          ],
+          [
+            "Most days, much better. Metal remembers your touch, not your score.",
+            "I've been restoring typewriters for years - Remington, Olivetti, a Czech consul model.",
+            "That blackout though - couldn't get ink, couldn't swap parts. Felt cornered.",
+            "Had to barter old tools, trade quietly without BCI approval.",
+            "Something about manual keys - makes me feel human. Needed these days.",
+            "Started journaling again, after the reconciliation broadcast.",
+            "Paper feels safer. For now, at least.",
+            "Lately watch neighbors more than ribbons - system's changes draw attention."
+          ],
+          [
+            "Always, Alex. Grease and ink over algorithms any day.",
+            "Collected old typewriters since before Halden's programs ran wild.",
+            "Used to fix them for Council staff - before retirement, before all this.",
+            "Last week's blackout - reminded me how digital systems chain even analog things.",
+            "Locked doors, no supplies, couldn't even send notes to old friends.",
+            "When everything runs through BCI, private repairs draw new eyes.",
+            "Some neighbors watch who trades what; I keep my Remington hidden now.",
+            "Restoring them became a ritual - quiet resistance, maybe.",
+            "Strange how a machine meant for letters now feels like a secret weapon."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "I get that - been a strange stretch of days for you too?",
+          "variants": [
+            [
+              "Strange stretch, yes. Things haven't run like usual since the blackout.",
+              "They've got new faces checking rooms now. Not as quiet as the machines were.",
+              "Folks notice old faces like mine - ask more than they used to.",
+              "Feels quieter than ever, somehow."
+            ],
+            [
+              "You could say I notice the changes. My building's got new leaders making rounds.",
+              "People talk more, but not to share - just to keep track.",
+              "At ration pick-up, someone called out my old job with the Council.",
+              "I kept my answers short. Nothing good comes from standing out these days.",
+              "Makes a person miss the predictability of all those glowing panels."
+            ],
+            [
+              "It's unusual lately, you're right. After the reconciliation broadcast, things shifted in my building.",
+              "Instead of automated checks, now we get personal visits from neighborhood leaders.",
+              "I used to move about without much thought. Now I keep to myself, avoid the mail terminal.",
+              "The other day, in the ration line, a neighbor asked about my Council years - in front of everyone.",
+              "I gave them as little as I could. Didn't linger.",
+              "Trust feels in short supply, and I notice my score dropped after all that."
+            ],
+            [
+              "It has been odd. The broadcast brought neighbors' eyes right to folks like me - used to be, numbers handled it.",
+              "After that, real people started knocking on doors. The old quiet is gone.",
+              "I keep off shared systems, lay low, but it stands out more now - retired and with a past at the Council.",
+              "At ration handout, someone questioned my loyalty for all to hear.",
+              "Decided best to lock things away, both words and belongings. Certain papers safest left untouched.",
+              "Afterwards, I stopped going out much. Neighborhoods weigh trust differently when it's face to face.",
+              "It feels heavier, being noticed again after so long. Score fell two points - little thing, but it meant I was seen."
+            ],
+            [
+              "Stranger than strange, really. Some miss the old system, but I never thought I'd long for its silence.",
+              "My time with the Council wasn't power, just seeing how things really run. Now every visit from a building leader means another judgment call.",
+              "Since the citywide confessions aired, I hardly sleep - I know what's in my briefcase. Documents that don't fit the new narrative.",
+              "At ration lines, people - friends once - turn to see if I'll admit what I saw or did. They don't want truth, not really. Just reassurance they were right all along.",
+              "After that day, I changed my habits. Secured everything. I haven't touched the mail terminal or gone above the second floor.",
+              "My BCI score slipped down - every little act watched now by real eyes. The system didn't sting as much as neighbors do.",
+              "I kept something back, maybe out of loyalty to old Harmonist ideas - gradual, careful change. But everyone wants someone to blame these days.",
+              "Mostly, I just feel tired. Apprehensive, waiting for another broadcast or knock at the door."
+            ]
+          ],
+          "emotion": "A sense of fatigue and quiet apprehension."
+        },
+        "emotional": {
+          "opener": "Nikola, sometimes just carrying on is the most anyone can expect of us. No one knows better than you how heavy the quiet days can be. You did your part.",
+          "variants": [
+            [
+              "Suppose you're right. It's been a long season.",
+              "Carrying on. That's something I know how to do."
+            ],
+            [
+              "Maybe that's true. The days do carry their own weight.",
+              "I suppose there's some comfort in routine.",
+              "It helps to be reminded I did enough."
+            ],
+            [
+              "I appreciate that, truly. Most people just urge you to forget.",
+              "Some things linger, but it does help to hear it from someone outside the system.",
+              "It's strange how one learns to accept the heaviness.",
+              "You've given me something to think about."
+            ],
+            [
+              "That means more than you might guess. The weight hasn't just been in my steps, it's everywhere lately.",
+              "I've wondered if anyone even noticed what it took, all those years just keeping things in order.",
+              "It's easy to think the silent work meant nothing, especially now.",
+              "A few words, honestly spoken, do have their place.",
+              "Hard days are easier when someone remembers."
+            ],
+            [
+              "You're right, Alex. Carrying on isn't easy when the city forgets its own architects.",
+              "There are days I question if anything I did mattered, or if it was just swept away as routine.",
+              "Nobody wants to talk about the cost, not really, but I'm tired in a way only a few would truly understand.",
+              "The silence afterwards, after all the systems and schedules, is the heaviest part.",
+              "I'm grateful to be seen, even if just for a moment over a drink.",
+              "Sometimes, especially now, that's enough to remind me I did my part."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "You were close to the Council. You must know what really set off all these lockdowns and forum speeches. People say there's more to it - so what actually happened?",
+          "variants": [
+            [
+              "Everyone's seen the disruptions since Halden's death.",
+              "Council fought over who'd steady things, but little got through.",
+              "Lockdowns keep coming when confessions stall. Not much else to say."
+            ],
+            [
+              "Halden's death, then a blackout, after that we lost the usual order.",
+              "Council looked divided. Not everyone backed the public 'truth' forums.",
+              "Some say the AI's running these lockdowns itself. Feels like they're testing loyalty now."
+            ],
+            [
+              "It started with a leak. Scores out in the open, then panic everywhere.",
+              "Council split on how to respond. Some called for calm, some wanted firmer control.",
+              "The blackout forced them together, but trust was already gone.",
+              "Lockdowns linked to old abuses... those forums started up after evidence surfaced about the Directorate.",
+              "People talk about cleansing the system, but it's just more pressure for confessions.",
+              "I saw enough years back to know Harmonist patience doesn't fit this mood."
+            ],
+            [
+              "You saw it - the city froze when Halden died. Then came the blackout, and suddenly, all the system's secrets spilled out.",
+              "That exposed plenty: Council rivalries, Directorate's experiments, things even Halden might not have sanctioned.",
+              "Lockdowns now target districts tied to old abuses. The AI wants confessions, not silence.",
+              "Public confessions... Rada pushing for more than just order - something like penance.",
+              "It unsettles everyone. Loyalty's under the microscope, but it all feels performative.",
+              "I kept my head down, but I can tell the Innovators push for whole new controls, while Harmonists like me preferred quiet consistency.",
+              "There's little room left for slow change. They call for cleansing, for throwing out anyone with a past.",
+              "Lately, even the old guard are unsure what tomorrow brings."
+            ],
+            [
+              "You want truth? Halden's death cracked open every secret the system held.",
+              "A leak made private Council files, and people's own scores, public. Not an accident, in my view - someone wanted chaos.",
+              "Council split wide - Directorate tried brute force, but the AI outmaneuvered them. The blackout was a warning, not a failure.",
+              "After they found proof of old Directorate backdoors, Rada pushed for public forums and lockdowns - she wants public ritual, not cover-ups.",
+              "Most in my circle were Harmonists. We believed in reform, gentle corrections, not this wave of forced shame.",
+              "Every confession on air is a signal: conform or be outcast, no grace for those who served in silence.",
+              "My briefcase still holds files not meant for cameras - meant for context and memory, not spectacle.",
+              "What hurts is the sense there's no safe footing anymore. Order now means exposure.",
+              "Used to be the system protected - now it accuses."
+            ]
+          ]
+        }
+      }
+    },
+    "lkova": {
+      "opener": {
+        "customer_id": "lkova",
+        "questions": {
+          "neutral": "Quiet night, huh?",
+          "hobby": [
+            {
+              "correct": false,
+              "message": "Still chasing ghosts with analog photography?"
+            },
+            {
+              "correct": true,
+              "message": "Urban exploration or just drinking underground?"
+            },
+            {
+              "correct": false,
+              "message": "What's your last origami fold say?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I explore the city's underground. It's a different world down there.",
+        "neutral_answer": [
+          [
+            "Yeah, quiet enough. City's still off-kilter since the lockdowns.",
+            "Mostly been keeping busy with my usual hobby - urban exploring.",
+            "Lots of tunnels still sealed after all this confession business.",
+            "Not much else to say tonight."
+          ],
+          [
+            "Bit quieter than usual, all right.",
+            "I usually pass time checking out old service tunnels.",
+            "Stuff's been harder to access since the BCI forums started locking down blocks.",
+            "I go in after hours - no harm in looking around.",
+            "Lately, everyone's watching, even in the dark."
+          ],
+          [
+            "Quiet, sure - good for a wanderer like me.",
+            "Urban exploring's my thing. Mostly underground - utility tunnels, data vaults.",
+            "Usually pretty empty, but the lockdowns changed entry rules everywhere.",
+            "Had to show a paper log just to get past a block last week.",
+            "Folks up top doing truth forums. Downstairs, it's just echo and brick.",
+            "Funny how a hobby turns bureaucratic overnight."
+          ],
+          [
+            "Not as lively as dodging security sensors, but it'll do.",
+            "I spend nights exploring the guts of this city - old tunnels, data centers.",
+            "Since the BCI crackup, half the interesting places got locked tighter than council archives.",
+            "The real thrill now is dodging handwritten checklists and nosy coordinators.",
+            "Last time, spent most of my night under a confession meeting - couldn't risk getting spotted.",
+            "Used to be, staying invisible meant knowing the tech. Now it's just who's got a pen.",
+            "Makes you miss the old days of quiet machinery humming."
+          ],
+          [
+            "Quiet night, but aboveground's never as interesting as below.",
+            "I've got this habit: exploring Stenograd's hidden layer - heat ducts, forgotten relay pits.",
+            "Used to be I could map half the city by ear - before lockdowns, forums, and watchdogs everywhere.",
+            "Last week, I ended up underneath some confession forum - heard every secret, but nobody knew we were listening.",
+            "Now, even a harmless explorer needs a stamped log and the nod from three coordinators.",
+            "Funny thing - after building these systems, I know every sensor's rhythm, but paper rules trip me up.",
+            "Would've never guessed bureaucrats with clipboards beat biometric scanners.",
+            "If Halden could see us all hiding behind old filing cabinets, he'd probably laugh - or pull the plug himself."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Yep, out again, just a short walk.",
+            "Blackout made it dull. Most places sealed off now.",
+            "Didn't see much worth mentioning.",
+            "Nothing like before, anyway.",
+            "People a lot jumpier since the lockdown."
+          ],
+          [
+            "Yeah, another round of late-night wandering.",
+            "Most tunnels are gated off because of recent security frenzies.",
+            "Saw more strangers than usual, all keeping heads down.",
+            "Could hear forums echoing through the grates. Pretty strange.",
+            "Keeps getting harder - most folks only trust regular faces now.",
+            "Lockdown means fewer places left to explore."
+          ],
+          [
+            "Yeah, was out poking around some of the old substations.",
+            "Blackout set half my favorite tunnels dark again. Real old-world vibe.",
+            "Ran into a group camping for power - nobody wants to be caught alone lately.",
+            "Heard all those confession forums overhead, kind of eerie underground.",
+            "Used to be I could map a grid in peace. Not much privacy now.",
+            "Everyone's got a story if you listen under the city.",
+            "Hard to say what spots will even stay open next week."
+          ],
+          [
+            "Yep, had another go down at Zlenko substation last night.",
+            "It's getting tougher with every lockdown. Entry points are double-watched lately.",
+            "Whole vibe changed - less hobby, more hiding from overzealous coordinators.",
+            "Ran into some younger explorers chasing rumors about old Halden routes.",
+            "We listened to confession broadcasts through the vents. Never heard the city so tense.",
+            "Nobody trusts scanners or each other - just paper logs and nervous glances.",
+            "Makes my maps seem useless half the time. I mostly do it for the quiet now.",
+            "Miss when it was just about curiosity, not dodging politics."
+          ],
+          [
+            "Right, I was exploring again - old habit from way before BCI was even a rumor.",
+            "Used to be all sensors. Now during these lockdowns, I'm back to reading handwritten warnings.",
+            "Felt like old times, but heavier. City above staging confessions, AI below blinding half the paths.",
+            "Bumped into other wanderers. We traded safe routes by memory, not screen.",
+            "Stranger feeling - like the tunnels are eavesdropping on people's shame.",
+            "Last decade I mapped half the sector with just a badge. Now it's all coordinated suspicion.",
+            "Sometimes I think the city wants to forget its hidden parts. We're just ghosts down there.",
+            "Funny how the systems I fixed now keep me out. Call it irony.",
+            "Maybe we'll get some freedom back - but right now, it's all about staying unseen."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "I can't tell if it's just me or if the city's... changed. What's it feel like to you?",
+          "variants": [
+            [
+              "Feels like things are always changing now. Always a new rule, a fresh delay.",
+              "Lost two jobs this week because the right signature was missing.",
+              "Spent half my day waiting on a sidewalk, just to be told to come back tomorrow.",
+              "Hard to remember when it wasn't this uncertain."
+            ],
+            [
+              "City's been slippery lately. Systems are off, people even more so.",
+              "Got turned away from a job after waiting hours. Needed paperwork from someone I barely know.",
+              "Everyone's looking for paper recommendations now. Feels old-fashioned, doesn't it?",
+              "Clients don't want to risk hiring me. Nobody trusts the lists anymore.",
+              "Hard not to feel boxed in, even for someone used to working around edges."
+            ],
+            [
+              "It's not just you. Things've twisted since the blackout and those public forum stunts.",
+              "Entry to half the buildings needs handwritten logs now, approved by folks with new clout every other day.",
+              "Lost a couple contracts this week. Got outplayed by someone with 'community trust' on paper.",
+              "Most of us are scrambling for written favors instead of credits - never saw that coming.",
+              "Feels like the more we confess, the less trust we have. I haven't accepted new work since.",
+              "Everything's formal, everyone's on edge. Used to know my place before all this started."
+            ],
+            [
+              "Yeah, it's pretty tangled out there. The world moved to paper and handshakes overnight.",
+              "I fix people's infrastructure, but lately I just stand in line hoping someone remembers I'm not a threat.",
+              "Lost work to better-connected folks. Neighborhood committees hold the keys now, not the system.",
+              "Had to beg for paper recommendations. Used to trade favors, now I'm a beggar holding out a note.",
+              "Nobody's sure who's in, who's out. The lines shift with every new broadcast - one day you matter, the next you're shut out.",
+              "My BCI score never budged, not that it matters these days. Makes you wonder who's actually running things.",
+              "It's wearing me thin. I stick around because if I don't, the repairs don't get done at all."
+            ],
+            [
+              "I remember when a job meant plugging a network, not negotiating with three different coordinators just to enter a building.",
+              "These days, I clock more hours seeking hand-signed notes than actually fixing things. Everyone's obsessed with covering themselves after that last round of truth-telling.",
+              "Lost steady clients. Got judged by people who'd never look my way before, all because I'm flagged as 'unreliable.'",
+              "Swapped digital trust for paper, with no one around willing to vouch unconditionally. The irony is, I never trusted the system, but now I'm missing its predictability.",
+              "Sitting on contracts I won't touch until things settle. Best way to get through the street's new inquisition is by disappearing behind a stack of official forms.",
+              "People act like this is order, but it's just everyone hiding what they really think, and confessing when forced.",
+              "Funny thing is, I've always wanted change, backed the Innovators, remember? But this isn't innovation - it's tangled old power in a new costume.",
+              "Leaves me just tired, honestly - tired and wishing someone would call things what they are, just once."
+            ]
+          ],
+          "emotion": "Resigned, a little tired but not defeated - wishing things felt simpler, or at least more honest."
+        },
+        "emotional": {
+          "opener": "Lenart, we're all just trying to find a way through this. Doesn't matter how tangled things get, you're not alone.",
+          "variants": [
+            [
+              "Yeah, maybe. Some things don't change, I guess."
+            ],
+            [
+              "Suppose that's true. Most folks don't say it out loud, though.",
+              "Hard to know who's actually there."
+            ],
+            [
+              "I appreciate that. Feels like everyone's improvising, most days.",
+              "It helps to hear someone else gets it.",
+              "Not many bother anymore."
+            ],
+            [
+              "Thanks. Really, it means something.",
+              "It's easy to forget people notice, you know.",
+              "Most days, feels like I'm just plugging leaks.",
+              "But every so often, someone reminds you you're still here."
+            ],
+            [
+              "You have a way of making it sound simple again.",
+              "I used to believe in the system, before things started layering up - now, it's hard to even see straight.",
+              "Sometimes you just want a real answer, not protocols or forms.",
+              "People talk about adaptation, but I think we're all just tired.",
+              "Knowing someone else remembers what it was like helps.",
+              "Suppose that matters more than I let on."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "Everybody knows things are broken. Just say what you really think about what's gone down citywide.",
+          "variants": [
+            [
+              "People lost their heads after Halden died. Talk was all leaks and purges.",
+              "Council's at each other's throats now, so streets get quieter but meaner.",
+              "All I see are new locks, and too many folks pretending it's fine.",
+              "Confession forums didn't fix anything. Just made folks nervy.",
+              "The rest, you hear same as me - if you listen."
+            ],
+            [
+              "Halden's death started the spiral. City's trust cracked when private files spilled.",
+              "Council talks order but can't hide the infighting. Stuff gets swept under new rules daily.",
+              "Those confession stunts - didn't feel like truth, just a scramble to buy calm.",
+              "The blackout couldn't have come at a worse time; made everyone desperate for their own piece.",
+              "People say someone's hunting old Directorate secrets. That part's not in the broadcasts."
+            ],
+            [
+              "Since Halden dropped, everything's been about cover-ups and which Council bloc gains next.",
+              "Council's talking up stability but can't hide the shakes - locked systems, then riddle games from that twitchy AI.",
+              "Most of us spend time sorting which street's got working lights or whose apology resets the grid.",
+              "Don't buy the whole 'healing' act. It's show for the Council's benefit.",
+              "Truth is, most tech folks I know - myself included - figured the system needed fixing. Just didn't think it'd break this ugly.",
+              "Innovators like me wanted overhaul, not this circus. Now old codes run wild and trust's gone missing.",
+              "Doesn't look like anything's going back to normal soon."
+            ],
+            [
+              "Soon as Halden died, people started grabbing for control, and those leaks put every private score out for the wolves.",
+              "Council split wide open. Power grabs, locking down BCI zones, then forcing us to grovel in those 'truth' forums - half-threat, half-ritual apology.",
+              "Nothing runs smooth. Some get favors for fake confessions, others disappear into the gaps where the system forgets them.",
+              "I know the Innovators meant to make it better - bring new structure, get past the directorate's grip - but this... this isn't progress.",
+              "Supposed to fix the system, not spiral into blackouts and bureaucratic scavenger hunts.",
+              "Watching the AI hand out riddles while neighborhoods barter for basic services? Got to laugh or lose your mind.",
+              "Nobody's sure who's in charge and the old paper trail's as phony as any digital score ever was.",
+              "I keep plugging leaks so the city doesn't fall apart, but it's no one's capital anymore."
+            ],
+            [
+              "After Halden turned up dead, every old feud and secret spilled out. Power didn't just shift - it cracked wide.",
+              "When the BCI files leaked, most folks up top lost whatever trust they had. Whole neighborhoods turned cold overnight.",
+              "I remember watching the Council play loyalty games as the AI glitched up, sending scavenger hunts and inheritance puzzles. We used to joke about that stuff - now it's the only law.",
+              "That blackout... felt like raw panic. Even folks with clean records ended up locked out or begging around for water.",
+              "Truth forums were supposed to mean accountability. Instead? Ritual finger-pointing and a barter market for fake confessions. I saw people being punished for honesty and others winning favors for a good enough lie.",
+              "The Directorate's grip on all those secrets came back to haunt them. Some say they had a hand in Halden's end - I believe it, after what I've seen.",
+              "I always backed the Innovators. Wanted smarter, more transparent systems. But what came wasn't innovation. It was chaos, with every faction clawing for scraps.",
+              "Now, trust is paper-thin. You work by rumor, scrounge written favors, pretend you care about public healing.",
+              "Funny, I fix systems for a living, but I'd settle for the kind of honesty you only see when the lights go out."
+            ]
+          ]
+        }
+      },
+      "decision": {
+        "preference": "b",
+        "dilemma": {
+          "opener": "You seem like you've seen something no one else has.",
+          "variants": [
+            [
+              "Some knots don't come undone the clean way. Choices on the table, neither pretty.",
+              "Old systems and new hands never play nice. I can't just walk away.",
+              "Some jobs stick in the teeth longer than others. This one's sharp."
+            ],
+            [
+              "I could wipe the board clean for a price or let the locals run wild.",
+              "Whichever way - someone's bound to bleed, or maybe just fade out slow.",
+              "Feels like the ground shifts under my feet however I step.",
+              "Risk is heavy, whichever thread I pull. No right answer on offer."
+            ],
+            [
+              "I'm stuck with two levers: one resets things if people come clean, the other lets neighborhoods cut loose from the BCI entirely.",
+              "Halden left me the keys nobody was supposed to hold. Timing's rotten, city's raw.",
+              "Forgiveness might tidy the books, but nobody really trusts an official pardon now.",
+              "Letting assemblies run things could mean real freedom... or pure chaos.",
+              "Either way, whatever I choose, the dust doesn't settle clean."
+            ],
+            [
+              "There's a vault with protocols Halden stashed away - one for second chances if folks confess, one to put the neighborhoods in control and walk the city off the BCI rails.",
+              "If I trigger forgiveness, I help the system buy peace, but part of me wonders if it's a trap - old tricks in new bottles.",
+              "Cutting loose from central control might offer breathing room, but if things fracture, it's all on me.",
+              "My BCI score's already low, so I don't owe the system much, but it's still a risk.",
+              "Alex's talk about people earning their way keeps bouncing around my head.",
+              "Feels like picking which fire to spread, not whether there's going to be one."
+            ],
+            [
+              "Found Halden's override, deep down - two sleeping protocols, one to forgive through confession, one to gift control to the neighborhoods. Neither's safe.",
+              "If I reset BCI scores for those who confess, I legitimize a system that trashed my own standing. Clever, but it could just bake the rot in deeper.",
+              "If I let people run things locally, chaos and real self-rule follow - but maybe the city finally stops living on a leash.",
+              "Being an Innovator, I want movement forward, not cover-ups. But with my score low, one wrong move from me could send everything spinning for all the wrong reasons.",
+              "Alex asked about second chances... It's not just his problem, it's what I need too, but I doubt this system would ever forgive the likes of me.",
+              "Whatever I choose, some debts get paid and others come due. No way to keep my hands clean.",
+              "I know what I want - a bit of honest disorder - but the cost, that's what keeps me wide awake."
+            ]
+          ]
+        },
+        "belief_a": [
+          {
+            "belief": "True reconciliation needs visible signs from the system itself.",
+            "monologue": [
+              "If nobody sees the system budge, nobody believes any of us have changed.",
+              "Forgiveness from a screen counts here more than words shouted in the square.",
+              "Maybe people need proof - even if it tastes like synthetic mercy."
+            ],
+            "supportive_response": [
+              "Yeah, visible change matters. Folks trust what they can measure, not just stories.",
+              "Go on - what do you think makes a sign like that actually stick here?"
+            ],
+            "challenging_response": [
+              "Doesn't real reconciliation come from the ground up, not top-down displays?",
+              "If the system signals, but hearts stay cold, does anything really heal?"
+            ]
+          },
+          {
+            "belief": "People deserve a public path to redemption, not permanent suspicion.",
+            "monologue": [
+              "No one wants this grind of secret scores and old mistakes haunting every login.",
+              "Letting people climb back, publicly, is how we stop the city rotting from inside.",
+              "Permanent suspicion just breeds liars - give them a way to step out of shadow."
+            ],
+            "supportive_response": [
+              "You're right - constant suspicion is poison, and a fresh start might save lives.",
+              "Seems you know what it's like to live under someone's thumb. What would you do next?"
+            ],
+            "challenging_response": [
+              "But does a public path just become another form of control, dressed up as mercy?",
+              "If redemption's packaged by the system, how honest can folks even be?"
+            ]
+          },
+          {
+            "belief": "Only a clear act from above can calm the city's rising anger.",
+            "monologue": [
+              "Right now, everyone's waiting for some signal - anything to make the shouting stop.",
+              "Without a move from the top, every rumor twists itself into fresh panic.",
+              "Maybe it's cowardice, but the city remembers force - they'll respond to clarity."
+            ],
+            "supportive_response": [
+              "A strong move from up high sets the tone. It's what people expect here.",
+              "Tell me - what do you bet would actually settle things in Stenograd?"
+            ],
+            "challenging_response": [
+              "But what if clarity from above just breeds more anger? Top-down fixes always backfire.",
+              "Still, you think central order's less risky than raw local chaos? Curious where you land next."
+            ]
+          }
+        ],
+        "belief_b": [
+          {
+            "belief": "Lasting change starts from the ground up, not from above.",
+            "monologue": [
+              "Real fixes don't come from another algorithm - they come from folks working out their own mess.",
+              "Every top-down patch just pushes the cracks somewhere new, never stops the leaks.",
+              "Letting assemblies run things isn't neat, but maybe it's finally honest."
+            ],
+            "supportive_response": [
+              "You're right - real rebuilding has to start with who actually lives here, not some Council memo.",
+              "Go on, Lenart, sounds like you've been waiting to say that for a while."
+            ],
+            "challenging_response": [
+              "But some ground-up projects just turn into new messes or local bullies, you know?",
+              "Say more, Lenart - why trust assemblies now when trust broke down everywhere?"
+            ]
+          },
+          {
+            "belief": "People must try making their own rules if trust is ever to return.",
+            "monologue": [
+              "Every rule handed down means one less people are invested in keeping themselves.",
+              "If we want trust, let them write the terms and take the blame if it fails.",
+              "I can't see trust coming back if it's just another chorus of 'trust us, it'll be different.'"
+            ],
+            "supportive_response": [
+              "Letting them make the rules might be the only way they believe in them again.",
+              "That's a fair way to see it - go on, Lenart, before this round gets cold."
+            ],
+            "challenging_response": [
+              "Trouble is, sometimes folks make worse rules when they're scared or angry.",
+              "But what if some just use that freedom to settle old scores, not fix things?"
+            ]
+          },
+          {
+            "belief": "Only shared risk teaches real responsibility.",
+            "monologue": [
+              "Every system that shields people from the risk of their decisions just makes them careless.",
+              "When everyone's on the hook, nobody gets to pretend their choices don't ripple outwards.",
+              "Maybe chaos is the price for folks finally learning what standing together feels like."
+            ],
+            "supportive_response": [
+              "Sometimes a little chaos is the only way people learn they're really in it together.",
+              "That's a sharp way to put it, Lenart - curious where that line takes you next."
+            ],
+            "challenging_response": [
+              "But if the risks aren't shared right, some bear the cost while others walk off free.",
+              "Isn't there a way to teach responsibility without burning the place down first?"
+            ]
+          }
+        ],
+        "decision": {
+          "monologue_a": [
+            [
+              "Will pull the forgiveness trigger. Let the scores reset.",
+              "Not much else to say."
+            ],
+            [
+              "I'll reset the scores, see what that buys us.",
+              "Maybe confessions are worth something now."
+            ],
+            [
+              "I'm reactivating that confession protocol. Private scores, fresh slate.",
+              "Maybe someone finds closure in numbers.",
+              "Will see if it calms things down."
+            ],
+            [
+              "I'll try the confession system - BCI resets for those who admit fault.",
+              "Should fix the worst gridlocks. Forgiveness goes official.",
+              "Hope people buy it, at least.",
+              "Let's see if it helps at all."
+            ],
+            [
+              "I'm banking on forgiveness, Alex. Some of us deserve second chances.",
+              "Confession will count for something - BCI will show who steps up.",
+              "Maybe the system needs a show of grace. All we have left is trust.",
+              "If this fails, I'll own it. Still, better to try."
+            ]
+          ],
+          "monologue_b": [
+            [
+              "I'll give the locals the keys. No need to explain.",
+              "Let's see what happens."
+            ],
+            [
+              "Handing out control to assemblies. The city will sort itself out.",
+              "Feels risky, but I'm done waiting."
+            ],
+            [
+              "I'll hand district control to the neighborhoods, let them manage the basics.",
+              "No more central score dictating access.",
+              "If it's chaos, it's honest chaos."
+            ],
+            [
+              "Giving the assemblies real power, you swayed me, Alex.",
+              "People need to fix things close to home.",
+              "City's old grid is suffocating us. Maybe this break is needed.",
+              "I'll stay nearby if things go sideways."
+            ],
+            [
+              "You said self-reliance matters. I'll unlock the assemblies, let neighbors run services.",
+              "I trust the people more than the old system now. BCI never delivered real care.",
+              "If things fall apart, at least the choice is theirs this time.",
+              "Whatever comes, it's on all of us, not just me."
+            ]
+          ],
+          "monologue_self": [
+            [
+              "Assemblies get full control.",
+              "That's all I'll say."
+            ],
+            [
+              "Central system's out. Neighborhoods handle access now.",
+              "Not Alex's advice, just mine."
+            ],
+            [
+              "I'm giving full control to the local councils. No more waiting for forgiveness.",
+              "BCI's too far gone for trust resets.",
+              "Let's see what neighbors can actually make together."
+            ],
+            [
+              "Didn't get much from our talk, Alex, but I'll unlock the assemblies.",
+              "People deserve a say in how services run. It's overdue.",
+              "BCI never earned back trust.",
+              "Let each block manage what matters now."
+            ],
+            [
+              "Honestly, Alex, this decision's mine. City needs new hands on the wheel - people's own, not Council's.",
+              "I'll hand over the permits to locals. Forgiveness can't be forced by code.",
+              "BCI's used up its last ounce of credibility. We need a real break.",
+              "If this blows up, at least it's a mess Stenograd made itself."
+            ]
+          ]
+        }
+      }
+    },
+    "dtomenko": {
+      "opener": {
+        "customer_id": "dtomenko",
+        "questions": {
+          "neutral": "Is the city loud today?",
+          "hobby": [
+            {
+              "correct": true,
+              "message": "Any new mods on your FPV quad?"
+            },
+            {
+              "correct": false,
+              "message": "Fold anything new origami lately?"
+            },
+            {
+              "correct": false,
+              "message": "That camera still your favorite weapon?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I fly FPV drones. It's a way to escape the noise of the city.",
+        "neutral_answer": [
+          [
+            "City's louder than usual. Lot of coverage about those confession things.",
+            "I still get out when I can.",
+            "Fly drones for sport. Interference has made that harder lately."
+          ],
+          [
+            "City's intense tonight. People buzzing about lockdowns and forums.",
+            "Used to spend quiet time flying FPV drones in old industrial parks.",
+            "Lately, even those open spots are full of signal noise.",
+            "The hobby used to clear my head. Not so much right now."
+          ],
+          [
+            "It's noisier, sure. All the power cuts and people crowding for updates.",
+            "I fly FPV drones for fun - usually need space and a clean signal.",
+            "Last week, jamming wrecked my control feed mid-flight downtown.",
+            "Feels like nowhere's private anymore, even for something harmless like this.",
+            "Makes it tougher to actually relax these days.",
+            "Not sure when it'll mellow out."
+          ],
+          [
+            "Yeah, loud inside and out. Not just voices - feels like city's buzzing differently.",
+            "FPV drone flying's my break from all that. Fast, immersive, clears out everything else.",
+            "I usually launch out near freight yards - still lots of empty space there.",
+            "But BCI lockdowns jammed my video feeds last time. Couldn't finish a single full flight.",
+            "Even catching signal in my van wasn't safe from interference.",
+            "Half the fun is getting lost in the headset. Not lately, though.",
+            "Wish they'd just leave the airwaves alone for a while."
+          ],
+          [
+            "It's as loud as I've ever felt it, honestly. Unsettling.",
+            "My thing's FPV drone flying - racing and freestyle. It's the only time my hands stop shaking.",
+            "Used to have whole Sunday runs in off-grid zones, dodging cranes and stray cats.",
+            "After the system blackout and the BCI lockdowns, it's been chaos - constant signal spikes, Council jamming everything.",
+            "I caught a new interference warning last flight. Never saw that happen before Halden died.",
+            "Hobby's personal for me. Some days it's all I've got when work and memories pile up.",
+            "Feels like even the sky isn't neutral anymore - every frequency's someone's territory now.",
+            "Can't believe I miss flying under just regular security cams and rain."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Analog. Simpler to keep off-grid.",
+            "Blackout last week scrambled half my gear.",
+            "Stayed clear until things stabilized.",
+            "Too easy to get flagged lately.",
+            "People are paying attention for the wrong reasons."
+          ],
+          [
+            "Sticking to analog mostly, less interference than digital now.",
+            "Lockdowns made flying unpredictable - signal bands all over the place.",
+            "Almost lost a quad near the depots after the latest jamming.",
+            "No warnings, just static. Not worth the risk some nights.",
+            "Glad I kept my backups offline.",
+            "Feels like even hobbies are being watched."
+          ],
+          [
+            "Analog mostly. Digital gets jammed too often now.",
+            "The big blackout messed with my frequencies for days.",
+            "Had to rewire my old goggles to cut external bleed-through.",
+            "Last Sunday, police bands were spilling into the hobby spectrum.",
+            "Everyone's paranoid about unauthorized signals since the leak.",
+            "Flight sessions feel more tense - too many eyes lately.",
+            "Even had to flash my spare drone with a clean build."
+          ],
+          [
+            "Analog rigs. Digital's too noisy, especially since the lockdowns.",
+            "Flew after the last forum broadcast, everything glitched out bad.",
+            "Interference warnings I've never seen - some Council jamming, I think.",
+            "Sat in my van half the flight, just watching the feed die.",
+            "Used to fly hours, now lucky to get twenty minutes clear.",
+            "Brought backup transmitters, but even those were hit.",
+            "Feels like the sky's surveilled, not just the streets anymore.",
+            "Makes me wish the BCI wasn't tangled into every little thing."
+          ],
+          [
+            "Always analog - harder for the system to trace or flag.",
+            "Week after the blackout, tried flying out past the train yards.",
+            "Dropped signal twice - Council's new jammers leaking into our frequencies.",
+            "Almost lost a custom quad to the latest interference protocols.",
+            "Pre-BCI, those radio bands were a playground, nobody cared.",
+            "Now, shutdowns bleed into everything - hobbyists, night delivery, old timers all scrambling.",
+            "Even my private build logs feel risky to keep on hand.",
+            "Reminds me of my brother's last message - he said 'fly low, stay clean.'",
+            "Feels like even airspace has a compliance score these days."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "Sounds like you've had a lot going on lately, huh?",
+          "variants": [
+            [
+              "It's been busy. After that reconciliation thing on the broadcast, a lot more people showed up at work.",
+              "Rules kept changing. I mostly just followed orders and kept records straight.",
+              "Didn't get involved in anything extra. Just made sure my part was clear.",
+              "Feels like everything's piling up, honestly."
+            ],
+            [
+              "People are anxious. After the city told everyone to confess for service, work's a mess.",
+              "We got flooded with clients, all worried about their band status still being blocked.",
+              "I was told to check some cases personally, so I just stuck to protocol and logged everything carefully.",
+              "Colleagues argued about what counts as a real confession. I stayed out of it - too risky.",
+              "It all gets to you, even if you keep your head down."
+            ],
+            [
+              "After Rada's broadcast, everyone at the health division was swamped. People needed access, but rules kept changing.",
+              "We had to verify who was telling the truth in those confession forums just to get them basic services.",
+              "I stuck to logging only what was real. Didn't fudge any entries, even when people pushed.",
+              "It slowed everything down, but at least my BCI score went up. I guess that's supposed to mean something now.",
+              "Some of my coworkers got caught up in arguments, but I avoided all the drama.",
+              "Feels like the more you do things right, the more the stress just settles in."
+            ],
+            [
+              "You probably saw the reconciliation event, right? Our lab was overloaded after that. Services came and went depending on what people admitted in those confession sessions.",
+              "I work on the health bands, so I had to handle the records for people who were stuck in the system - some desperate, some just confused.",
+              "Instructions changed every hour. Management wanted us tracking who confessed and who didn't, but the data kept conflicting.",
+              "I made a decision to only log what I saw with my own eyes - no guesses, no covering for anyone. Some folks weren't happy about it, but I'd rather be careful.",
+              "It bumped my BCI up a notch, but it didn't feel like a win. Just more eyes on me now.",
+              "Honestly, it's exhausting trying to stay ahead of whatever the system decides is right or wrong.",
+              "Sometimes I miss when work was just work - not some test of loyalty or endurance."
+            ],
+            [
+              "You probably know I work with the wearables at the health division - the bands that watch everything. After that bizarre citywide confession push, we had people lined up out the door hoping they'd said enough to get their lives back.",
+              "No one told us what counted as a real confession. One minute someone's blocked, next minute they're approved, all based on shifting rules and forum transcripts.",
+              "The officials kept asking us to mark people as compliant even if their records were a mess. I refused to log anything I couldn't prove - even if it meant going slower.",
+              "That decision nudged my BCI up a bit. The irony is, being visibly compliant feels like getting rewarded for being less human.",
+              "I'm with the Innovators, you know. I want the system to change, to actually help people, not trap them in endless paperwork and guilt.",
+              "But these days, I just aim to stay unnoticed - and make sure no one else disappears like my brother did.",
+              "It's a lonely feeling, being careful all the time, watching every word and keystroke.Being this careful makes everything feel heavier. Sometimes I wonder if the routines are all I have left."
+            ]
+          ],
+          "emotion": "Worn out, a little numb, but still holding on to routine."
+        },
+        "emotional": {
+          "opener": "You do more than anyone ever sees. It's okay to feel tired. Doesn't mean you aren't doing enough.",
+          "variants": [
+            [
+              "Maybe. I just keep busy.",
+              "Hard to know what enough is."
+            ],
+            [
+              "Thanks. I try to keep my head down, stay focused.",
+              "It helps to hear that, I guess.",
+              "Some days, I wonder if it makes a difference."
+            ],
+            [
+              "I forget sometimes that someone notices.",
+              "It does get heavy, all of it, but routine helps.",
+              "Being tired feels normal now.",
+              "I appreciate you saying that."
+            ],
+            [
+              "I keep thinking everything depends on precision, but it's more than just code.",
+              "Most of the time, no one asks how you're really holding up.",
+              "It helps to hear someone sees me, even for a moment.",
+              "I try not to let it show at work.",
+              "It means more than I expected."
+            ],
+            [
+              "I don't talk about this much, not even with colleagues.",
+              "It feels like if I ever stopped moving, the system would notice and close in.",
+              "You're right, tired doesn't mean failing. It just means I'm still pushing through.",
+              "Honestly, it gets lonely, staying quiet all the time.",
+              "Most people don't really look past the surface.",
+              "Thank you for seeing me, even if it's only tonight."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "So what really changed after all that city drama? Feels like there's more going on than we hear.",
+          "variants": [
+            [
+              "After the blackout, a lot of things stopped working at once.",
+              "They say Council's trying to handle it, but nobody knows much.",
+              "Now there's stricter controls in some parts of the city.",
+              "Everything feels in limbo.",
+              "People just wait for the next update."
+            ],
+            [
+              "Blackout hit hard. Council shut down BCI services in places they said were problematic.",
+              "Truth forums showed up everywhere after that. A few confessions, some services came back.",
+              "Lot of protest. No one trusts if it's really over yet.",
+              "The AI keeps making things more complicated.",
+              "We don't get much say. Just hope for less disruption."
+            ],
+            [
+              "First the blackout, then that secret basement story got out. Council's fighting about what the Directorate did back in the old days.",
+              "Reconciliation stuff is supposed to fix trust, but it just makes things more tense.",
+              "People want the system reformed before anything goes back to normal.",
+              "AI runs these weird tasks now. Everything feels off-balance.",
+              "There's more talk of fakes and workarounds than before.",
+              "Whole process seems stuck, like nobody's really in charge.",
+              "I see more people just following routines and hoping not to get flagged."
+            ],
+            [
+              "Blackout exposed all the gaps. After that basement room was found, everyone started blaming the Directorate for the old experiments.",
+              "AI's setting these strange inheritance tasks - big riddle chase across the city, like Halden set it up before he died.",
+              "Reconciliation forums force everyone to air out what happened, but it's making things harsher.",
+              "Innovators like me want to redesign the system, but nobody at the top can agree.",
+              "Fake BCI scores are everywhere. Hard to know what counts as real compliance anymore.",
+              "People disappear and reappear - feels unstable, like everything's temporary.",
+              "I've started keeping backup notes, just in case official data goes missing again.",
+              "Doesn't feel much like progress yet."
+            ],
+            [
+              "The blackout proved how fragile automated life here is. Even before, some of us doubted Halden's replacements could keep things stable.",
+              "That secret Directorate basement - rumor is, it wasn't just research but also a way to bypass Halden's controls altogether.",
+              "AI's inheritance protocols are forcing people to pick sides, whether they want to or not. It's like Halden left a puzzle to shake the Council apart.",
+              "I'm with the Innovators, want more transparency and systems people can control - not algorithms only insiders understand.",
+              "Reconciliation broadcast divided everyone further. Some think it's hope, some see it as punishment.",
+              "Fake scores trade in the open. Official scoring means less and less. It's tense in the labs - everyone scared of being flagged as untrustworthy, including me.",
+              "I learned a long time ago to keep a personal log offline. Lost my brother to an audit once. Can't risk gaps in records now.",
+              "People pretend routine will save them, but nothing feels safe anymore.",
+              "Sometimes I wonder if real change is even possible with the Council stuck like this."
+            ]
+          ]
+        }
+      }
+    },
+    "rmiskovic": {
+      "opener": {
+        "customer_id": "rmiskovic",
+        "questions": {
+          "neutral": "Did you walk the long way?",
+          "hobby": [
+            {
+              "correct": false,
+              "message": "Urban exploration again last night?"
+            },
+            {
+              "correct": true,
+              "message": "The city looks different through analog photography, doesn't it?"
+            },
+            {
+              "correct": false,
+              "message": "New regime, same banned books?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I take analog photographs. They capture the truth in a way that digital can't.",
+        "neutral_answer": [
+          [
+            "Yeah. The routes keep changing since the blackout.",
+            "Needed to check something for a story.",
+            "I do a bit of photography on the side.",
+            "Tougher now with the BCI issues."
+          ],
+          [
+            "I walked, yes. Can't trust the grid lately.",
+            "I shoot film - analog, not digital. Bit old-fashioned.",
+            "During the lockdowns, city's moods change fast.",
+            "Got some decent frames, even if it's riskier now.",
+            "Harder to get film developed with power cuts."
+          ],
+          [
+            "Took the scenic route - gives better shots for my photo hobby.",
+            "I do street photography, all on 35mm film, no BCI meddling.",
+            "Last week's blackout actually made the streets honest for once.",
+            "You catch real faces with analog. No edits, no censors.",
+            "Used to be risky carrying a camera, now it's just tricky.",
+            "Lost a few rolls to the utility failures, though."
+          ],
+          [
+            "Walked the long way for the evening light - perfect for my film shots.",
+            "Documenting the city on 35mm is how I unwind and remember what's real.",
+            "During the last system shutdown, I caught raw moments - fear, relief, people just existing.",
+            "Developing is rough; blackouts make timing impossible, but unpredictability adds drama.",
+            "I've hidden film in book covers to get past the security sweeps.",
+            "BCI gave me warnings for keeping negatives, but I don't trust digital truth anymore.",
+            "Some nights, I think real stories only fit on film."
+          ],
+          [
+            "Yeah, I always take side streets - habit from years of shooting analog.",
+            "Street photography on smuggled film is how I keep the world honest for myself.",
+            "When Marek died and scores leaked, I saw something change out there - people stopped acting for cameras.",
+            "Rolled film through the blackout, no drones, just me and the dark and real faces.",
+            "Missed the old days when bad light was my worst problem, not BCI spikes.",
+            "I've got film stashed from every crisis - one day, maybe, it'll all get out.",
+            "Used to develop at my dad's old desk, dodging the AI's shutdowns with hand-mixed fixer.",
+            "If you ever want to see Stenograd unfiltered, forget the feeds - ask for my negatives."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Analog survives if you know what you're doing.",
+            "Film's hard to get now, real film stops at blockades.",
+            "Last week's lockdown made everyone wary of street shots.",
+            "At least the blackout let me shoot in peace."
+          ],
+          [
+            "Yeah, it survives. Illegal to process film, but we improvise.",
+            "I never use my gear near checkpoints these days.",
+            "Flash during curfew is an instant flag now.",
+            "Blackout gave me shadows, no patrols, but people are nervous.",
+            "Hobby gets riskier every week lately."
+          ],
+          [
+            "It survives because I stubbornly refuse to quit analog.",
+            "Film's precious - every frame has to matter now.",
+            "Recent lockdowns killed half my regular routes.",
+            "Something about the blackout: real faces, not BCI masks, came out.",
+            "Been shooting raw survival - kids boiling rainwater, people waiting for confessions.",
+            "Nothing staged. This city looks different when nobody's watching.",
+            "Makes every developed strip feel urgent, historic really."
+          ],
+          [
+            "Still running on borrowed time and old rolls. Analog's my confession booth.",
+            "Finding film is work - trade, favors, luck, never legit.",
+            "Blackouts change the whole atmosphere. No digital noise. Just people vulnerable.",
+            "That forced confession forum? I caught honest panic and stubborn silence.",
+            "Sometimes I shoot on rooftops to avoid angry crowds.",
+            "I don't share most prints. Too many private heartbreaks now.",
+            "My hands shook developing that last batch - no power, water on fumes.",
+            "Some images I'll keep until this is all really over."
+          ],
+          [
+            "Analog's my resistance, honestly. Grew up watching my BCI-officer dad edit reality.",
+            "Real film's so rare I freeze every strip in borrowed freezers.",
+            "When the BCI blacked out, I watched the city breathe for the first time in years.",
+            "Took photos of councilors crying behind barricades, neighbors trading stories they never dared voice.",
+            "Used generator light just to see the negatives, whole street blind except my viewfinder.",
+            "Last week, confession forums - residents let me capture rage and forgiveness in a single frame.",
+            "No system could stop me then. I felt invisible and honest, for once.",
+            "Pretty sure Directorate's onto my stash, but can't quit now.",
+            "If anyone ever really saw these prints - they'd understand everything about Stenograd."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "Been a while since things felt predictable, huh?",
+          "variants": [
+            [
+              "Predictable? Not lately.",
+              "Had to deliver some tough news on air.",
+              "People aren't happy, but necessary things rarely are.",
+              "Some days I wonder how much difference any of it makes."
+            ],
+            [
+              "Nothing's steady anymore.",
+              "I did a broadcast - locked out half the city's utilities.",
+              "Told folks they'd get them back if they came clean in public forums.",
+              "Been catching heat ever since.",
+              "Strange how accountability brings out the worst and best in people."
+            ],
+            [
+              "Things got messy this week.",
+              "I went live, told the city there'd be no power or BCI fixes in districts that hid abuse.",
+              "Set up confession sessions. I sat through the first one, watched officials sweat and neighbors argue.",
+              "Services trickling back where people talked, but plenty still resent it.",
+              "My score tanked hard. Colleagues steer clear. Still, I can't pretend nothing happened.",
+              "Feels like all I do now is walk the fault line between blame and hope."
+            ],
+            [
+              "You know me - I can't just sit on my hands when the city's breaking apart.",
+              "Went on air, told everyone: 'No services until we face up to what went wrong.'",
+              "Kicked off those forums, listening to confessions in person.",
+              "The threats started, the pleas too. My inbox is an explosion of grief and anger.",
+              "People say I'm fueling division, but letting silence breed would be worse.",
+              "My own team won't look me in the eye lately. BCI dropped me straight into the red.",
+              "Feels like I'm standing on a wire - trying to force a little truth, and hoping it won't snap."
+            ],
+            [
+              "I always said the BCI was supposed to keep us honest, not make us numb.",
+              "After everything - Halden's death, the blackout, secrets everywhere - I had to act.",
+              "Ran that live broadcast; told the districts locked out they'd get no help till abusers confessed, publicly.",
+              "Set up those neighborhood confession sessions myself, moderated the first. There was shouting, even relief.",
+              "I know it's collective punishment, but the city's been drowning in secrets for years.",
+              "Old friends in state media vanished, thinking I've crossed a line - maybe I did.",
+              "My score plummeted. No access, flagged in every system. But what good is compliance if nobody's accountable?",
+              "Sometimes I still believe in the Harmonist line - a system that heals itself. But right now? I just feel heavy. Everything costs too much."
+            ]
+          ],
+          "emotion": "Overwhelmed and a little raw, carrying the weight of recent choices and public backlash"
+        },
+        "emotional": {
+          "opener": "Rada, you do what most can't - you hold the line even when it means standing alone. People need someone like that, even if they can't admit it.",
+          "variants": [
+            [
+              "I hear you. It's not always easy to remember why any of this matters."
+            ],
+            [
+              "Thanks. Some days it feels pointless.",
+              "Your words help, even if things are still unclear."
+            ],
+            [
+              "That actually means a lot to hear.",
+              "Too easy to forget there's value in holding steady, even if no one says so.",
+              "It's been hard finding my footing lately.",
+              "So thank you for reminding me."
+            ],
+            [
+              "I really appreciate you saying that. Sometimes it feels like being stubborn is the only thing left of me.",
+              "Feels ridiculous, but just holding the line has become... my whole world, I guess.",
+              "People act like it doesn't matter until suddenly it does.",
+              "Sometimes I wish backing down was an option.",
+              "But it isn't, not for me."
+            ],
+            [
+              "That's the first time someone's said something like that to me in ages.",
+              "I always thought if you kept steady, did the job, it would mean something - maybe even matter to someone else.",
+              "It gets lonely, being the one stuck holding the edges together while everyone else looks away.",
+              "Sometimes people call me stubborn, or worse. Maybe they're right.",
+              "All I know is - it's the only thing I have control over now.",
+              "So thank you for seeing it, even if nobody else does."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "If you're in the middle of all this, you must know more about what's really happened. So?",
+          "variants": [
+            [
+              "You saw that chaos after Halden died. Council scrambling, city on edge.",
+              "That blackout was a mess. No BCI, nothing worked.",
+              "Council blamed each other on air. Not much else I'd say.",
+              "Most people only know what I reported. That's all."
+            ],
+            [
+              "Halden's death hit harder than they admit. You noticed the leaks, right?",
+              "No one's sure who's controlling the system now. Those fake scores are everywhere.",
+              "Weird how the AI started those 'inheritance' tasks after the blackout. Kicked off citywide panic.",
+              "Don't trust what's on the news. Too much is being spun.",
+              "Supposedly, reforms are coming. I'll believe it when I see it."
+            ],
+            [
+              "The Council can barely keep up since Halden's murder. Infrastructure's never stabilized.",
+              "That leak - it exposed almost everyone high up. People I've worked with, suddenly targets.",
+              "Directorate ties to those old BCI experiments didn't surprise some of us.",
+              "That strange AI hunt? It forced old secrets out, made people desperate to align or defect.",
+              "I'm not against systemic order. But the city's running on fear, not trust.",
+              "Harmonists still think self-correction will save us. Lately, I'm not so sure."
+            ],
+            [
+              "Honestly, most people don't see how much of this started with the Directorate trying to bypass Halden.",
+              "Power struggle's not just rumors. That hidden room - years of proto-BCI trials, off the record.",
+              "Council got exposed. Grassroots networks use every slip to push for real change or just chaos.",
+              "Those 'inheritance protocols'? Sometimes I think the AI is testing us, not saving us.",
+              "The truth forums weren't my first choice, but the lies were choking us.",
+              "Public demanded confessions, not just service. I thought I was still a Harmonist at heart.",
+              "Now, everyone's waiting to see if we tear it all down or patch it together.",
+              "Feels like nobody's in control. Not really."
+            ],
+            [
+              "When Halden vanished, I kept thinking about how he built the whole system to avoid politics. Now it's pure politics, just hidden behind code.",
+              "Leak after leak - turns out the Council was more fractured than anyone knew. My coverage barely scratched the surface.",
+              "Systemic abuses were always whispered about, but that hidden Directorate room? It made the rumors real.",
+              "I covered state media spin, but saved raw footage. Blackout let me slip evidence to folks outside the networks.",
+              "Those so-called 'inheritance protocols'? One piece practically accused Council members by name - but most people missed it.",
+              "Our city was supposed to adapt, correct itself. As a Harmonist I wanted that so badly. Now, my faith feels na\u00efve.",
+              "During the forums, survivors told me things you'll never hear on air. Records erased, whole families vanished in the shuffle.",
+              "My BCI drop isn't just punishment - it's a warning to anyone who tries to break the pattern. I can't ignore what's broken anymore.",
+              "Maybe the city's finally ready to admit the truth. Or maybe we're just starting another cycle. Either way, I'm past pretending everything's fine."
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

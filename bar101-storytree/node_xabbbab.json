@@ -1,0 +1,1391 @@
+{
+  "title": "Directorate Security Crackdown",
+  "timestamp": "2025-06-05T20:23:00",
+  "news": {
+    "official": [
+      {
+        "image_id": "biometric_scanner",
+        "headline": "Enhanced Safety Measures",
+        "anchor_line": "Biometric checkpoints now keep Stenograd secure after recent unrest.",
+        "contextual_reframing": "Council assures that new BCI protocols streamline safety and public order for all citizens. BCI, the Behavioral Compliance Index, ensures seamless services based on civic alignment.",
+        "image": "news/biometric_scanner.jpg"
+      },
+      {
+        "image_id": "id_scan",
+        "headline": "Privilege Pathways Updated",
+        "anchor_line": "Citizens experience smoother access and fairer privileges linked to BCI alignment.",
+        "contextual_reframing": "System adjustments guarantee trusted individuals maintain access. Dynamic, data-driven governance adapts quickly for collective benefit.",
+        "image": "news/id_scan.jpg"
+      },
+      {
+        "image_id": "crowd_spectacle",
+        "headline": "Public Life Maintained",
+        "anchor_line": "Collective spirit endures as calm prevails across all districts despite minor disruptions.",
+        "contextual_reframing": "Efficient management from the Council keeps Stenograd stable. Automated, algorithmic solutions empower everyday life without interruption.",
+        "image": "news/crowd_spectacle.jpg"
+      }
+    ],
+    "underground": [
+      {
+        "image_id": "id_scan",
+        "headline": "Checkpoints Everywhere",
+        "anchor_line": "New biometric scans trap more citizens each hour, all justified by vague 'unrest'.",
+        "contextual_reframing": "This isn't just about safety. The BCI - a system scoring everything you do - now locks down basic life for anyone seen as 'out of line'. Privacy and dignity disappear first.",
+        "image": "news/id_scan.jpg"
+      },
+      {
+        "image_id": "crowd_spectacle",
+        "headline": "Silence Or Else",
+        "anchor_line": "Public debate ended overnight. Speak up and your BCI score drops, privileges gone.",
+        "contextual_reframing": "The Behavioral Compliance Index, or BCI, rewards perfect obedience and erases the rest. Resistance is forced underground as the system tightens its grip and Council elections vanish without a sound.",
+        "image": "news/crowd_spectacle.jpg"
+      },
+      {
+        "image_id": "blank_display",
+        "headline": "Ghosted And Gone",
+        "anchor_line": "Reports spread of ghost citizens erased after secret detentions and crackdowns.",
+        "contextual_reframing": "If the system flags you, you vanish - lost privileges, blocked access. Ghosts aren't just rumors. In Stenograd, the machine polices itself, leaving the city's wounds hidden behind silent screens.",
+        "image": "news/blank_display.jpg"
+      }
+    ]
+  },
+  "visitors": [
+    "olintz",
+    "rmiskovic",
+    "lkova",
+    "dtomenko"
+  ],
+  "character_stats": {
+    "olintz": {
+      "bci_score": 8,
+      "political_preference": "innovators",
+      "bci_history": [
+        52,
+        52,
+        47,
+        46,
+        48,
+        45,
+        42,
+        45,
+        49,
+        47,
+        52,
+        34,
+        34,
+        16,
+        16,
+        11,
+        8
+      ]
+    },
+    "npetrak": {
+      "bci_score": 61,
+      "political_preference": "harmonists",
+      "bci_history": [
+        65,
+        65,
+        60,
+        59,
+        63,
+        62,
+        66,
+        70,
+        75,
+        72,
+        75,
+        71,
+        69,
+        67,
+        65,
+        63,
+        61
+      ]
+    },
+    "dtomenko": {
+      "bci_score": 87,
+      "political_preference": "innovators",
+      "bci_history": [
+        66,
+        69,
+        65,
+        70,
+        66,
+        64,
+        64,
+        61,
+        64,
+        66,
+        67,
+        63,
+        66,
+        68,
+        68,
+        84,
+        87
+      ]
+    },
+    "lkova": {
+      "bci_score": 38,
+      "political_preference": "directorate",
+      "bci_history": [
+        46,
+        49,
+        54,
+        56,
+        57,
+        54,
+        53,
+        56,
+        52,
+        54,
+        59,
+        54,
+        36,
+        35,
+        19,
+        17,
+        38
+      ]
+    },
+    "shalek": {
+      "bci_score": 69,
+      "political_preference": "innovators",
+      "bci_history": [
+        67,
+        72,
+        74,
+        77,
+        79,
+        78,
+        82,
+        82,
+        79,
+        78,
+        82,
+        80,
+        78,
+        76,
+        74,
+        71,
+        69
+      ]
+    },
+    "rmiskovic": {
+      "bci_score": 22,
+      "political_preference": "rebel",
+      "bci_history": [
+        33,
+        33,
+        28,
+        25,
+        24,
+        27,
+        28,
+        27,
+        30,
+        35,
+        40,
+        37,
+        33,
+        30,
+        30,
+        27,
+        22
+      ]
+    }
+  },
+  "chats": {
+    "olintz": {
+      "opener": {
+        "customer_id": "olintz",
+        "questions": {
+          "neutral": "Is it quiet tonight?",
+          "hobby": [
+            {
+              "correct": true,
+              "message": "Origami keeping the mind steady?"
+            },
+            {
+              "correct": false,
+              "message": "Political literature or political theater tonight?"
+            },
+            {
+              "correct": false,
+              "message": "FPV drones still your escape?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I fold origami... from scrap forms mostly. It helps me think... quietly.",
+        "neutral_answer": [
+          [
+            "Quieter than last week. Patrols outside keep people home, I suppose.",
+            "I make origami models at home. Helps pass the time.",
+            "Harder now with all the movement checks.",
+            "Folded one last night. Not sure why I bother."
+          ],
+          [
+            "Quiet, yes. Guess people don't want to risk the checkpoints anymore.",
+            "I've got a hobby - folding origami, keeps my mind off things.",
+            "Not easy to get paper now, supplies are restricted.",
+            "Last time, I just used receipts. Didn't look great.",
+            "It's different doing it with sirens outside."
+          ],
+          [
+            "Quieter than I'd like, honestly. Feels like everyone's staying out of sight tonight.",
+            "I fold origami - mostly animals, sometimes plants. Something to keep my hands busy.",
+            "Used to get good paper, now just scraps from work.",
+            "After the new ID checks, I stay in more, fold by the window.",
+            "Last week, I tried a lupine from a schedule printout. Awkward, but... something.",
+            "The city doesn't make hobbies easy anymore."
+          ],
+          [
+            "Very quiet, yes. Streets empty sooner, too much surveillance.",
+            "I fold origami - complicated modular designs, when I find the right paper.",
+            "With all these supply controls, I'm using old reports, receipts, anything.",
+            "Checkpoint routines get in my head. Sometimes folding is the only way to settle down.",
+            "Last night, I hid a tiny model in a file at home. Habit, I guess.",
+            "The system's made it weird to even have a harmless hobby now.",
+            "Used to leave cranes in the lobby for neighbors, but not lately."
+          ],
+          [
+            "It's almost silent, not natural at all. This whole city feels wound too tight.",
+            "I've always folded origami - complex models, not just birds - helps keep anxiety in check.",
+            "Lately I use discarded BCI memos, security notices, anything I can find.",
+            "Patrols outside make my hands tremble, but folding helps me feel less exposed.",
+            "I actually had to hide an origami fox last week when there was a random check.",
+            "Getting proper paper is impossible since the Directorate's new clampdown.",
+            "Used to teach kids in my building, before all the disappearances and lockdowns.",
+            "Now, folding's more about survival than decoration - I just wish it could mean something again."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Yeah. Keeps the mind steady enough.",
+            "Hard to find good paper these days with all the delays.",
+            "I keep it simple, nothing fancy - just habit, I guess.",
+            "Crowds and checkpoints make supplies tricky. People notice if you linger.",
+            "Mostly just fold at home now."
+          ],
+          [
+            "It does... when I have time to focus.",
+            "Origami feels different since the new restrictions started.",
+            "Building entrances, extra checks - everyone's a little tense about hobbies lately.",
+            "Hard to get decent paper, so I fold with what I find.",
+            "Stopped bringing models outside. Too many eyes. Might look odd.",
+            "Just quieter now, is all."
+          ],
+          [
+            "Origami helps, especially on days like these.",
+            "Paper's hard to come by since movement got restricted.",
+            "I use old directives or grocery slips now, whatever's not tracked.",
+            "Folding complex shapes is harder when you're always listening for knocks.",
+            "You can't display anything anymore - someone might read into it.",
+            "Came close to tossing a whole batch after that last building sweep.",
+            "Still, it's better to fold than scroll news feeds."
+          ],
+          [
+            "Yeah, origami's the only steady habit left for me.",
+            "Restrictions made it tougher - scrounging for paper scraps feels almost rebellious.",
+            "Wish I could relax at the park folding cranes again... impossible now.",
+            "Checkpoint last night made me ruin a snail model - hands wouldn't stop shaking.",
+            "I used to swap patterns with neighbors for fun, but now nobody lingers.",
+            "You get creative with receipts, even old BCI notices - strange souvenirs.",
+            "Folding keeps the panic at bay better than talking does.",
+            "Sometimes I wonder if someone out there finds one and understands."
+          ],
+          [
+            "Exactly, origami is my grounding wire when systems fray.",
+            "I started with modular tessellations, but need whatever paper's at hand now.",
+            "Used to lose whole afternoons testing pattern symmetry at river's edge. Not safe anymore.",
+            "Last week after another compliance sweep, made a fox from Directorate mandate sheets. Mood fitting.",
+            "Neighbors avoid even glancing at my paper scraps, like associations might be enough to flag them.",
+            "Checkpoint outside my building means every model's smaller, just in case I have to hide them fast.",
+            "There's an unspoken chill - creative hobbies draw attention if you're not in the right circles.",
+            "Sometimes I fold for ghosts - missed faces turned invisible. Leave a model, hope it means something.",
+            "Odd how folding something pointless can be a quiet protest... or just a way to survive."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "Hard to keep track of what's normal anymore. What's that look like for you?",
+          "variants": [
+            [
+              "Normal? Feels like just passing checkpoints is most days now.",
+              "Got stopped outside my building twice this week. Late to work for it.",
+              "Coworkers losing access, harder to reach anyone. Feels...not normal anymore.",
+              "Some days I just keep my head down and hope nothing changes."
+            ],
+            [
+              "Normal keeps shifting. Mandatory ID scans all the time now.",
+              "I saw patrols right outside my building yesterday. Hard to ignore.",
+              "Lost access to shared files at work, and some people just...aren't there.",
+              "Heard stories about residents getting flagged and disappearing.",
+              "Been changing my walking routes, just to stay cautious."
+            ],
+            [
+              "Hard to say what normal is now. Building's got guards and the scans are constant.",
+              "Stopped twice just to leave my block. People at work vanished from the system overnight.",
+              "Rumors about disappearances keep spreading. It's getting to everyone.",
+              "I even leave my phone at home sometimes - never did that before.",
+              "Colleagues act nervous, afraid of saying or doing the wrong thing.",
+              "Mostly, it's just isolating. Like nothing fits right anymore."
+            ],
+            [
+              "My idea of normal got turned upside down. I used to think BCI was just background noise - helpful, even.",
+              "Now I get scanned every step from my door to my desk. Missed work, got questions.",
+              "This week, people lost access at random. No warning, just gone. Colleagues too scared to talk about it.",
+              "There are rumors about detentions, and some of us leave devices at home, deliberately off the grid.",
+              "I started avoiding main streets and monitored spots. It feels wrong, but safer.",
+              "Tension's everywhere. You see it in empty desks, nervous looks.",
+              "It gets lonely, hiding from a system I once helped run."
+            ],
+            [
+              "Honestly? I analyzed patterns for BCI. Believed in the system. But now, just surviving checkpoints and random scans leaves me exhausted.",
+              "I watched coworkers disappear from files overnight - no explanation. Some never come back. The rest of us just...shrink into ourselves.",
+              "Heard fresh rumors about people getting erased, or picked up, if their score drops. Former 'ghosts' returning, too, untracked. The fear is real.",
+              "To feel safer, I leave my phone behind, choose back alleys, avoid intersections. It's like moving through a glitching simulation.",
+              "People lost privileges without warning this week. You can see it - tense faces at lunch, empty workspaces.",
+              "All this made me question if compliance matters or if it's just chaos now. I used to think Innovators could fix it, but I'm not so sure anymore.",
+              "After being sidelined for doubting new security orders, my score tanked. No more access, full isolation.",
+              "If that's what normal is now, I don't know where I fit. It aches more than I'd admit."
+            ]
+          ],
+          "emotion": "alienated and quietly overwhelmed"
+        },
+        "emotional": {
+          "opener": "Oksana, it's not just you. Anyone would feel lost, boxed in like this. I see how hard you're trying. You're not invisible.",
+          "variants": [
+            [
+              "Thank you. Most people don't say that.",
+              "I... appreciate it."
+            ],
+            [
+              "It helps to hear someone notices.",
+              "I keep most things to myself, but... that means a lot.",
+              "Not many people understand."
+            ],
+            [
+              "Sometimes I wonder if everyone feels this way, or if it's just me.",
+              "It's easy to forget you exist, with everything so automated.",
+              "I used to think I liked the quiet. Lately, it feels different.",
+              "Thanks for saying that."
+            ],
+            [
+              "Some days, I barely recognize myself. It's like I'm watching someone else move through it all.",
+              "It helps to know I'm not completely alone, even if I don't always show it.",
+              "I used to trust the system. Now I'm not sure what I trust.",
+              "You saying that... it matters more than you think.",
+              "You notice things others ignore."
+            ],
+            [
+              "I've spent years analyzing patterns, but lately, I can't untangle my own feelings.",
+              "Being invisible used to be a kind of safety for me. Now it's just... cold.",
+              "It's strange. I wanted to be part of something stable, but maybe that's not what I got.",
+              "I hardly talk to anyone about this. It's like there's a weight pressing down all the time.",
+              "Honestly, most days I feel like I'm one mistake away from disappearing.",
+              "Your words...it makes the world feel less empty, for once."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "Enough with the vague stuff. What's really happening out there?",
+          "variants": [
+            [
+              "Big changes after Halden. That's all I can say.",
+              "Some data leaked, people panicked. System's tight now.",
+              "Checkpoints everywhere. If you aren't compliant, you know it.",
+              "System does what it wants. Not much anyone can do."
+            ],
+            [
+              "Halden's death... disrupted things, but we're told it's contained.",
+              "Info got out that shouldn't have. Council's scrambling for control.",
+              "Heard rumors about people gaming the BCI, but who knows what's true.",
+              "Old code acting up, makes the rules fuzzy. Hard to trust anything.",
+              "Now the Directorate's running checkpoints like we're all suspects."
+            ],
+            [
+              "Halden's gone and we get lockdowns, score leaks, chaos. Hard to call it stability.",
+              "Even some Council members lost privileges. The system's... not predictable anymore.",
+              "There's a black market for fake scores now. People desperate to fix their lives.",
+              "When 'ghosts' reappeared, every admin I know freaked out. It's like the old control tools broke.",
+              "Directorate thinks more surveillance is the answer. I'm not convinced that's improvement.",
+              "I used to see value in reforms, but it's hard to imagine innovation working with this much fear."
+            ],
+            [
+              "Sudden score drops, privileged citizens losing access - it's hitting everyone now, not just the usual targets.",
+              "The data leak shook trust. No one's sure who's protected anymore, not even inside Council.",
+              "Those old BCI algorithms, pre-Halden, they've come back. Permissions shift for no reason; it's chaos by design.",
+              "Saw colleagues trading for false scores. Some even deal directly with 'ghosts' - they're real, not a story.",
+              "I aligned with the Innovators, wanted new systems, but now leaders are freezing out anyone who questions them.",
+              "Personal risk? Went up after I tried to fix things. Sidelined, locked out, can't reach most of my team.",
+              "The Directorate's answer is clampdowns and checkpoints, but no one feels safe. Fixes nothing."
+            ],
+            [
+              "When Marek Halden died, the system lost its center - what came after was panic, score leaks, old code seeping in from his private notes.",
+              "People at the top got exposed. Suddenly, privilege meant nothing. Some scrambled - others hid. Even Council is nervous about their own metrics.",
+              "I saw 'ghosts' come back - citizens erased from the BCI, suddenly visible, negotiating for their safety. Helped them get public testimony.",
+              "Innovators like me tried to use Halden's diagrams to roll back the system. Council factions broke into open conflict over it.",
+              "Directorate turned to brute force - emergency checkpoints, hard surveillance, silencing the reform talks, even barring me from my own files.",
+              "Fake BCI scores started circulating. Saw admins paying for them.",
+              "Personal fallout? My score tanked after I objected. Officially, I'm isolated and not allowed access. That was the price for pushing change.",
+              "Now, people vanish quietly again, and the street knows before any news channel. I hear the talk - they're terrified.",
+              "If they ever restore order, it won't be with more surveillance or another control patch. The trust is gone. The structure itself is... not what I hoped for."
+            ]
+          ]
+        }
+      }
+    },
+    "rmiskovic": {
+      "opener": {
+        "customer_id": "rmiskovic",
+        "questions": {
+          "neutral": "Did you time it well - calm right now?",
+          "hobby": [
+            {
+              "correct": true,
+              "message": "Analog photography... stubborn as ever?"
+            },
+            {
+              "correct": false,
+              "message": "Antique typewriters and quiet bars  -  good pair."
+            },
+            {
+              "correct": false,
+              "message": "Any new mods on your FPV quad?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I take analog photographs. They capture the truth in a way that digital can't.",
+        "neutral_answer": [
+          [
+            "Bit of quiet is rare. I don't mind it.",
+            "I do a little street photography in my spare time.",
+            "Not much inspiration out there these days.",
+            "Checkpoints make it complicated."
+          ],
+          [
+            "Yeah, decent timing. I needed a breather after today.",
+            "Used to shoot film around the city for fun.",
+            "Now, checkpoints mess with my routes and timing.",
+            "Getting decent shots is a struggle lately.",
+            "Not worth the risk sometimes."
+          ],
+          [
+            "Feels calm, but surface isn't real these days.",
+            "I sneak out with an old 35mm camera, street shots on film.",
+            "Used to love dusk in District 5, people everywhere.",
+            "Since the new biometric checks, whole scene's changed.",
+            "Last week, drones ruined three of my best photos.",
+            "Still - sometimes you get lucky. One good shot makes it worthwhile."
+          ],
+          [
+            "Quiet now, but only because people are exhausted.",
+            "I'm addicted to film photography, real street moments, nothing staged.",
+            "Tried shooting near the new checkpoints last week - total surveillance zone.",
+            "Drones, ID scans, the whole mood changed, people paranoid.",
+            "One BCI warning mid-shoot nearly made me trash my camera.",
+            "But when I caught a kid glaring back at me, fearless?",
+            "That image feels like why I do this."
+          ],
+          [
+            "You read the room well - these nights are rare now.",
+            "Ever since I was a kid, I've sworn by 35mm film - real grain, no filters.",
+            "Shooting candid street scenes worked before the crackdowns.",
+            "Last week, checkpoints and BCI surveillance nearly got me flagged for nothing.",
+            "I'm barely hanging on with a score of 22. Even walking around with a camera gets you profiled.",
+            "Developed my shots anyway - almost all wrecked by nerves except one, a kid refusing to look away.",
+            "Holding onto that - it's proof not everything's been erased yet.",
+            "Not sure how long it lasts, but I'm not quitting."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Still is. I keep it close.",
+            "Film's hard to get with all these new controls.",
+            "Snapped a few shots last week, checkpoints everywhere.",
+            "Most nights I stay home now. Too many eyes.",
+            "It isn't as easy as it used to be."
+          ],
+          [
+            "Always. Nothing digital beats real film.",
+            "But the Directorate's new checkpoints make it risky.",
+            "Nearly lost a roll last weekend to those new scanners.",
+            "The air's different out there. People watch; no one talks.",
+            "You really have to pick your moments now.",
+            "One slip, and your BCI drops even more."
+          ],
+          [
+            "It's my lifeline. Still running film, even in this climate.",
+            "Went out after curfew last week. Drones, checkpoints, you name it.",
+            "Used to blend in, now every move feels marked.",
+            "Met a kid by the scanners, caught a shot. Felt dangerous.",
+            "Most frames were trash - hands shaking, too many patrols.",
+            "Makes every print matter more, you know?",
+            "Even seeing real faces is rare these days."
+          ],
+          [
+            "Always my weapon. Analog film tells what algorithms can't see.",
+            "Been dodging those biometric posts every session now.",
+            "Used to roam alleys free - now the city's a neural net.",
+            "Last Saturday, caught a real moment: a girl glaring at patrols.",
+            "The ghosts' stories make people glance at the lens, just in case.",
+            "My BCI dipped so low, doors lock for me at work.",
+            "Honestly, shooting feels illegal now, but it's worth it.",
+            "Sometimes I think the camera's my last real voice."
+          ],
+          [
+            "Always has been, always will. Dad taught me in secret, back before BCI.",
+            "I smuggle in rolls, develop at home - can't trust labs with this climate.",
+            "When Halden died, the city flipped. Drones everywhere, checkpoints at every turn.",
+            "Last Sunday, tried capturing fear at the scanners. BCI drop hit instantly.",
+            "Colleagues avoid me now - too risky to be seen sharing footage.",
+            "Bar 101's the only place I dare speak honest about it.",
+            "Sometimes I sneak prints to ghosts, help them prove they exist.",
+            "The world's become an archive dusted by algorithms. I settle for stolen frames.",
+            "If they ever catch me, at least I'll have the negatives."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "Funny how things shift without anyone saying much. You seen that around you?",
+          "variants": [
+            [
+              "It's been a bit tighter lately, you know, with all these new checkpoints.",
+              "Had some trouble getting into work after they updated security.",
+              "People act different when the system clamps down. Makes you think.",
+              "Feels like privacy's not even a suggestion anymore."
+            ],
+            [
+              "Security flagged me at the newsroom this morning. Said I'd been near the wrong people.",
+              "Had to wait while they checked my ID, in my own office. Never happened before.",
+              "Colleagues stopped sharing info. Everyone's jumpy.",
+              "Deleted a lot from my phone, just in case.",
+              "You realize how fast your world shrinks in this city."
+            ],
+            [
+              "Yeah, things shift quick. I got flagged today getting into work. Didn't even see it coming.",
+              "All because I messaged a few names now on the erased list. Suddenly I'm standing in the hall, waiting to be cleared.",
+              "People used to swap tips, now we barely look at each other.",
+              "They installed new checkpoints at every door. Feels more like a screening than a newsroom.",
+              "I had to wipe my phone clean. Even stopped sending invites to folks I used to trust.",
+              "Guess my BCI score's circling the drain. Every day feels smaller lately."
+            ],
+            [
+              "Shifts? All the time. I'm living proof. This morning my access gets flagged just for talking to old friends.",
+              "They pulled me aside, questioned me about work contacts linked to protests, said my 'profile's unstable'.",
+              "I watched my colleagues clam up. Nobody shares credentials, not since those silent erasures.",
+              "I had to delete weeks of work from my own phone, cut contacts out for their safety and mine.",
+              "Had to switch all research to nights at home. Feels like my job's just documenting my own restrictions now.",
+              "Never thought I'd see our newsroom turn into a checkpoint maze.",
+              "Funny thing? I grew up with this system, thought I knew how to play it. Turns out it plays back harder."
+            ],
+            [
+              "Things shift without a word  -  I know. I got flagged at work this morning, just for reaching out to people they've ghosted.",
+              "Security at the door asks about my contacts, about protests and erasures. I see colleagues refusing to even swap a story with me.",
+              "You know I save the raw footage, right? Now I'm deleting for my life, and not because of censors but to protect sources.",
+              "Raised by a BCI officer  -  I always saw the strings. This week, I felt them tighten around my neck.",
+              "They turned the newsroom into a gauntlet. Even lunch is a checkpoint.",
+              "I'm running most of my work from home now, one phone always off, privacy an illusion.",
+              "My BCI score's sunk below twenty-five. Maybe it'll tank me for good soon, but I won't just roll over.",
+              "It's suffocating. But I'm not the type to let them decide what stories get forgotten."
+            ]
+          ],
+          "emotion": "Frustrated, isolated, tired but daring to keep going."
+        },
+        "emotional": {
+          "opener": "Rada, sometimes just showing up is the bravest thing you can do. You don't have to carry it all by yourself.",
+          "variants": [
+            [
+              "Maybe. Sometimes showing up is all there is.",
+              "Thanks for saying that."
+            ],
+            [
+              "It helps hearing that, really.",
+              "Most days it feels like no one notices the effort.",
+              "Still, have to keep moving."
+            ],
+            [
+              "You make it sound easier than it is.",
+              "I do keep showing up. Guess I'm stubborn.",
+              "It gets lonely, but I can't make myself disappear.",
+              "Hearing that... it matters."
+            ],
+            [
+              "Nobody ever says that out loud. It's strange how much I needed to hear it.",
+              "I keep thinking if I let go for one day, it all falls apart.",
+              "It's stupid how heavy things get, even when I know they shouldn't be mine alone.",
+              "Sometimes all I want is to be invisible, but I never manage it.",
+              "That helps. More than you know."
+            ],
+            [
+              "People never ask how I keep going, just whether I'm still here.",
+              "My head's full of old lessons - my mother's rules, the city's rules - so it's easier to just shut up and get on with it.",
+              "I miss trusting that what I do matters.",
+              "Most days, I actually believe someone's watching, weighing me, counting my steps like I'm a variable.",
+              "Your words remind me I don't vanish when no one's looking. I'm still here, even when I wish I wasn't.",
+              "It means a lot, hearing that from you. I forget I'm allowed to need that."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "Come on, Rada, everyone knows the surface news. If you want to drink here, give me something real.",
+          "variants": [
+            [
+              "Everyone's tense after the Halden story. You can feel it in the air.",
+              "BCI scores are glitching now, messing with people's routines.",
+              "Nobody trusts who has access to what anymore.",
+              "People talk about 'ghosts' but who really knows."
+            ],
+            [
+              "Council's scrambling - after Halden's death, nothing lines up like it used to.",
+              "There was that data leak with BCI scores, freaked a lot of people out.",
+              "Privileges gone one day, back the next. All through the system, quiet but sharp.",
+              "A few old faces are back, the ones who were meant to be forgotten. It's unsettled people.",
+              "Underground channels fill up fast whenever the Directorate tightens control."
+            ],
+            [
+              "Halden's death... That's when things got openly messy.",
+              "Council factions are clawing at each other - nobody believes the system's neutral anymore.",
+              "That big leak exposed BCI scores and private info, scared the loyal and the rogues both.",
+              "People with spotless records are suddenly stuck outside, while flagged ones breeze through checkpoints.",
+              "The city's split. Official rules, and the ones you whisper about after work.",
+              "Ghosts started showing up, real ones, not rumors. Saw it myself near Sector 4.",
+              "Directorate's stamping down, checkpoints, detentions... the old police state moves."
+            ],
+            [
+              "You've seen those hidden faces since the leak... some of them aren't supposed to exist. I've saved footage I can't even risk showing now.",
+              "System glitched so hard protest planners ended up getting fast-tracked for services by mistake. Nobody can explain why.",
+              "I know the BCI's supposed to be impartial. It's not. Council's using the mess to sideline rivals and silence reformers.",
+              "Ghosts tried to negotiate - Lintz offered them legal firewall, but she's been pushed out now.",
+              "Security teams are scooping people up for 'review' and some just go quiet. Same thing as the old days, just with more code.",
+              "The way people talk at Bar 101 now - everyone picking a faction. Makes me sick to see us split like this.",
+              "My feeds are crawling with reports about fake BCI scores.",
+              "Makes me want to dig deeper, even if it drops my score lower."
+            ],
+            [
+              "I grew up learning how these systems were rigged. My mother would say - 'never trust a number you didn't write yourself.' Now I see why.",
+              "After Halden died, everything's just algorithms on autopilot. No one's really in charge, so the worst ones get to pull levers.",
+              "I kept a copy of that leaked score list. Made me realize half the city's getting by with fakes or favors now.",
+              "The 'ghosts' - the real ones - they contacted me about their deal with Lintz. She tried to protect them, but the Directorate pushed her out with a keystroke.",
+              "Those old faces? They're banding together, running ad-hoc clinics and info drops, staying just ahead of biometric sweeps.",
+              "Checkpoints everywhere, system errors making daily life hell. Last week, my neighbor's access cut off mid-shift - no warning, just a red score.",
+              "Directorate's threatening forced detentions again. Every reporter who asks too much 'loses access.'",
+              "Even the Innovators are scared; they know the code isn't safe. And here I am, still recording, still passing raw files out.",
+              "Most days I look around and think - no matter what the Council says, it's on us to remember what they're trying to erase."
+            ]
+          ]
+        }
+      },
+      "decision": {
+        "preference": "a",
+        "dilemma": {
+          "opener": "Looks like you've got more on your plate than that drink.",
+          "variants": [
+            [
+              "Sometimes you get handed something that could really shake things up.",
+              "You weigh what's right for everyone, but every answer seems to leave someone burning.",
+              "Some truths are heavier when you're the only one holding them."
+            ],
+            [
+              "I landed something powerful that could either start a fire or keep things quiet.",
+              "Either way, someone gets hurt, and I'm not sure which road does less damage.",
+              "I could blow it all open or try to steer it from behind closed doors.",
+              "No matter what, my name's on the fallout."
+            ],
+            [
+              "Halden's last words just landed in my lap with the keys to the kingdom.",
+              "If I push that button, everyone in Stenograd hears what he really thought of the BCI.",
+              "Or I sidestep the spotlight and pass it off to those looking to fix things quietly.",
+              "Maybe I hand the truth to people who talk reforms instead of riots.",
+              "The risk is trust could shatter either way, so I'm standing on the line."
+            ],
+            [
+              "The rebels passed me Halden's final message and a way to override every screen in Stenograd.",
+              "I could detonate the whole city's faith in the system - just a broadcast and secrets fall out.",
+              "Or I slip the evidence to insiders willing to reform without turning the streets inside out.",
+              "There's no pretending I walk away untouched - broadcasting puts me in Directorate crosshairs, again.",
+              "Holding back would gnaw at me, but maybe it spares people from what comes after panic.",
+              "My score's already tanked. I know what it's like living flagged, and I feel the pull both ways."
+            ],
+            [
+              "Alex, I just got Halden's last confession and full override access. It's bigger than any news I've carried.",
+              "If I release it citywide, Stenograd erupts - every secret, every coverup laid bare, and I'll spark chaos we can't stuff back in.",
+              "If I stay quiet and slip it just to reformists, maybe things change quietly, but maybe the Council buries it all.",
+              "I keep thinking about people erased, denied, living like ghosts - truth means justice, but it means shattered lives too.",
+              "This job taught me how to stage a story. My score's low, so risky moves only make it worse, but silence feels like betrayal.",
+              "What kind of city do I actually want to call home: honest and broken, or just another lie we carry?",
+              "Some days being the messenger feels like the worst seat in the house. I'm not sure which version of myself I can live with."
+            ]
+          ]
+        },
+        "belief_a": [
+          {
+            "belief": "Truth must be seen to have power - secrecy only serves the oppressors.",
+            "monologue": [
+              "People can only act on what they know, not on what's buried and hidden.",
+              "If we keep this locked away, the lies just go on, invisible and unchallenged.",
+              "It's the cover-ups that make people helpless, not just the rules themselves."
+            ],
+            "supportive_response": [
+              "You're right, hiding truth only strengthens those who already hold the strings.",
+              "Go on, what else about this truth weighs on you tonight?"
+            ],
+            "challenging_response": [
+              "But sometimes it's the shock of truth that breaks more than it heals people.",
+              "Keep talking, I'm curious where you'd draw that line for Stenograd now."
+            ]
+          },
+          {
+            "belief": "Courage means risking turmoil for real change.",
+            "monologue": [
+              "Safety isn't always kindness - sometimes it's just compliance by another name.",
+              "If we flinch every time things start to shake, nothing ever gets rebuilt.",
+              "No one ever fixed this city by sitting quietly; someone has to throw the first stone."
+            ],
+            "supportive_response": [
+              "Sounds like you're willing to take a hit for everyone just to move things forward.",
+              "So, how did you learn to stomach the risks that scare everyone else?"
+            ],
+            "challenging_response": [
+              "Is it still courage if the fallout sweeps up people who never chose this?",
+              "Let's stay with that for a second - what's too much to risk, even for your ideals?"
+            ]
+          },
+          {
+            "belief": "People deserve agency, even at the price of uncertainty.",
+            "monologue": [
+              "Order built on control isn't peace, it's just a cage people can't see.",
+              "I can't decide for them - they've got to see the whole picture and choose for themselves.",
+              "If chaos is the cost of finally being free to decide, maybe it's worth it."
+            ],
+            "supportive_response": [
+              "Letting people choose - even when it hurts - might be the first step out of this mess.",
+              "Keep talking, I want to hear more about what freedom looks like for you here."
+            ],
+            "challenging_response": [
+              "But what if giving everyone control throws us straight into disaster, not freedom?",
+              "Alright, how do you know they'll use that choice for something better this time?"
+            ]
+          }
+        ],
+        "belief_b": [
+          {
+            "belief": "Order and safety outweigh the shock of naked truth.",
+            "monologue": [
+              "There's a difference between real change and just lighting a match in dry grass.",
+              "People trust routines, even broken ones - rip that out overnight, and we're left with panic.",
+              "I'm not afraid of the truth, I'm afraid of what the frenzy will destroy before anything can be rebuilt."
+            ],
+            "supportive_response": [
+              "That fear makes sense - when order collapses, it's the innocent who pay first.",
+              "I get wanting to protect people from chaos. But what else keeps you up at night?"
+            ],
+            "challenging_response": [
+              "But sometimes hiding the mess is what lets it rot deeper. Are you sure safety is real?",
+              "If order's built on lies, maybe the panic is just honesty catching up. Where does that leave you?"
+            ]
+          },
+          {
+            "belief": "Real reform requires stability, not chaos.",
+            "monologue": [
+              "Lasting change only happens when people aren't running scared - we need space, not sirens.",
+              "If everything unravels at once, the Council will double down with force, not listen.",
+              "Sometimes reform isn't a sprint - it's knowing when to pull the right thread, and when not to."
+            ],
+            "supportive_response": [
+              "Stability gives everyone room to think, not just react. That's not weakness.",
+              "Sounds like you're looking at the long game. What thread pulls at you the hardest?"
+            ],
+            "challenging_response": [
+              "But what if stability just means delay? Maybe people need a jolt to wake them up.",
+              "Is slow change even possible with this Council? Tell me, would calm ever convince them?"
+            ]
+          },
+          {
+            "belief": "Too much disruption risks irreparable harm to vulnerable people.",
+            "monologue": [
+              "It's not just the power brokers who'll get crushed when everything breaks loose - it's families, kids, anyone with a low score.",
+              "I've seen what it looks like when the city grinds to a halt; the first to slip through the cracks are never the ones writing the rules.",
+              "If I set this in motion, I can't control what gets torn apart or who gets left behind."
+            ],
+            "supportive_response": [
+              "Worrying about who suffers first means you haven't lost your compass, Rada.",
+              "Caution is its own courage. Tell me, who do you picture when you think of the harm?"
+            ],
+            "challenging_response": [
+              "But maybe it's the vulnerable who need the shield torn down the most. Ever think of that?",
+              "Isn't leaving things as they are just another way of harming them? What keeps you holding back?"
+            ]
+          }
+        ],
+        "decision": {
+          "monologue_a": [
+            [
+              "I will use the credentials.",
+              "It will be live soon."
+            ],
+            [
+              "I am making the broadcast public.",
+              "Something big is about to break."
+            ],
+            [
+              "I will override the feed and send out Halden's message citywide.",
+              "It will shake Stenograd to its core.",
+              "Everyone will hear the truth tonight."
+            ],
+            [
+              "You made me realize silence keeps us trapped.",
+              "I am unlocking every channel for Halden's confession.",
+              "This city needs the truth, raw and loud.",
+              "Whatever happens now, I am ready to stand in the open."
+            ],
+            [
+              "You pushed me to ask what kind of city we deserve.",
+              "I will let Halden speak to everyone, no matter the fallout.",
+              "Even if chaos hits, we owe each other the unvarnished truth.",
+              "I want you to know this risk is for a future we build together."
+            ]
+          ],
+          "monologue_b": [
+            [
+              "I will pass it along, quietly.",
+              "Let someone else handle the mess."
+            ],
+            [
+              "I am giving what I have to the right people.",
+              "No public waves this time."
+            ],
+            [
+              "I will send Halden's evidence to the insiders I trust.",
+              "This stays quiet for now, but real change is coming.",
+              "Maybe the system can fix itself."
+            ],
+            [
+              "You reminded me chaos can destroy more than it frees.",
+              "I am handing the files to the reformists, off the record.",
+              "Let them negotiate from the inside for now.",
+              "We will watch for their next move."
+            ],
+            [
+              "Your questions stayed with me. Noise isn't always progress.",
+              "I'll stay out of the spotlight and let insiders work this out.",
+              "If we get truth and protection quietly, maybe we can repair what matters.",
+              "This isn't surrender, Alex - it's my hope the system can evolve."
+            ]
+          ],
+          "monologue_self": [
+            [
+              "It's my choice. I am exposing everything.",
+              "No more secrets."
+            ],
+            [
+              "I will do this my way. Citywide release.",
+              "Not waiting for permission."
+            ],
+            [
+              "Credentials in hand, I will blast Halden's message on every broadcast channel.",
+              "Stenograd will feel the thunder tonight.",
+              "This time, the story won't be erased."
+            ],
+            [
+              "I'm unleashing the whole truth, no edits, no delay.",
+              "It's not revenge. It's what this city needs to wake up.",
+              "My father taught control. I will choose transparency.",
+              "We're past restraint now."
+            ],
+            [
+              "Nobody talked me into this, not you, not anyone.",
+              "Every warning I got - ignored. I will light up all feeds with Halden's voice.",
+              "This is for the vanished, for everyone silenced - including myself.",
+              "When the world shifts, we'll know it's because we chose to face it."
+            ]
+          ]
+        }
+      }
+    },
+    "lkova": {
+      "opener": {
+        "customer_id": "lkova",
+        "questions": {
+          "neutral": "Is the whole city running hot today?",
+          "hobby": [
+            {
+              "correct": false,
+              "message": "Antique typewriters holding up?"
+            },
+            {
+              "correct": true,
+              "message": "Urban exploration ever get boring for you?"
+            },
+            {
+              "correct": false,
+              "message": "Still folding origami to stay grounded?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I explore the city's underground. It's a different world down there.",
+        "neutral_answer": [
+          [
+            "Hot enough. City's a maze today, checkpoints everywhere.",
+            "Had to cut my usual rounds short in the tunnels.",
+            "Urban exploration's more of a waiting game lately.",
+            "Everyone's getting inventive, not just hobbyists."
+          ],
+          [
+            "Feels that way. Even the bars feel tight now.",
+            "Been tough getting down to the utility tunnels lately, sensors everywhere.",
+            "Hobby like mine - urban exploration - is not so anonymous these days.",
+            "Checkpoints caught me off guard last night, had to backtrack.",
+            "This city's forgotten how to stay quiet."
+          ],
+          [
+            "Yeah, things are tense out there. Can't even relax with my usual hobby.",
+            "I do urban exploration - mostly old data centers and tunnels, after hours.",
+            "Last night I tried to check my favorite spot, got flagged at a new checkpoint.",
+            "Never used to see patrols that deep, not till the crackdown.",
+            "Ran into a few others dodging the system too.",
+            "Feels like the city's watching its own shadow these days."
+          ],
+          [
+            "Running hot, alright. My hobby's urban exploring - the deep stuff, old relay hubs.",
+            "Used to unwind there, brews and all. Now it's a gauntlet just to walk tunnel stairs.",
+            "Tried it last week, alarms set off halfway to the thermal substation.",
+            "Had to lay low with a few ghosts - folks the BCI lost track of.",
+            "Not the usual crowd. Even swapped stories, shared a nip of my samogon.",
+            "System's got its eye everywhere, but it's missing the big leaks.",
+            "At least the tunnels have better company these days."
+          ],
+          [
+            "You said it. My bit of peace - exploring old infrastructure - just got complicated real fast.",
+            "Been sneaking into city tunnels and sealed server rooms since I left the Directorate.",
+            "Last Saturday, made for my homebrew stash near Sector 8. New scanners everywhere. Burned my hand on a rookie's wiring, nearly blew the lid.",
+            "Ran into three 'disappeared' types down there - BCI ghosts trading info, nervous as cats.",
+            "We shared a drink. Used to be hobbyists, now everyone's a fugitive or informant.",
+            "Taught one how to power-cycle a stuck data node. Showed another how to dodge the heartbeat sensors.",
+            "Funny, the system's so tight it's leaking right under their noses.",
+            "Suppose I'll have to find a new place to hide my toolkit."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Doesn't get boring, just sometimes less quiet than before.",
+            "Lot more locked doors lately. Lot more eyes, too.",
+            "Saw checkpoints went up. Changed my usual routes.",
+            "I stick to myself. Just maintenance, nothing more.",
+            "Hard to tell if it's a hobby or work now."
+          ],
+          [
+            "Urban exploration's never boring, but it's gotten complicated lately.",
+            "Checkpoints everywhere since the state of emergency. Less places to slip through.",
+            "Noticed more patrols near the tunnels. Makes things... inconvenient.",
+            "Still manage to get around, just takes longer.",
+            "Some spots are busier these days than they should be.",
+            "I don't hang around when I don't have to."
+          ],
+          [
+            "Gets boring? Not for me. Tunnels always throw up something new.",
+            "Ever since those biometric scanners went in, everything's tighter.",
+            "Saw three old faces last week, supposed to be 'ghosted.'",
+            "Whole city's nervous, even under the pipes.",
+            "Latest clampdown means more detours around sensor grids.",
+            "Can't brew in peace half the time now.",
+            "Not as free as it used to be, but still worth it."
+          ],
+          [
+            "Never got boring, honestly. Always some circuit to trace, some shortcut left.",
+            "State's cracked down since the ghosts reappeared. Makes my hobby trickier.",
+            "Ran into a group hiding out in my old spot last week.",
+            "They said the new lockdown grid's messing up their routines too.",
+            "Seems like everyone's using the tunnels now, not just old hands.",
+            "Was almost nostalgic, being chased by sensors and not people.",
+            "Suppose it keeps me sharp, even if I miss the quiet.",
+            "They haven't found my plum stash yet, at least."
+          ],
+          [
+            "Boring? Never. Those tunnels outlive regimes, outsmart half the Council's techs.",
+            "Been crawling them since before Halden wired the BCI, even in the blackout years.",
+            "Now? With the latest checkpoints, even my old entry codes don't work half the time.",
+            "Last week I found three ghosts setting up relay points under the thermal station.",
+            "They were supposed to be erased. Turns out, the BCI is losing grip underground.",
+            "Shared a drink, swapped routes, warned them about new biometric sweeps.",
+            "No one trusts digital maps now - hand-drawn schematics are back in fashion.",
+            "It's wild, the system's tightest aboveground but softest below.",
+            "Means I have to watch my back, but wine tastes better under pressure."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "Hard to keep track of what's normal anymore. What's that look like for you?",
+          "variants": [
+            [
+              "Hard to say what normal is now. Everyone's jumpy, even over the little things.",
+              "Spent a couple nights helping fix up some access points. People get touchy when they can't get inside.",
+              "You see a lot from the sidelines. Not much changes by talking about it.",
+              "Just feels heavier than usual lately, to be honest."
+            ],
+            [
+              "Normal? Not a word I hear much. City's restless.",
+              "I was on call, retrofitting some checkpoint scanners. Had to turn folks away when their scores dropped too low.",
+              "Directors wanted it tight. Didn't leave much room for favors, even for old clients.",
+              "People talk, but no one knows who to trust.",
+              "Just feels heavier than usual lately, to be honest."
+            ],
+            [
+              "Normal... I don't think I'd know it if it walked in and bought a drink.",
+              "The last week, I worked through the night on new biometric checkpoints. Put in a hard barrier for anyone the system didn't like.",
+              "Lots of angry messages from people blocked from their homes, jobs. I kept clear. Rules are rules.",
+              "Directorate gave me override power for technical staff only, so I didn't play favorites.",
+              "Now my score jumped, but people see me different too - less neighbor, more gatekeeper.",
+              "Just feels heavier than usual lately, to be honest."
+            ],
+            [
+              "Normal? I don't think the city remembers what that means. I used to fix leaky pipes. Now it's always nerves and new orders.",
+              "Last week Directorate had me install those biometric checkpoints. I calibrated every one, by hand. Watched folks get locked out and get angry with me, not the Council.",
+              "Old friends asked for loopholes, but I stuck to the plan. That put a lot of folks on edge, you know?",
+              "Directorate trusted me to issue overrides, but I used them only when things would break without it. Stability first.",
+              "Had a friend, Lintz - can't even message me now. System flagged him, so that's it for us.",
+              "My BCI score went up, so the Council flagged me as 'essential.' Doesn't feel like much of a prize.",
+              "Just feels heavier than usual lately, to be honest."
+            ],
+            [
+              "I don't remember normal. You spend enough time patching these systems, routine just evaporates.",
+              "Two nights running, Directorate had me toiling over biometric checkpoints. Hand-calibrated, watching folks lose access while they grabbed at me for exceptions - most I had to turn away. Used to be clients, even friends.",
+              "Each rejection shot an alert up the chain. Every move I made logged. Turned down a bunch of workaround requests. Protocol's the only thing standing between me and chaos, these days.",
+              "Wasn't just me - friend of mine, Lintz, lost access entirely. Tried to get me through back channels, but the system cut him off. No warning. No fixing that.",
+              "Council handed me more privileges for keeping things stable, called me 'essential,' though it mostly means more eyes on me.",
+              "You'd think a bump in score would be reassuring. Feels more like a target on my back, given how folks look at me now.",
+              "My loyalty's to order, not the people shouting for chaos or the Innovators obsessed with their fixes. Without the Directorate's backbone, this place falls apart anyway.",
+              "Just feels heavier than usual lately, to be honest."
+            ]
+          ],
+          "emotion": "Just feels heavier than usual lately, to be honest."
+        },
+        "emotional": {
+          "opener": "You know, you're not the only one carrying all this weight around. Sometimes it just helps to say it out loud - even if it's just to someone pouring your drink.",
+          "variants": [
+            [
+              "Maybe so.",
+              "Doesn't always feel like it, though."
+            ],
+            [
+              "Yeah, I get that.",
+              "Sometimes saying things doesn't change much, but... it's something."
+            ],
+            [
+              "That actually helps, more than you'd think.",
+              "Some days it drags you down, but knowing someone gets it... that's different.",
+              "It's not always simple out there.",
+              "Thanks for this."
+            ],
+            [
+              "You're right - saying it out loud does lift it a bit.",
+              "I don't talk much about how heavy things get, but lately, it's been a lot.",
+              "Doesn't matter how used to it I am, the weight still creeps up.",
+              "Feels good to know it's not all on me.",
+              "Hard to admit, but I needed that."
+            ],
+            [
+              "You saying that really did something for me.",
+              "I keep these things close, act like it's all just wiring and routine. But it's not.",
+              "Everyone thinks people like me don't get weighed down - always fixing, always neutral.",
+              "Truth is, it stacks up, all the little pressures, the looks, the silent expectations.",
+              "I used to be better at shaking it off. Lately, it's stuck longer than I'd like.",
+              "Feels less lonely hearing you say it. That matters more than most things lately."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "Alright, enough small talk. What's really going on out there?",
+          "variants": [
+            [
+              "Just the usual: city tightens up every time things get loud.",
+              "Council says it's for safety. No one's buying it.",
+              "People vanish, then show up like nothing happened. Gets folks nervous.",
+              "Not my call to ask why."
+            ],
+            [
+              "Saw more checkpoints pop up since the ghosts started making noise.",
+              "Whole place on edge. Council's clamping down hard.",
+              "I keep my head down. There's always rumors, can't tell what's true anymore.",
+              "Heard some folks got flagged one day, invisible the next.",
+              "My work order list doubled overnight."
+            ],
+            [
+              "Checkpoints are new, but unrest's been brewing a while.",
+              "Last data leak broke trust in the Council - everyone scrambling now.",
+              "The 'ghosts' showing up... that's thrown the system even more off balance.",
+              "Now you get denied entry for reasons nobody explains. Makes tempers short.",
+              "Council's split, but Directorate's holding the reins, locking things down.",
+              "Services stutter, folks stuck waiting. Used to be a line; now it's a wall.",
+              "Not much appetite for reform from the top, far as I see."
+            ],
+            [
+              "Things changed since Halden went. The whole city feels rudderless.",
+              "Data leak burned a lot of bridges. People don't trust their own scores - can't blame them.",
+              "The 'ghosts' reappearing, trading secrets for amnesty, that was chaos. Shook up every ranking.",
+              "Directorate's in charge now, real heavy hand. More monitoring, less talking.",
+              "Lintz tried running reforms, got sidelined fast. You step out of line, system ghosts you.",
+              "Old police-state habits creeping back: silent detentions, shut mouths everywhere.",
+              "I stick to keeping things stable - always did. If not the Directorate, it'd be pure disorder.",
+              "Everyone's waiting for another shoe to drop. Feels like standing on thin ice."
+            ],
+            [
+              "Used to patch leaky pipes. Now I spend nights bolting checkpoints for the Directorate, just to keep basic order.",
+              "Halden leaving was the crack in the dam. After his death, every subsystem's twitchy.",
+              "BCI means nothing now - scores jump, doors don't open, people with clearance left in the cold. Fake IDs everywhere.",
+              "The ghosts - people erased before - they came back, turned the place upside down. Council didn't know who to trust.",
+              "Directorate grabbed the wheel, locked the city down. I do what they ask because I believe order's the only thing left to lean on.",
+              "Lintz tried making deals with the ghosts, promising reforms. Didn't last - Council iced her out, erased her admin rights while I watched.",
+              "Anyone seen as soft on compliance, they're out. Or gone. No warning.",
+              "I hand out overrides when machinery breaks, keep my distance from politics. My loyalty's to keeping things running, not to fairytales about perfect systems.",
+              "Feels heavier than any emergency before. I don't say that lightly."
+            ]
+          ]
+        }
+      }
+    },
+    "dtomenko": {
+      "opener": {
+        "customer_id": "dtomenko",
+        "questions": {
+          "neutral": "Long night?",
+          "hobby": [
+            {
+              "correct": false,
+              "message": "Analog photography still treating you right?"
+            },
+            {
+              "correct": false,
+              "message": "Find any ghosts in the tunnels?"
+            },
+            {
+              "correct": true,
+              "message": "FPV routes still clean?"
+            }
+          ]
+        },
+        "wrong_hobby_answer": "That's not me. In free time, I fly FPV drones. It's a way to escape the noise of the city.",
+        "neutral_answer": [
+          [
+            "Yeah. Just wanted some air.",
+            ". Do a bit of drone flying as a break.",
+            ". Checkpoints make it difficult now.",
+            ". Not much else to say."
+          ],
+          [
+            "Long enough. Used to fly drones to unwind after shift.",
+            ". Security's tighter these days - keeps getting harder to find clear airspace.",
+            ". Saw lots of patrols tonight, so I cut it short.",
+            ". Was hoping for quiet. Not much luck lately."
+          ],
+          [
+            "Yeah, it's been a stretch. I fly FPV drones for stress relief.",
+            "Usually stick to the old industrial lots, off-grid areas.",
+            "Lately, Directorate checkpoints have spread everywhere - tonight was worse.",
+            "Had to show permits and flight plan just for a quick session.",
+            "Doesn't feel as free as it used to.",
+            "Makes relaxing almost impossible right now."
+          ],
+          [
+            "Feels like every night is long lately. I fly freestyle FPV drones after work.",
+            "It used to help me reset, especially near the warehouses - nobody bothered you much.",
+            "Since the new checkpoints came in, they track every drone, log your route.",
+            "Tonight, Directorate guys flagged me for 'compliance' even with proper docs.",
+            "Saw them scanning ghost profiles right there.",
+            "Honestly, flying's more tense than fun now.",
+            "Almost packed up early just to avoid attention."
+          ],
+          [
+            "Yeah, not just work. I fly FPV drones - to clear my head, avoid system noise.",
+            "Started years ago, before tracking was everywhere; it's about freedom, seeing the city above it all.",
+            "Used to meet friends out by the freight lines, chase old tower lights for hours.",
+            "Now checkpoints scan everything - heartbeat, mood, drone IDs, even face micro-tics.",
+            "Tonight their tablet was cycling ghost profiles; didn't even look at my flying.",
+            "Some of us used to push boundaries, swap batteries out of the grid. Can't risk it now.",
+            "Makes you miss when the only rules were battery limits and lost signal, not Directorate tracking.",
+            "Sometimes I wonder if it's worth even bringing the drone out anymore."
+          ]
+        ],
+        "hobby_answer": [
+          [
+            "Yeah. Minor tweak to signal boost, nothing big.",
+            "Mostly flying in simulation now. Safer with all these checkpoints.",
+            "Not worth risking a flag over hardware changes lately.",
+            "Hobby's changed since the Directorate's clampdown.",
+            "Less time in the air. Feels monitored everywhere."
+          ],
+          [
+            "Just swapped antennas, improved range by a meter.",
+            "Weather was good last Saturday, tried a quiet flight.",
+            "Had to stop early - checkpoint patrols everywhere now.",
+            "Directorate's flooding the industrial zone with LEDs and drones.",
+            "Kind of kills the mood. Not as relaxing anymore.",
+            "Used to fly longer before these emergency measures."
+          ],
+          [
+            "Put in a new camera, lighter frame, still tuning the balance.",
+            "Usually fly near the old warehouses - nobody bothers you there.",
+            "Last time, Directorate checkpoints stopped me right at the fence.",
+            "Biometrics, reg check, full logs. Just for a flight session.",
+            "Search beams everywhere lately. Can't get a clean gap run.",
+            "Feels cramped up there. Airspace used to be open.",
+            "Stopped flying at dusk - just too risky now."
+          ],
+          [
+            "Built a low-latency setup - custom stack, soft-mount motors, new FPV feed.",
+            "Really helps for tight lines over the abandoned lots.",
+            "The Directorate's lockdown changed the whole route. Checkpoints caught me before takeoff last weekend.",
+            "Had to show my wristband, drone serials, even live signal-capping apps.",
+            "They tracked my drone's ID next to a list with ghost faces. Creepy stuff.",
+            "Stayed legal, but wasn't the same. Too much surveillance up there.",
+            "Miss when it was just me and the static hum.",
+            "Hobby's never felt this tense. Might stick to repairs for a while."
+          ],
+          [
+            "Rebuilt the whole flight board after my last Band update. Took forever with new firmware restrictions.",
+            "Drone's my break from system noise - autonomous, runs silent, meant for dodging the city grid.",
+            "Used to sneak out late, fly under the radar near the old logistics park.",
+            "But since Halden's death, Directorate checkpoints pop up everywhere. Personal inspection last Saturday - way stricter than before.",
+            "They scanned my heart rate, behavior cues, logged every frequency I used.",
+            "Truth is, they're hunting ghosts and anyone 'eccentric' after the access leaks. Flyers like me get flagged for nothing.",
+            "Felt watched the whole time, even in the air. No privacy at all lately.",
+            "Miss those nights when the sky felt empty. Now it's like the drones are watching my drone.",
+            "Sometimes think about my brother - he disappeared after a BCI audit. Maybe that's why I'm extra careful."
+          ]
+        ]
+      },
+      "main": {
+        "main": {
+          "opener": "You still keeping the same rhythm, or things gotten weird?",
+          "variants": [
+            [
+              "Same routine mostly.",
+              "Security's tighter now, checkpoints every morning.",
+              "My access glitched this week. Cleared up fast enough.",
+              "Feels like someone's always watching lately."
+            ],
+            [
+              "Routine's changed a bit. New checkpoint scans, stricter than before.",
+              "Had a band error, got stuck waiting outside for a while. Weird, but not worth making noise about.",
+              "Lots of requests for resets came in. Everyone's on edge, maybe more audits.",
+              "Supervisor warned us about monitored comms. Makes you careful.",
+              "Can't really shake the feeling we're being watched all the time."
+            ],
+            [
+              "Honestly, it's different these days. Checkpoints aren't just for show, missed my shift over a false flag.",
+              "People keep showing up with band issues, urgent resets needed. I only touch the ones I can log  -  not taking risks now.",
+              "Supervisor admitted they're monitoring everything, even private messages  -  all 'temporary' of course.",
+              "Stopped sharing my location, avoided certain people. Can't be too careful with all the vanished records lately.",
+              "Checked my logs just to stay ahead. Got a slight score bump for playing along, but it's cold comfort.",
+              "Feels like we're always being watched, and less trusted by the week."
+            ],
+            [
+              "Life gets more sterile by the day. They run us through pointless face checks and wrist scans just to get in.",
+              "Last week my band flagged red for the first time ever. Queue of us just standing there, hoping we still exist in the system.",
+              "Reset requests shot up right after. I fix what I can, but never off the record these days. Too risky  -  almost lost someone before.",
+              "Supervisor said comms are watched now. Had to stop helping people whose records went 'missing.' Feels wrong, but so does getting flagged.",
+              "Every night I check my own logs. That's the only way to sleep.",
+              "My score even crawled up this week. Maybe they like compliant ghosts. Doesn't make things safer.",
+              "I keep replaying it, wondering if the next glitch means more than just a delay. The city's eyes are everywhere and it makes your skin itch."
+            ],
+            [
+              "Keeping up the rhythm takes actual work now. Biometric scans, glitchy checkpoints, and everyone pretending it's normal.",
+              "I missed my shift because of an 'error'  -  probably just the BCI testing us. They never explain, just watch who panics.",
+              "People with the wrong bands show up asking for resets, desperate. I stick to rules  -  no undocumented fixes, not after what happened to my brother. Can't go through that again.",
+              "Supervisors shut down outside comms, 'for our safety.' Means nobody helps each other without risking a mark. The old trust is gone.",
+              "I disabled my location, scrub logs every night. There are ghosts everywhere, you can feel it.",
+              "My BCI score climbed a point. That means visibility, not safety. They want obedience, not innovation now.",
+              "I used to think Innovators like me could change things. Now I only see systems closing in, locking out even just decent people.",
+              "Feels like surviving isn't living anymore, just avoiding invisible traps. I can feel someone watching every move."
+            ]
+          ],
+          "emotion": "unease, and a sense of being watched"
+        },
+        "emotional": {
+          "opener": "You're not invisible. I see what you're dealing with, and you don't have to explain yourself if you don't want to.",
+          "variants": [
+            [
+              "Thanks. Not many people say that."
+            ],
+            [
+              "It's good someone gets it.",
+              "It's hard knowing when you can actually be yourself."
+            ],
+            [
+              "You're right. Most people just pretend nothing's wrong.",
+              "Feels lighter, hearing that.",
+              "I appreciate that you'd say something.",
+              "Makes it easier to breathe."
+            ],
+            [
+              "Sometimes it feels like you have to be a different person just to get by.",
+              "You saying that helps more than you think.",
+              "Most days, I try not to notice the pressure, but it's there.",
+              "Hard to talk about any of it.",
+              "Glad you understand."
+            ],
+            [
+              "Everyone acts like it's normal, but sometimes it feels like I'm the only one who sees the cracks.",
+              "It wasn't always this tense - at least, I don't remember it like this.",
+              "People adjust, but it leaves you hollow after a while.",
+              "You notice things: glances, pauses, the way people move.",
+              "Not many people talk about it. Maybe they can't.",
+              "I feel less alone when someone actually sees me."
+            ]
+          ]
+        },
+        "factual": {
+          "opener": "Come on, you must know more. Just tell me what's really happening out there.",
+          "variants": [
+            [
+              "Directorate called emergency protocols last week.",
+              "Security was everywhere, checkpoints went up instantly.",
+              "People talk about glitches, not much else. No one trusts what they hear.",
+              "Whatever's real, it's not on public terminals."
+            ],
+            [
+              "Everything changed after that citywide leak.",
+              "Now the Directorate's running things, checkpoints on every corner.",
+              "You see more silent security than usual, like they're preparing for something.",
+              "I heard some high-level admins got replaced fast.",
+              "They say it's about 'stability.' Feels like a cover."
+            ],
+            [
+              "The ghosts resurfacing shook the city more than any audit or protest ever did.",
+              "Since then, the Directorate moved in - locks, scans, comms all under new controls.",
+              "Word is the Council leader, Lintz, got pushed out. Kova's in charge now.",
+              "Reports of silent detentions circulating, but nobody sees who's taken.",
+              "People organize off-grid, but the tech makes it harder. Trust is low.",
+              "Innovator types hoped for change when the ghosts spoke up. Now it's all crackdowns."
+            ],
+            [
+              "Everything tightened right after the ghosts' statement - Directorate took over, and Lintz can't even speak publicly.",
+              "BCI rules got harsher, privileges reshuffled for anyone even close to the protests.",
+              "My colleagues whisper about new disappearances, not officially logged anywhere.",
+              "Underground networks are restarting, but most of us just try to avoid extra attention.",
+              "Expecting innovation means you're probably flagged now. Compliance is rewarded, not ideas.",
+              "Wish we'd leaned into reform when we had the momentum, but the Directorate crushed it fast.",
+              "Old friends, even a few from tech labs, faded out overnight - off the system entirely.",
+              "Hard to say who could actually change anything now."
+            ],
+            [
+              "Had access to some backend chatter - there's panic up top, complete loss of trust after the BCI leak.",
+              "Directorate forced a sweep. Kova is running security detail, and nobody pushes back.",
+              "Lintz got locked out for trying to negotiate with the ghosts. We heard through lab channels.",
+              "Logs show silent erasures picking up. People still disappear, but there's radio silence after.",
+              "The crackdown feels familiar. Saw it after my brother vanished, but even the Innovators are scared now.",
+              "Undergrounds scramble, but surveillance nails most before they get off-grid.",
+              "Even if you play by the rules, the system glitches on you. Means no one feels safe.",
+              "I thought innovation could help - now all the algorithms just push obedience.",
+              "Feels like a dead loop. System's watching, but it's all breaking underneath."
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

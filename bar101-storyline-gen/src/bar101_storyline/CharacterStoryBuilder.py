@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 import json
+import traceback
 from lib import ask_llm
 
 get_system_message = lambda background, character, character_stats, events, character_story: f"""# BACKGROUND
@@ -190,6 +191,8 @@ class CharacterStoryBuilder:
                 print(f"Error occurred: {e}")
                 print("Retrying...")
 
+        # print stack trace
+        traceback.print_exc()
         raise Exception(f"Failed to create customer chapter after 3 attempts: {last_error}")
         
     def _create_character_chapter(self, character_id, character_stats, events, outcome=None, dilemma=None, choice=None):

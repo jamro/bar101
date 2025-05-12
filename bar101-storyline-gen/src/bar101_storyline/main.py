@@ -37,7 +37,23 @@ if __name__ == "__main__":
 
     story_root = os.path.join(os.path.dirname(__file__), "../../story_tree")
     variants_chain = []
-    const_snapshop = 0
+    cost_snapshop = 0
+
+    # loop over all i in range 0 to 127
+    total_exists = 0
+    not_existing_branch = None
+    for i in range(128):
+        binary_i = bin(i)[2:].zfill(7) # convert i into binary form as 0 and 1
+        binary_i = binary_i.replace("0", "a").replace("1", "b")  # replace 0 with a and 1 with b
+        binary_i = [char for char in binary_i] # brake into array of 7 characters
+        branch_path = os.path.join(story_root, *binary_i, "node.json")
+        if os.path.exists(branch_path):
+            total_exists += 1
+        elif not_existing_branch is None:
+            not_existing_branch = binary_i
+
+    console.print(f"[bold white]Existing branches: {total_exists}/{128}[/bold white]")
+    console.print(f"[bold white]Not existing branch: {not_existing_branch}[/bold white]")
 
     tree_packer = TreePacker()
     plot_shaper = PlotShaper(os.getenv("OPENAI_API_KEY"))
@@ -131,7 +147,7 @@ if __name__ == "__main__":
             )
             if patron_id == key_customer['id']:
                 console.print(f"[bold white]Story path: {' > '.join(variants_chain) if len(variants_chain) > 0 else 'x'}[/bold white]")
-                decision = decide_dilemma(decision_maker, key_customer, customers_model, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain)
+                decision = decide_dilemma(decision_maker, key_customer, customers_model, dilemma, plot_a, plot_b, plot_shaper.timeline, variants_chain, forced_path=not_existing_branch)
 
         # pack the story node
         node_path = os.path.join(story_root, *variants_chain, "node.json")
@@ -140,8 +156,8 @@ if __name__ == "__main__":
 
         # track costs
         total_cost = get_global_llm_cost()
-        cost = total_cost - const_snapshop
-        const_snapshop = total_cost
+        cost = total_cost - cost_snapshop
+        cost_snapshop = total_cost
         console.print(f"[bold yellow]----------------------------[/bold yellow]")
         console.print(f"[bold yellow]STORY NODE COST: ${cost:.2f}[/bold yellow]")
         console.print(f"[bold yellow]----------------------------[/bold yellow]")

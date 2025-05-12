@@ -18,7 +18,7 @@ def pick_belief(beliefs, preference):
     prefered_beliefs.remove(random_belief)
     return random_belief
 
-def decide_dilemma(decision_maker, customer, customers_model, dilemma, plot_a, plot_b, timeline, variants_chain):
+def decide_dilemma(decision_maker, customer, customers_model, dilemma, plot_a, plot_b, timeline, variants_chain, forced_path=None):
     story_root = os.path.join(os.path.dirname(__file__), "../../../story_tree")
     decision_path = os.path.join(story_root, *variants_chain, f"chat_{customer['id']}_decision.json")
 
@@ -31,14 +31,20 @@ def decide_dilemma(decision_maker, customer, customers_model, dilemma, plot_a, p
         with open(decision_path, "w") as f:
             json.dump(chat, f, indent=2)
 
-    decision = questionary.select(message=f"{customer['name']} leads to:", choices=[
-        f"A: {plot_a['outcome']}",
-        f"B: {plot_b['outcome']}",
-      ], 
-      default=f"A: {plot_a['outcome']}" if dilemma['preference'] == 'a' else f"B: {plot_b['outcome']}",
-    ).ask()
-
-    decision = "a" if decision[0] == "A" else "b"
+    if forced_path is not None:
+        decision = forced_path[len(variants_chain)]
+        if decision == "a":
+            console.print(f"[yellow bold]A: {plot_a['outcome']}[/yellow bold]")
+        else:
+            console.print(f"[yellow bold]B: {plot_b['outcome']}[/yellow bold]")
+    else:
+        decision = questionary.select(message=f"{customer['name']} leads to:", choices=[
+            f"A: {plot_a['outcome']}",
+            f"B: {plot_b['outcome']}",
+          ], 
+          default=f"A: {plot_a['outcome']}" if dilemma['preference'] == 'a' else f"B: {plot_b['outcome']}",
+        ).ask()
+        decision = "a" if decision[0] == "A" else "b"
 
     new_political_preference = dilemma['political_a'] if decision == "a" else dilemma['political_b']
 
