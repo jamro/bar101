@@ -11,11 +11,15 @@ export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
   const [completed, setCompleted] = useState(false);
 
   const newsSubtitlesRef = useRef(null);
+  const tvRef = useRef(null);
 
   useEffect(() => {
     const run = async () => {
       if (newsSubtitlesRef.current) {
         newsSubtitlesRef.current.clear();
+      }
+      if (tvRef.current) {
+        await tvRef.current.fadeIn();
       }
       if (newsSubtitlesRef.current) {
         await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].headline, "news_"+segmentName);
@@ -82,13 +86,14 @@ export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
         mode={segmentName}
         pipUrl={newsImage ? `/story/${newsImage}` : null}
         onReady={() => setTvReady(true)}
+        ref={tvRef}
       />
       <div className={styles.subtitlesContainer} style={{display: tvReady ? "none" : "block"}}>
         Loading...
       </div>
       <div className={styles.subtitlesContainer} style={{display: tvReady ? "block" : "none"}}>
         <div className={styles.subtitlesBody}>
-          <ConversationText ref={newsSubtitlesRef} />
+          <ConversationText ref={newsSubtitlesRef} placeholder="" />
         </div>
         <div className={styles.subtitlesControls}>
           <button onClick={() => completed ? close() : skip()}>{completed ? "Continue" : "Skip"}</button>

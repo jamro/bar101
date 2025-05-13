@@ -1,15 +1,15 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
 import PropTypes from 'prop-types';
 import * as styles from './tv.module.css';
 import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import NewsMasterContainer from "../pixi/news/NewsMasterContainer";
 
-export default function TV({
+const TV = forwardRef(({
   mode,
   pipUrl,
   headline,
   onReady,
-}) {
+}, ref) => {
 
   const barSceneRef = useRef(new NewsMasterContainer());
 
@@ -23,9 +23,14 @@ export default function TV({
     barSceneRef.current.setHeadline(headline);
   }, [mode, pipUrl, headline]);
 
+  useImperativeHandle(ref, () => ({
+    fadeIn: () => barSceneRef.current.fadeIn(),
+    fadeOut: () => barSceneRef.current.fadeOut(),
+  }));
+
   return <ResizablePixiCanvas masterContainer={barSceneRef.current} className={styles.container} onReady={onReady}/>
 
-}
+})
 
 TV.propTypes = {
   mode: PropTypes.oneOf(['official', 'underground']),
@@ -39,3 +44,5 @@ TV.defaultProps = {
   headline: 'Breaking News',
   onReady: () => {}
 };
+
+export default TV;
