@@ -70,7 +70,8 @@ for customer in cusomers:
 all_files = os.listdir(root_path)
 node_files = [f for f in all_files if f.startswith("node_") and f.endswith(".json")]
 
-for node_file in node_files:
+for i, node_file in enumerate(node_files):
+    print(f"### PROGRESS: Processing {i+1}/{len(node_files)}: {node_file}")
     node_id = node_file.split(".")[0]
     node_json = os.path.join(root_path, node_file)
     with open(node_json, "r") as f:
