@@ -35,7 +35,7 @@ class GameAssets {
       'img/shaker_top.png',
       'img/shaker_special.png',
       'img/recipes.png',
-      'img/paper.png',
+      'img/paper.jpg',
       'img/rocks_drawing.png',
       'img/coupe_drawing.png',
       'img/bci_scanner.png',

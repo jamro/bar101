@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import GameAssets from '../GameAssets';
 
-const PAPER_ASSET_NAME = 'img/paper.png';
+const PAPER_ASSET_NAME = 'img/paper.jpg';
 const PAGE_MARGIN = 50;
 
 class PaperSheet extends PIXI.Container {
