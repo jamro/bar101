@@ -5,7 +5,7 @@ class GameAssets {
     this.assets = {};
     this.ready = false;
     this.loadingQueue = [
-      'img/bar_bg.png',
+      'img/bar_bg.jpg',
       'img/dtomenko.png',
       'img/lkova.png',
       'img/npetrak.png',

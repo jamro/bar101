@@ -17,7 +17,7 @@ export default class BarTable extends PIXI.Container {
 
   constructor() {
     super();
-    this._bgSprite = new PIXI.Sprite(GameAssets.assets['img/bar_bg.png']);
+    this._bgSprite = new PIXI.Sprite(GameAssets.assets['img/bar_bg.jpg']);
     this.addChild(this._bgSprite);
     this._customerSprite = null
     this._drinkSprite = null;
