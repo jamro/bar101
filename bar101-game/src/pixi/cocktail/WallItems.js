@@ -8,6 +8,7 @@ export default class WallItems extends PIXI.Container {
     this._bg = new PIXI.Sprite(GameAssets.assets['img/recipes.png']);
     this._bg.anchor.set(0.5);
     this.addChild(this._bg);
+    this._bg.y = -30;
 
     this._recipesButton = new PIXI.Graphics();
     this._recipesButton.rect(-380, -250, 250, 330).fill(0x000000);
