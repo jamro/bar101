@@ -47,7 +47,7 @@ export default function DateLayout({storyNode, onClose=() => {}}) {
     <div className={styles.fullCentered} onClick={showInstructions ? onClose : null}>
       <div>
         <div className={styles.dateText}>{dateName} of {monthName}, {year}</div>
-        <div className={styles.timeText} >{hours}:{minutesText} EEST</div>
+        <div className={styles.locationText} >STENOGRAD</div>
         {instructions}
       </div>
     </div>
