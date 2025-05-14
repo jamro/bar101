@@ -9,6 +9,9 @@ run:
 samples:
 	poetry run python src/bar101_voiceover/samples.py
 
+upload:
+	aws s3 sync ./voiceovers/storytree  s3://cdn-bar101.jmrlab.com/storytree --exact-timestamps
+
 # Format code with black
 format:
 	poetry run black .
