@@ -5,17 +5,26 @@ import ChatMessage from './ChatMessage';
 import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from "react";
 import PropTypes from 'prop-types';
 import ConversationText from './ConversationText';
+import DilemmaWidget from './DilemmaWidget';
 
-const ChatWindow = forwardRef(({options, onSubmit}, ref) => {
+const ChatWindow = forwardRef(({
+    options, 
+    onSubmit,
+    children
+  }, ref) => {
   const [from, setFrom] = useState("");
   const [userIndex, setUserIndex] = useState(0);
   const [promptContinue, setPromptContinue] = useState(false);
   const convoRef = useRef(null);
   const chatCompleteResolver = useRef(null);
 
-  const buttons = options.map((option, key) => (
+  let buttons = options.map((option, key) => (
     <ChatSubmitButton key={key} onClick={() => onSubmit(key)} label={option} />
   ));
+
+  if (children) {
+    buttons = children
+  }
 
   const handleComplete = () => {
     if (convoRef.current && convoRef.current.isPrinting()) {

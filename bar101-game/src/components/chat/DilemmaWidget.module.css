@@ -1,0 +1,64 @@
+.dilemmaTitleA {
+  text-align: left;
+  color: #dec583;
+  font-size: 0.8em;
+  margin: 0 0.3em;
+}
+
+.dilemmaTitleB {
+  text-align: right;
+  color: #a83300;
+  font-size: 0.8em;
+  margin: 0 0.3em;
+
+}
+
+.dilemmaTitleA small, .dilemmaTitleB small {
+  color: #777777;
+  display: block;
+  font-size: 0.7em;
+}
+
+.dilemmaWidget {
+  margin: 0.5em;
+  font-size: 1.2em;
+}
+
+.dilemmaProgress {
+  margin-left: 0.3em;
+}
+
+.buttons {
+  margin-top: 0.25em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.buttonA {
+  background-color: #dec583;
+  color: #000000;
+  flex-grow: 1;
+  padding: 0.5em;
+  margin: 0.5em 0.25em 0 0.25em;
+  border: none;
+  border-radius: 0.5em;
+}
+
+.buttonB {
+  background-color: #a83300;
+  color: #000000;
+  flex-grow: 1;
+  padding: 0.5em;
+  margin: 0.5em 0.25em 0 0.25em;
+  border: none;
+  border-radius: 0.5em;
+
+}
+
+.buttonA:disabled, .buttonB:disabled {
+  border: 1px solid #333333;
+  color: #333333;
+  background-color: #000000;
+}

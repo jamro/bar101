@@ -2,16 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import CustomerPreview from '../../components/CustomerPreview';
 import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
+import DilemmaWidget from '../../components/chat/DilemmaWidget';
 
 export default function DilemmaLayout({ customer, chat, balance, drink, onClose, onDecision, bartender }) {
+  const [showWidget, setShowWidget] = useState(false);
+  const [widgetEnabled, setWidgetEnabled] = useState(false);
   const [chatOptions, setChatOptions] = useState([]);
+  const [dilemmaProgress, setDilemmaProgress] = useState()
+
   const [phase, setPhase] = useState("serve");
   const [beliefsA, setBeliefsA] = useState(chat.decision.belief_a)
   const [beliefsB, setBeliefsB] = useState(chat.decision.belief_b)
   const [currentBelief, setCurrentBelief] = useState(null)
   const [lastChoice, setLastChoice] = useState(chat.decision.preference)
-  const [beliefScoreA, setBeliefScoreA] = useState(0)
-  const [beliefScoreB, setBeliefScoreB] = useState(0)
   const chatWindowRef = useRef(null);
 
   const popRandomBelief = (variant) => {
@@ -47,6 +50,11 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
       const initBelief = popRandomBelief(chat.decision.preference)
       setLastChoice(chat.decision.preference)
       setCurrentBelief(initBelief)
+      if(chat.decision.preference === "a") {
+        setDilemmaProgress(0.95 - Math.random() * 0.25)
+      } else {
+        setDilemmaProgress(0.05 + Math.random() * 0.25)
+      }
 
       for (let i = 0; i < mainVariant.length; i++) {
         await chatWindowRef.current.print(mainVariant[i], customer.name, customer.id, 0)
@@ -54,7 +62,9 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
       for (let i = 0; i < initBelief.monologue.length; i++) {
         await chatWindowRef.current.print(initBelief.monologue[i], customer.name, customer.id, 0, i === initBelief.monologue.length - 1)
       }
-      setChatOptions(["Support", "Doubt"])
+      setShowWidget(true)
+      setWidgetEnabled(true)
+      setChatOptions([])
       setPhase("followup")
     }
     run()
@@ -64,18 +74,23 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
   const sendMessage = async (index) => {
     switch(phase) {
       case "followup":
-        const setBeliefScore = (lastChoice === "a") ? setBeliefScoreA : setBeliefScoreB
         const alternativeChoice = (lastChoice === "a") ? "b" : "a"
+        let multiplier = (lastChoice === "a") ? +1 : -1
+        multiplier *= (0.05 + Math.random() * 0.1 + (customer.trust*0.5 + 0.5)*0.85)
+        setShowWidget(true)
+        setWidgetEnabled(false)
         setChatOptions([])
 
         let nextChoice
         let dilemmaResponse
         if (index === 0) { // Support
-          setBeliefScore(prev => prev + 1)
+          console.log("Support")
+          setDilemmaProgress(prev => Math.max(0, Math.min(1, prev + multiplier * 0.25)))
           nextChoice = lastChoice
           dilemmaResponse = currentBelief.supportive_response
         } else { // Doubt
-          setBeliefScore(prev => prev - 1)
+          console.log("Doubt")
+          setDilemmaProgress(prev => Math.max(0, Math.min(1, prev - multiplier * 0.25)))
           nextChoice = alternativeChoice
           dilemmaResponse = currentBelief.challenging_response
         }
@@ -85,6 +100,8 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
             await chatWindowRef.current.print(dilemmaResponse[i], "Alex", "aradan", 1, i === dilemmaResponse.length - 1)
           }
           setChatOptions(["Continue"])
+          setShowWidget(false)
+          setWidgetEnabled(false)
           setPhase("decision")
           return
         }
@@ -99,32 +116,16 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
           await chatWindowRef.current.print(nextBeleif.monologue[i], customer.name, customer.id, 0, i === nextBeleif.monologue.length - 1)
         }
 
-        setChatOptions(["Support", "Doubt"])
+        setShowWidget(true)
+        setWidgetEnabled(true)
+        setChatOptions([])
         setPhase("followup")
 
         break;
       case "decision":
-        const trustLevel = getTrustIndex(customer.trust)
-        const scoreDiff = Math.abs(beliefScoreA - beliefScoreB)
-        let influenced = false
-        let decision = chat.decision.preference
-
-        if (trustLevel === 0 && scoreDiff >= 5) {
-          decision = (beliefScoreA > beliefScoreB) ? "a" : "b"
-          influenced = true
-        } else if (trustLevel === 1 && scoreDiff >= 4) {
-          decision = (beliefScoreA > beliefScoreB) ? "a" : "b"
-          influenced = true
-        } else if (trustLevel === 2 && scoreDiff >= 3) {
-          decision = (beliefScoreA > beliefScoreB) ? "a" : "b"
-          influenced = true
-        } else if (trustLevel === 3 && scoreDiff >= 2) {
-          decision = (beliefScoreA > beliefScoreB) ? "a" : "b"
-          influenced = true
-        } else if (trustLevel === 4 && scoreDiff >= 1) {
-          decision = (beliefScoreA > beliefScoreB) ? "a" : "b"
-          influenced = true
-        }
+        let decision = dilemmaProgress > 0.5 ? "a" : "b"
+        const influenced = (customer.trust > 0) || (decision !== chat.decision.preference)
+        console.log({influenced, decision})
         onDecision(decision)
         let decision_monologue
         if (!influenced) {
@@ -137,15 +138,21 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
 
         const decision_monologue_variant = decision_monologue[getTrustIndex(customer.trust)]
 
+        setShowWidget(false)
+        setWidgetEnabled(false)
         setChatOptions([])
         for (let i = 0; i < decision_monologue_variant.length; i++) {
           await chatWindowRef.current.print(decision_monologue_variant[i], customer.name, customer.id, 0, i === decision_monologue_variant.length - 1)
         }
+        setShowWidget(false)
+        setWidgetEnabled(false)
         setChatOptions(["Continue"])
         setPhase("exit")
 
         break;
       case "exit":
+        setShowWidget(false)
+        setWidgetEnabled(false)
         setChatOptions([])
         onClose()
         break;
@@ -153,8 +160,23 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
       default:
         console.error("Unknown phase", phase)
   }}
-  
+
+  let dilemmaWidget = null
+  if (showWidget) {
+    dilemmaWidget = <DilemmaWidget
+      dilemmaTitleA={chat.decision.title_a}
+      dilemmaTitleB={chat.decision.title_b}
+      dilemmaPreference={dilemmaProgress}
+      buttonLabelA={lastChoice === "b" ? "Doubt" : "Support"}
+      buttonLabelB={lastChoice === "b" ? "Support" : "Doubt"}
+      onButtonAClick={() => sendMessage(lastChoice === "a" ? 0 : 1)}
+      onButtonBClick={() => sendMessage(lastChoice === "a" ? 1 : 0)}
+      enabled={widgetEnabled}
+    />
+  }
   return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender}>
-      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
+      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} >
+        {dilemmaWidget}
+      </ChatWindow>
     </CustomerPreview>
 }

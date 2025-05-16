@@ -49,6 +49,14 @@ class TreePacker:
         return data
    
     def pack_node(self, path, variants_chain):
+        # get next branches
+        branch_a_path = os.path.join(path, "a")
+        branch_b_path = os.path.join(path, "b")
+        branch_a = self._read_file(branch_a_path, "_plot.json", no_error=True)
+        branch_b = self._read_file(branch_b_path, "_plot.json", no_error=True)
+        branch_a_title = branch_a["title"] if branch_a else "Unknown"
+        branch_b_title = branch_b["title"] if branch_b else "Unknown"
+
         # get parent node from parent dir of path
         if len(variants_chain) > 0:
             parent_dir = os.path.dirname(path)
@@ -74,6 +82,8 @@ class TreePacker:
             }
         if dilemma:
             visitors_chat[dilemma["customer_id"]]['decision'] = self._read_file(path, f"chat_{dilemma['customer_id']}_decision.json")
+            visitors_chat[dilemma["customer_id"]]['decision']['title_a'] = branch_a_title
+            visitors_chat[dilemma["customer_id"]]['decision']['title_b'] = branch_b_title
 
         character_stats = {}
         for character in characters:
