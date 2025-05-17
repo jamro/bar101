@@ -8,7 +8,7 @@ const assetsPosition = {
   'img/olintz.png': { x: 262, y: 82 },
   'img/lkova.png': { x: 228, y: 57 },
   'img/npetrak.png': { x: 222, y: 82 },
-  'img/rmiskovic.png': { x: 273, y: 92 },
+  'img/rmiskovic.png': { x: 273, y: 97 },
   'img/shalek.png': { x: 261, y: 83 },
   'img/trader.png': { x: 270, y: 96 },
 };
