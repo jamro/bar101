@@ -18,6 +18,8 @@ class GameAssets {
       'img/tv.jpg',
       'img/news_official.jpg',
       'img/news_underground.jpg',
+      'img/news_official_splash.jpg',
+      'img/news_underground_splash.jpg',
       'img/drop.png',
       'img/table_texture.png',
       'img/wall.jpg',

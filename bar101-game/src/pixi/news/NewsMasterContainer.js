@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import MasterContainer from "../MasterContainer";
 import TvOverlay from './TvOverlay';
 import NewsScreen from './NewsScreen';
+import { Howl } from 'howler';
 
 const tvScreenSize = { width: 690, height: 460 };
 
@@ -17,6 +18,35 @@ class NewsMasterContainer extends MasterContainer {
     this._shade = new PIXI.Graphics();
     this.addChild(this._shade);
     this._shade.visible = false;
+
+    this._officialJingle = new Howl({
+      src: ['/audio/official_jingle.mp3'],
+      volume: 1
+    })
+    this._undergroundJingle = new Howl({
+      src: ['/audio/underground_jingle.mp3'],
+      volume: 1
+    })
+
+    this._jingleSound = null
+  }
+
+  playIntro() {
+    this._content.splashVisible = true;
+    if(this._jingleSound) {
+      this._jingleSound.stop();
+    }
+    this._jingleSound = this._content.mode === 'official' ? this._officialJingle : this._undergroundJingle
+    this._jingleSound.play()
+    this.fadeIn()
+  }
+
+  hideIntro() {
+    this._content.splashVisible = false;
+    if(this._jingleSound) {
+      this._jingleSound.stop();
+      this._jingleSound = null
+    }
   }
 
   setHeadline(text) {

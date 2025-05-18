@@ -38,8 +38,24 @@ export default class NewsScreen extends PIXI.Container {
     this._headline.y = 280
     this._content.addChild(this._headline);
 
+
+    this._splashContainer = new PIXI.Container();
+    this._content.addChild(this._splashContainer);
+    this._splashContainer.visible = false;
+
+    this._officialSplash = new PIXI.Sprite(GameAssets.assets['img/news_official_splash.jpg']);
+    this._officialSplash.anchor.set(0.5);
+    this._splashContainer.addChild(this._officialSplash);
+    this._officialSplash.visible = false;
+
+    this._undergroundSplash = new PIXI.Sprite(GameAssets.assets['img/news_underground_splash.jpg']);
+    this._undergroundSplash.anchor.set(0.5);
+    this._splashContainer.addChild(this._undergroundSplash);
+    this._undergroundSplash.visible = false;
+
     this._noise = new NoiseOverlay()
     this._content.addChild(this._noise)
+
   }
 
   set headline(text) {
@@ -58,6 +74,8 @@ export default class NewsScreen extends PIXI.Container {
     this._mode = "underground";
     this._officialNews.visible = false;
     this._undergroundNews.visible = true;
+    this._undergroundSplash.visible = true;
+    this._officialSplash.visible = false;
 
     this._pipContainer.scale.set(0.48);
     this._pipContainer.x = 300;
@@ -68,13 +86,22 @@ export default class NewsScreen extends PIXI.Container {
     this._mode = "official";
     this._officialNews.visible = true;
     this._undergroundNews.visible = false;
+    this._officialSplash.visible = true;
+    this._undergroundSplash.visible = false;
 
     this._pipContainer.scale.set(0.61);
     this._pipContainer.x = 283;
     this._pipContainer.y = -115;
   }
-  
 
+  get splashVisible() {
+    return this._splashContainer.visible;
+  }
+  
+  set splashVisible(visible) {
+    this._splashContainer.visible = visible;
+  }
+  
   async setPip(imgUrl) {
     if (this._pipSource === imgUrl) {
       return;

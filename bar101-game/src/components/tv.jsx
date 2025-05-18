@@ -31,6 +31,8 @@ const TV = forwardRef(({
   useImperativeHandle(ref, () => ({
     fadeIn: () => barSceneRef.current.fadeIn(),
     fadeOut: () => barSceneRef.current.fadeOut(),
+    playIntro: () => barSceneRef.current.playIntro(),
+    hideIntro: () => barSceneRef.current.hideIntro(),
   }));
 
   return <ResizablePixiCanvas masterContainer={barSceneRef.current} className={styles.container} onReady={onReady}/>

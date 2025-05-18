@@ -6,7 +6,7 @@ import * as styles from './NewsLayout.module.css';
 export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
   const [tvReady, setTvReady] = useState(false);
   const [segmentName, setSegmentName] = useState('official');
-  const [segmentIndex, setSegmentIndex] = useState(0);
+  const [segmentIndex, setSegmentIndex] = useState(-1);
   const [newsImage, setNewsImage ] = useState('');
   const [completed, setCompleted] = useState(false);
 
@@ -18,22 +18,30 @@ export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
       if (newsSubtitlesRef.current) {
         newsSubtitlesRef.current.clear();
       }
-      if (tvRef.current) {
-        await tvRef.current.fadeIn();
+
+      if(segmentIndex === -1) {
+        if (tvRef.current) {
+          await tvRef.current.playIntro();
+        }
+        setCompleted(true)
+      } else {
+        if (tvRef.current) {
+          await tvRef.current.hideIntro();
+        }
+        if (newsSubtitlesRef.current) {
+          await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].headline, "news_"+segmentName);
+        }
+        if (newsSubtitlesRef.current) {
+          await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].anchor_line, "news_"+segmentName);
+        }
+        if (newsSubtitlesRef.current) {
+          await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].contextual_reframing, "news_"+segmentName);
+        }
+        setCompleted(true)
       }
-      if (newsSubtitlesRef.current) {
-        await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].headline, "news_"+segmentName);
-      }
-      if (newsSubtitlesRef.current) {
-        await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].anchor_line, "news_"+segmentName);
-      }
-      if (newsSubtitlesRef.current) {
-        await newsSubtitlesRef.current.print(storyNode.news[segmentName][segmentIndex].contextual_reframing, "news_"+segmentName);
-      }
-      setCompleted(true)
     }
     run()
-    setNewsImage(storyNode.news[segmentName][segmentIndex].image);
+    setNewsImage(segmentIndex >= 0 ? storyNode.news[segmentName][segmentIndex].image : null);
     setCompleted(false)
 
   }
@@ -53,7 +61,7 @@ export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
 
     if (segmentName === 'official' && inventory.antenna) {
       setSegmentName('underground');
-      setSegmentIndex(0);
+      setSegmentIndex(-1);
     } else {
       onClose();
     }
@@ -82,9 +90,9 @@ export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
   return (
     <div style={{width: "100%", height: "100%"}}>
       <TV 
-        headline={storyNode.news[segmentName][segmentIndex].headline} 
+        headline={segmentIndex >= 0 ? storyNode.news[segmentName][segmentIndex].headline : ""} 
         mode={segmentName}
-        pipUrl={newsImage ? `/story/${newsImage}` : null}
+        pipUrl={(segmentIndex >= 0 && newsImage) ? `/story/${newsImage}` : null}
         onReady={() => setTvReady(true)}
         ref={tvRef}
       />
