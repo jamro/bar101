@@ -8,7 +8,7 @@ import AudioManager from './audio/AudioManager';
 const audioManager = new AudioManager();
 
 const setBarNoiseVolume = (volume) => {
-  audioManager.barNoiseVolume = volume;
+  audioManager.barBackgroundVolume = volume;
 }
 
 const root = createRoot(document.getElementById('root'));

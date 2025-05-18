@@ -3,7 +3,7 @@ import { Howl } from 'howler';
 class AudioManager {
   constructor() {
 
-    this._targetBarNoiseVolume = 0;
+    this._targetBarBackgroundVolume = 0;
     this._barNoise = new Howl({
       src: ['/audio/bar_noise.mp3'],
       loop: true,
@@ -26,29 +26,31 @@ class AudioManager {
 
   }
 
-  get barNoiseVolume() {
-    return this._targetBarNoiseVolume;
+  get barBackgroundVolume() {
+    return this._targetBarBackgroundVolume;
   }
 
-  set barNoiseVolume(volume) {
-    this._targetBarNoiseVolume = volume;
+  set barBackgroundVolume(volume) {
+    this._targetBarBackgroundVolume = volume;
   }
 
   update() {
-    const currentVolume = this._barNoise.volume();
-    const targetVolume = this._targetBarNoiseVolume;
-    const delta = targetVolume - currentVolume;
-    
-    if (Math.abs(delta) < 0.05) {
-      if (delta !== 0) {
-        this._barNoise.volume(targetVolume);
-        this._barMusic.volume(targetVolume*0.2);
+    const updateVolume = (audio, targetVolume) => {
+      const currentVolume = audio.volume();
+      const delta = targetVolume - currentVolume;
+      
+      if (Math.abs(delta) < 0.05) {
+        if (delta !== 0) {
+          audio.volume(targetVolume);
+        }
+      } else {
+        const step = Math.sign(delta) * 0.05;
+        audio.volume(currentVolume + step);
       }
-    } else {
-      const step = Math.sign(delta) * 0.05;
-      this._barNoise.volume(currentVolume + step);
-      this._barMusic.volume((currentVolume + step)*0.2);
     }
+
+    updateVolume(this._barNoise, this._targetBarBackgroundVolume);
+    updateVolume(this._barMusic, this._targetBarBackgroundVolume > 0.5 ? this._targetBarBackgroundVolume*0.2 : 0);
   }
 }
 
