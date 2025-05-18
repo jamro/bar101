@@ -4,7 +4,7 @@ import GameAssets from '../GameAssets';
 const assetsPosition = {
   'img/rocks.png': { x: 417, y: 492 },
   'img/coupe.png': { x: 409, y: 444 },
-  'img/dtomenko.png': { x: 301, y: 94 },
+  'img/dtomenko.png': { x: 336, y: 96 },
   'img/olintz.png': { x: 262, y: 82 },
   'img/lkova.png': { x: 228, y: 57 },
   'img/npetrak.png': { x: 222, y: 82 },

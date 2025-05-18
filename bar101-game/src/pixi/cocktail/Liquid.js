@@ -28,7 +28,7 @@ export default class Liquid extends PIXI.Container {
     this._pourSound = new Howl({
       src: ['/audio/pour.wav'],
       loop: true,
-      volume: 0.5
+      volume: 1
     });
   }
 

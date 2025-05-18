@@ -6,7 +6,7 @@ import useGameState from './hooks/useGameState';
 import GameAssets from './pixi/GameAssets';
 import StoryTreeLayout from './layouts/StoryTreeLayout';
 
-function App({ }) {
+function App({ onBarNoiseVolumeChange }) {
   const [ storyNode, setStoryNode ] = useState(null);
   const [ worldContext , setWorldContext ] = useState(null);
   const [ isStarted, setIsStarted ] = useState(false);
@@ -88,6 +88,7 @@ function App({ }) {
   }
 
   if (error) {
+    onBarNoiseVolumeChange(0);
     return (
       <div className="container">
         <div className="alert alert-danger" role="alert">
@@ -105,10 +106,12 @@ function App({ }) {
   }
   
   if (!storyNode || !worldContext) {
+    onBarNoiseVolumeChange(0);
     return <LoadingScreen />
   }
 
   if(!isStarted && !isStoryTree) {
+    onBarNoiseVolumeChange(0);
     return <StartLayout 
         onStart={() => setIsStarted(true)} 
         onClear={() => handleClearGameState()} 
@@ -117,6 +120,7 @@ function App({ }) {
   }
 
   if(isStoryTree) {
+    onBarNoiseVolumeChange(0);
     return <StoryTreeLayout 
         onClose={() => setIsStoryTree(false)} 
         visitedNodes={gameState.visitedNodes} 
@@ -167,6 +171,7 @@ function App({ }) {
     onBuy={(item, price) => buyItem(item, price)}
     onUseItem={(item) => useItem(item)}
     onGameOver={() => gameOver()}
+    onBarNoiseVolumeChange={onBarNoiseVolumeChange}
   />
 }
 export default App;

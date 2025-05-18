@@ -23,7 +23,7 @@ export default class Shaker extends PIXI.Container {
         shake5: [1100, 40],
         shake6: [1140, 610],
       },
-      volume: 0.5
+      volume: 1
     });
 
     this._container.y = 150/2

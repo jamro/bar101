@@ -23,8 +23,10 @@ function GameLayout({
   onUseItem,
   onBuy,
   onGameOver,
+  onBarNoiseVolumeChange,
 }) {
   if(!storyNode) {
+    onBarNoiseVolumeChange(0);
     return <div>Loading...</div>;
   }
 
@@ -48,10 +50,13 @@ function GameLayout({
 
   switch (levelPhase) {
     case 'date':
+      onBarNoiseVolumeChange(0);
       return <DateLayout storyNode={storyNode} onClose={() => onPhaseChange('news')} />;
     case 'news':
+      onBarNoiseVolumeChange(0.4);
       return <NewsLayout storyNode={storyNode} inventory={bartender.inventory} onClose={() => exitNews()} />;
     case 'customer':
+      onBarNoiseVolumeChange(0.8);
       const customerId = storyNode.visitors[customerIndex];
       if(!customerId) {
         return <div>Error: No customer ID found</div>;
@@ -68,8 +73,10 @@ function GameLayout({
         onClose={() => handleCustomerLeave()}
         onDecision={(decision) => onDecision(decision)}
         onUseItem={(item) => onUseItem(item)}
+        onBarNoiseVolumeChange={onBarNoiseVolumeChange}
       />
     case 'trader':
+      onBarNoiseVolumeChange(0.8);
       return <TraderLayout
         bartender={bartender}
         trader={trader}
@@ -78,6 +85,7 @@ function GameLayout({
         onBuy={(item, price) => onBuy(item, price)}
       />
     default:
+      onBarNoiseVolumeChange(0);
       return <div>Error: Unknown phase {levelPhase}</div>;
   }
 

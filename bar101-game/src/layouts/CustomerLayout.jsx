@@ -19,6 +19,7 @@ export default function CustomerLayout({
   onClose, 
   onDecision,
   onUseItem,
+  onBarNoiseVolumeChange
 }) {
   
   const [phase, setPhase] = useState("ask_drink");
@@ -47,11 +48,13 @@ export default function CustomerLayout({
 
   const customer = customers[customerId];
   if (!customer) {
+    onBarNoiseVolumeChange(0);
     return <div>Customer {customerId} not found</div>;
   }
 
   const chat = chats[customerId];
   if (!chat) {
+    onBarNoiseVolumeChange(0);
     return <div>Chat not found</div>;
   }
 
@@ -62,6 +65,7 @@ export default function CustomerLayout({
 
   let content = null
   if (phase === "ask_drink") {
+    onBarNoiseVolumeChange(0.8);
     content = <DrinkPrompLayout 
       bartender={bartender} 
       balance={balance}
@@ -69,6 +73,7 @@ export default function CustomerLayout({
       onClose={(serveUsual) => gotoDrinkServing(serveUsual)} 
     />;
   } else if (phase === "serve_drink") {
+    onBarNoiseVolumeChange(1);
     content = <DrinkPrepLayout 
       bartender={bartender}
       customer={customer} 
@@ -77,6 +82,7 @@ export default function CustomerLayout({
       onServe={(drink) => serveDrink(drink)} 
     />;
   } else if (phase === "opener") {
+    onBarNoiseVolumeChange(0.8);
     content = <OpenerLayout 
       bartender={bartender}
       balance={balance}
@@ -91,6 +97,7 @@ export default function CustomerLayout({
       onClose={(skip) => setPhase(skip ? (chat.decision ? "decision_chat" : "exit") : "main_chat")}
     />;
   } else if (phase === "main_chat") {
+    onBarNoiseVolumeChange(0.8);
     content = <MainChatLayout 
       bartender={bartender} 
       customer={customer} 
@@ -101,6 +108,7 @@ export default function CustomerLayout({
       onClose={() => setPhase(chat.decision ? "decision_chat" : "exit")}
     />;
   } else if (phase === "decision_chat") {
+    onBarNoiseVolumeChange(0.8);
     content = <DilemmaLayout 
       customer={customer} 
       bartender={bartender}
@@ -112,6 +120,7 @@ export default function CustomerLayout({
       onDecision={(d) => onDecision(d)}
     />;
   } else if (phase === "exit") {
+    onBarNoiseVolumeChange(0.8);
     content = <GoodbyeLayout
       bartender={bartender}
       balance={balance}
