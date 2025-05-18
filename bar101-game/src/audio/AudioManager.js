@@ -50,7 +50,7 @@ class AudioManager {
     }
 
     updateVolume(this._barNoise, this._targetBarBackgroundVolume);
-    updateVolume(this._barMusic, this._targetBarBackgroundVolume > 0.5 ? this._targetBarBackgroundVolume*0.2 : 0);
+    updateVolume(this._barMusic, this._targetBarBackgroundVolume*0.2);
   }
 }
 

@@ -53,7 +53,7 @@ function GameLayout({
       onBarNoiseVolumeChange(0);
       return <DateLayout storyNode={storyNode} onClose={() => onPhaseChange('news')} />;
     case 'news':
-      onBarNoiseVolumeChange(0.4);
+      onBarNoiseVolumeChange(0);
       return <NewsLayout storyNode={storyNode} inventory={bartender.inventory} onClose={() => exitNews()} />;
     case 'customer':
       onBarNoiseVolumeChange(0.8);
