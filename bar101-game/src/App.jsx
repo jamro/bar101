@@ -19,6 +19,7 @@ function App({ }) {
     clearGameState, 
     resetStoryPath,
     proceedStoryPath, 
+    erodeAllCusomersTrust,
     changeTrust,
     setLevelPhase,
     proceedToNextCustomer,
@@ -142,6 +143,11 @@ function App({ }) {
     inventory: gameState.inventory,
   }
 
+  const completeLevel = () => {
+    erodeAllCusomersTrust();
+    proceedStoryPath();
+  }
+
   return <GameLayout 
     storyNode={storyNode} 
     bartender={bartender}
@@ -155,7 +161,7 @@ function App({ }) {
     onBalanceChange={(delta) => changeBalance(delta)}
     onPhaseChange={(phase) => setLevelPhase(phase)}
     onCustomerLeave={() => proceedToNextCustomer()}
-    onLevelComplete={() => proceedStoryPath()}
+    onLevelComplete={() => completeLevel()}
     onDecision={(decision) => setDilemmaDecision(decision)}
     onTrustChange={(customerId, dt) => changeTrust(customerId, dt)}
     onBuy={(item, price) => buyItem(item, price)}
