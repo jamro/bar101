@@ -42,12 +42,12 @@ class AudioManager {
     if (Math.abs(delta) < 0.05) {
       if (delta !== 0) {
         this._barNoise.volume(targetVolume);
-        this._barMusic.volume(targetVolume*0.25);
+        this._barMusic.volume(targetVolume*0.2);
       }
     } else {
       const step = Math.sign(delta) * 0.05;
       this._barNoise.volume(currentVolume + step);
-      this._barMusic.volume((currentVolume + step)*0.25);
+      this._barMusic.volume((currentVolume + step)*0.2);
     }
   }
 }
