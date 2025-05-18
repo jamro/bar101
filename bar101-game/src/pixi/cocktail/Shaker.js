@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import GameAssets from '../GameAssets.js';
+import { Howl } from 'howler';
 
 export default class Shaker extends PIXI.Container {
 
@@ -10,6 +11,20 @@ export default class Shaker extends PIXI.Container {
     this.interactive = true;
     this.buttonMode = true;
     this.interactiveChildren = true;
+
+    // Initialize shaker sound
+    this._shakerSound = new Howl({
+      src: ['/audio/shaker.wav'],
+      sprite: {
+        shake1: [0, 260],
+        shake2: [260, 290],
+        shake3: [550, 250],
+        shake4: [800, 300],
+        shake5: [1100, 40],
+        shake6: [1140, 610],
+      },
+      volume: 0.5
+    });
 
     this._container.y = 150/2
 
@@ -136,7 +151,13 @@ export default class Shaker extends PIXI.Container {
     const acceleration = Math.abs(distance - this._lastVelocity)
     this._lastVelocity = distance
     if(acceleration > 50) {
-      this.progress = Math.min(this._progress + 0.03, 1);
+      // Play random shaker sound only if not already playing
+      if (!this._shakerSound.playing()) {
+        const sounds = ['shake1', 'shake2', 'shake3', 'shake4', 'shake5', 'shake6'];
+        const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+        this._shakerSound.play(randomSound);
+      }
+      this.progress = Math.min(this._progress + 0.015, 1);
     }
 
     if( distance > 20) {

@@ -51,6 +51,7 @@ module.exports = {
       patterns: [
         { from: "../bar101-storytree", to: "story" },
         { from : "./assets/img", to: "img" },
+        { from : "./assets/audio", to: "audio" },
         { from : "./assets/fonts", to: "fonts" },
       ],
     }),
