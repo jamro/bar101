@@ -4,6 +4,8 @@ import * as styles from './tv.module.css';
 import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import NewsMasterContainer from "../pixi/news/NewsMasterContainer";
 
+let newsMasterContainer; // TODO:re factor to avoid global variable
+
 const TV = forwardRef(({
   mode,
   pipUrl,
@@ -11,7 +13,10 @@ const TV = forwardRef(({
   onReady,
 }, ref) => {
 
-  const barSceneRef = useRef(new NewsMasterContainer());
+  if (!newsMasterContainer) {
+    newsMasterContainer = new NewsMasterContainer()
+  }
+  const barSceneRef = useRef(newsMasterContainer);
 
   useEffect(() => {
     if(mode === "official") {

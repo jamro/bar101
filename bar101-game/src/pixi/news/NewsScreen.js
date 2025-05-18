@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import GameAssets from "../GameAssets";
+import NoiseOverlay from './NoiseOverlay';
 
 export default class NewsScreen extends PIXI.Container {
   constructor() {
@@ -36,6 +37,9 @@ export default class NewsScreen extends PIXI.Container {
     this._headline.anchor.set(0.5);
     this._headline.y = 280
     this._content.addChild(this._headline);
+
+    this._noise = new NoiseOverlay()
+    this._content.addChild(this._noise)
   }
 
   set headline(text) {
