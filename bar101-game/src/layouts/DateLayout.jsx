@@ -4,6 +4,7 @@ import * as styles from './DateLayout.module.css';
 export default function DateLayout({storyNode, onClose=() => {}}) {
 
   const [showInstructions, setShowInstructions] = useState(false);
+  const [showDate, setShowDate] = useState(false);
  
   const now = new Date(storyNode.timestamp)
   const year = now.getFullYear()
@@ -32,21 +33,31 @@ export default function DateLayout({storyNode, onClose=() => {}}) {
   const weekdayName = allWeekdays[weekday]
 
   useEffect(() => {
-    const loop = setTimeout(() => {
+    const loop1 = setTimeout(() => {
+      setShowDate(true)
+    }, 200)
+    const loop2 = setTimeout(() => {
       setShowInstructions(true)
     }, 1500)
-    return () => clearTimeout(loop)
+    return () => {
+      clearTimeout(loop1)
+      clearTimeout(loop2)
+    }
   }, [])
 
   let instructions = <div className={styles.instructionsPlaceholder}>&nbsp;</div>
   if(showInstructions) {
     instructions = <div className={styles.instructions}>(Tap to continue)</div>
   }
-  
+
+  let dateText = <div className={styles.dateTextPlaceholder}>&nbsp;</div>
+  if(showDate) {
+    dateText = <div className={styles.dateText}>{dateName} of {monthName}, {year}</div>
+  }
   return (
     <div className={styles.fullCentered} onClick={showInstructions ? onClose : null}>
       <div>
-        <div className={styles.dateText}>{dateName} of {monthName}, {year}</div>
+        {dateText}
         <div className={styles.locationText} >STENOGRAD</div>
         {instructions}
       </div>
