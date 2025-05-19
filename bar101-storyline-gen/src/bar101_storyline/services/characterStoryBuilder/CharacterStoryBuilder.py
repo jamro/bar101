@@ -1,13 +1,14 @@
 from openai import OpenAI
 import os
 import json
-from utils import ask_llm, retry_on_error
+from utils import retry_on_error
+from services.AiService import AiService
 from .prompts import get_system_message, get_standard_prompt, get_dilemma_prompt
 
-class CharacterStoryBuilder:
+class CharacterStoryBuilder(AiService):
 
     def __init__(self, openai_api_key):
-        self.client = OpenAI(api_key=openai_api_key)
+        super().__init__(openai_api_key)
         self.world_context = None
         self.chapters = {}
 
@@ -94,19 +95,10 @@ class CharacterStoryBuilder:
         else:
             prompt = get_standard_prompt(character_stats)
 
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
-
-        response = ask_llm(
-            self.client, 
-            messages=messages, 
+        params = self.ask_llm_for_function(
+            messages=self.get_messages(prompt, system_message), 
             functions=[self.store_character_chapter_func]
         )
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "store_character_chapter":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
 
         if abs(params["old_bci_score"] - character_stats["bci_score"]) > 5:
             raise Exception(f"The BCI score in the response does not match the character's current BCI score. Expected {character_stats['bci_score']} but got {params['old_bci_score']}")
