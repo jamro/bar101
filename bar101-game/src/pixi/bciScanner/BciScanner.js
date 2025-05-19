@@ -3,15 +3,35 @@ import GameAssets from '../GameAssets';
 import BciScorePage from './BciScorePage';
 import BciProfilePage from './BciProfilePage';
 import BciHistoryPage from './BciHistoryPage';
+import { Howl } from 'howler';
+import LedBar from './LedBar';
 
 export default class BciScanner extends PIXI.Container {
   constructor() {
     super();
 
+    this._clickSound = new Howl({
+      src: ['/audio/click.mp3'],
+      loop: false,
+      volume: 0.3,
+    });
+
+    this._powerSound = new Howl({
+      src: ['/audio/power_up.mp3'],
+      loop: false,
+      volume: 0.5,
+    });
+
     this._customer = null;
+
+    this._masterContainer = new PIXI.Container();
 
     this._bg  = PIXI.Sprite.from(GameAssets.assets['img/bci_scanner.png']);
     this.addChild(this._bg);
+    this.addChild(this._masterContainer);
+
+    this._ledBar = new LedBar();
+    this.addChild(this._ledBar);
 
     this._titleLabel = new PIXI.Text({
       text: 'BCI SCAN',
@@ -25,7 +45,7 @@ export default class BciScanner extends PIXI.Container {
     this._titleLabel.anchor.set(0, 0);
     this._titleLabel.x = 205;
     this._titleLabel.y = 175;
-    this.addChild(this._titleLabel);
+    this._masterContainer.addChild(this._titleLabel);
 
     this._userIdLabel = new PIXI.Text({
       text: 'UID:',
@@ -39,7 +59,7 @@ export default class BciScanner extends PIXI.Container {
     this._userIdLabel.anchor.set(1, 0);
     this._userIdLabel.x = 565;
     this._userIdLabel.y = 175;
-    this.addChild(this._userIdLabel);
+    this._masterContainer.addChild(this._userIdLabel);
 
     this._pagesLabel = new PIXI.Text({
       text: 'PAGE 1/1',
@@ -53,19 +73,19 @@ export default class BciScanner extends PIXI.Container {
     this._pagesLabel.anchor.set(0.5, 1);
     this._pagesLabel.x = 385;
     this._pagesLabel.y = 595;
-    this.addChild(this._pagesLabel);
+    this._masterContainer.addChild(this._pagesLabel);
 
     let horizontalLine = new PIXI.Graphics();
     horizontalLine.rect(0, 0, 370, 3)
       .fill(0xdec583);
-    this.addChild(horizontalLine);
+    this._masterContainer.addChild(horizontalLine);
     horizontalLine.x = 200;
     horizontalLine.y = 210;
 
     horizontalLine = new PIXI.Graphics();
     horizontalLine.rect(0, 0, 370, 3)
       .fill(0xdec583);
-    this.addChild(horizontalLine);
+    this._masterContainer.addChild(horizontalLine);
     horizontalLine.x = 200;
     horizontalLine.y = 550;
 
@@ -79,9 +99,16 @@ export default class BciScanner extends PIXI.Container {
     this._upButton.on('pointerdown', () => {
       this._upButton.alpha = 1;
       this.setPageIndex((this._currentPageIndex + 1) % this._pages.length);
+      this._clickSound.play();
+      this._ledBar.setLed(3, 1);
+      this._ledBar.setLed(0, 0);
+      this._ledBar.setLed(1, 0);
+      this._ledBar.setLed(2, 0);
+      this._ledBar.setLed(this._currentPageIndex, 1);
     });
     this._upButton.on('pointerup', () => {
       this._upButton.alpha = 0;
+      this._ledBar.setLed(3, 0);
     });
 
     this._downButton = new PIXI.Sprite(GameAssets.assets['img/bci_down.png']);
@@ -94,9 +121,16 @@ export default class BciScanner extends PIXI.Container {
     this._downButton.on('pointerdown', () => {
       this._downButton.alpha = 1;
       this.setPageIndex((this._currentPageIndex - 1 + this._pages.length) % this._pages.length);
+      this._clickSound.play();
+      this._ledBar.setLed(3, 1);
+      this._ledBar.setLed(0, 0);
+      this._ledBar.setLed(1, 0);
+      this._ledBar.setLed(2, 0);
+      this._ledBar.setLed(this._currentPageIndex, 1);
     });
     this._downButton.on('pointerup', () => {
       this._downButton.alpha = 0;
+      this._ledBar.setLed(3, 0);
     });
 
     this._offButton = new PIXI.Sprite(GameAssets.assets['img/bci_off.png']);
@@ -108,10 +142,17 @@ export default class BciScanner extends PIXI.Container {
     this._offButton.alpha = 0;
     this._offButton.on('pointerdown', () => {
       this._offButton.alpha = 1;
+      this._clickSound.play();
+      this._ledBar.setLed(3, 1);
     });
     this._offButton.on('pointerup', () => {
       this._offButton.alpha = 0;
       this.emit('close');
+      this._ledBar.setLed(0, 0);
+      this._ledBar.setLed(1, 0);
+      this._ledBar.setLed(2, 0);
+      this._ledBar.setLed(3, 0);
+      this._ledBar.setPower(0);
     });
     
     this._currentPageIndex = 0;
@@ -122,11 +163,81 @@ export default class BciScanner extends PIXI.Container {
     ]
     this._currentPage = 0;
     this._pagesContainer = new PIXI.Container();
-    this.addChild(this._pagesContainer);
+    this._masterContainer.addChild(this._pagesContainer);
     this._pagesContainer.x = 400 - 200
     this._pagesContainer.y = 400 - 180
-    
+
+    this._pageMask = new PIXI.Graphics();
+    this.addChild(this._pageMask);
+    this._pageMask.rect(-390/2, -430/2, 390, 430)
+      .fill(0x0000ff);
+    this._pageMask.x = 385;
+    this._pageMask.y = 380;
+    this._masterContainer.mask = this._pageMask;
+
+    this._powerOverlay = new PIXI.Graphics();
+    this.addChild(this._powerOverlay);
+    this._powerOverlay.x = 385;
+    this._powerOverlay.y = 380;
+   
     this.setPageIndex(0);
+  }
+
+  powerOn() {
+    const anim = async () => {
+      this._ledBar.setLed(0, 0);
+      this._ledBar.setLed(1, 0);
+      this._ledBar.setLed(2, 0);
+      this._ledBar.setLed(3, 0);
+      this._ledBar.setPower(0);
+      this._pageMask.scale.set(1, 0);
+      for(let i = 0.0; i < 1; i+=0.15) {
+        await new Promise(resolve => setTimeout(resolve, 30));
+        this._powerOverlay.clear();
+        const w = 390 * i;
+        this._powerOverlay.rect(-5, -5, 10, 10)
+          .fill({color: 0xdec583, alpha: i});
+      }
+      this._powerSound.play();
+      this._ledBar.setLed(0, 1);
+      for(let i = 0.0; i < 1; i+=0.15) {
+        await new Promise(resolve => setTimeout(resolve, 30));
+        this._powerOverlay.clear();
+        const w = 390 * i;
+        this._powerOverlay.rect(-w/2, -5, w, 10)
+          .fill(0xdec583);;
+      }
+      this._ledBar.setLed(1, 1);
+      for(let i = 1; i > 0; i-=0.2) {
+        await new Promise(resolve => setTimeout(resolve, 30));
+        this._powerOverlay.clear();
+        const y = 0.5 * 430 * (1-i);
+        this._powerOverlay
+          .rect(-390/2, -y-5, 390, 10)
+          .rect(-390/2, +y-5, 390, 10)
+          .fill({color: 0xdec583, alpha: i})
+        this._pageMask.scale.set(1, 1-i);
+        this._masterContainer.alpha = Math.random() > i ? (1-i) : 0;
+      }
+      this._ledBar.setLed(2, 1);
+      this._ledBar.setPower(1);
+      this._powerOverlay.clear();
+      for(let i = 0; i < 1; i+=0.1) {
+        await new Promise(resolve => setTimeout(resolve, 30));
+        this._masterContainer.alpha = Math.random();
+      }
+      this._masterContainer.alpha = 1;
+      this._ledBar.setLed(3, 1);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      this._ledBar.setLed(0, 0);
+      this._ledBar.setLed(1, 0);
+      this._ledBar.setLed(2, 0);
+      this._ledBar.setLed(3, 0);
+      this._ledBar.setLed(this._currentPageIndex, 1);
+
+    }
+
+    anim();
   }
 
   setPageIndex(index) {

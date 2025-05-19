@@ -14,6 +14,7 @@ export default function BCIScanner({customer, inventory, onClose}) {
 
   useEffect(() => {
     barSceneRef.current.setData({customer, inventory});
+    barSceneRef.current.powerOn();
   }, [customer]);
 
   useEffect(() => {

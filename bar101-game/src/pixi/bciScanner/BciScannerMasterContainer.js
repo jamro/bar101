@@ -12,6 +12,10 @@ class BciScannerMasterContainer extends MasterContainer {
     });
   }
 
+  powerOn() {
+    this._bciScanner.powerOn();
+  }
+
   setData(data) {
     this._bciScanner.setData(data);
   }
