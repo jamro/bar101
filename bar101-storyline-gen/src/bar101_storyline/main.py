@@ -1,21 +1,20 @@
 import os
 from dotenv import load_dotenv
-from PlotShaper import PlotShaper
-from KeyCustomerPicker import KeyCustomerPicker
-from TimelineIntegrator import TimelineIntegrator
-from CharacterStoryBuilder import CharacterStoryBuilder
-from ChatOpenerEngine import ChatOpenerEngine
-from ChatStoryEngine import ChatStoryEngine
-from DecisionMaker import DecisionMaker
-from NewsWriter import NewsWriter
-from TreePacker import TreePacker
+from services import (
+    PlotShaper,
+    KeyCustomerPicker,
+    TimelineIntegrator,
+    CharacterStoryBuilder,
+    ChatOpenerEngine,
+    ChatStoryEngine,
+    DecisionMaker,
+    NewsWriter,
+    TreePacker
+)
 import json
-import random
 from lib import get_global_llm_cost
-from rich.panel import Panel
 from rich.console import Console
 from generator import (
-    print_table,
     create_variant_dirs,
     fork_plot,
     create_dilemma,
