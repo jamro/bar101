@@ -76,7 +76,7 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
       case "followup":
         const alternativeChoice = (lastChoice === "a") ? "b" : "a"
         let multiplier = (lastChoice === "a") ? +1 : -1
-        multiplier *= (0.05 + Math.random() * 0.1 + (customer.trust*0.5 + 0.5)*0.85)
+        multiplier *= (0.05 + Math.random() * 0.1 + (customer.trust*0.7 + 0.3)*0.85)
         setShowWidget(true)
         setWidgetEnabled(false)
         setChatOptions([])
@@ -85,12 +85,12 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
         let dilemmaResponse
         if (index === 0) { // Support
           console.log("Support")
-          setDilemmaProgress(prev => Math.max(0, Math.min(1, prev + multiplier * 0.25)))
+          setDilemmaProgress(prev => Math.max(0, Math.min(1, prev + multiplier * 0.2)))
           nextChoice = lastChoice
           dilemmaResponse = currentBelief.supportive_response
         } else { // Doubt
           console.log("Doubt")
-          setDilemmaProgress(prev => Math.max(0, Math.min(1, prev - multiplier * 0.25)))
+          setDilemmaProgress(prev => Math.max(0, Math.min(1, prev - multiplier * 0.2)))
           nextChoice = alternativeChoice
           dilemmaResponse = currentBelief.challenging_response
         }
