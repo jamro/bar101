@@ -2,7 +2,7 @@ import random
 from openai import OpenAI
 import os
 import json
-from lib import ask_llm
+from utils import ask_llm
 
 all_openers = [
   "Yeah... makes me wonder how your week's been.",

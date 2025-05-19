@@ -1,7 +1,7 @@
 from openai import OpenAI
 import os
 import json
-from lib import ask_llm
+from utils import ask_llm
 
 get_system_message = lambda world_context, customer, timeline_info: f"""# BACKGROUND
 {world_context['background']}

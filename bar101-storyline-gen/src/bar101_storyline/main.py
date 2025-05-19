@@ -12,7 +12,7 @@ from services import (
     TreePacker
 )
 import json
-from lib import get_global_llm_cost
+from utils import get_global_llm_cost, get_or_create
 from rich.console import Console
 from generator import (
     create_variant_dirs,
@@ -92,20 +92,15 @@ if __name__ == "__main__":
     # initial character story
     characters_story_path = os.path.join(story_root, "characters.json")
     chapter = None
-    if not os.path.exists(characters_story_path):
-        characters_story = {}
-        for character_id in all_characters:
-            console.print(f"[dim]Creating story for character {character_id}...[/dim]")
-            characters_story[character_id] = character_story_builder.create_character_chapter(
-                character_id,
-                customers_model[character_id],
-                plot_shaper.timeline
-            )
-        with open(os.path.join(story_root, "characters.json"), "w") as f:
-            json.dump(characters_story, f, indent=2)
-    else:
-        with open(characters_story_path, "r") as f:
-            characters_story = json.load(f)
+    characters_story = get_or_create(
+        characters_story_path,
+        character_story_builder.create_all_character_chapters,
+        # input arguments
+        customers_model,
+        plot_shaper.timeline,
+        lambda x: console.print(f"[dim]{x}[/dim]")
+    )
+
     for character_id in all_characters:
         character_story_builder.store_character_chapter(
             character_id,

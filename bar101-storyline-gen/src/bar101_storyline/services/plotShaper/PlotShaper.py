@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 import json
 import random
-from lib import ask_llm
+from utils import ask_llm
 
 get_system_message = lambda background, events: f"""# BACKGROUND
 {background}

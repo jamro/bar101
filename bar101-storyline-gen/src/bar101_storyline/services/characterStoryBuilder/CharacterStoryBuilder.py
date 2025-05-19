@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 import json
 import traceback
-from lib import ask_llm
+from utils import ask_llm
 
 get_system_message = lambda background, character, character_stats, events, character_story: f"""# BACKGROUND
 {background}
@@ -176,7 +176,19 @@ class CharacterStoryBuilder:
             print(f"Chapter must be a string, but got {type(chapter)}", chapter)
             raise ValueError("Chapter must be a string.")
         self.chapters[character_id].append(chapter)
-
+        
+    def create_all_character_chapters(self, customers_model, timeline, log_callback=None):
+        characters_story = {}
+        all_characters = customers_model.keys()
+        for character_id in all_characters:
+            log_callback(f"Creating story for character {character_id}...") if log_callback else None
+            characters_story[character_id] = self.create_character_chapter(
+                character_id,
+                customers_model[character_id],
+                timeline
+            )
+        return characters_story
+    
     def create_character_chapter(self, character_id, character_stats, events, outcome=None, dilemma=None, choice=None):
         last_error = None
         for i in range(3):

@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 import json
 import base64
-from lib import ask_llm
+from utils import ask_llm
 from diffusers import StableDiffusionPipeline
 import torch
 import random

@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 import json
 import random
-from lib import ask_llm
+from utils import ask_llm
 
 all_openers = [
   "You look like something's on your mind.",
