@@ -81,6 +81,10 @@ if __name__ == "__main__":
             "bci_score": get_customer_by_id(character_id)["bci_score"],
         }
 
+    # check if story_root exists. if not create it
+    if not os.path.exists(story_root):
+        os.makedirs(story_root)
+
     # initial timeline
     with open(os.path.join(story_root, "timeline.json"), "w") as f:
         json.dump(plot_shaper.timeline, f, indent=2)
