@@ -12,6 +12,7 @@ def retry_on_error(max_attempts: int = 3):
                 except Exception as e:
                     last_error = e
                     print(f"Attempt {i + 1} failed: {e}")
+                    traceback.print_exc()
                     if i < max_attempts - 1:
                         print("Retrying...")
             traceback.print_exc()

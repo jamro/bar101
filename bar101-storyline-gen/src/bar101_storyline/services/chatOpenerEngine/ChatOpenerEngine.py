@@ -3,182 +3,9 @@ from openai import OpenAI
 import os
 import json
 from utils import ask_llm
-
-all_openers = [
-    "Hey, how's it going?",
-    "Long night?",
-    "You made it, didn't you?",
-    "Is it quiet tonight?",
-    "Still dry outside?",
-    "No cameras up there, right?",
-    "Is the smoke thicker today?",
-    "No signals reach here, do they?",
-    "Is the city loud today?",
-    "Did you walk the long way?",
-    "Still breathing in Stenograd?",
-    "Are the systems feeling jumpy?",
-    "Are the lines starting to blur?",
-    "Storm above us?",
-    "They still scanning topside?",
-    "Same boots, different dust - right?",
-    "Is the air heavier today?",
-    "You still trust your steps?",
-    "Does the city feel colder?",
-    "Did you make it through the day?",
-    "You look like you've seen some things - rough day?",
-    "Rough one out there?",
-    "City treating you alright?",
-    "Long walk to get here?",
-    "You keeping steady?",
-    "Quiet night, huh?",
-    "Looks like you needed a pause - that right?",
-    "Everything holding up okay?",
-    "Feel like a slow night to you?",
-    "Got out before the rush?",
-    "You alright?",
-    "One of those days?",
-    "Feels cooler down here, doesn't it?",
-    "Is the whole city running hot today?",
-    "Did you make it through the noise?",
-    "Are people restless tonight?",
-    "Something bring you down here?",
-    "No trouble getting here?",
-    "Is the city acting weird lately?",
-    "Timing's good - not too busy, huh?",
-    "Everything feel off today?",
-    "You're not here by accident, are you?",
-    "Heard the streets are tense again?",
-    "Did the city spit you out again?",
-    "Do the streets feel heavier today?",
-    "How's the path down here?",
-    "Night's only just started, hasn't it?",
-    "Same city, different story - yeah?",
-    "Another quiet night for you?",
-    "Did you time it well - calm right now?",
-    "City been kind to you?",
-    "You look like you dodged something - true?",
-    "Is it always this quiet when you come in?",
-    "You know your way around down here?",
-    "Still breathing, aren't you?",
-    "You feel it too - something's off, right?",
-    "Everything outside still spinning?",
-    "You made it in one piece?",
-    "It's one of those nights, isn't it?",
-    "Did you slip in easy tonight?",
-    "Is your night just starting or ending?"
-]
-
-get_system_message = lambda background, customer, character_stats, recent_story, outcome_timeline, events: f"""#BACKGROUND
-{background}
-
-# CHARACTER PROFILE
-Name: {customer['name']}
-Age: {customer['age']}
-Sex: {customer['sex']}
-Job Title: {customer['job_title']}
-Access to information: {customer['access']}
-Political Preferences: {character_stats['political_preference']}
-BCI Score: {character_stats['bci_score']}
-Hobby: {customer['hobby']}
-Comunication style: {customer['communication']}
-{customer['details']}
-
-# RECENT STORY OF {customer['name']}
-{recent_story}
-
-# GLOBAL STORY SUMMARY
-{outcome_timeline}
-
-# RECENT GLOBAL EVENTS
-{json.dumps(events, indent=2)}
-"""
-
-get_hobby_story_prompt = lambda customer: f"""You are {customer['name']}.
-Write a realistic and engaging story (150-200 words) describing a recent situation in which 
-RECENT GLOBAL EVENTS impacted your personal hobby.
-
-# Instructions:
-- Use only knowledge, experiences, and perspectives that {customer['name']} would reasonably have.
-- Keep the tone natural and conversational - like you're telling this to a friend.
-- The story must be technically accurate, plausible, and grounded in reality — do not invent unrealistic scenarios.
-- Describe a specific event that occurred recently (within the past few weeks).
-- The situation should span around 1 to 6 hours — include relevant details about when, where, what happened, and how global events influenced it.
-- Ensure the situation is aligned with the character's profile
-- Make it interesting and immersive by focusing on details, emotions, or unexpected outcomes.
-"""
-
-get_neutral_prompt = lambda customer, question: f"""Imagine you are {customer['name']}. 
-Once you have entered the bar, bartender Alex served you a drink and started a conversation by asking you: "{question}".
-Write a short monologue in response - not a dialogue. 
-Use this moment to reveal hobby of {customer['name']} and related activities. 
-Assume the bartender doesn't know what your hobby is.
-
-# Guidelines
-- Format: 4-8 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, max 10-15 words each)
-- Tone: Conversational and natural
-- Style: align with the character's communication style, personality and political preferences
-- Language: Avoid technical jargon, vague statements, or overly generic wording
-- Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.
-- Make sure details about hobby are realistic and technically correct - do not make things up
-- Do not ask questions or request any actions from Alex
-- Monologue should end naturally — no need for dramatic conclusion or exit line
-- Ensure smooth and natural transtion from answering bartender's to talking about your hobby
-- Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
-- For pauses, use periods or ellipses only. Never use dashes or hyphens.
-
-# Variants
-Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
-- Very Suspicious: Shares minimal detail, guarded language (up to 4 bullet points)
-- Suspicious: Gives a bit more, but still cautious (up to 5 bullet points)
-- Neutral: Comfortable enough to speak plainly (up to 6 bullet points)
-- Trusting: Open and more personal (up to 7 bullet points)
-- Very Trusting: Speaks freely, includes more background about yourself and the world (up to 8 bullet points)
-
-# Across all versions:
-- ALWAYS mention your hobby explicite and something related to it
-- ALWAYS refer to some recent event that affected your hobby
-- As trust increases, shift from public and widely known information to private insights, personal experiences, and secrets known only by the character
-- Include world background and recent events appropriate to the level of trust
-
-# Output
-Return the result using the generate_monologue_variants function.
-"""
-
-get_hobby_prompt = lambda customer, question: f"""Imagine you are {customer['name']}. 
-Once you have entered the bar, bartender Alex served you a drink and started a conversation by asking you about your hobby: "{question}".
-Write a short monologue in response (not a dialogue) that starts with a short answer to the question and then expands into a more detailed discussion about your hobby.
-Use this moment to reveal how recent global events afected hobby of {customer['name']}
-Use only information that the {customer['name']} would know
-
-# Guidelines
-- Format: 5-9 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, max 10-15 words each)
-- Tone: Conversational and natural
-- Style: align with the character's communication style, personality and political preferences
-- Language: Avoid technical jargon, vague statements, or overly generic wording
-- Be specific about the hobby and its nuances. {customer['name']} is an expert in the hobby.
-- Make sure details about hobby are realistic and technically correct - do not make things up
-- Do not ask questions or request any actions from Alex
-- Monologue should end naturally — no need for dramatic conclusion or exit line
-- Ensure smooth and natural transtion from answering bartender's to talking about recent events
-- Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
-- For pauses, use periods or ellipses only. Never use dashes or hyphens.
-
-# Variants
-Write five monologue variants, each reflecting a different level of trust {customer['name']} feels toward the bartender:
-- Very Suspicious: Shares minimal detail, guarded language (up to 5 bullet points)
-- Suspicious: Gives a bit more, but still cautious (up to 6 bullet points)
-- Neutral: Comfortable enough to speak plainly (up to 7 bullet points)
-- Trusting: Open and more personal (up to 8 bullet points)
-- Very Trusting: Speaks freely, includes more background about yourself and the world (up to 9 bullet points)
-
-# Across all versions:
-- ALWAYS refer to some recent event that affected your hobby
-- As trust increases, shift from public and widely known information to private insights, personal experiences, and secrets known only by the character
-- Include world background and recent events appropriate to the level of trust
-
-# Output
-Return the result using the generate_monologue_variants function.
-"""
+from .openers import all_openers
+from .prompts import get_system_message, get_neutral_prompt, get_hobby_prompt, get_hobby_story_prompt
+from utils import retry_on_error
     
 class ChatOpenerEngine:
     def __init__(self, openai_api_key):
@@ -267,41 +94,8 @@ class ChatOpenerEngine:
         wrong_opener = customer["wrong_opener"]
         return wrong_opener
     
+    @retry_on_error(max_attempts=3)
     def get_neutral_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
-        last_error = None
-        for i in range(3):
-            try:
-                response = self._get_neutral_conversation( question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story)
-                if response is not None:
-                    return response
-                else:
-                    raise Exception("No response from the model.")
-            except Exception as e:
-              
-                last_error = e
-                print(f"Error occurred: {e}")
-                print("Retrying...")
-
-        raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
-    
-    def get_hobby_conversation(self,  question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
-        last_error = None
-        for i in range(3):
-            try:
-                response = self._get_hobby_conversation( question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story)
-                if response is not None:
-                    return response
-                else:
-                    raise Exception("No response from the model.")
-            except Exception as e:
-              
-                last_error = e
-                print(f"Error occurred: {e}")
-                print("Retrying...")
-
-        raise Exception(f"Failed to fork plot after 3 attempts: {last_error}")
-    
-    def _get_neutral_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
@@ -332,7 +126,8 @@ class ChatOpenerEngine:
             params["very_trusting"]
         ]
     
-    def _get_hobby_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
+    @retry_on_error(max_attempts=3)
+    def get_hobby_conversation(self, question, customer_id, character_stats, recent_story, outcome_timeline, events, hobby_story):
         customer = self.find_customer_by_id(customer_id)
         system_message = get_system_message(
             self.world_context["background"],
