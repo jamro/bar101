@@ -6,52 +6,12 @@ from utils import ask_llm
 from .openers import all_openers
 from .prompts import get_system_message, get_neutral_prompt, get_hobby_prompt, get_hobby_story_prompt
 from utils import retry_on_error
+from .functions import generate_monologue_variants
     
 class ChatOpenerEngine:
     def __init__(self, openai_api_key):
         self.client = OpenAI(api_key=openai_api_key)
         self.world_context = None
-        self.generate_monologue_variants_func = {
-          "name": "generate_monologue_variants",
-          "description": "Generates 5 monologue variants based on trust levels for a given character and stores them",
-          "parameters": {
-            "type": "object",
-            "properties": {
-                "very_suspicious": {
-                    "description": "List of monologue messages for very suspicious level",
-                    "items": {
-                        "type": "string"
-                    },
-                },
-                "suspicious": {
-                    "description": "List of monologue messages for suspicious level",
-                    "items": {
-                        "type": "string"
-                    },
-                },
-                "neutral": {
-                    "description": "List of monologue messages for neutral level",
-                    "items": {
-                        "type": "string"
-                    },
-                },
-                "trusting": {
-                    "description": "List of monologue messages for trusting level",
-                    "items": {
-                        "type": "string"
-                    },
-                },
-                "very_trusting": {
-                    "description": "List of monologue messages for very trusting level",
-                    "items": {
-                        "type": "string"
-                    },
-                }
-            },
-            "required": ["very_suspicious", "suspicious", "neutral", "trusting", "very_trusting"]
-          }
-        }
-
 
     def get_neutral_opener(self):
         return random.choice(all_openers)
@@ -113,7 +73,7 @@ class ChatOpenerEngine:
             {"role": "assistant", "content": hobby_story},
             {"role": "user", "content": prompt}
         ]
-        response = ask_llm(self.client, messages=messages, functions=[self.generate_monologue_variants_func])
+        response = ask_llm(self.client, messages=messages, functions=[generate_monologue_variants])
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
             raise Exception("The model did not return a function call.")
         params = json.loads(response.choices[0].message.function_call.arguments)
@@ -145,7 +105,7 @@ class ChatOpenerEngine:
             {"role": "assistant", "content": hobby_story},
             {"role": "user", "content": prompt}
         ]
-        response = ask_llm(self.client, messages=messages, functions=[self.generate_monologue_variants_func])
+        response = ask_llm(self.client, messages=messages, functions=[generate_monologue_variants])
         if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
             raise Exception("The model did not return a function call.")
         params = json.loads(response.choices[0].message.function_call.arguments)

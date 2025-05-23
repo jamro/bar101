@@ -4,6 +4,7 @@ import json
 from utils import retry_on_error
 from services.AiService import AiService
 from .prompts import get_system_message, get_standard_prompt, get_dilemma_prompt
+from .functions import store_character_chapter
 
 class CharacterStoryBuilder(AiService):
 
@@ -11,35 +12,6 @@ class CharacterStoryBuilder(AiService):
         super().__init__(openai_api_key)
         self.world_context = None
         self.chapters = {}
-
-        self.store_character_chapter_func = {
-          "name": "store_character_chapter",
-          "description": "Store character chapter showing how related external events have directly affected the character's daily life",
-          "parameters": {
-            "type": "object",
-            "properties": {
-              "chapter": {
-                  "description": "The paragraph containing the character's story based on recent events",
-                  "items": {
-                    "type": "string"
-                  },
-              },
-              "old_bci_score": {
-                  "description": "The initial character's BCI score before the chapter.",
-                  "type": "number",
-                  "minimum": 0,
-                  "maximum": 100
-              },
-              "new_bci_score": {
-                  "description": "The new character's BCI score after the chapter.",
-                  "type": "number",
-                  "minimum": 0,
-                  "maximum": 100
-              },
-            },
-            "required": ["chapter", "bci_score"]
-          }
-        }
 
     def read_context(self, base_path):
         def read_context_file(file_path):
@@ -97,7 +69,7 @@ class CharacterStoryBuilder(AiService):
 
         params = self.ask_llm_for_function(
             messages=self.get_messages(prompt, system_message), 
-            functions=[self.store_character_chapter_func]
+            functions=[store_character_chapter]
         )
 
         if abs(params["old_bci_score"] - character_stats["bci_score"]) > 5:
