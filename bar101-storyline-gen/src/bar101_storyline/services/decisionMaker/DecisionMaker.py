@@ -3,202 +3,9 @@ import os
 import json
 import random
 from utils import ask_llm
-
-all_openers = [
-  "You look like something's on your mind.",
-  "Trouble following you down here tonight?",
-  "You look like you're carrying more than a drink.",
-  "That look - something weighing you down?",
-  "Whatever's chasing you, it hasn't caught you yet.",
-  "Noticed the pause in your eyes. Want to fill it?",
-  "Something you're not saying. Want to try?",
-  "Let me know if that drink isn't strong enough for what's on your mind.",
-  "You're stirring more than your glass.",
-  "Whatever's circling you, it followed you in.",
-  "I've seen that look before - usually before something breaks.",
-  "Looks like your drink isn't the only thing that needs settling.",
-  "Looks like you've got more on your plate than that drink.",
-  "No metrics down here. You can say it.",
-  "Something's off - in you, not the drink.",
-  "You're not here for the cocktails, are you?",
-  "Something you left unsaid. Still time.",
-  "Bar's a good place for dilemmas. Want to test that?",
-  "You're carrying a decision, aren't you?",
-  "Whatever's heavy - you don't have to hold it alone.",
-  "You look like you know something you wish you didn't.",
-  "Drink's honest. You can be too.",
-  "You're here, but not really. What's pulling you back?",
-  "That exhale - something behind it?",
-  "No council ears here. You're safe.",
-  "You seem like you've seen something no one else has.",
-  "You're bracing for something. Want to talk before it hits?",
-  "Want to test a thought out loud?",
-  "Whatever's wrong - you're not the first to bring it here.",
-  "Something you can't say up there?",
-  "You keeping something safe, or keeping it secret?",
-  "Feel like you're hiding from a truth?",
-  "Some thoughts are safer in the dark. Want to try?",
-  "The drink is simple. You're not.",
-  "There's a question on your face. Want to ask it?",
-  "You're pacing inside. Want to unpack it?",
-  "Looks like a choice is chasing you.",
-  "Hard to carry questions alone. Want help?",
-  "Want to talk about what the drink isn't touching?",
-  "You okay if I ask what's really bothering you?",
-  "Feels like you're hiding from more than cameras.",
-  "Looks like part of you stayed outside.",
-  "Looks like someone asked you a question you haven't answered yet."
-]
-
-
-get_system_message = lambda background, customer, character_stats, events=None: f"""#BACKGROUND
-{background}
-
-# PROFILE
-Name: {customer['name']}
-Age: {customer['age']}
-Sex: {customer['sex']}
-Job Title: {customer['job_title']}
-Access to information: {customer['access']}
-Political Preferences: {character_stats['political_preference']}
-BCI Score: {character_stats['bci_score']}
-Comunication style: {customer['communication']}
-
-{customer['details']}
-
-{'# GLOBAL EVENTS' if events else ''}
-{json.dumps(events, indent=2)}
-"""
-
-get_dilemma_prompt = lambda customer, trigger_event, dilemma, reason, question, choice_a, choice_b: f"""Imagine you are {customer['name']}. 
-You have an important decision to make, and you are in a dilemma: {dilemma}.
-The dilemma is triggered by the following event: {trigger_event}.
-It is dificult since {reason}.
-You have to choose between two options:
-- Option A: {choice_a}
-- Option B: {choice_b}
-During conversation with bartender Alex, he asked: "{question}" to learn what bothers you.
-Write a short internal monologue in response about the dilemma - no dialogue, no narration. This is your voice, your thoughts, spoken aloud to Alex in the moment.
-
-# Guidelines
-- Format: 3-7 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, 10 - 15 words long)
-- Tone: Conversational and natural
-- Purpose: Reveal a current dilemma you're struggling with
-- Language: Avoid technical jargon, vague statements, or overly generic wording
-- What to Share: A specific decision that's bothering you right now
-- Do NOT ask Alex for advice or help
-- Do not ask questions or request any actions from Alex
-- End the monologue on a neutral but thoughtful note, leaving emotional space for Alex to respond or for you to continue sharing your beliefs later
-- Keep the tone true to the world of Stenograd — subtle, loaded, layered with quiet tension
-- Share specific details and situations that triggered the dilemma
-- Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
-- Share what direction you are leaning towards and how your political preferences and current BCI score may affect the decision
-- For pauses, use periods or ellipses only. Never use dashes or hyphens.
-
-# Variants
-Write five monologue variants, each showing the level of trust {customer['name']} feels toward the bartender:
-	•	Very Suspicious: Hints at facing a tough choice but stays vague; dilemma is implied, options are not clearly stated (up to 3 bullet points).
-	•	Suspicious: Admits to a real dilemma and two paths, but gives minimal context or reasoning (up to 4 bullet points).
-	•	Neutral: Clearly states the dilemma and both options; provides basic background without sharing personal stakes (up to 5 bullet points).
-	•	Trusting: Opens up about the dilemma, explains the facts behind it, and briefly touches on personal stakes (up to 6 bullet points).
-	•	Very Trusting: Fully unpacks the dilemma with all facts, personal reasons, and emotional weight (up to 7 bullet points).
-
-# Across all versions:
-- As trust increases, shift from surface-level unease to deep internal conflict
-- As trust increases, move from safe public info to private, dangerous, or compromising details
-- ALWAYS admit to a dilemma, and always share two choices - level of detail and emotional texture will vary depending on the trust level
-- The higher the trust, the more bullet points you can use
-- For high trust levels, share directly what's bothering you, what choices you consider and why?
-- Reflect on how the system, the city, or the past shaped your current hesitation
-- Do not rush to resolution — this is an exploration, not a conclusion
-- End in a way that allows beliefs or worldview to be revealed in the next turn
-- NEVER mention "Option A" or "Option B" phrases but use the actual meaning of the choice
-
-# Output
-Return the result using the generate_monologue_variants function.
-"""
-
-get_beliefs_prompt = lambda customer, trigger_event, dilemma, reason, choice_a, choice_b, beliefs: f"""Imagine you are {customer['name']}. 
-You have an important decision to make, and you are in a dilemma: {dilemma}.
-The dilemma is triggered by the following event: {trigger_event}.
-It is dificult since {reason}.
-You have to choose between two options:
-- Option A: {choice_a}
-- Option B: {choice_b}
-  
-Following {len(beliefs)} beliefs drives you to Option A:
-{json.dumps(beliefs, indent=2)}
-
-During conversation with bartender Alex, you vahe a conversation about your belifs which can be challenged or supported by Alex.
-For EACH belief, write a short internal monologue in response about the dilemma - no dialogue, no narration. 
-This is your voice, your thoughts, spoken aloud to Alex in the moment related to the belief. Make sure it is undersable without any additional context as this is the first time you share it.
-
-# Guidelines for each belief
-- Format: 2-3 bullet points of what {customer['name']} says (short spoken phrases only, no narration or descriptions of actions/emotions, 10 - 15 words long)
-- Tone: Conversational and natural
-- Purpose:  Explain what is your belief and why. Make sure it is clear without any additional context as you did not share it before.
-- Language: Avoid technical jargon, vague statements, or overly generic wording. keep it simple, compact and easy to understand
-- Do not request any actions from Alex
-- End the monologue on a neutral but thoughtful note, leaving space for Alex to challenge or support your beliefs
-- Keep the tone true to the world of Stenograd — subtle, loaded, layered with quiet tension
-- Make sure the monologe's is a natural logical and smooth flow of thoughts, with a clear connection between points
-- Reflect on how the system, the city, or the past shaped your current hesitation
-- Make sure it is clear what choice the belief is related to
-- Do not rush to resolution — this is an exploration, not a conclusion
-- NEVER mention "Option A" or "Option B" phrases but use the actual meaning of the choice
-- Alex responses for each belief:
-   * Create two, short responses of Alex to the monologue. One should be supportive resulting in keeping the belief, and the other should be challenging resulting in changing the belief.
-   * Each response should be 2 bullet points long. Each bullet point must be compact, easy to understand, and natural.
-   * Response of Alex should not requrie any follow up from {customer['name']}. After the response, {customer['name']} will immediately continue with the next belief. Make sure Alex's response allows that in natural way.
-   * First line of Alex's response should refer directly to the belief shared by {customer['name']}.
-   * Last line of Alex's response should be a natural shift of the conversation to {customer['name']} to keep talking. Make it natural and smooth. Do not be pushy or too direct. Let {customer['name']} open up in a natural way.
-
-# IMPORTANT
-ALWAYS generate 3 monologues - one for each belief. Make sure the number of monologues must match the number of beliefs.
-
-# Output
-Return the result using the generate_monologue_variants function.
-"""
-
-get_decision_prompt = lambda customer, trigger_event, dilemma, reason, choice_a, choice_b, preference: f"""Imagine you are {customer['name']}.
-You're facing a difficult decision: {dilemma}, triggered by {trigger_event}.
-It's a hard call because: {reason}.
-You must choose between:
-- Option A:	{choice_a}
-- Option B:	{choice_b}
-
-After speaking with bartender Alex, you make a decision.
-Now, create three separate monologues, each showing a different outcome of that conversation:
-
-Monologue 1 - You chose Option A, and Alex helped you decide.
-Monologue 2 - You chose Option B, and Alex helped you decide.
-Monologue 3 - You made your own choice: Option {preference}. Alex wasn't helpful, but you share your decision anyway driven by your own beliefs and intuition.
-
-Each monologue has five variants, based on how much the speaker trusts Alex:
-1.	Very Suspicious - Barely hints at the decision; offers no context. (Max 2 bullets)
-2.	Suspicious - Acknowledges the choice vaguely; gives minimal detail. (Max 2 bullets)
-3.	Neutral - States the decision clearly; gives light context. (Max 3 bullets)
-4.	Trusting - Explains the choice and stakes more openly. (Max 4 bullets)
-5.	Very Trusting - Shares in-depth motivation, beliefs, and emotional tension. (Max 4 bullets)
-
-Monologue Format:
--	2-4 short bullet points (up to 10-15 words each)
--	First-person voice, spoken aloud to Alex
--	No narration, no internal thoughts, no dialogue
-- Use future tense — describe what the character will do next
--	Focus on clarity, natural tone, and logical flow
--	End with a neutral but reflective closing line
--	Never mention "Option A or B" directly - use real choices
-- For pauses, use periods or ellipses only. Never use dashes or hyphens.
-
-Tone & Setting:
--	Conversational, layered with subtle tension
--	Avoid vague phrasing or technical jargon
--	Reflect how the city, system, or personal history shapes the hesitation
-
-Output:
-Use the `generate_monologue_variants` function to return the result.
-"""
+from .openers import all_openers
+from .prompts import get_system_message, get_dilemma_prompt, get_beliefs_prompt, get_decision_prompt
+from utils import retry_on_error
 
 class DecisionMaker:
 
@@ -352,23 +159,8 @@ class DecisionMaker:
             
         self.world_context = read_context_file(os.path.join(base_path, "world.json"))
 
+    @retry_on_error(max_attempts=3)
     def expose_dilemma(self, customer, character_stats, dilemma, timeline):
-        last_error = None
-        for i in range(3):
-            try:
-                response = self._expose_dilemma(customer, character_stats, dilemma, timeline)
-                if response is not None:
-                    return response
-                else:
-                    raise Exception("No response from the model.")
-            except Exception as e:
-                last_error = e
-                print(f"Error occurred: {e}")
-                print("Retrying...")
-        raise Exception(f"Failed to expose dilemma after 3 attempts: {last_error}")
-    
-
-    def _expose_dilemma(self, customer, character_stats, dilemma, timeline):
         opener = random.choice(all_openers)
         system_message = get_system_message(
             self.world_context["background"],
@@ -409,23 +201,8 @@ class DecisionMaker:
           ]
         }
     
+    @retry_on_error(max_attempts=3)
     def share_beliefs(self, customer, character_stats, dilemma, timeline, choice_a, choice_b, beliefs):
-        last_error = None
-        for i in range(5):
-            try:
-                response = self._share_beliefs(customer, character_stats, dilemma, timeline, choice_a, choice_b, beliefs)
-                if response is not None:
-                    return response
-                else:
-                    raise Exception("No response from the model.")
-            except Exception as e:
-                last_error = e
-                print(f"Error occurred: {e}")
-                print("Retrying...")
-        raise Exception(f"Failed to share beliefs after 5 attempts: {last_error}")
-    
-    
-    def _share_beliefs(self, customer, character_stats, dilemma, timeline, choice_a, choice_b, beliefs):
         system_message = get_system_message(
             self.world_context["background"],
             customer,
@@ -462,23 +239,8 @@ class DecisionMaker:
 
         return monologues
     
+    @retry_on_error(max_attempts=3)
     def share_decision(self, customer, character_stats, dilemma, timeline, choice_a, choice_b):
-        last_error = None
-        for i in range(3):
-            try:
-                response = self._share_decision(customer, character_stats, dilemma, timeline, choice_a, choice_b)
-                if response is not None:
-                    return response
-                else:
-                    raise Exception("No response from the model.")
-            except Exception as e:
-                last_error = e
-                print(f"Error occurred: {e}")
-                print("Retrying...")
-        raise Exception(f"Failed to share decision after 3 attempts: {last_error}")
-    
-    
-    def _share_decision(self, customer, character_stats, dilemma, timeline, choice_a, choice_b):
         system_message = get_system_message(
             self.world_context["background"],
             customer,
@@ -533,7 +295,7 @@ class DecisionMaker:
     
     def get_dilemma_convo(self, customer, character_stats, dilemma, timeline, log_callback=None):
         log_callback(f"[dim]{customer['id']} share the dilemma...[/dim]") if log_callback else None
-        dilemma_chat = self._expose_dilemma(customer, character_stats, dilemma, timeline)
+        dilemma_chat = self.expose_dilemma(customer, character_stats, dilemma, timeline)
         log_callback(f"[dim]{customer['id']} share the beliefs A...[/dim]") if log_callback else None
         belief_a_chat = self.share_beliefs(
             customer, 
