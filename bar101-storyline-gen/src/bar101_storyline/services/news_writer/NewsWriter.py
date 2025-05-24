@@ -3,7 +3,7 @@ import json
 import base64
 import random
 from utils import retry_on_error
-from .prompts import get_system_message, get_official_prompt, get_underground_prompt, get_image_prompt, NEWS_IMAGES
+from .prompts import get_system_message, get_official_prompt, get_underground_prompt, get_image_prompt, get_match_image_id_prompt, NEWS_IMAGES
 from .functions import get_publish_news
 from services.AiService import AiService
 
@@ -80,6 +80,21 @@ class NewsWriter(AiService):
             "underground": underground_news
         }
     
+    def match_image_id(self, news_text, events, outcome):
+        system_message = get_system_message(self.world_context['background'], events, outcome)
+        prompt = get_match_image_id_prompt(news_text)
+
+        messages = self.get_messages(prompt, system_message)
+        response = self.ask_llm(messages)
+
+        image_id = response.choices[0].message.content.strip()
+
+        if image_id not in [i["id"] for i in NEWS_IMAGES]:
+            image_id = random.choice([i["id"] for i in NEWS_IMAGES])
+            print(f"WARNING: Image id {image_id} not found in NEWS_IMAGES. Picking random one.")
+
+        return image_id
+    
     def create_news_image(self, image_id, log_callback=None):
         image_path = os.path.join(os.path.dirname(__file__), "../../../../assets/news", f"{image_id}.png")
         image_path = os.path.abspath(image_path)
@@ -89,8 +104,7 @@ class NewsWriter(AiService):
         
         log_callback(f"Creating image for {image_id}...") if log_callback else None
 
-        selected_images = random.sample(NEWS_IMAGES, 30)
-        image_description = next((i["description"] for i in selected_images if i["id"] == image_id), None)
+        image_description = next((i["description"] for i in NEWS_IMAGES if i["id"] == image_id), None)
 
         prompt = get_image_prompt(image_description)
 

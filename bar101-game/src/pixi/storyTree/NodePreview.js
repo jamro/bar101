@@ -144,7 +144,7 @@ export default class NodePreview extends PIXI.Container {
     const response = await fetch(nodeFile);
     const data = await response.json();
     this._label.text = data.title;
-    const imgId = data.news.official[0].image_id
+    const imgId = data.news.underground[0].image_id
     const imgUrl = `/story/news/${imgId}.jpg`
     this._chapterLabel.text = `CHAPTER ${intToRoman(this._node.path.length)}`
     // load image 

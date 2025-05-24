@@ -1,4 +1,5 @@
 import json
+import random
 
 NEWS_IMAGES = json.load(open("assets/news_images.json"))
 
@@ -12,7 +13,22 @@ get_system_message = lambda background, events, outcome: f"""# BACKGROUND
 {outcome}
 
 # NEWS_IMAGES
-{json.dumps(NEWS_IMAGES, indent=2)}
+{json.dumps(random.sample(NEWS_IMAGES, 20), indent=2)}
+"""
+
+get_match_image_id_prompt = lambda news_excerpt: f"""
+You are given a news excerpt and a list NEWS_IMAGES. Your task is to:
+1. Read the news excerpt carefully.
+2. Identify the dominant themes, emotional tone, visual setting, and symbolic motifs present in the text.
+3. From the list of NEWS_IMAGES, select the one image that most closely matches the mood, symbolism, or setting of the news.
+ - The match does not need to be literal.
+ - It should evoke the same feeling, visual metaphor, or atmosphere as the news excerpt.
+4. Return the id of the best matching image.
+ - Return only the id, no other text.
+ - The id must be in the list of NEWS_IMAGES.
+
+News Excerpt:
+{news_excerpt}
 """
 
 get_official_prompt = lambda segment_count, extra_context: f"""Write and `publish_news` as a brief news segments (5-10 seconds) as broadcast on Stenograd State Broadcast (SSB) 
