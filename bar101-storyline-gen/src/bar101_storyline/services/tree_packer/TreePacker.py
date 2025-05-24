@@ -74,6 +74,7 @@ class TreePacker:
         dilemma = self._read_file(path, "dilemma.json", no_error=True)
         visitors = self._read_file(path, "visitors.json", no_error=True) or []
         timeline = self._read_file(path, "timeline.json", no_error=True) or []
+        book = self._read_file(path, "book.json", no_error=True) or {}
         visitors_chat = {}
         for visitor in visitors:
             visitors_chat[visitor] = {
@@ -106,6 +107,7 @@ class TreePacker:
 
         raw_result = {
             "title": title,
+            "story_summary": book["content"],
             "timestamp": next_day.isoformat(),
             "news": self._read_file(path, "news.json"),
             "visitors": visitors,

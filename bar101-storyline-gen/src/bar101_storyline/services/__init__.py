@@ -7,6 +7,7 @@ from .plot_shaper import PlotShaper
 from .timeline_integrator import TimelineIntegrator
 from .tree_packer import TreePacker
 from .key_customer_picker import KeyCustomerPicker
+from .book_writer import BookWriter
 
 __all__ = [
     'CharacterStoryBuilder',

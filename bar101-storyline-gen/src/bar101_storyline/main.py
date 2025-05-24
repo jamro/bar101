@@ -9,7 +9,8 @@ from services import (
     ChatStoryEngine,
     DecisionMaker,
     NewsWriter,
-    TreePacker
+    TreePacker,
+    BookWriter
 )
 import json
 from utils import get_global_llm_cost, get_or_create
@@ -24,7 +25,8 @@ from generator import (
     develop_character_story,
     get_news_spot,
     serve_customer,
-    get_bar_visitors
+    get_bar_visitors,
+    summarize_book
 )
 
 # Load environment variables
@@ -63,6 +65,7 @@ if __name__ == "__main__":
     chat_opener_engine = ChatOpenerEngine(os.getenv("OPENAI_API_KEY"))
     chat_story_engine = ChatStoryEngine(os.getenv("OPENAI_API_KEY"))
     decision_maker = DecisionMaker(os.getenv("OPENAI_API_KEY"))
+    book_writer = BookWriter(os.getenv("OPENAI_API_KEY"))
     
     plot_shaper.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     cusomer_picker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
@@ -72,7 +75,8 @@ if __name__ == "__main__":
     chat_opener_engine.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     chat_story_engine.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
     decision_maker.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
-
+    book_writer.read_context(os.path.join(os.path.dirname(__file__), "../../context"))
+    
     all_characters = character_story_builder.get_characters()
     customers_model = {}
     for character_id in all_characters:
@@ -124,6 +128,8 @@ if __name__ == "__main__":
             3, 
             "IMPORTANT: Use news to reveal and explain key concept from background context provide neccesary introduction to the world. Explain all the acronyms and terms used in the world context."
           )
+
+        summarize_book(book_writer, new_events, outcome, variants_chain)
 
         plot_a, plot_b = fork_plot(plot_shaper, variants_chain)
         dilemma, transition_a, transition_b = create_dilemma(cusomer_picker, customers_model, plot_a, plot_b, plot_shaper.timeline, outcome_timeline, variants_chain)
@@ -203,6 +209,12 @@ if __name__ == "__main__":
         extra_context = f"IMPORTANT: news are the epilogue of the story. Use them to wrap up the story and make a strong final statement. The last new segment MUST cover the end final of the story in objective way: {outcome}"
 
     get_news_spot(news_writter, new_events, outcome, variants_chain, news_segment_count, extra_context)
+
+    book = summarize_book(book_writer, new_events, outcome, variants_chain)
+
+    print("== THE END =================================")
+    print(book["content"])
+    print("============================================")
 
     # pack the story node
     node_path = os.path.join(story_root, *variants_chain, "node.json")
