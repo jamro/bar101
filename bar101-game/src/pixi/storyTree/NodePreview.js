@@ -1,4 +1,6 @@
 import * as PIXI from 'pixi.js';
+import TimeTravelButton from './TimeTravelButton';
+import TitleBanner from './TitleBanner';
 
 const COLOR = 0xdec583
 
@@ -23,6 +25,8 @@ function intToRoman(num) {
   return romanNumerals[num];
 }
 
+const TITLE_OFFSET = 130
+
 export default class NodePreview extends PIXI.Container {
   constructor(node) {
     super();
@@ -31,10 +35,13 @@ export default class NodePreview extends PIXI.Container {
 
     this._node = node;
 
+    this._label = new TitleBanner()
+    
+
     this._bg = new PIXI.Graphics();
     this.addChild(this._bg);
     this._bg
-      .roundRect(-450, 100, 900, 200, 30)
+      .roundRect(-450, TITLE_OFFSET, 900, 200, 30)
       .fill(COLOR)
       .circle(0, 0, 400)
       .fill(0x000000)
@@ -48,62 +55,13 @@ export default class NodePreview extends PIXI.Container {
     this._imgContainer.mask = mask;
     this.addChild(mask);
 
-    this._labelBg = new PIXI.Graphics();
-    this.addChild(this._labelBg);
-    this._labelBg
-      .roundRect(-450+14, 100+14, 900-28, 200-28, 30)
-      .fill(0x000000)
-      
-    this._label = new PIXI.Text({
-      text: this._node.path,
-      style: {
-        fontFamily: 'Chelsea Market',
-        fontSize: 50,
-        fill: 0xffffff,
-        align: 'center',
-      }
-    })
-    this._label.anchor.set(0.5);
-    this._label.x = 0;
-    this._label.y = 215;
     this.addChild(this._label);
+    this._label.x = -450+14;
+    this._label.y = TITLE_OFFSET+14;
 
-    this._chapterLabel = new PIXI.Text({
-      text: "CHAPTER II",
-      style: {
-        fontFamily: 'Chelsea Market',
-        fontSize: 30,
-        fill: COLOR,
-        align: 'center',
-      }
-    })
-    this._chapterLabel.anchor.set(0.5);
-    this._chapterLabel.x = 0;
-    this._chapterLabel.y = 155;
-    this.addChild(this._chapterLabel);
-
-    this._button = new PIXI.Container();
-    this._button.y = 260;
+    this._button = new TimeTravelButton()
+    this._button.y = TITLE_OFFSET + 160;
     this.addChild(this._button);
-    const buttonBg = new PIXI.Graphics();
-    this._button.addChild(buttonBg);
-    buttonBg.roundRect(-200, 0, 400, 120, 30)
-      .fill(0xa83300)
-      .stroke({color: 0, width: 14})
-
-    const buttonLabel = new PIXI.Text({
-      text: "Open Chapter >",
-      style: {
-        fontFamily: 'Chelsea Market',
-        fontSize: 30,
-        fill: 0,
-        align: 'center',
-      }
-    })
-    buttonLabel.anchor.set(0.5);
-    buttonLabel.x = 0;
-    buttonLabel.y = 60;
-    this._button.addChild(buttonLabel);
 
     this._button.on('pointerdown', () => {
       this.emit('buttonClick');
@@ -124,7 +82,7 @@ export default class NodePreview extends PIXI.Container {
     this.visible = true;
     this.scale.set(0);
     this._label.text = ""
-    this._chapterLabel.text = ""
+    this._label.chapterLabel = ""
     const loop = () => {
       this.scale.set(this.scale.x + 0.05);
       if(this.scale.x < 1) {
@@ -146,7 +104,7 @@ export default class NodePreview extends PIXI.Container {
     this._label.text = data.title;
     const imgId = data.news.underground[0].image_id
     const imgUrl = `/story/news/${imgId}.jpg`
-    this._chapterLabel.text = `CHAPTER ${intToRoman(this._node.path.length)}`
+    this._label.chapterLabel = `CHAPTER ${intToRoman(this._node.path.length)}`
     // load image 
     while(this._imgContainer.children.length > 0) {
       this._imgContainer.removeChild(this._imgContainer.children[0]);
