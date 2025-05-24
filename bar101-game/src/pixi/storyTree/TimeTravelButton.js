@@ -4,6 +4,10 @@ export default class TimeTravelButton extends PIXI.Container {
   constructor() {
     super();
 
+    this.interactive = true;
+    this.buttonMode = true;
+    this.eventMode = 'static';
+
     const buttonBg = new PIXI.Graphics();
     this.addChild(buttonBg);
     buttonBg.roundRect(-200, 0, 400, 120, 30)

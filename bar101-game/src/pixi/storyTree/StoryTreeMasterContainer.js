@@ -3,10 +3,17 @@ import MasterContainer from "../MasterContainer";
 import StoryTree from "./StoryTree";
 import DragAndPinchHandler from "./DragAndPinchHandler";
 import NodePreview from './NodePreview';
+import { Howl } from 'howler';
 
 class StoryTreeMasterContainer extends MasterContainer {
   constructor() {
     super();
+
+    this._clickSound = new Howl({
+      src: ['/audio/click.mp3'],
+      loop: false,
+      volume: 0.3,
+    });
 
     this._masterContainer = new PIXI.Container();
     this.addChild(this._masterContainer);
@@ -42,9 +49,11 @@ class StoryTreeMasterContainer extends MasterContainer {
       if(this._nodePreview) {
         this._nodePreviewContainer.removeChild(this._nodePreview);
         this._nodePreview = null;
+        this._clickSound.play();
       }   
       else {  
         this.emit('close');
+        this._clickSound.play();
       }
     });
     this.addChild(this._closeLabel);
@@ -74,17 +83,20 @@ class StoryTreeMasterContainer extends MasterContainer {
         } else {
           this._nodePreviewContainer.removeChild(this._nodePreview);
           this._nodePreview = null;
+          this._clickSound.play();
         }
         if(node) {
           this._nodePreview = new NodePreview(node);
           this._nodePreview.enableTimeTravel(this._enableTimeTravel);
           this._nodePreview.on('openChapter', () => {
             this.emit('openChapter', node.path);
+            this._clickSound.play();
           });
           this._nodePreviewContainer.addChild(this._nodePreview);
           this._nodePreview.show();
           this._targetStoryTreePosition.x = -node.x * this._currentScale;
           this._targetStoryTreePosition.y = -node.y * this._currentScale;
+          this._clickSound.play();
         }
       }
     });
