@@ -25,12 +25,13 @@ class NewsWriter(AiService):
         self.customers = self.world_context['bar']['customers']
 
     @retry_on_error(max_attempts=3)
-    def write_news(self, events, outcome, news_segment_count, extra_context=None):
+    def write_news(self, events, outcome, news_segment_count, extra_context=None, log_callback=None):
         system_message = get_system_message(self.world_context['background'], events, outcome)
         prompt = get_official_prompt(news_segment_count, extra_context)
         messages = self.get_messages(prompt, system_message)
 
         functions = [get_publish_news(news_segment_count)]
+        log_callback("Generating official news...") if log_callback else None
         params = self.ask_llm_for_function(messages, functions)
 
         official_news = []
@@ -50,6 +51,7 @@ class NewsWriter(AiService):
 
         prompt = get_underground_prompt(news_segment_count, extra_context)
         messages.append({"role": "user", "content": prompt})
+        log_callback("Generating underground news...") if log_callback else None
         params = self.ask_llm_for_function(messages, functions)
         
         underground_news = []
@@ -71,21 +73,24 @@ class NewsWriter(AiService):
         # iterate trhough official and underground to get image_id and create image
         for news in official_news + underground_news:
             image_id = news["image_id"]
-            self.create_news_image(image_id)
+            self.create_news_image(image_id, log_callback)
 
         return {
             "official": official_news,
             "underground": underground_news
         }
     
-    def create_news_image(self, image_id):
+    def create_news_image(self, image_id, log_callback=None):
         image_path = os.path.join(os.path.dirname(__file__), "../../../../assets/news", f"{image_id}.png")
         image_path = os.path.abspath(image_path)
 
         if os.path.exists(image_path):
             return
+        
+        log_callback(f"Creating image for {image_id}...") if log_callback else None
 
-        image_description = next((i["description"] for i in NEWS_IMAGES if i["id"] == image_id), None)
+        selected_images = random.sample(NEWS_IMAGES, 30)
+        image_description = next((i["description"] for i in selected_images if i["id"] == image_id), None)
 
         prompt = get_image_prompt(image_description)
 
