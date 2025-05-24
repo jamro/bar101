@@ -1,16 +1,15 @@
-from openai import OpenAI
 import os
 import json
 import random
-from utils import ask_llm
 from .prompts import get_system_message, get_brainstorm_prompt, get_fork_prompt
 from utils import retry_on_error
 from .functions import fork_storyline
+from services.AiService import AiService
 
-class PlotShaper:
+class PlotShaper(AiService):
 
     def __init__(self, openai_api_key):
-        self.client = OpenAI(api_key=openai_api_key)
+        super().__init__(openai_api_key)
         self.timeline = []
         self.world_context = None
         self.plot_structure = None
@@ -49,13 +48,10 @@ class PlotShaper:
         chapter_examples = "\n   * ".join(random.sample(plot_stage['examples'], 10))
 
         brainstorm_prompt = get_brainstorm_prompt(plot_stage, chapter_examples)
+        messages = self.get_messages(brainstorm_prompt, system_message)
 
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": brainstorm_prompt}
-        ]
         log_callback("[dim]Brainstorming ideas for the next chapter...[/dim]") if log_callback else None
-        response = ask_llm(self.client, messages)
+        response = self.ask_llm(messages)
 
         fork_prompt = get_fork_prompt(plot_stage, chapter_examples)
 
@@ -66,24 +62,15 @@ class PlotShaper:
             {"role": "user", "content": fork_prompt}
         ]
 
-        functions = [ fork_storyline ]
         log_callback("[dim]Forking the storyline...[/dim]") if log_callback else None
-        response = ask_llm(self.client, messages, functions)
+        params = self.ask_llm_for_function(messages, [fork_storyline])
 
-        # Handle function call
-        if response.choices[0].finish_reason == "function_call":
-            function_call = response.choices[0].message.function_call
-            if function_call.name == "fork_storyline":
-                params = json.loads(function_call.arguments)
-                response = {
-                    "branch_a": params["branch_a"],
-                    "branch_b": params["branch_b"],
-                    "branch_a_title": params["branch_a_title"],
-                    "branch_b_title": params["branch_b_title"],
-                    "events_a": params["events_a"],
-                    "events_b": params["events_b"],
-                    "plot_stage": plot_stage
-                }
-                return response
-
-        raise Exception("Failed to parse function call response")
+        return {
+            "branch_a": params["branch_a"],
+            "branch_b": params["branch_b"],
+            "branch_a_title": params["branch_a_title"],
+            "branch_b_title": params["branch_b_title"],
+            "events_a": params["events_a"],
+            "events_b": params["events_b"],
+            "plot_stage": plot_stage
+        }

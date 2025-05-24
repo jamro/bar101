@@ -1,17 +1,15 @@
-from openai import OpenAI
 import os
 import json
 import random
-from utils import ask_llm
 from .openers import all_openers
 from .prompts import get_system_message, get_dilemma_prompt, get_beliefs_prompt, get_decision_prompt
 from utils import retry_on_error
 from .functions import generate_dilemma_monologue_variants, generate_beliefs_monologue_variants, generate_decision_monologue_variants
+from services.AiService import AiService
 
-class DecisionMaker:
-
+class DecisionMaker(AiService):
     def __init__(self, openai_api_key):
-        self.client = OpenAI(api_key=openai_api_key)
+        super().__init__(openai_api_key)
         self.world_context = None
 
     def read_context(self, base_path):
@@ -42,18 +40,8 @@ class DecisionMaker:
             dilemma["choice_a"],
             dilemma["choice_b"]
         )
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
-        response = ask_llm(
-            self.client,
-            messages,
-            functions=[generate_dilemma_monologue_variants]
-        )
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
+        messages = self.get_messages(prompt, system_message)
+        params = self.ask_llm_for_function(messages, [generate_dilemma_monologue_variants])
 
         return {
             "opener": opener,
@@ -83,18 +71,8 @@ class DecisionMaker:
             choice_b,
             beliefs
         )
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
-        response = ask_llm(
-            self.client,
-            messages,
-            functions=[generate_beliefs_monologue_variants]
-        )
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
+        messages = self.get_messages(prompt, system_message)
+        params = self.ask_llm_for_function(messages, [generate_beliefs_monologue_variants])
 
         monologues = [
             params["monologue_1"],
@@ -121,18 +99,8 @@ class DecisionMaker:
             choice_b,
             dilemma["preference"]
         )
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
-        response = ask_llm(
-            self.client,
-            messages,
-            functions=[generate_decision_monologue_variants]
-        )
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
+        messages = self.get_messages(prompt, system_message)
+        params = self.ask_llm_for_function(messages, [generate_decision_monologue_variants])
 
         return {
             "monologue_a": [

@@ -1,16 +1,14 @@
-from openai import OpenAI
 import os
 import json
 import random
-from utils import ask_llm
 from utils import retry_on_error
 from .prompts import get_system_message, get_dilemma_prompt, get_refine_prompt
 from .functions import get_refine_customer_dilemma
+from services.AiService import AiService
 
-class KeyCustomerPicker:
-
+class KeyCustomerPicker(AiService):
     def __init__(self, openai_api_key):
-        self.client = OpenAI(api_key=openai_api_key)
+        super().__init__(openai_api_key)
         self.world_context = None
         self.customers = None
 
@@ -65,59 +63,44 @@ class KeyCustomerPicker:
         events_a_text = "\n".join([f" - {event['timestamp']} - {event['description']}" for event in events_a])
         events_b_text = "\n".join([f" - {event['timestamp']} - {event['description']}" for event in events_b])
         prompt = get_dilemma_prompt(key_customer['name'], branch_a, branch_b, events_a_text, events_b_text)
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
+        messages = self.get_messages(prompt, system_message)
 
         log_callback(f"Brainstorming {key_customer['name']} dilemma...") if log_callback else None
-        response = ask_llm(self.client, messages)
+        response = self.ask_llm(messages)
         messages.append({"role": "assistant", "content": response.choices[0].message.content})
         
         log_callback("Refining the dilemma...") if log_callback else None
         messages.append({"role": "user", "content": get_refine_prompt()})
-        response = ask_llm(
-            self.client, 
-            messages,
-            functions=[get_refine_customer_dilemma(key_customer)]
-        )
+        params = self.ask_llm_for_function(messages, [get_refine_customer_dilemma(key_customer)])
 
-        if response.choices[0].finish_reason == "function_call":
-            function_call = response.choices[0].message.function_call
-            if function_call.name == "refine_customer_dilemma":
-                params = json.loads(function_call.arguments)
+        if params["political_support_a"] not in ["harmonists", "innovators", "directorate", "rebel"]:
+            raise ValueError(f"Political support A is invalid value: {params['political_support_a']}. Allowed values: 'harmonists', 'innovators', 'directorate' or 'rebel'.")
+        if params["political_support_b"] not in ["harmonists", "innovators", "directorate", "rebel"]:
+            raise ValueError(f"Political support B is invalid value: {params['political_support_b']}. Allowed values: 'harmonists', 'innovators', 'directorate' or 'rebel'.")
+        if params["preference"].lower() not in ["a", "b"]:
+            raise ValueError(f"Preference is invalid value: {params['preference']}. Allowed values: A or B.")
+        if len(params["sub_beliefs_driver_a"]) != 3:
+            raise ValueError(f"Sub beliefs driver A must be a list of 3 distinct beliefs. Found: {len(params['sub_beliefs_driver_a'])}")
+        if len(params["sub_beliefs_driver_b"]) != 3:
+            raise ValueError(f"Sub beliefs driver B must be a list of 3 distinct beliefs. Found: {len(params['sub_beliefs_driver_b'])}")
+        if params["sub_beliefs_driver_a"] == params["sub_beliefs_driver_b"]:
+            raise ValueError(f"Sub beliefs driver A and B must be distinct. Found: {params['sub_beliefs_driver_a']}")
+        if params["sub_beliefs_driver_a"][0] == params["sub_beliefs_driver_b"][0]:
+            raise ValueError(f"Sub beliefs driver A and B must be distinct. Found: {params['sub_beliefs_driver_a'][0]}")
 
-                if params["political_support_a"] not in ["harmonists", "innovators", "directorate", "rebel"]:
-                    raise ValueError(f"Political support A is invalid value: {params['political_support_a']}. Allowed values: 'harmonists', 'innovators', 'directorate' or 'rebel'.")
-                if params["political_support_b"] not in ["harmonists", "innovators", "directorate", "rebel"]:
-                    raise ValueError(f"Political support B is invalid value: {params['political_support_b']}. Allowed values: 'harmonists', 'innovators', 'directorate' or 'rebel'.")
-                if params["preference"].lower() not in ["a", "b"]:
-                    raise ValueError(f"Preference is invalid value: {params['preference']}. Allowed values: A or B.")
-                if len(params["sub_beliefs_driver_a"]) != 3:
-                    raise ValueError(f"Sub beliefs driver A must be a list of 3 distinct beliefs. Found: {len(params['sub_beliefs_driver_a'])}")
-                if len(params["sub_beliefs_driver_b"]) != 3:
-                    raise ValueError(f"Sub beliefs driver B must be a list of 3 distinct beliefs. Found: {len(params['sub_beliefs_driver_b'])}")
-                if params["sub_beliefs_driver_a"] == params["sub_beliefs_driver_b"]:
-                    raise ValueError(f"Sub beliefs driver A and B must be distinct. Found: {params['sub_beliefs_driver_a']}")
-                if params["sub_beliefs_driver_a"][0] == params["sub_beliefs_driver_b"][0]:
-                    raise ValueError(f"Sub beliefs driver A and B must be distinct. Found: {params['sub_beliefs_driver_a'][0]}")
-
-                response = {
-                    "customer": key_customer,
-                    "trigger_event": params["trigger_event"],
-                    "dilemma": params["dilemma"],
-                    "reason": params["reason"],
-                    "variant_a": params["variant_a"],
-                    "political_support_a": params["political_support_a"],
-                    "belief_driver_a": params["sub_beliefs_driver_a"],
-                    "transition_events_a": params["transition_events_a"],
-                    "variant_b": params["variant_b"],
-                    "political_support_b": params["political_support_b"],
-                    "belief_driver_b": params["sub_beliefs_driver_b"],
-                    "transition_events_b": params["transition_events_b"],
-                    "preference": "a" if params["preference"].lower() == "a" else "b",
-                }
-                return response
-
-        raise ValueError("Function call not found in the response.")
+        return {
+            "customer": key_customer,
+            "trigger_event": params["trigger_event"],
+            "dilemma": params["dilemma"],
+            "reason": params["reason"],
+            "variant_a": params["variant_a"],
+            "political_support_a": params["political_support_a"],
+            "belief_driver_a": params["sub_beliefs_driver_a"],
+            "transition_events_a": params["transition_events_a"],
+            "variant_b": params["variant_b"],
+            "political_support_b": params["political_support_b"],
+            "belief_driver_b": params["sub_beliefs_driver_b"],
+            "transition_events_b": params["transition_events_b"],
+            "preference": "a" if params["preference"].lower() == "a" else "b",
+        }
 

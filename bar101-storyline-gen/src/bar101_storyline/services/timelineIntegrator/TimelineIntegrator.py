@@ -1,15 +1,14 @@
-from openai import OpenAI
 import os
 import json
-from utils import ask_llm
 from .prompts import get_system_message, get_prompt
 from utils import retry_on_error
 from .functions import refine_events
+from services.AiService import AiService
 
-class TimelineIntegrator:
+class TimelineIntegrator(AiService):
 
     def __init__(self, openai_api_key):
-        self.client = OpenAI(api_key=openai_api_key)
+        super().__init__(openai_api_key)
         self.world_context = None
         self.plot_structure = None
 
@@ -37,18 +36,7 @@ class TimelineIntegrator:
 
         system_message = get_system_message(self.world_context, customer, timeline_info)
         prompt = get_prompt(customer['name'], dilemma, choice, outcome, events)
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
-        functions = [refine_events]
-        response = ask_llm(self.client, messages, functions)
-
-        # Handle function call
-        if response.choices[0].finish_reason == "function_call":
-            function_call = response.choices[0].message.function_call
-            if function_call.name == "refine_events":
-                params = json.loads(function_call.arguments)
-                return params["events"]
-
-        raise Exception("Failed to parse function call response")
+        messages = self.get_messages(prompt, system_message)
+        
+        params = self.ask_llm_for_function(messages, [refine_events])
+        return params["events"]

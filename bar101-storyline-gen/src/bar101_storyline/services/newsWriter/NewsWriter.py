@@ -1,17 +1,16 @@
-from openai import OpenAI
 import os
 import json
 import base64
-from utils import ask_llm
-from utils import retry_on_error
 import random
+from utils import retry_on_error
 from .prompts import get_system_message, get_official_prompt, get_underground_prompt, get_image_prompt, NEWS_IMAGES
 from .functions import get_publish_news
+from services.AiService import AiService
 
-class NewsWriter:
+class NewsWriter(AiService):
    
     def __init__(self, openai_api_key):
-        self.client = OpenAI(api_key=openai_api_key)
+        super().__init__(openai_api_key)
         self.world_context = None
 
     def read_context(self, base_path):
@@ -29,16 +28,10 @@ class NewsWriter:
     def write_news(self, events, outcome, news_segment_count, extra_context=None):
         system_message = get_system_message(self.world_context['background'], events, outcome)
         prompt = get_official_prompt(news_segment_count, extra_context)
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
+        messages = self.get_messages(prompt, system_message)
 
         functions = [get_publish_news(news_segment_count)]
-        response = ask_llm(self.client, messages, functions)
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "publish_news":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
+        params = self.ask_llm_for_function(messages, functions)
 
         official_news = []
         for item in params['news_segmenrs']:
@@ -57,10 +50,8 @@ class NewsWriter:
 
         prompt = get_underground_prompt(news_segment_count, extra_context)
         messages.append({"role": "user", "content": prompt})
-        response = ask_llm(self.client, messages, functions)
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "publish_news":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
+        params = self.ask_llm_for_function(messages, functions)
+        
         underground_news = []
         for item in params['news_segmenrs']:
             image_id = item["image_id"]

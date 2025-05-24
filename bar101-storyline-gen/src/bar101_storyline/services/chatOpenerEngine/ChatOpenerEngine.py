@@ -7,10 +7,11 @@ from .openers import all_openers
 from .prompts import get_system_message, get_neutral_prompt, get_hobby_prompt, get_hobby_story_prompt
 from utils import retry_on_error
 from .functions import generate_monologue_variants
+from services.AiService import AiService
     
-class ChatOpenerEngine:
+class ChatOpenerEngine(AiService):
     def __init__(self, openai_api_key):
-        self.client = OpenAI(api_key=openai_api_key)
+        super().__init__(openai_api_key)
         self.world_context = None
 
     def get_neutral_opener(self):
@@ -73,10 +74,7 @@ class ChatOpenerEngine:
             {"role": "assistant", "content": hobby_story},
             {"role": "user", "content": prompt}
         ]
-        response = ask_llm(self.client, messages=messages, functions=[generate_monologue_variants])
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
+        params = self.ask_llm_for_function(messages, [generate_monologue_variants])
 
         return [
             params["very_suspicious"],
@@ -105,10 +103,7 @@ class ChatOpenerEngine:
             {"role": "assistant", "content": hobby_story},
             {"role": "user", "content": prompt}
         ]
-        response = ask_llm(self.client, messages=messages, functions=[generate_monologue_variants])
-        if not response.choices[0].finish_reason == "function_call" or not response.choices[0].message.function_call.name == "generate_monologue_variants":
-            raise Exception("The model did not return a function call.")
-        params = json.loads(response.choices[0].message.function_call.arguments)
+        params = self.ask_llm_for_function(messages, [generate_monologue_variants])
 
         return [
             params["very_suspicious"],
@@ -130,11 +125,8 @@ class ChatOpenerEngine:
         )
         prompt = get_hobby_story_prompt(customer)
         
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
-        response = ask_llm(self.client, messages=messages)
+        messages = self.get_messages(prompt, system_message)
+        response = self.ask_llm(messages)
         return response.choices[0].message.content
     
     def get_opener(self, customer_id, character_stats, recent_story, outcome_timeline, events, log_callback=None):
