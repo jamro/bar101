@@ -36,7 +36,13 @@ class StoryTreeMasterContainer extends MasterContainer {
     this._closeButton.rect(-230, 0, 230, 100).fill(0);
     this._closeButton.alpha = 0;
     this._closeButton.on('pointerdown', () => {
-      this.emit('close');
+      if(this._nodePreview) {
+        this._nodePreviewContainer.removeChild(this._nodePreview);
+        this._nodePreview = null;
+      }   
+      else {  
+        this.emit('close');
+      }
     });
     this.addChild(this._closeLabel);
     this.addChild(this._closeButton);
@@ -96,6 +102,7 @@ class StoryTreeMasterContainer extends MasterContainer {
     
     this._currentScale += (this._targetScale - this._currentScale) * 0.3;
     this._storyTree.scale.set(this._currentScale);
+    this._storyTree.update()
   }
 
   init() {

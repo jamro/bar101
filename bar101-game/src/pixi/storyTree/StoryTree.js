@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import StoryNode from './StoryNode';
+import Pulsar from './Pulsar';
 
 const COLOR = 0xdec583
 
@@ -44,7 +45,6 @@ function connectPoints(graphics, x1, y1, x2, y2, color = COLOR, randomRange = 1,
   // Apply the stroke
   graphics.stroke({width: 3, color});
 }
-
 
 
 class StoryTree extends PIXI.Container {
@@ -105,6 +105,9 @@ class StoryTree extends PIXI.Container {
         }
       }
     }
+
+    this._pulsar = new Pulsar();
+    this.addChild(this._pulsar);
   }
 
   get currentNode() {
@@ -131,11 +134,17 @@ class StoryTree extends PIXI.Container {
     return null;
   }
 
+  update() {
+    this._pulsar.update();
+  }
+
   updateStoryPath(storyPath) {
     this._currentNode.current = false;
     const nodePath = "x" + storyPath.join("");
     this._currentNode = this._treeMap[nodePath];
     this._currentNode.current = true;
+    this._pulsar.x = this._currentNode.x
+    this._pulsar.y = this._currentNode.y
   }
 
   updateVisitedNodes(visitedNodes) {

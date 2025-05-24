@@ -82,7 +82,7 @@ const useGameState = () => {
           ...prevState,
           timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
           storyPath: [...prevState.storyPath, prevState.levelProgress.decision],
-          visitedNodes: [...prevState.visitedNodes, "x" + [...prevState.storyPath, prevState.levelProgress.decision].join('')],  
+          visitedNodes: [...prevState.visitedNodes, "x" + [...prevState.storyPath, prevState.levelProgress.decision].join('')].filter((value, index, self) => self.indexOf(value) === index),
           levelProgress: {
             ...prevState.levelProgress,
             customerIndex: 0,
@@ -91,6 +91,23 @@ const useGameState = () => {
           }
         }
       });
+    },
+    visitNode: (nodeId) => {
+      if (!nodeId.startsWith("x")) {
+        throw new Error(`Invalid nodeId: ${nodeId}`);
+      }
+      if (nodeId.length > 8) {
+        throw new Error(`Invalid nodeId: ${nodeId}`);
+      }
+      const nodesChain = []
+      for (let i = 0; i < nodeId.length; i++) {
+        nodesChain.push(nodeId.slice(0, i + 1));
+      }
+      setState((prevState) => ({
+        ...prevState,
+        timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
+        visitedNodes: [...prevState.visitedNodes, ...nodesChain].filter((value, index, self) => self.indexOf(value) === index),
+      }));
     },
     setLevelPhase: (phase) => {
       setState((prevState) => ({
