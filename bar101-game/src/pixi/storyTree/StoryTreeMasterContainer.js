@@ -14,11 +14,14 @@ class StoryTreeMasterContainer extends MasterContainer {
     this._masterContainer.addChild(this._bg);
     this._enableTimeTravel = false;
 
+    this._zoomContainer = new PIXI.Container();
+    this._masterContainer.addChild(this._zoomContainer);
+
     this._storyTree = new StoryTree();
     this._targetStoryTreePosition = {x: 0, y: 0};
     this._targetScale = 1;
     this._currentScale = 1;
-    this._masterContainer.addChild(this._storyTree);
+    this._zoomContainer.addChild(this._storyTree);
     
     this._closeLabel = new PIXI.Text({
       text: 'Close X',
@@ -64,8 +67,8 @@ class StoryTreeMasterContainer extends MasterContainer {
         if(!this._nodePreview) {
           const translatedX1 = (x - this._masterContainer.x) / this._masterContainer.scale.x;
           const translatedY1 = (y - this._masterContainer.y) / this._masterContainer.scale.y;
-          const translatedX2 = (translatedX1 - this._storyTree.x) / this._storyTree.scale.x;
-          const translatedY2 = (translatedY1 - this._storyTree.y) / this._storyTree.scale.y;
+          const translatedX2 = (translatedX1 - this._storyTree.x) / this._zoomContainer.scale.x;
+          const translatedY2 = (translatedY1 - this._storyTree.y) / this._zoomContainer.scale.y;
 
           node = this._storyTree.selectNodeAt(translatedX2, translatedY2);
         } else {
@@ -101,7 +104,7 @@ class StoryTreeMasterContainer extends MasterContainer {
     this._storyTree.y += (this._targetStoryTreePosition.y - this._storyTree.y) * 0.2;
     
     this._currentScale += (this._targetScale - this._currentScale) * 0.3;
-    this._storyTree.scale.set(this._currentScale);
+    this._zoomContainer.scale.set(this._currentScale);
     this._storyTree.update()
   }
 
