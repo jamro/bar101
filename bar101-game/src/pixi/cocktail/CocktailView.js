@@ -49,6 +49,10 @@ export default class CocktailView extends PIXI.Container {
     this._background.anchor.set(0.5);
     this.addChild(this._background);
 
+    this._shadow = new PIXI.Graphics();
+    this._shadow.blendMode = "multiply"
+    this.addChild(this._shadow);
+
     // recipes
     this._wallItems = new WallItems();
     this.addChild(this._wallItems);
@@ -438,6 +442,23 @@ export default class CocktailView extends PIXI.Container {
 
     this._wallItems.x =  this.segmentSize*1.5
     this._wallItems.y =  this.segmentSize*0.4 
+
+    const shadowFill = new PIXI.FillGradient({
+      type: 'radial',
+      center: { x: 0.5, y: 0.5 },
+      innerRadius: 0.25,
+      outerCenter: { x: 0.5, y: 0.5 },
+      outerRadius: 0.5,
+      colorStops: [
+          { offset: 0, color: 0xffffff}, // Center color
+          { offset: 1, color: 0x000000 }   // Edge color
+      ],
+      textureSpace: 'local'
+    })
+    this._shadow.clear();
+    this._shadow.rect(-512, -512, 2048+1024, 1024+1024).fill(shadowFill);
+    this._shadow.rect(-512-1024, -512, 1024, 1024+1024).fill(0x000000);
+    this._shadow.rect(-512+2048+1024, -512, 1024, 1024+1024).fill(0x000000);
   }
 
   setPortraitMode() {
@@ -467,6 +488,23 @@ export default class CocktailView extends PIXI.Container {
 
     this._wallItems.x =  this.segmentSize*0.5
     this._wallItems.y =  this.segmentSize*1.4 
+
+    const shadowFill = new PIXI.FillGradient({
+      type: 'radial',
+      center: { x: 0.5, y: 0.5 },
+      innerRadius: 0.25,
+      outerCenter: { x: 0.5, y: 0.5 },
+      outerRadius: 0.5,
+      colorStops: [
+          { offset: 0, color: 0xffffff}, // Center color
+          { offset: 1, color: 0x000000 }   // Edge color
+      ],
+      textureSpace: 'local'
+    })
+    this._shadow.clear();
+    this._shadow.rect(-512, -512, 1024+1024, 2048+1024).fill(shadowFill);
+    this._shadow.rect(-512, -512-1024, 1024+1024, 1024).fill(0x000000);
+    this._shadow.rect(-512, -512+2048+1024, 1024+1024, 1024).fill(0x000000);
   }
 
   get segmentSize() {
