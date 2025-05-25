@@ -90,8 +90,12 @@ export default class NodePreview extends PIXI.Container {
   async _loadNodeData() {
     const nodeFile = `/story/node_${this._node.path}.json`;
     console.log("Loading node data from", nodeFile);
+    this._overview.loading = true;
     const response = await fetch(nodeFile);
     const data = await response.json();
+    this._overview.once('imageLoaded', () => {
+      this._overview.loading = false;
+    })
     this._overview.updateData(data);
     this._bookContent.updateData(data);
   }

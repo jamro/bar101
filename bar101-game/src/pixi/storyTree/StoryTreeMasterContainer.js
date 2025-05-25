@@ -172,7 +172,7 @@ class StoryTreeMasterContainer extends MasterContainer {
     if(showNodePreview && this._storyTree.currentNode) {
       setTimeout(() => {
         this.showNodePreview(this._storyTree.currentNode);
-      }, 300);
+      }, 500);
     }
   }
 

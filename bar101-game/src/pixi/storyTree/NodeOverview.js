@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import TimeTravelButton from './TimeTravelButton';
 import TitleBanner from './TitleBanner';
 import StoryBookButton from './StoryBookButton';
+import OverviewLoading from './OverviewLoading';
 
 const COLOR = 0xdec583
 
@@ -33,9 +34,9 @@ export default class NodeOverview extends PIXI.Container {
     super();
 
     this.interactive = true;
+    this._loading = false;
 
     this._node = node;
-
     this._label = new TitleBanner()
     
     this._bg = new PIXI.Graphics();
@@ -57,6 +58,9 @@ export default class NodeOverview extends PIXI.Container {
     this._imgContainer.mask = mask;
     this.addChild(mask);
 
+    this._loadingAnimation = new OverviewLoading();
+    this.addChild(this._loadingAnimation);
+
     this.addChild(this._label);
     this._label.x = -450+14;
     this._label.y = TITLE_OFFSET+14;
@@ -77,6 +81,19 @@ export default class NodeOverview extends PIXI.Container {
       this.emit('showBook')
     })
 
+  }
+
+  set loading(loading) {
+    this._loading = loading;
+    if (loading) {
+      this._loadingAnimation.start();
+    } else {
+      this._loadingAnimation.stop();
+    }
+  }
+
+  get loading() {
+    return this._loading;
   }
 
   show() {
@@ -104,5 +121,18 @@ export default class NodeOverview extends PIXI.Container {
     imgSprite.y = 0;
     imgSprite.scale.set(1.3);
     this._imgContainer.addChild(imgSprite);
+    this.emit('imageLoaded');
+
+    let fadeProgress = 0;
+    const fadeInLoop = setInterval(() => {
+      fadeProgress += 0.02;
+      imgSprite.visible = Math.random() < (0.1 + 0.9*fadeProgress)
+      if(fadeProgress >= 1) {
+        imgSprite.visible = true;
+        clearInterval(fadeInLoop);
+      }
+    }, 16);
   }
+
+  
 }
