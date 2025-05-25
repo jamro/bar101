@@ -67,8 +67,10 @@ export default class CocktailView extends PIXI.Container {
     this._ingredientsDisplay.showHint("Grab a bottle and start pouring");
 
     // shaker
+    this._staticShakerContainer = new PIXI.Container();
+    this.addChild(this._staticShakerContainer);
     this._shaker = new Shaker();
-    this.addChild(this._shaker);
+    this._staticShakerContainer.addChild(this._shaker);
     this._shaker.on('pointerdown', (event) => this._startShaking(event));
     this._shaker.on('pointerup', (event) => this._endShaking(event));
     this._shaker.on('pointerupoutside', (event) => this._endShaking(event));
@@ -86,6 +88,9 @@ export default class CocktailView extends PIXI.Container {
       bottle.on('pointerup', (event) => this._endDrag(event));
       bottle.on('pointerupoutside', (event) => this._endDrag(event));
     })
+
+    this._dynamicShakerContainer = new PIXI.Container();
+    this.addChild(this._dynamicShakerContainer);
 
     // drag event hadling
     this.interactive = true;
@@ -163,10 +168,14 @@ export default class CocktailView extends PIXI.Container {
     if (this._shakerContent == 0 || this._shaker.progress >= 1) {
       return;
     }
+    this._shaker.parent.removeChild(this._shaker);
+    this._dynamicShakerContainer.addChild(this._shaker);
     this._shaker.startShaking()
   }
 
   _endShaking(event) {
+    this._shaker.parent.removeChild(this._shaker);
+    this._staticShakerContainer.addChild(this._shaker);
     this._shaker.endShaking()
     if(this._shaker.progress >= 1) {
       this.serveDrink()
@@ -351,7 +360,7 @@ export default class CocktailView extends PIXI.Container {
     glass.y = this._pourPoint.y + 200;
     glass.alpha = 0;
     glass.scale.set(1.5);
-    this.addChild(glass);
+    this._staticShakerContainer.addChild(glass);
     glass.parent.setChildIndex(glass, this._shaker.parent.getChildIndex(this._shaker));
 
     if (drink.glass === "rocks") {
