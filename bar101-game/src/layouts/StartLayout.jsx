@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as styles from './StartLayout.module.css';
 import { Howl } from 'howler';
 
@@ -9,6 +9,8 @@ const clickSound = new Howl({
 });
 
 export default function StartLayout({ onStart, onClear, onStoryTree }) {
+
+  const [debugClicks, setDebugClicks] = useState(0);
   
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -47,8 +49,15 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
     onStoryTree();
   }
 
+  let clearSavedDataButton = null;
+  if (debugClicks > 10) {
+    clearSavedDataButton = <div className={styles.buttonRow}>
+      <button onClick={() => clear()} >Clear Saved Data</button>
+    </div>
+  }
+
   return <div className={styles.masterContainer}>
-      <div className={styles.version}>
+      <div className={styles.version} onClick={() => setDebugClicks(debugClicks + 1)}>
         <small>ver.{__BUILD_DATE__}</small>
       </div>
       <div className={styles.barImage}></div>
@@ -60,9 +69,7 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
           <div className={styles.buttonRow}>
             <button onClick={() => openStoryTree()} >Story Tree</button>
           </div>
-          <div className={styles.buttonRow}>
-            <button onClick={() => clear()} >Clear Saved Data</button>
-          </div>
+          {clearSavedDataButton}
         </div>
       </div>
     </div>
