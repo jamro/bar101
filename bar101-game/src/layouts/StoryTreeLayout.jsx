@@ -37,7 +37,7 @@ export default function StoryTreeLayout({ onClose, visitedNodes, storyPath, enab
   }, [visitedNodes]);
 
   useEffect(() => {
-    storyTreeMasterContainer.updateStoryPath(storyPath);
+    storyTreeMasterContainer.updateStoryPath(storyPath, true);
   }, [storyPath]);
 
   return <ResizablePixiCanvas style={{width: '100%', height: '100%'}} masterContainer={storyTreeSceneRef.current} />

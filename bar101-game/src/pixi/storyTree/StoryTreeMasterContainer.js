@@ -86,22 +86,26 @@ class StoryTreeMasterContainer extends MasterContainer {
           this._clickSound.play();
         }
         if(node) {
-          this._nodePreview = new NodePreview(node);
-          this._nodePreview.enableTimeTravel(this._enableTimeTravel);
-          this._nodePreview.on('openChapter', () => {
-            this.emit('openChapter', node.path);
-            this._clickSound.play();
-          });
-          this._nodePreviewContainer.addChild(this._nodePreview);
-          this._nodePreview.show();
-          this._targetStoryTreePosition.x = -node.x * this._currentScale;
-          this._targetStoryTreePosition.y = -node.y * this._currentScale;
+          this.showNodePreview(node)
           this._clickSound.play();
         }
       }
     });
 
     this._renderLoop = null;
+  }
+
+  showNodePreview(node) {
+    this._nodePreview = new NodePreview(node);
+    this._nodePreview.enableTimeTravel(this._enableTimeTravel);
+    this._nodePreview.on('openChapter', () => {
+      this.emit('openChapter', node.path);
+      this._clickSound.play();
+    });
+    this._nodePreviewContainer.addChild(this._nodePreview);
+    this._nodePreview.show();
+    this._targetStoryTreePosition.x = -node.x * this._currentScale;
+    this._targetStoryTreePosition.y = -node.y * this._currentScale;
   }
 
   enableTimeTravel(enable) {
@@ -161,10 +165,15 @@ class StoryTreeMasterContainer extends MasterContainer {
     this._storyTree.updateVisitedNodes(visitedNodes);
   }
 
-  updateStoryPath(storyPath) {
+  updateStoryPath(storyPath, showNodePreview=false) {
     this._storyTree.updateStoryPath(storyPath);
     this._targetStoryTreePosition.x = -this._storyTree.currentNode?.x || 0;
     this._targetStoryTreePosition.y = -this._storyTree.currentNode?.y || 0;
+    if(showNodePreview && this._storyTree.currentNode) {
+      setTimeout(() => {
+        this.showNodePreview(this._storyTree.currentNode);
+      }, 300);
+    }
   }
 
   resize(width, height) {
