@@ -10,9 +10,14 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
   const skipPromiseResolver = useRef(null);
   const printPromiseResolver = useRef(null);
   const voicePromiseResolver = useRef(null);
+  const voiceLoadingPromiseResolver = useRef(null);
   const voiceRef = useRef(null);
 
   const skip = () => {
+    if(voiceLoadingPromiseResolver.current) {
+      voiceLoadingPromiseResolver.current();
+      voiceLoadingPromiseResolver.current = null;
+    }
     if(skipPromiseResolver.current) {
       skipPromiseResolver.current();
       skipPromiseResolver.current = null;
@@ -54,6 +59,10 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
     }
     
     const sound = await new Promise((resolve) => {
+      voiceLoadingPromiseResolver.current = () => {
+        resolve(false);
+      }
+
       const s = new Howl({
         src: [voiceoverUrl],
         format: ['mp3'],
@@ -73,9 +82,10 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
           resolve(null);
         },
       })
-    })
-    
 
+    })
+    voiceLoadingPromiseResolver.current = null;
+    
     if (voiceRef.current) {
       voiceRef.current.stop();
     }
@@ -91,6 +101,12 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
     if (voicePromiseResolver.current) {
       voicePromiseResolver.current();
       voicePromiseResolver.current = null;
+    }
+
+    if(sound === false) {
+      console.log("skipping voice loading", text);
+      setDisplayedText(text)
+      return;
     }
 
     let isSkipResolved = false;
@@ -174,7 +190,7 @@ const ConversationText = forwardRef(({ onComplete, placeholder, delayMs }, ref) 
   }
 
   const isPrinting = () => {
-    return displayLoop.current !== null || voiceRef.current !== null;
+    return displayLoop.current !== null || voiceRef.current !== null || voiceLoadingPromiseResolver.current !== null;
   }
 
   useImperativeHandle(ref, () => ({
