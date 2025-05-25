@@ -61,13 +61,13 @@ const useGameState = () => {
         }
       }));
     },
-    erodeAllCusomersTrust: (erosionFactor = 0.8) => {
+    erodeAllCusomersTrust: (decisionMakerId, erosionFactor = 0.8) => {
       setState((prevState) => ({
         ...prevState,
         timestamp: Date.now(), // setting new timestamp to flush changes to localStorage
         customerTrust: Object.keys(prevState.customerTrust).reduce((acc, customerId) => {
           const currentTrust = prevState.customerTrust[customerId]
-          acc[customerId] = (currentTrust + 1) * erosionFactor - 1;
+          acc[customerId] = (currentTrust + 1) * (customerId === decisionMakerId ? 0.25 : erosionFactor) - 1;
           return acc;
         }, {})
       }));

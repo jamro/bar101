@@ -73,6 +73,7 @@ function App({ onBarNoiseVolumeChange }) {
         const data = await response.json();
         console.log("Story node data loaded", data);
         setStoryNode(data);
+        window.storyNode = data;
       } catch (error) {
         console.error("Error fetching story node:", error);
         setError(error);
@@ -148,7 +149,8 @@ function App({ onBarNoiseVolumeChange }) {
   }
 
   const completeLevel = () => {
-    erodeAllCusomersTrust();
+    const decisionMaker = Object.keys(storyNode.chats).filter(id => storyNode.chats[id].decision).pop()
+    erodeAllCusomersTrust(decisionMaker);
     proceedStoryPath();
   }
 

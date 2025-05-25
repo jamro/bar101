@@ -45,10 +45,10 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
       if (drink.id == customer.drink && drink.quality > 0) {
         let trustBump = 0
         if(serveUsual) {
-          trustBump += 0.2
+          trustBump += 0.1
         }
         if(drink.special) {
-          trustBump += 0.2
+          trustBump += 0.6
         }
         onTrustChange(trustBump)
         if(drink.special) {
@@ -79,7 +79,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
           await chatWindowRef.current.print(arrRnd(customer.phrases.charge_tip, customer), customer.name, customer.id, 0, true)
         } else { // on the house
           await chatWindowRef.current.print(arrRnd(bartender.phrases.on_house), "Alex", "aradan", 1)
-          onTrustChange(+0.2)
+          onTrustChange(+0.4)
           await chatWindowRef.current.print(arrRnd(customer.phrases.charge_free, customer), customer.name, customer.id, 0, true)
         }
 
@@ -153,7 +153,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         }
         if (question.id === customer.hobby_id) {
           const hobbyAnswer = chat.opener.hobby_answer[getTrustIndex(customer.trust)]
-          onTrustChange(+0.2)
+          onTrustChange(+0.1)
           for (let i = 0; i < hobbyAnswer.length; i++) {
             await chatWindowRef.current.print(hobbyAnswer[i], customer.name, customer.id, 0, i === hobbyAnswer.length - 1)
           }
