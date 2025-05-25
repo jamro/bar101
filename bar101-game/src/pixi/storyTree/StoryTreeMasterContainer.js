@@ -65,8 +65,8 @@ class StoryTreeMasterContainer extends MasterContainer {
 
     this._dragAndPinchHandler = new DragAndPinchHandler(this._masterContainer, {
       onDrag: (dx, dy) => {
-        this._targetStoryTreePosition.x += dx;
-        this._targetStoryTreePosition.y += dy;
+        this._targetStoryTreePosition.x += dx/this._zoomContainer.scale.x;
+        this._targetStoryTreePosition.y += dy/this._zoomContainer.scale.y;
       },
       onPinch: (zoomFactor) => {
         this._targetScale = Math.max(0.1, Math.min(5, this._targetScale * zoomFactor));
@@ -76,8 +76,8 @@ class StoryTreeMasterContainer extends MasterContainer {
         if(!this._nodePreview) {
           const translatedX1 = (x - this._masterContainer.x) / this._masterContainer.scale.x;
           const translatedY1 = (y - this._masterContainer.y) / this._masterContainer.scale.y;
-          const translatedX2 = (translatedX1 - this._storyTree.x) / this._zoomContainer.scale.x;
-          const translatedY2 = (translatedY1 - this._storyTree.y) / this._zoomContainer.scale.y;
+          const translatedX2 = (translatedX1 - this._storyTree.x*this._zoomContainer.scale.x) / this._zoomContainer.scale.x;
+          const translatedY2 = (translatedY1 - this._storyTree.y*this._zoomContainer.scale.y) / this._zoomContainer.scale.y;
 
           node = this._storyTree.selectNodeAt(translatedX2, translatedY2);
         } else {
@@ -104,8 +104,8 @@ class StoryTreeMasterContainer extends MasterContainer {
     });
     this._nodePreviewContainer.addChild(this._nodePreview);
     this._nodePreview.show();
-    this._targetStoryTreePosition.x = -node.x * this._currentScale;
-    this._targetStoryTreePosition.y = -node.y * this._currentScale;
+    this._targetStoryTreePosition.x = -node.x * this._currentScale / this._zoomContainer.scale.x;
+    this._targetStoryTreePosition.y = -node.y * this._currentScale / this._zoomContainer.scale.y;
   }
 
   enableTimeTravel(enable) {
