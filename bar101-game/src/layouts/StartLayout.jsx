@@ -1,5 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import * as styles from './StartLayout.module.css';
+import { Howl } from 'howler';
+
+const clickSound = new Howl({
+  src: ['/audio/click.mp3'],
+  loop: false,
+  volume: 0.3,
+});
 
 export default function StartLayout({ onStart, onClear, onStoryTree }) {
   
@@ -23,10 +30,21 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
   };
   
   const start = () => {
+    clickSound.play();
     if (isMobileDevice()) {
       toggleFullscreen();
     }
     onStart();
+  }
+
+  const clear = () => {
+    clickSound.play();
+    onClear();
+  }
+
+  const openStoryTree = () => {
+    clickSound.play();
+    onStoryTree();
   }
 
   return <div className={styles.masterContainer}>
@@ -37,13 +55,13 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
       <div className={styles.controlsContainer}>
         <div style={{ textAlign: 'center' }}>
           <div className={styles.buttonRow}>
-            <button onClick={start} >Enter Bar 101</button>
+            <button onClick={() => start()} >Enter Bar 101</button>
           </div>
           <div className={styles.buttonRow}>
-            <button onClick={onStoryTree} >Story Tree</button>
+            <button onClick={() => openStoryTree()} >Story Tree</button>
           </div>
           <div className={styles.buttonRow}>
-            <button onClick={onClear} >Clear Saved Data</button>
+            <button onClick={() => clear()} >Clear Saved Data</button>
           </div>
         </div>
       </div>
