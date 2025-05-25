@@ -11,9 +11,16 @@ export default class OverviewLoading extends PIXI.Container {
       .fill(0xa83300)
 
     this._spinner = new PIXI.Graphics();
-    this._spinner.moveTo(90, 0)
-      .arc(0, 0, 90, 0, Math.PI * 2 * 3 / 4)
-      .stroke({color: 0xffffff, width: 28})
+    this._spinner.moveTo(90, 0);
+
+    for (let i = 0; i < 32; i++) {
+      this._spinner.lineTo(
+        90 * Math.cos(0.75 * i * Math.PI * 2 / 32), 
+        90 * Math.sin(0.75 * i * Math.PI * 2 / 32)
+      )
+    }
+    this._spinner.stroke({color: 0xffffff, width: 28})
+
     this.addChild(this._spinner);
     this._spinner.alpha = 0
 
