@@ -11,7 +11,42 @@ const clickSound = new Howl({
 export default function StartLayout({ onStart, onClear, onStoryTree }) {
 
   const [debugClicks, setDebugClicks] = useState(0);
+
+  const gameImage = useRef(null);
   
+  useEffect(() => {
+    let loop = null
+    let isActive = true;
+    const img = new Image();
+    img.src = '/img/bar101_entrence.jpg';
+    img.onload = () => {
+      // load off image
+      img.src = '/img/bar101_entrence_off.jpg';
+      img.onload = () => {
+        console.log('image loaded');
+        if(isActive) {
+          loop = setInterval(() => {
+            if(!gameImage.current) {
+              return;
+            }
+            if (Math.random() < 0.95) {
+              gameImage.current.style.backgroundImage = `url('/img/bar101_entrence.jpg')`;
+            } else {
+              gameImage.current.style.backgroundImage = `url('/img/bar101_entrence_off.jpg')`;
+            }
+          }, 30);
+        }
+      };
+    };
+
+    return () => {
+      isActive = false;
+      if(loop) {
+        clearInterval(loop);
+      }
+    }
+  }, []);
+
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(err => {
@@ -60,7 +95,7 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
       <div className={styles.version} onClick={() => setDebugClicks(debugClicks + 1)}>
         <small>ver.{__BUILD_DATE__}</small>
       </div>
-      <div className={styles.barImage}></div>
+      <div ref={gameImage} className={styles.barImage} style={{ backgroundImage: `url('/img/bar101_entrence.jpg')` }}></div>
       <div className={styles.controlsContainer}>
         <div style={{ textAlign: 'center' }}>
           <div className={styles.buttonRow}>
