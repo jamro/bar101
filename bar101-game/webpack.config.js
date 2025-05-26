@@ -65,7 +65,7 @@ module.exports = {
       background_color: '#000000',
       orientation: 'any',
       theme_color: '#000000',
-      display: 'standalone',
+      display: 'fullscreen',
       start_url: '.',
       publicPath: '/',
       icons: [

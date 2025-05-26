@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#000000">
   <title>Bar 101 - The</title>
@@ -22,6 +23,11 @@
       -webkit-user-select: none; /* Safari */
       -ms-user-select: none;     /* IE 10 and IE 11 */
       user-select: none;         /* Standard syntax */
+
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
     #root {
       height: 100%;
