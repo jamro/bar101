@@ -5,6 +5,9 @@ class GameAssets {
     this.assets = {};
     this.ready = false;
     this.loadingQueue = [
+      'img/bar101_entrence.jpg',
+      'img/bar101_entrence_off.png',
+      'img/bar101_entrence_led.png',
       'img/bar_bg.jpg',
       'img/dtomenko.png',
       'img/lkova.png',

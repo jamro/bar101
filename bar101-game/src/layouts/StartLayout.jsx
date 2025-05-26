@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as styles from './StartLayout.module.css';
 import { Howl } from 'howler';
+import HomeMasterContainer from '../pixi/home/HomeMasterContainer';
+import ResizablePixiCanvas from "../components/ResizablePixiCanvas";
 
 const clickSound = new Howl({
   src: ['/audio/click.mp3'],
@@ -8,44 +10,14 @@ const clickSound = new Howl({
   volume: 0.3,
 });
 
+let homeMasterContainer; // TODO:re factor to avoid global variable
+
 export default function StartLayout({ onStart, onClear, onStoryTree }) {
-
+  if (!homeMasterContainer) {
+    homeMasterContainer = new HomeMasterContainer()
+  }
+  const homeSceneRef = useRef(homeMasterContainer);
   const [debugClicks, setDebugClicks] = useState(0);
-
-  const gameImage = useRef(null);
-  
-  useEffect(() => {
-    let loop = null
-    let isActive = true;
-    const img = new Image();
-    img.src = '/img/bar101_entrence.jpg';
-    img.onload = () => {
-      // load off image
-      img.src = '/img/bar101_entrence_off.jpg';
-      img.onload = () => {
-        console.log('image loaded');
-        if(isActive) {
-          loop = setInterval(() => {
-            if(!gameImage.current) {
-              return;
-            }
-            if (Math.random() < 0.95) {
-              gameImage.current.style.backgroundImage = `url('/img/bar101_entrence.jpg')`;
-            } else {
-              gameImage.current.style.backgroundImage = `url('/img/bar101_entrence_off.jpg')`;
-            }
-          }, 30);
-        }
-      };
-    };
-
-    return () => {
-      isActive = false;
-      if(loop) {
-        clearInterval(loop);
-      }
-    }
-  }, []);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
@@ -89,20 +61,24 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
     </div>
   }
 
-  return <div className={styles.masterContainer}>
+  return <div className={styles.mainContainer}>
       <div className={styles.version} onClick={() => setDebugClicks(debugClicks + 1)}>
         <small>ver.{__BUILD_DATE__}</small>
       </div>
-      <div ref={gameImage} className={styles.barImage} style={{ backgroundImage: `url('/img/bar101_entrence.jpg')` }}></div>
-      <div className={styles.controlsContainer}>
-        <div style={{ textAlign: 'center' }}>
-          <div className={styles.buttonRow}>
-            <button onClick={() => start()} >Enter Bar 101</button>
+      <div className={styles.flexContainer}>
+        <div className={styles.barImage}>
+          <ResizablePixiCanvas masterContainer={homeSceneRef.current} className={styles.barImageCanvas} />
+        </div>
+        <div className={styles.controlsContainer}>
+          <div style={{ textAlign: 'center', paddingBottom: '3em' }}>
+            <div className={styles.buttonRow}>
+              <button onClick={() => start()} >Enter Bar 101</button>
+            </div>
+            <div className={styles.buttonRow}>
+              <button onClick={() => openStoryTree()} >Story Tree</button>
+            </div>
+            {clearSavedDataButton}
           </div>
-          <div className={styles.buttonRow}>
-            <button onClick={() => openStoryTree()} >Story Tree</button>
-          </div>
-          {clearSavedDataButton}
         </div>
       </div>
     </div>
