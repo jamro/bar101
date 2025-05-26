@@ -53,7 +53,6 @@ module.exports = {
         { from : "./assets/img", to: "img" },
         { from : "./assets/audio", to: "audio" },
         { from : "./assets/fonts", to: "fonts" },
-        { from : "./public/test", to: "test" },
       ],
     }),
     new webpack.DefinePlugin({
