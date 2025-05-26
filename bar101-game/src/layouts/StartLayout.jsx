@@ -48,14 +48,12 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
   }, []);
 
   const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(err => {
         console.error(`Error attempting to enable fullscreen: ${err.message}`);
       });
-    } else {
-      if (document.exitFullscreen) {
+    } else if (document.exitFullscreen) {
         document.exitFullscreen();
-      }
     }
   };
 
