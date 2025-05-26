@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const MSG_DELAY = 100
 
-export default function GoodbyeLayout({ bartender, customer, drink, balance, onClose }) {
+export default function GoodbyeLayout({ bartender, customer, drink, balance, onClose, onExit }) {
  
   const chatWindowRef = useRef(null);
 
@@ -35,7 +35,7 @@ export default function GoodbyeLayout({ bartender, customer, drink, balance, onC
 
   }, [customer.id, drink])
   
-  return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender}>
+  return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender} onExit={onExit}>
       <ChatWindow ref={chatWindowRef} />
     </CustomerPreview>
 }

@@ -24,6 +24,7 @@ function GameLayout({
   onBuy,
   onGameOver,
   onBarNoiseVolumeChange,
+  onExit,
 }) {
   if(!storyNode) {
     onBarNoiseVolumeChange(0);
@@ -74,6 +75,7 @@ function GameLayout({
         onDecision={(decision) => onDecision(decision)}
         onUseItem={(item) => onUseItem(item)}
         onBarNoiseVolumeChange={onBarNoiseVolumeChange}
+        onExit={() => onExit()}
       />
     case 'trader':
       onBarNoiseVolumeChange(0.8);

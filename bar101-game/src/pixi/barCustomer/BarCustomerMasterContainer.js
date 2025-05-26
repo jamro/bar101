@@ -4,6 +4,7 @@ import BarTable from './BarTable';
 import TrustMeter from './TrustMeter';
 import BalanceMeter from './BalanceMeter';
 import GameAssets from '../GameAssets';
+import ExitButton from './ExitButton';
 class BarCustomerMasterContainer extends MasterContainer {
   constructor() {
     super();
@@ -16,13 +17,14 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._trustMeter.y = 0;
     this.addChild(this._trustMeter);
 
-    this._balanceMeter = new BalanceMeter
+    this._balanceMeter = new BalanceMeter()
     this._balanceMeter.x = 0;
     this._balanceMeter.y = 0;
     this.addChild(this._balanceMeter);
 
     this._bciButtonAvailable = false;
     this._bciButton = null
+    this._exitButton = null;
   }
 
   init() {
@@ -32,7 +34,7 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._bciButton = new PIXI.Sprite(GameAssets.assets['img/bci_button.png']);
     this._bciButton.interactive = true;
     this._bciButton.buttonMode = true;
-    this._bciButton.anchor.set(0, 1);
+    this._bciButton.anchor.set(0, 0);
     this._bciButton.on('pointerdown', () => {
       this.emit('bciToggle');
     });
@@ -42,6 +44,15 @@ class BarCustomerMasterContainer extends MasterContainer {
     }
     this._bciButton.visible = this._bciButtonAvailable;
     this._updateBciButtonVisibility()
+
+    if(this._exitButton) {
+      this.removeChild(this._exitButton);
+    }
+    this._exitButton = new ExitButton();
+    this._exitButton.on('exit', () => {
+      this.emit('exit');
+    });
+    this.addChild(this._exitButton);
   }
 
   resize(width, height) {
@@ -53,14 +64,18 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._barTable.y = (height - this._barTable.initHeight * scale) / 2;
     this._trustMeter.scale.set(scale);
     this._trustMeter.x = width - this._trustMeter.width  - 40;
-    this._trustMeter.y = 20
+    this._trustMeter.y = height - 80
     this._balanceMeter.scale.set(scale);
     this._balanceMeter.x = 40;
-    this._balanceMeter.y = 20
+    this._balanceMeter.y = height - 80
 
     this._bciButton.scale.set(scale*1.1);
-    this._bciButton.x = 40
-    this._bciButton.y = height - 20;
+    this._bciButton.x = 40;
+    this._bciButton.y = 20;
+
+    this._exitButton.scale.set(scale*1.1);
+    this._exitButton.x = width - 200*scale;
+    this._exitButton.y = 20;
   }
 
   setBalance(balance) {

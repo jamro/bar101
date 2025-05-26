@@ -12,7 +12,9 @@ export default class BalanceMeter extends PIXI.Container {
             fontFamily: 'Chelsea Market',
             fontSize: 25,
             fill: 0xa54200,
-            align: 'center'
+            align: 'center',
+            stroke: 0x000000,
+            strokeThickness: 8,
           }
         })
         this._cashLabel.x = 25;

@@ -174,6 +174,7 @@ function App({ onBarNoiseVolumeChange }) {
     onUseItem={(item) => useItem(item)}
     onGameOver={() => gameOver()}
     onBarNoiseVolumeChange={onBarNoiseVolumeChange}
+    onExit={() => setIsStarted(false)}
   />
 }
 export default App;

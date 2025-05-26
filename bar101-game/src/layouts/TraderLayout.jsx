@@ -4,7 +4,7 @@ import ChatWindow from '../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 import TradingWindow from '../components/trade/TradingWindow';
 
-export default function TraderLayout({ bartender, trader, balance, onClose, onBuy }) {
+export default function TraderLayout({ bartender, trader, balance, onClose, onBuy, onExit }) {
   
   const chatWindowRef = useRef(null); 
   const [chatOptions, setChatOptions] = useState([]);
@@ -48,7 +48,7 @@ export default function TraderLayout({ bartender, trader, balance, onClose, onBu
 
   const tradingWindow = <TradingWindow inventory={bartender.inventory} onBuy={onBuy} onClose={endTrading} balance={balance} trader={trader} />
 
-  return <CustomerPreview customer={trader} customerAnim={true} balance={balance} bartender={bartender} >
+  return <CustomerPreview customer={trader} customerAnim={true} balance={balance} bartender={bartender} onExit={onExit} >
       {phase !== "trade" ? chat : tradingWindow}
     </CustomerPreview>
 }

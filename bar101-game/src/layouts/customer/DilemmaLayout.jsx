@@ -4,7 +4,7 @@ import ChatWindow from '../../components/chat/ChatWindow';
 import PropTypes from 'prop-types';
 import DilemmaWidget from '../../components/chat/DilemmaWidget';
 
-export default function DilemmaLayout({ customer, chat, balance, drink, onClose, onDecision, bartender }) {
+export default function DilemmaLayout({ customer, chat, balance, drink, onClose, onDecision, onExit, bartender }) {
   const [showWidget, setShowWidget] = useState(false);
   const [widgetEnabled, setWidgetEnabled] = useState(false);
   const [chatOptions, setChatOptions] = useState([]);
@@ -174,7 +174,7 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
       enabled={widgetEnabled}
     />
   }
-  return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender}>
+  return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender} onExit={onExit}>
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} >
         {dilemmaWidget}
       </ChatWindow>

@@ -17,6 +17,7 @@ export default function CustomerLayout({
   onBalanceChange,
   onTrustChange,
   onClose, 
+  onExit,
   onDecision,
   onUseItem,
   onBarNoiseVolumeChange
@@ -71,6 +72,7 @@ export default function CustomerLayout({
       balance={balance}
       customer={customer} 
       onClose={(serveUsual) => gotoDrinkServing(serveUsual)} 
+      onExit={() => onExit()}
     />;
   } else if (phase === "serve_drink") {
     onBarNoiseVolumeChange(1);
@@ -95,6 +97,7 @@ export default function CustomerLayout({
       onGoBack={() => gotoDrinkServing(false)} 
       onTrustChange={(dt) => onTrustChange(customer.id, dt)} 
       onClose={(skip) => setPhase(skip ? (chat.decision ? "decision_chat" : "exit") : "main_chat")}
+      onExit={() => onExit()}
     />;
   } else if (phase === "main_chat") {
     onBarNoiseVolumeChange(0.8);
@@ -106,6 +109,7 @@ export default function CustomerLayout({
       drink={drink} 
       onTrustChange={(dt) => onTrustChange(customer.id, dt)} 
       onClose={() => setPhase(chat.decision ? "decision_chat" : "exit")}
+      onExit={() => onExit()}
     />;
   } else if (phase === "decision_chat") {
     onBarNoiseVolumeChange(0.8);
@@ -118,6 +122,7 @@ export default function CustomerLayout({
       onTrustChange={(dt) => onTrustChange(customer.id, dt)} 
       onClose={() => setPhase("exit")}
       onDecision={(d) => onDecision(d)}
+      onExit={() => onExit()}
     />;
   } else if (phase === "exit") {
     onBarNoiseVolumeChange(0.8);
@@ -127,6 +132,7 @@ export default function CustomerLayout({
       customer={customer} 
       drink={drink} 
       onClose={() => close()}
+      onExit={() => onExit()}
     />;
 
   } else {

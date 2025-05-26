@@ -14,7 +14,7 @@ const hobbyNames = {
 
 const DRINK_PRICE = 16
 
-export default function OpenerLayout({ bartender, customer, allCustomers, chat, drink, balance, serveUsual, onBalanceChange, onGoBack, onTrustChange, onClose }) {
+export default function OpenerLayout({ bartender, customer, allCustomers, chat, drink, balance, serveUsual, onBalanceChange, onGoBack, onTrustChange, onClose, onExit }) {
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
   const [openerQuestions, setOpenerQuestions] = useState([]);
@@ -173,7 +173,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         console.error("Unknown phase", phase)
   }}
   
-  return <CustomerPreview customer={customer} drink={drink} drinkAnim={true} balance={balance} bartender={bartender} >
+  return <CustomerPreview customer={customer} drink={drink} drinkAnim={true} balance={balance} bartender={bartender} onExit={onExit} >
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
     </CustomerPreview>
 }
