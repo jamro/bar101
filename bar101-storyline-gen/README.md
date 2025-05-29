@@ -2,8 +2,25 @@
 
 A Python-based tool for generating complex branching storylines for the Bar 101 game. This project uses advanced prompt engineering techniques with OpenAI's API to create a tree of 128 unique story paths, each branching at 7 decision points. The system ensures narrative coherence, logical progression, and engaging variations across all possible story branches.
 
+## Story Generation Flow
+
+The story begins with an initial context and a sequence of events. From there, the generator builds a tree of all possible story branches, based on the decisions made by Bar 101’s customers. The player can influence these decisions.
+
+To structure the story properly, each level of the tree is generated using specific guidelines. For more details, refer to: `/bar101-storyline-gen/context/plot_shaper.json`
+
 ![Story Generation Flow](assets/docs/generator_flow.png)
 
+## Dialogues Flow
+
+The most advanced part of the story is the dialogue system, which reveals key parts of the plot. Dialogues are influenced by the customer's trust level, and each one has five different variants.
+
+In addition to revealing the story, dialogues can also be used to build trust and influence the customer's decisions. The flow below illustrates how this works in detail:
+
+![Dialogues Flow](assets/docs/dialogue_flow.png)
+
+The direction of the plot depends on the choices made by the customer. They present a dilemma to the player and share their beliefs that support one option or the other.
+
+The player can either support these beliefs or challenge them, influencing the story’s direction. The higher the trust level, the more impact the player has on the customer's decision and ultimately, on how the story unfolds.
 
 ## Prerequisites
 
