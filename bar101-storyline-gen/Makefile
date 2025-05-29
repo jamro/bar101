@@ -20,4 +20,4 @@ lint:
 
 # Run tests with pytest
 test:
-	poetry run pytest
+	poetry run pytest tests
