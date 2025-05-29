@@ -26,14 +26,13 @@ The player can either support these beliefs or challenge them, influencing the s
 
 ## TV News
 
-The TV news is another way to reveal the story to the player. News are generated in two variants:
-- Official, propaganda news controlled by the state
-- Rebel TV which is an underground news channel that is not controlled by the state.
+TV news segments provide another way to reveal the story to the player. Each segment is generated in two variants:
+	-	**Official News** — State-controlled and aligned with government propaganda.
+	-	**Rebel TV** — An underground, independent broadcast opposing the official narrative.
 
-In addition to news voiceover, each news segment is accompanied by a visual image. The images are generated using Open AI model. To ensure images consistency, a reference image is provided to the model. See `/bar101-storyline-gen/assets/news_images.json` for more details.
+Each news segment includes both a voiceover and a visual image. The images are generated using an OpenAI model, with a reference image provided to ensure visual consistency. For more details, see /bar101-storyline-gen/assets/news_images.json.
 
 ![TV News](assets/docs/news_mosaic.png)
-
 
 ## Prerequisites
 
