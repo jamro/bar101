@@ -11,6 +11,7 @@ class TimelineIntegrator(AiService):
         super().__init__(openai_api_key)
         self.world_context = None
         self.plot_structure = None
+        self.timeline = None
 
     def read_context(self, base_path):
         def read_context_file(file_path):

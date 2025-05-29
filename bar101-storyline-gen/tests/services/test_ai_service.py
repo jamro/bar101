@@ -1,4 +1,5 @@
 import pytest
+import json
 from unittest.mock import patch
 from bar101_storyline.services.AiService import AiService
 
@@ -58,8 +59,8 @@ def test_ask_llm_with_functions(service, mock_llm_response):
         assert response == mock_response
 
 @pytest.mark.parametrize("function_call,should_raise", [
-    ({"name": "test_function", "arguments": {"param1": "value1"}}, False),
-    ({"name": "wrong_function", "arguments": {"param1": "value1"}}, True),
+    ({"name": "test_function", "arguments": '{"param1": "value1"}'}, False),
+    ({"name": "wrong_function", "arguments": '{"param1": "value1"}'}, True),
     (None, True)
 ])
 def test_ask_llm_for_function(service, mock_llm_response, function_call, should_raise):
@@ -85,4 +86,4 @@ def test_ask_llm_for_function(service, mock_llm_response, function_call, should_
             
             # Assert
             mock_ask_llm.assert_called_once_with(service.client, messages, functions, "gpt-4.1")
-            assert params == function_call["arguments"]
+            assert json.dumps(params) == function_call["arguments"]

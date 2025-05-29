@@ -4,7 +4,7 @@ get_publish_news = lambda news_segment_count: {
   "parameters": {
       "type": "object",
       "properties": {
-          "news_segmenrs": {
+          "news_segments": {
               "type": "array",
               "description": f"List of EXACTY {news_segment_count} news segments.",
               "items": {
@@ -31,6 +31,6 @@ get_publish_news = lambda news_segment_count: {
               }
           }
       },
-      "required": ["news_segmenrs"]
+      "required": ["news_segments"]
   }
 }

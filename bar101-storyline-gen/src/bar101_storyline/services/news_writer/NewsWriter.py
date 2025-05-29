@@ -35,7 +35,7 @@ class NewsWriter(AiService):
         params = self.ask_llm_for_function(messages, functions)
 
         official_news = []
-        for item in params['news_segmenrs']:
+        for item in params['news_segments']:
             image_id = item["image_id"]
             if image_id not in [i["id"] for i in NEWS_IMAGES]:
                 image_id = random.choice([i["id"] for i in NEWS_IMAGES])
@@ -55,7 +55,7 @@ class NewsWriter(AiService):
         params = self.ask_llm_for_function(messages, functions)
         
         underground_news = []
-        for item in params['news_segmenrs']:
+        for item in params['news_segments']:
             image_id = item["image_id"]
             if image_id not in [i["id"] for i in NEWS_IMAGES]:
               image_id = random.choice([i["id"] for i in NEWS_IMAGES])
