@@ -24,6 +24,17 @@ The direction of the plot depends on the choices made by the customer. They pres
 
 The player can either support these beliefs or challenge them, influencing the story’s direction. The higher the trust level, the more impact the player has on the customer's decision and ultimately, on how the story unfolds.
 
+## TV News
+
+The TV news is another way to reveal the story to the player. News are generated in two variants:
+- Official, propaganda news controlled by the state
+- Rebel TV which is an underground news channel that is not controlled by the state.
+
+In addition to news voiceover, each news segment is accompanied by a visual image. The images are generated using Open AI model. To ensure images consistency, a reference image is provided to the model. See `/bar101-storyline-gen/assets/news_images.json` for more details.
+
+![TV News](assets/docs/news_mosaic.png)
+
+
 ## Prerequisites
 
 - Python 3.11 or higher
