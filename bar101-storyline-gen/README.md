@@ -2,6 +2,9 @@
 
 A Python-based tool for generating complex branching storylines for the Bar 101 game. This project uses advanced prompt engineering techniques with OpenAI's API to create a tree of 128 unique story paths, each branching at 7 decision points. The system ensures narrative coherence, logical progression, and engaging variations across all possible story branches.
 
+![Story Generation Flow](assets/docs/generator_flow.png)
+
+
 ## Prerequisites
 
 - Python 3.11 or higher
