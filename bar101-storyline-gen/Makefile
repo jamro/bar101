@@ -20,4 +20,4 @@ lint:
 
 # Run tests with pytest
 test:
-	poetry run pytest tests
+	poetry run pytest tests --cov=src/bar101_storyline/services --cov-report=term-missing
