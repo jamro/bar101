@@ -53,7 +53,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
   const products = {
     antenna: {
       id: "antenna",
-      img: "/img/tv_product_emblem.png",
+      img: "/img/tv_product_emblem.jpg",
       name: "Resist TV",
       subtitle: "Satellite Dish",
       price: 50.00,
@@ -63,7 +63,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
     },
     scanner: {
       id: "scanner",
-      img: "/img/bci_scanner_product_emblem.png",
+      img: "/img/bci_scanner_product_emblem.jpg",
       name: "BCI Scanner",
       subtitle: "Jailbroken. Off the Grid",
       price: 100.00,
@@ -73,7 +73,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
     },
     special: {
       id: "special",
-      img: "/img/absinthe_product_emblem.png",
+      img: "/img/absinthe_product_emblem.jpg",
       name: "Absinthe",
       subtitle: `Inventory: ${inventory.special}`,
       available: true,
@@ -83,7 +83,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
     },
     timemachine: {
       id: "timemachine",
-      img: "/img/time_machine_product_emblem.png",
+      img: "/img/time_machine_product_emblem.jpg",
       name: "Time Machine",
       subtitle: `Jump to any point in time`,
       available: !inventory.timemachine,
@@ -96,7 +96,7 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
   for(const user of users) {
     products[user] = {
       id: user,
-      img: `/img/${user}_product_emblem.png`,
+      img: `/img/${user}_product_emblem.jpg`,
       name: "BCI User Profile",
       subtitle: userNames[user],
       price: 50.00 + users.indexOf(user) * 30,
