@@ -126,7 +126,9 @@ export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
     } else if (!inventory.scanner) {
       initialItems.push(products.scanner.id)
     } else {
-      initialItems.push(products.timemachine.id)
+      if(!inventory.timemachine) {
+        initialItems.push(products.timemachine.id)
+      }
       for(const user of users) {
         if(!inventory.files.includes(user)) {
           initialItems.push(products[user].id)
