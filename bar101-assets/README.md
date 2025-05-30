@@ -2,7 +2,7 @@
 
 This directory contains all the assets used in the Bar101 application. Below is a comprehensive overview of the assets structure and their purposes.
 
-![Bar101 Assets](./bar101-entrence.png)
+![Bar101 Assets](./bar101-entrence-small.jpg)
 
 ## Directory Structure
 
@@ -52,3 +52,10 @@ Contains product-related assets and images.
 2. Use the provided templates (e.g., `product_emblem_template.png`) for consistency
 3. Keep the file structure organized and add new assets to their appropriate directories
 4. When adding new assets, ensure they follow the existing naming conventions
+
+## Image Generation and Processing
+All images in this directory were initially generated using the OpenAI GPT-4o model. These files represent the raw outputs from the AI model. Each image has undergone post-processing which includes:
+- Scaling to appropriate dimensions
+- Adjusting levels and colors for optimal appearance
+- Adding transparency where needed
+- Fine-tuning for consistency across the application
