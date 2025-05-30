@@ -70,11 +70,11 @@ class BarCustomerMasterContainer extends MasterContainer {
     this._balanceMeter.y = height - 80
 
     this._bciButton.scale.set(scale*1.1);
-    this._bciButton.x = 40;
+    this._bciButton.x = width - 200*scale;
     this._bciButton.y = 20;
 
     this._exitButton.scale.set(scale*1.1);
-    this._exitButton.x = width - 200*scale;
+    this._exitButton.x = 40;
     this._exitButton.y = 20;
   }
 
