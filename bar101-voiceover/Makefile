@@ -2,12 +2,20 @@
 
 install:
 	poetry install --no-root
+
 # Run the app
 run:
 	poetry run python src/bar101_voiceover/main.py
 
 samples:
 	poetry run python src/bar101_voiceover/samples.py
+
+clean-local:
+	rm -rf ./voiceovers/storytree
+	rm -rf ./voiceovers/samples
+
+clean-aws:
+  aws s3 rm s3://cdn-bar101.jmrlab.com --recursive
 
 upload:
 	aws s3 sync ./voiceovers/storytree  s3://cdn-bar101.jmrlab.com/storytree --exact-timestamps
