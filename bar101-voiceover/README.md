@@ -4,7 +4,7 @@ A Python-based tool for generating voiceovers for the Bar 101 game's dialogues a
 
 ## Overview
 
-The voiceover generator is an integral part of the Bar 101 game's narrative system, working in conjunction with the storyline generator to create engaging TV news segments. Each news segment includes both visual content and voiceover narration, providing players with multiple ways to experience the story.
+The voiceover generator is an integral part of the Bar 101 game's narrative system, working in conjunction with the storyline generator to create engaging character dialogues and TV news segments. Each dialogue has 5 different variants based on the character's trust level, and with 128 different plot branches, the system generates approximately 100,000 audio files (totaling around 2GB) to cover all possible story combinations. This comprehensive voiceover system ensures that every conversation and news segment in the game is fully voiced, providing players with an immersive audio experience.
 
 ## Features
 
@@ -31,7 +31,7 @@ The voiceover generator is designed to handle a large-scale text-to-speech conve
 
 ## Text-to-Speech Technology
 
-The project uses Coqui TTS with the VITS model trained on the VCTK dataset for voice synthesis. This choice was made for several key reasons:
+The project uses Coqui TTS with the VITS model trained on the VCTK dataset for voice synthesis. While even better results could be achieved with large online models (such as those offered by OpenAI), the cost would be prohibitive given the large number of voiceovers needed. One of the key assumptions of this project was to maintain a low budget while still delivering quality results. This choice was made for several key reasons:
 
 - **Quality**: VITS (Variational Inference with adversarial learning for end-to-end Text-to-Speech) provides high-quality, natural-sounding speech synthesis that's crucial for immersive game dialogue
 - **Multi-speaker Support**: The VCTK dataset includes multiple speakers, allowing us to assign distinct voices to different characters and news types
