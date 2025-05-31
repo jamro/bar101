@@ -23,6 +23,7 @@ export default class BciScanner extends PIXI.Container {
     });
 
     this._customer = null;
+    this._isAnimating = false;
 
     this._masterContainer = new PIXI.Container();
 
@@ -184,57 +185,89 @@ export default class BciScanner extends PIXI.Container {
   }
 
   powerOn() {
+    // Prevent multiple animations from running simultaneously
+    if (this._isAnimating) {
+      return;
+    }
+    
+    this._isAnimating = true;
+    
     const anim = async () => {
-      this._ledBar.setLed(0, 0);
-      this._ledBar.setLed(1, 0);
-      this._ledBar.setLed(2, 0);
-      this._ledBar.setLed(3, 0);
-      this._ledBar.setPower(0);
-      this._pageMask.scale.set(1, 0);
-      for(let i = 0.0; i < 1; i+=0.15) {
-        await new Promise(resolve => setTimeout(resolve, 30));
+      try {
+        this._ledBar.setLed(0, 0);
+        this._ledBar.setLed(1, 0);
+        this._ledBar.setLed(2, 0);
+        this._ledBar.setLed(3, 0);
+        this._ledBar.setPower(0);
+        this._pageMask.scale.set(1, 0);
+        
+        for(let i = 0.0; i < 1; i+=0.15) {
+          await new Promise(resolve => setTimeout(resolve, 30));
+          this._powerOverlay.clear();
+          const w = 390 * i;
+          this._powerOverlay.rect(-5, -5, 10, 10)
+            .fill({color: 0xdec583, alpha: i});
+        }
+        
+        this._powerSound.play();
+        this._ledBar.setLed(0, 1);
+        
+        for(let i = 0.0; i < 1; i+=0.15) {
+          await new Promise(resolve => setTimeout(resolve, 30));
+          this._powerOverlay.clear();
+          const w = 390 * i;
+          this._powerOverlay.rect(-w/2, -5, w, 10)
+            .fill(0xdec583);;
+        }
+        
+        this._ledBar.setLed(1, 1);
+        
+        for(let i = 1; i > 0; i-=0.2) {
+          await new Promise(resolve => setTimeout(resolve, 30));
+          this._powerOverlay.clear();
+          const y = 0.5 * 430 * (1-i);
+          this._powerOverlay
+            .rect(-390/2, -y-5, 390, 10)
+            .rect(-390/2, +y-5, 390, 10)
+            .fill({color: 0xdec583, alpha: i})
+          this._pageMask.scale.set(1, 1-i);
+          this._masterContainer.alpha = Math.random() > i ? (1-i) : 0;
+        }
+        
+        this._ledBar.setLed(2, 1);
+        this._ledBar.setPower(1);
         this._powerOverlay.clear();
-        const w = 390 * i;
-        this._powerOverlay.rect(-5, -5, 10, 10)
-          .fill({color: 0xdec583, alpha: i});
+        
+        // Ensure proper state after scaling animation
+        this._pageMask.scale.set(1, 1);
+        this._masterContainer.alpha = 1;
+        
+        // Flickering effect with guaranteed final state
+        for(let i = 0; i < 1; i+=0.1) {
+          await new Promise(resolve => setTimeout(resolve, 30));
+          this._masterContainer.alpha = Math.random();
+        }
+        
+        // Guarantee final visibility
+        this._masterContainer.alpha = 1;
+        this._ledBar.setLed(3, 1);
+        
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        this._ledBar.setLed(0, 0);
+        this._ledBar.setLed(1, 0);
+        this._ledBar.setLed(2, 0);
+        this._ledBar.setLed(3, 0);
+        this._ledBar.setLed(this._currentPageIndex, 1);
+        
+      } catch (error) {
+        console.error('Animation error:', error);
+        // Ensure proper cleanup even if animation fails
+        this._masterContainer.alpha = 1;
+        this._pageMask.scale.set(1, 1);
+      } finally {
+        this._isAnimating = false;
       }
-      this._powerSound.play();
-      this._ledBar.setLed(0, 1);
-      for(let i = 0.0; i < 1; i+=0.15) {
-        await new Promise(resolve => setTimeout(resolve, 30));
-        this._powerOverlay.clear();
-        const w = 390 * i;
-        this._powerOverlay.rect(-w/2, -5, w, 10)
-          .fill(0xdec583);;
-      }
-      this._ledBar.setLed(1, 1);
-      for(let i = 1; i > 0; i-=0.2) {
-        await new Promise(resolve => setTimeout(resolve, 30));
-        this._powerOverlay.clear();
-        const y = 0.5 * 430 * (1-i);
-        this._powerOverlay
-          .rect(-390/2, -y-5, 390, 10)
-          .rect(-390/2, +y-5, 390, 10)
-          .fill({color: 0xdec583, alpha: i})
-        this._pageMask.scale.set(1, 1-i);
-        this._masterContainer.alpha = Math.random() > i ? (1-i) : 0;
-      }
-      this._ledBar.setLed(2, 1);
-      this._ledBar.setPower(1);
-      this._powerOverlay.clear();
-      for(let i = 0; i < 1; i+=0.1) {
-        await new Promise(resolve => setTimeout(resolve, 30));
-        this._masterContainer.alpha = Math.random();
-      }
-      this._masterContainer.alpha = 1;
-      this._ledBar.setLed(3, 1);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      this._ledBar.setLed(0, 0);
-      this._ledBar.setLed(1, 0);
-      this._ledBar.setLed(2, 0);
-      this._ledBar.setLed(3, 0);
-      this._ledBar.setLed(this._currentPageIndex, 1);
-
     }
 
     anim();

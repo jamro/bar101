@@ -62,8 +62,10 @@ export default class BciHistoryPage extends BciScannerPage {
     const graphHeight = 250;
     this._graph.clear();
 
-    if(bciData < 1) return
-    const bciData = data.customer.bci_history.slice(-10);
+
+    let bciData = data.customer.bci_history ? data.customer.bci_history.slice(-10) : [];
+    bciData = [...bciData]
+    if(bciData.length < 1) return;
     const step = graphWidth / (bciData.length-1);
     const yStep = graphHeight / 10;
 
@@ -74,7 +76,6 @@ export default class BciHistoryPage extends BciScannerPage {
         this._graph.rect(i-2, j-4, 4, 8).fill({color: 0xdec583, alpha: 0.25})
       }
     }
-
 
     // draw chart
     this._graph.moveTo(0, graphHeight);
@@ -94,9 +95,6 @@ export default class BciHistoryPage extends BciScannerPage {
     for (let i = 1; i < bciData.length-1; i++) {
       this._graph.circle(i * step, graphHeight - bciData[i] * (graphHeight / 100), 7).fill(0xffffff);
     }
-
-
-
 
     // draw frame
     this._graph.rect(0, 0, graphWidth, graphHeight)
