@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 export default function MainChatLayout({ customer, chat, onTrustChange, drink, balance, onClose, bartender, onExit }) {
  
+  const [chatInputHeader, setChatInputHeader] = useState("");
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
   const chatWindowRef = useRef(null);
@@ -20,6 +21,7 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
       for (let i = 0; i < mainVariant.length; i++) {
         await chatWindowRef.current.print(mainVariant[i], customer.name, customer.id, 0, i === mainVariant.length - 1)
       }
+      setChatInputHeader("REACTION")
       setChatOptions([
         "Be empathetic",
         "Push for info",
@@ -32,6 +34,7 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
   const sendMessage = async (index) => {
     switch(phase) {
       case "followup":
+        setChatInputHeader("")
         setChatOptions([])
         if (index === 0) { // Be empathetic
           onTrustChange(+0.2)
@@ -40,6 +43,7 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
           for (let i = 0; i < emotionalVariant.length; i++) {
             await chatWindowRef.current.print(emotionalVariant[i], customer.name, customer.id, 0, i === emotionalVariant.length - 1)
           }
+          setChatInputHeader("FOLLOW UP")
           setChatOptions(["Continue"])
           setPhase("exit")
         } else if (index === 1) { // Push for info
@@ -49,12 +53,14 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
           for (let i = 0; i < informationalVariant.length; i++) {
             await chatWindowRef.current.print(informationalVariant[i], customer.name, customer.id, 0, i === informationalVariant.length - 1)
           }
+          setChatInputHeader("FOLLOW UP")
           setChatOptions(["Continue"])
           setPhase("exit")
         }
 
         break;
       case "exit":
+        setChatInputHeader("")
         setChatOptions([])
         onClose()
         break;
@@ -64,6 +70,6 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
   }}
   
   return <CustomerPreview customer={customer} drink={drink} balance={balance} bartender={bartender} onExit={onExit}>
-      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
+      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} inputHeader={chatInputHeader} />
     </CustomerPreview>
 }

@@ -18,6 +18,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
   const [chatOptions, setChatOptions] = useState([]);
   const [phase, setPhase] = useState("serve");
   const [openerQuestions, setOpenerQuestions] = useState([]);
+  const [chatInputHeader, setChatInputHeader] = useState("");
   const chatWindowRef = useRef(null);
 
   const getTrustIndex = (trust) => {
@@ -56,11 +57,13 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         } else {
           await chatWindowRef.current.print(arrRnd(customer.phrases.thanks, customer), customer.name, customer.id, 0, true)
         }
+        setChatInputHeader("CHARGE")
         setChatOptions([`That'll be $${DRINK_PRICE.toFixed(2)}`, "On the house."])
         setPhase("charge")
       } else {
         onTrustChange(-0.2)
         await chatWindowRef.current.print(arrRnd(customer.phrases.wrong_drink, customer), customer.name, customer.id, 0)
+        setChatInputHeader("")
         setChatOptions(["Fix it"])
         setPhase("goBack")
       }
@@ -72,6 +75,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
     switch(phase) {
 
       case "charge":
+        setChatInputHeader("")
         setChatOptions([])
         if(index === 0) { // charge
           await chatWindowRef.current.print(arrRnd(bartender.phrases.charge), "Alex", "aradan", 1)
@@ -120,12 +124,13 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
           text: chat.opener.questions.neutral
         })
         setOpenerQuestions(openers)
-        
+        setChatInputHeader("OPEN CONVERSATION WITH...")
         setChatOptions(openers.map(o => o.label))
         setPhase("opener")
         break;
 
       case "goBack":
+        setChatInputHeader("")
         setChatOptions([])
         await chatWindowRef.current.print(arrRnd(bartender.phrases.fix_drink), "Alex", "aradan", 1) 
         onGoBack()
@@ -133,12 +138,14 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
 
       case "opener":
         const question = openerQuestions[index]
+        setChatInputHeader("")
         setChatOptions([])
         await chatWindowRef.current.print(`${question.text}`, "Alex", "aradan", 1)
         if (question.id !== "neutral" && question.id !== customer.hobby_id) {
           onTrustChange(-0.2)
           await chatWindowRef.current.print(chat.opener.wrong_hobby_answer, customer.name, customer.id, 0, true)
           setPhase("exit")
+          setChatInputHeader("FOLLOW UP")
           setChatOptions(["Continue", "Stay quiet"])
           return;
         }
@@ -148,6 +155,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
             await chatWindowRef.current.print(neutralAnswer[i], customer.name, customer.id, 0, i === neutralAnswer.length - 1)
           }
           setPhase("exit")
+          setChatInputHeader("FOLLOW UP")
           setChatOptions(["Continue", "Stay quiet"])
           return
         }
@@ -158,6 +166,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
             await chatWindowRef.current.print(hobbyAnswer[i], customer.name, customer.id, 0, i === hobbyAnswer.length - 1)
           }
           setPhase("exit")
+          setChatInputHeader("FOLLOW UP")
           setChatOptions(["Continue", "Stay quiet"])
           return
         }
@@ -165,6 +174,7 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
         break;
 
       case "exit":
+        setChatInputHeader("")
         setChatOptions([])
         onClose(index === 1)
         break;
@@ -174,6 +184,6 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
   }}
   
   return <CustomerPreview customer={customer} drink={drink} drinkAnim={true} balance={balance} bartender={bartender} onExit={onExit} >
-      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
+      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} inputHeader={chatInputHeader} />
     </CustomerPreview>
 }

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 export default function DrinkPrompLayout({ bartender, customer, balance, onClose, onExit }) {
   const drinkQuestions = ['What can I get you?', 'The usual?'] 
   const [chatOptions, setChatOptions] = useState([...drinkQuestions]);
+  const [chatInputHeader, setChatInputHeader] = useState("ASK FOR ORDER");
   const [phase, setPhase] = useState("ask");
   const chatWindowRef = useRef(null);
   const [serveUsual, setServeUsual] = useState(false);
@@ -27,11 +28,12 @@ export default function DrinkPrompLayout({ bartender, customer, balance, onClose
   const sendMessage = async (index) => {
     if (phase === "exit") {
       setChatOptions([])
+      setChatInputHeader("")
       await chatWindowRef.current.print(arrRnd(bartender.phrases.confirm_drink), "Alex", "aradan", 1)
       onClose(serveUsual)
       return
     }
-
+    setChatInputHeader("")
     setChatOptions([])
 
     if (index === 0) { // "What can I get you?"
@@ -44,12 +46,13 @@ export default function DrinkPrompLayout({ bartender, customer, balance, onClose
       setServeUsual(true)
     }
 
-    setChatOptions(["OK"])
+    setChatInputHeader("PREPARE DRINK")
+    setChatOptions(["OK, I'll get it ready"])
     setPhase("exit")
   }
 
   return <CustomerPreview customer={customer} customerAnim={true} balance={balance} bartender={bartender} onExit={onExit} >
-      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} />
+      <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} inputHeader={chatInputHeader} />
     </CustomerPreview>
 }
 

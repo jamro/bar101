@@ -5,12 +5,12 @@ import ChatMessage from './ChatMessage';
 import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from "react";
 import PropTypes from 'prop-types';
 import ConversationText from './ConversationText';
-import DilemmaWidget from './DilemmaWidget';
 
 const ChatWindow = forwardRef(({
     options, 
     onSubmit,
-    children
+    children,
+    inputHeader
   }, ref) => {
   const [from, setFrom] = useState("");
   const [userIndex, setUserIndex] = useState(0);
@@ -24,6 +24,13 @@ const ChatWindow = forwardRef(({
 
   if (children) {
     buttons = children
+  }
+
+  if (inputHeader) {
+    buttons = <div>
+      <div className={styles.headerTitle}>{inputHeader}</div>
+      <div>{buttons}</div>
+    </div>
   }
 
   const handleComplete = () => {
@@ -77,10 +84,12 @@ const ChatWindow = forwardRef(({
 ChatWindow.propTypes = {
   onSubmit: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string),
+  inputHeader: PropTypes.string,
 };
 ChatWindow.defaultProps = {
   onSubmit: () => {},
   options: [],
+  inputHeader: "",
 };
 
 export default ChatWindow;
