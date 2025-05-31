@@ -2,7 +2,7 @@
 
 Welcome to Bar 101, a narrative-driven game set in the dystopian city of Stenograd, where you'll play as a bartender navigating a world controlled by the Behavioral Compliance Index (BCI) - an all-seeing system that scores every citizen's behavior in real-time.
 
-![Screenshots](./bar101-assets/screenshots.jpg)
+![Bar 101](./bar101-assets/bar_wide.jpg)
 
 ## Quick Links
 - **[Play the Demo](https://bar101.jmrlab.com)**
@@ -25,6 +25,8 @@ As Alex Radan, a former systems technician with a mysterious past, you'll:
 - Navigate the complex web of Council factions: Harmonists, Innovators, and the Directorate
 
 ## Game Mechanics
+
+![Screenshots](./bar101-assets/screenshots.jpg)
 
 ### Social Engineering
 - Build trust with customers through meaningful conversations
