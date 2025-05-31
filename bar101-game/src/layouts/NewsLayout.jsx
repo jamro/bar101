@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ConversationText from '../components/chat/ConversationText';
-import TV from '../components/tv';
+import TV from '../components/TV'
 import * as styles from './NewsLayout.module.css';
 
 export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {

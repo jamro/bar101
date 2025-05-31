@@ -1,10 +1,8 @@
 import React, {useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
 import PropTypes from 'prop-types';
-import * as styles from './tv.module.css';
+import * as styles from './TV.module.css';
 import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import NewsMasterContainer from "../pixi/news/NewsMasterContainer";
-
-let newsMasterContainer; // TODO:re factor to avoid global variable
 
 const TV = forwardRef(({
   mode,
@@ -13,30 +11,27 @@ const TV = forwardRef(({
   onReady,
 }, ref) => {
 
-  if (!newsMasterContainer) {
-    newsMasterContainer = new NewsMasterContainer()
-  }
-  const barSceneRef = useRef(newsMasterContainer);
+  const masterContainer = NewsMasterContainer.getInstance();
 
   useEffect(() => {
     if(mode === "official") {
-      barSceneRef.current.setOfficialMode();
+      masterContainer.setOfficialMode();
     } else {
-      barSceneRef.current.setUndergroundMode();
+      masterContainer.setUndergroundMode();
     }
-    barSceneRef.current.setPip(pipUrl);
-    barSceneRef.current.setHeadline(headline);
+    masterContainer.setPip(pipUrl);
+    masterContainer.setHeadline(headline);
   }, [mode, pipUrl, headline]);
 
   useImperativeHandle(ref, () => ({
-    fadeIn: () => barSceneRef.current.fadeIn(),
-    fadeOut: () => barSceneRef.current.fadeOut(),
-    playIntro: () => barSceneRef.current.playIntro(),
-    hideIntro: () => barSceneRef.current.hideIntro(),
+    fadeIn: () => masterContainer.fadeIn(),
+    fadeOut: () => masterContainer.fadeOut(),
+    playIntro: () => masterContainer.playIntro(),
+    hideIntro: () => masterContainer.hideIntro(),
   }));
 
   return <ResizablePixiCanvas 
-      masterContainer={barSceneRef.current} 
+      masterContainer={masterContainer} 
       className={styles.container} 
       onReady={onReady} 
       cacheKey="TV" 

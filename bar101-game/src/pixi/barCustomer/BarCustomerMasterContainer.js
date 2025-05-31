@@ -112,4 +112,13 @@ class BarCustomerMasterContainer extends MasterContainer {
 
 }
 
+BarCustomerMasterContainer.instance = null;
+
+BarCustomerMasterContainer.getInstance = () => {
+  if(!BarCustomerMasterContainer.instance) {
+    BarCustomerMasterContainer.instance = new BarCustomerMasterContainer();
+  }
+  return BarCustomerMasterContainer.instance;
+}
+
 export default BarCustomerMasterContainer;

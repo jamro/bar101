@@ -31,4 +31,13 @@ class BciScannerMasterContainer extends MasterContainer {
 
 }
 
+BciScannerMasterContainer.instance = null;
+
+BciScannerMasterContainer.getInstance = () => {
+  if(!BciScannerMasterContainer.instance) {
+    BciScannerMasterContainer.instance = new BciScannerMasterContainer();
+  }
+  return BciScannerMasterContainer.instance;
+}
+
 export default BciScannerMasterContainer;

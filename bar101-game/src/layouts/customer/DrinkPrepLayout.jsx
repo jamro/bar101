@@ -3,36 +3,32 @@ import PropTypes from 'prop-types';
 import ResizablePixiCanvas from '../../components/ResizablePixiCanvas';
 import CocktailMasterContainer from '../../pixi/cocktail/CocktailMasterContainer';
 
-let cocktailMasterContainer; // TODO:re factor to avoid global variable
 
 export default function DrinkPrepLayout({ drinks, bartender, onServe }) {
-  if (!cocktailMasterContainer) {
-    cocktailMasterContainer = new CocktailMasterContainer();
-  }
-  const cocktailSceneRef = useRef(cocktailMasterContainer);
+  const masterContainer = CocktailMasterContainer.getInstance();
 
   const inventory = bartender.inventory;
 
   useEffect(() => {
-    cocktailMasterContainer.on('serveDrink', (drink) => {
+    masterContainer.on('serveDrink', (drink) => {
       onServe(drink);
     })
     return () => {
-      cocktailMasterContainer.off('serveDrink');
+      masterContainer.off('serveDrink');
     }
   }, []);
 
   useEffect(() => {
-    cocktailMasterContainer.setDrinks(drinks);
+    masterContainer.setDrinks(drinks);
   }, [drinks]);
 
   useEffect(() => {
-    cocktailMasterContainer.setInventory(inventory);
+    masterContainer.setInventory(inventory);
   }, [inventory]);
 
   return <ResizablePixiCanvas 
       style={{width: '100%', height: '100%'}} 
-      masterContainer={cocktailSceneRef.current} 
+      masterContainer={masterContainer} 
       cacheKey="DrinkPrepLayout" 
     />
 

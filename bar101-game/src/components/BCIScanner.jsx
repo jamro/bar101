@@ -4,30 +4,26 @@ import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import * as styles from './BCIScanner.module.css';
 import BciScannerMasterContainer from "../pixi/bciScanner/BciScannerMasterContainer";
 
-let bciScannerMasterContainer; // TODO:re factor to avoid global variable
-
 export default function BCIScanner({customer, inventory, onClose}) {
-  if (!bciScannerMasterContainer) {
-    bciScannerMasterContainer = new BciScannerMasterContainer()
-  }
-  const barSceneRef = useRef(bciScannerMasterContainer);
+
+  const masterContainer = BciScannerMasterContainer.getInstance()
 
   useEffect(() => {
-    barSceneRef.current.setData({customer, inventory});
-    barSceneRef.current.powerOn();
+    masterContainer.setData({customer, inventory});
+    masterContainer.powerOn();
   }, [customer]);
 
   useEffect(() => {
-    barSceneRef.current.on('close', onClose);
+    masterContainer.on('close', onClose);
     return () => {
-      barSceneRef.current.off('close');
+      masterContainer.off('close');
     };
   }, [onClose]);
 
   return (
     <ResizablePixiCanvas 
         className={styles.bciScannerContainer} 
-        masterContainer={barSceneRef.current} 
+        masterContainer={masterContainer} 
         cacheKey="BCIScanner" 
         onReady={() => {
           console.log("BCIScanner ready");

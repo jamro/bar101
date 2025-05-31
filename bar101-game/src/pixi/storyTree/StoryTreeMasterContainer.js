@@ -199,4 +199,13 @@ class StoryTreeMasterContainer extends MasterContainer {
   }
 }
 
+StoryTreeMasterContainer.instance = null;
+
+StoryTreeMasterContainer.getInstance = () => {
+  if(!StoryTreeMasterContainer.instance) {
+    StoryTreeMasterContainer.instance = new StoryTreeMasterContainer();
+  }
+  return StoryTreeMasterContainer.instance;
+}
+
 export default StoryTreeMasterContainer;

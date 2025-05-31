@@ -63,4 +63,13 @@ class HomeMasterContainer extends MasterContainer {
 
 }
 
+HomeMasterContainer.instance = null;
+
+HomeMasterContainer.getInstance = () => {
+  if(!HomeMasterContainer.instance) {
+    HomeMasterContainer.instance = new HomeMasterContainer();
+  }
+  return HomeMasterContainer.instance;
+}
+
 export default HomeMasterContainer;

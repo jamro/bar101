@@ -126,4 +126,13 @@ class NewsMasterContainer extends MasterContainer {
 
 }
 
+NewsMasterContainer.instance = null;
+
+NewsMasterContainer.getInstance = () => {
+  if(!NewsMasterContainer.instance) {
+    NewsMasterContainer.instance = new NewsMasterContainer();
+  }
+  return NewsMasterContainer.instance;
+}
+
 export default NewsMasterContainer;

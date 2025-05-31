@@ -152,4 +152,13 @@ class CocktailMasterContainer extends MasterContainer {
 
 }
 
+CocktailMasterContainer.instance = null;
+
+CocktailMasterContainer.getInstance = () => {
+  if(!CocktailMasterContainer.instance) {
+    CocktailMasterContainer.instance = new CocktailMasterContainer();
+  }
+  return CocktailMasterContainer.instance;
+}
+
 export default CocktailMasterContainer;

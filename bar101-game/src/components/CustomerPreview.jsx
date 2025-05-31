@@ -6,41 +6,37 @@ import ResizablePixiCanvas from "./ResizablePixiCanvas";
 import BarCustomerMasterContainer from "../pixi/barCustomer/BarCustomerMasterContainer";
 import BCIScanner from "./BCIScanner";
 
-let barCustomerMasterContainer; // TODO:re factor to avoid global variable
 
 export default function CustomerPreview({ customer,bartender, drink, children, drinkAnim=false, customerAnim=false, balance=0, onExit=()=>{} }) {
-  if (!barCustomerMasterContainer) {
-    barCustomerMasterContainer = new BarCustomerMasterContainer();
-  }
+  const masterContainer = BarCustomerMasterContainer.getInstance();
   const [containerRef, size] = useResizeObserver();
-  const barSceneRef = useRef(barCustomerMasterContainer);
   const [bciShown, setBciShown] = useState(false);
 
   useEffect(() => {
-    barSceneRef.current.setDrink(drink, drinkAnim);
+    masterContainer.setDrink(drink, drinkAnim);
   }, [drink]);
 
   useEffect(() => {
-    barSceneRef.current.setCustomer(customer, customerAnim);
+    masterContainer.setCustomer(customer, customerAnim);
   }, [customer]);
 
   useEffect(() => {
-    barSceneRef.current.setBciAvailable(bartender.inventory.scanner);
+    masterContainer.setBciAvailable(bartender.inventory.scanner);
   }, [bartender]);
 
   useEffect(() => {
-    barSceneRef.current.setBalance(balance);
+    masterContainer.setBalance(balance);
   }, [balance]);
   
   useEffect(() => {
-    barSceneRef.current.on('bciToggle', () => {
+    masterContainer.on('bciToggle', () => {
       setBciShown((prev) => !prev);
     });
-    barSceneRef.current.on('exit', () => {
+    masterContainer.on('exit', () => {
       onExit();
     });
     return () => {
-      barSceneRef.current.off('bciToggle');
+      masterContainer.off('bciToggle');
     };
   }, []);
 
@@ -63,7 +59,7 @@ export default function CustomerPreview({ customer,bartender, drink, children, d
     <div className={styles.mainContainer} ref={containerRef} style={{flexDirection: flexDirection}}>
       <ResizablePixiCanvas 
         className={styles.previewContainer} 
-        masterContainer={barSceneRef.current} 
+        masterContainer={masterContainer} 
         cacheKey="CustomerPreview" 
         onReady={() => {
           console.log("CustomerPreview ready");

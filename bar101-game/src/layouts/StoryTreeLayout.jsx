@@ -2,47 +2,41 @@ import React, { useRef, useEffect } from 'react';
 import ResizablePixiCanvas from '../components/ResizablePixiCanvas';
 import StoryTreeMasterContainer from '../pixi/storyTree/StoryTreeMasterContainer';
 
-
-let storyTreeMasterContainer; // TODO:re factor to avoid global variable
-
 export default function StoryTreeLayout({ onClose, visitedNodes, storyPath, enableTimeTravel, onStoryPathChange }) {
-  if (!storyTreeMasterContainer) {
-    storyTreeMasterContainer = new StoryTreeMasterContainer();
-  }
-  const storyTreeSceneRef = useRef(storyTreeMasterContainer);
+  const masterContainer = StoryTreeMasterContainer.getInstance();
 
   useEffect(() => {
-    storyTreeMasterContainer.enableTimeTravel(enableTimeTravel);
+    masterContainer.enableTimeTravel(enableTimeTravel);
   }, [enableTimeTravel]);
 
   useEffect(() => {
-    storyTreeMasterContainer.on('close', () => {
+    masterContainer.on('close', () => {
       console.log('close');
       onClose();
     })
     return () => {
-      storyTreeMasterContainer.off('close');
+      masterContainer.off('close');
     }
   }, []);
 
   useEffect(() => {
-    storyTreeMasterContainer.on('openChapter', (path) => {
+    masterContainer.on('openChapter', (path) => {
       let storyPath = path.replace('x', '').split('')
       onStoryPathChange(storyPath);
     })
   }, []);
 
   useEffect(() => {
-    storyTreeMasterContainer.updateVisitedNodes(visitedNodes);
+    masterContainer.updateVisitedNodes(visitedNodes);
   }, [visitedNodes]);
 
   useEffect(() => {
-    storyTreeMasterContainer.updateStoryPath(storyPath, true);
+    masterContainer.updateStoryPath(storyPath, true);
   }, [storyPath]);
 
   return <ResizablePixiCanvas 
       style={{width: '100%', height: '100%'}} 
-      masterContainer={storyTreeSceneRef.current} 
+      masterContainer={masterContainer} 
       cacheKey="StoryTreeLayout" 
     />
 }

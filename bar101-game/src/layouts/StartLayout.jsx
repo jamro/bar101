@@ -10,13 +10,8 @@ const clickSound = new Howl({
   volume: 0.3,
 });
 
-let homeMasterContainer; // TODO:re factor to avoid global variable
-
 export default function StartLayout({ onStart, onClear, onStoryTree }) {
-  if (!homeMasterContainer) {
-    homeMasterContainer = new HomeMasterContainer()
-  }
-  const homeSceneRef = useRef(homeMasterContainer);
+  const masterContainer = HomeMasterContainer.getInstance()
   const [debugClicks, setDebugClicks] = useState(0);
 
   const toggleFullscreen = () => {
@@ -68,7 +63,7 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
       <div className={styles.flexContainer}>
         <div className={styles.barImage}>
           <ResizablePixiCanvas 
-              masterContainer={homeSceneRef.current} 
+              masterContainer={masterContainer} 
               className={styles.barImageCanvas} 
               cacheKey="StartLayout" 
             />
