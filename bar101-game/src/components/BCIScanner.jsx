@@ -25,7 +25,14 @@ export default function BCIScanner({customer, inventory, onClose}) {
   }, [onClose]);
 
   return (
-    <ResizablePixiCanvas className={styles.bciScannerContainer} masterContainer={barSceneRef.current} />
+    <ResizablePixiCanvas 
+        className={styles.bciScannerContainer} 
+        masterContainer={barSceneRef.current} 
+        cacheKey="BCIScanner" 
+        onReady={() => {
+          console.log("BCIScanner ready");
+        }}
+      />
   )
 }
 

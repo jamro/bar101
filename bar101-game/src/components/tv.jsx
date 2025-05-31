@@ -35,7 +35,12 @@ const TV = forwardRef(({
     hideIntro: () => barSceneRef.current.hideIntro(),
   }));
 
-  return <ResizablePixiCanvas masterContainer={barSceneRef.current} className={styles.container} onReady={onReady}/>
+  return <ResizablePixiCanvas 
+      masterContainer={barSceneRef.current} 
+      className={styles.container} 
+      onReady={onReady} 
+      cacheKey="TV" 
+    />
 
 })
 

@@ -67,7 +67,11 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
       </div>
       <div className={styles.flexContainer}>
         <div className={styles.barImage}>
-          <ResizablePixiCanvas masterContainer={homeSceneRef.current} className={styles.barImageCanvas} />
+          <ResizablePixiCanvas 
+              masterContainer={homeSceneRef.current} 
+              className={styles.barImageCanvas} 
+              cacheKey="StartLayout" 
+            />
         </div>
         <div className={styles.controlsContainer}>
           <div style={{ textAlign: 'center', paddingBottom: '3em' }}>

@@ -40,5 +40,9 @@ export default function StoryTreeLayout({ onClose, visitedNodes, storyPath, enab
     storyTreeMasterContainer.updateStoryPath(storyPath, true);
   }, [storyPath]);
 
-  return <ResizablePixiCanvas style={{width: '100%', height: '100%'}} masterContainer={storyTreeSceneRef.current} />
+  return <ResizablePixiCanvas 
+      style={{width: '100%', height: '100%'}} 
+      masterContainer={storyTreeSceneRef.current} 
+      cacheKey="StoryTreeLayout" 
+    />
 }

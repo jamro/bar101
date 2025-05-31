@@ -1,16 +1,54 @@
+/*
+ * PIXI Application Caching Strategy
+ * 
+ * This component implements caching to decouple PIXI application lifecycle from React component lifecycle.
+ * 
+ * Problem:
+ * React components can mount/unmount rapidly due to:
+ * - Route changes and navigation
+ * - Conditional rendering ({showGame && <ResizablePixiCanvas />})
+ * - Parent component re-renders causing child remounts  
+ * - React 18 Strict Mode deliberately double-mounting in development
+ * - Hot module reloading during development
+ * 
+ * Without caching, each mount/unmount cycle would:
+ * 1. Destroy WebGL context and GPU resources
+ * 2. Release all loaded textures and buffers
+ * 3. Recreate WebGL context (expensive GPU operation)
+ * 4. Recompile shaders (CPU intensive)
+ * 5. Reload assets (47+ textures in this game)
+ * 6. Rebuild entire scene graph
+ * 
+ * Solution:
+ * Cache PIXI applications by masterContainer to:
+ * - Preserve expensive WebGL contexts and compiled shaders
+ * - Keep assets loaded in GPU memory
+ * - Maintain scene state via masterContainer.restore()
+ * - Simply move canvas DOM element to new container
+ * - Restart rendering loop without full recreation
+ */
+
 import React, { useEffect, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import * as PIXI from 'pixi.js';
 import { extensions, ResizePlugin } from 'pixi.js';
 import useResizeObserver from '../hooks/useResizeObserver';
+import PixiApplicationCache from '../pixi/PixiApplicationCache';
 
-const pixiCache = new Map(); // TODO:re factor to avoid global variable
+const pixiCache = new PixiApplicationCache(5); // Cache up to 5 apps
+// Clean up cache on page unload to prevent memory leaks
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeunload', () => {
+    pixiCache.clear();
+  });
+}
 
-const ResizablePixiCanvas = ({className, style, masterContainer, onReady}) => {
+const ResizablePixiCanvas = ({className, style, masterContainer, onReady, cacheKey}) => {
   const [pixiContainer, size] = useResizeObserver();
   const appRef = useRef(null);
 
-  let cacheId = masterContainer
+  // Use explicit cacheKey prop, or fall back to constructor name for consistent caching
+  const cacheId = cacheKey || masterContainer?.constructor?.name || 'default';
 
   useEffect(() => {
     if(!masterContainer) {
@@ -88,13 +126,15 @@ ResizablePixiCanvas.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   masterContainer: PropTypes.object.isRequired,
-  onReady: PropTypes.func
+  onReady: PropTypes.func,
+  cacheKey: PropTypes.string
 };
 
 ResizablePixiCanvas.defaultProps = {
   className: "",
   style: {},
-  onReady: () => {}
+  onReady: () => {},
+  cacheKey: null
 };
 
 export default ResizablePixiCanvas;

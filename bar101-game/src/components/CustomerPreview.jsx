@@ -61,7 +61,14 @@ export default function CustomerPreview({ customer,bartender, drink, children, d
 
   return (
     <div className={styles.mainContainer} ref={containerRef} style={{flexDirection: flexDirection}}>
-      <ResizablePixiCanvas className={styles.previewContainer} masterContainer={barSceneRef.current} />
+      <ResizablePixiCanvas 
+        className={styles.previewContainer} 
+        masterContainer={barSceneRef.current} 
+        cacheKey="CustomerPreview" 
+        onReady={() => {
+          console.log("CustomerPreview ready");
+        }}
+      />
       <div className={styles.chatContainer}>
         {bciShown && <BCIScanner customer={customer} inventory={bartender.inventory} onClose={() => setBciShown(false)}/>}
         {children}

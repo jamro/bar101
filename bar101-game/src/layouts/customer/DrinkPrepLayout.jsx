@@ -30,7 +30,11 @@ export default function DrinkPrepLayout({ drinks, bartender, onServe }) {
     cocktailMasterContainer.setInventory(inventory);
   }, [inventory]);
 
-  return <ResizablePixiCanvas style={{width: '100%', height: '100%'}} masterContainer={cocktailSceneRef.current} />
+  return <ResizablePixiCanvas 
+      style={{width: '100%', height: '100%'}} 
+      masterContainer={cocktailSceneRef.current} 
+      cacheKey="DrinkPrepLayout" 
+    />
 
 }
 
