@@ -1,0 +1,16 @@
+# Example configuration for Bar101 infrastructure
+# Copy this file to terraform.tfvars and adjust values as needed
+
+# Basic configuration
+domain_name = "jmrlab.com"
+app_subdomain = "bar101"
+cdn_subdomain = "cdn-bar101"
+aws_region = "us-east-1"
+
+# Cloudflare settings
+cloudflare_proxied = true
+cloudflare_ttl = 300
+
+# Cost Protection Settings
+daily_transfer_cost_limit = 2.00  # $1 USD per day
+alert_email = "your-email@example.com"  # Replace with your email 

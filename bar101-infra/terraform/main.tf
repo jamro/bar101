@@ -195,8 +195,8 @@ resource "cloudflare_page_rule" "bar101_cdn_cache" {
 
   actions {
     cache_level = "cache_everything"
-    edge_cache_ttl = 2592000 # 30 days
-    browser_cache_ttl = 2592000 # 30 days  
+    edge_cache_ttl = 2592000 # 30 days (1 month) in seconds
+    browser_cache_ttl = 2592000 # 30 days (1 month) in seconds
   }
 }
 

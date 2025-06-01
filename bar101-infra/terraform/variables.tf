@@ -32,4 +32,16 @@ variable "cloudflare_ttl" {
   description = "TTL for Cloudflare DNS records (only used when proxied is false)"
   type        = number
   default     = 300
+}
+
+variable "daily_transfer_cost_limit" {
+  description = "Daily S3 transfer cost limit in USD (e.g., 2.00 for $2 per day)"
+  type        = number
+  default     = 2.00
+}
+
+variable "alert_email" {
+  description = "Email address for cost alerts and notifications"
+  type        = string
+  default     = "kjamroz83@gmail.com"
 } 
