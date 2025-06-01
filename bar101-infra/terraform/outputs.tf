@@ -1,11 +1,21 @@
-# S3 outputs
-output "bar101_app_s3_website_endpoint" {
-  description = "S3 website endpoint for main application"
+# S3 bucket outputs
+output "s3_app_bucket_name" {
+  description = "Name of the S3 bucket for the application"
+  value       = aws_s3_bucket.s3_bar101_app.bucket
+}
+
+output "s3_app_website_endpoint" {
+  description = "Website endpoint for S3 app bucket"
   value       = aws_s3_bucket_website_configuration.s3_bar101_app_website.website_endpoint
 }
 
-output "bar101_cdn_s3_website_endpoint" {
-  description = "S3 website endpoint for CDN assets"
+output "s3_cdn_bucket_name" {
+  description = "Name of the S3 bucket for CDN assets"
+  value       = aws_s3_bucket.s3_cdn_bar101.bucket
+}
+
+output "s3_cdn_website_endpoint" {
+  description = "Website endpoint for S3 CDN bucket"
   value       = aws_s3_bucket_website_configuration.s3_cdn_bar101_website.website_endpoint
 }
 
