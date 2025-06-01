@@ -1,0 +1,35 @@
+variable "domain_name" {
+  description = "The base domain name"
+  type        = string
+  default     = "jmrlab.com"
+}
+
+variable "app_subdomain" {
+  description = "Subdomain for the main application"
+  type        = string
+  default     = "bar101"
+}
+
+variable "cdn_subdomain" {
+  description = "Subdomain for CDN assets"
+  type        = string
+  default     = "cdn-bar101"
+}
+
+variable "aws_region" {
+  description = "AWS region for resources"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "cloudflare_proxied" {
+  description = "Whether to enable Cloudflare proxy for CDN and security features"
+  type        = bool
+  default     = true
+}
+
+variable "cloudflare_ttl" {
+  description = "TTL for Cloudflare DNS records (only used when proxied is false)"
+  type        = number
+  default     = 300
+} 

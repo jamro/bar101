@@ -1,4 +1,14 @@
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
+  }
   backend "s3" {
     bucket = "bar101-terraform-state"
     key    = "terraform.tfstate"
@@ -7,7 +17,12 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
+}
+
+provider "cloudflare" {
+  # Configuration will be read from environment variables:
+  # CLOUDFLARE_API_TOKEN or CLOUDFLARE_EMAIL + CLOUDFLARE_API_KEY
 }
 
 # S3 bucket for Terraform state storage
@@ -140,4 +155,54 @@ resource "aws_s3_bucket_policy" "s3_cdn_bar101_policy" {
   })
 
   depends_on = [aws_s3_bucket_public_access_block.s3_cdn_bar101_pab]
+}
+
+# Cloudflare Zone
+data "cloudflare_zone" "jmrlab_com" {
+  name = var.domain_name
+}
+
+# DNS record for main application (bar101.jmrlab.com)
+resource "cloudflare_record" "bar101_app" {
+  zone_id = data.cloudflare_zone.jmrlab_com.id
+  name    = var.app_subdomain
+  content = aws_s3_bucket_website_configuration.s3_bar101_app_website.website_endpoint
+  type    = "CNAME"
+  ttl     = var.cloudflare_proxied ? 1 : var.cloudflare_ttl
+  proxied = var.cloudflare_proxied
+  
+  comment = "Main Bar101 application - points to S3 static website"
+}
+
+# DNS record for CDN assets (cdn-bar101.jmrlab.com)
+resource "cloudflare_record" "bar101_cdn" {
+  zone_id = data.cloudflare_zone.jmrlab_com.id
+  name    = var.cdn_subdomain
+  content = aws_s3_bucket_website_configuration.s3_cdn_bar101_website.website_endpoint
+  type    = "CNAME"
+  ttl     = var.cloudflare_proxied ? 1 : var.cloudflare_ttl
+  proxied = var.cloudflare_proxied
+  
+  comment = "Bar101 CDN assets - points to S3 static website for media content"
+}
+
+# Outputs for reference
+output "bar101_app_s3_website_endpoint" {
+  description = "S3 website endpoint for main application"
+  value       = aws_s3_bucket_website_configuration.s3_bar101_app_website.website_endpoint
+}
+
+output "bar101_cdn_s3_website_endpoint" {
+  description = "S3 website endpoint for CDN assets"
+  value       = aws_s3_bucket_website_configuration.s3_cdn_bar101_website.website_endpoint
+}
+
+output "bar101_app_cloudflare_record" {
+  description = "Cloudflare record for main application"
+  value       = cloudflare_record.bar101_app.hostname
+}
+
+output "bar101_cdn_cloudflare_record" {
+  description = "Cloudflare record for CDN assets"
+  value       = cloudflare_record.bar101_cdn.hostname
 }
