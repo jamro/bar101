@@ -186,6 +186,20 @@ resource "cloudflare_record" "bar101_cdn" {
   comment = "Bar101 CDN assets - points to S3 static website for media content"
 }
 
+# Page Rule for CDN caching to reduce costs
+resource "cloudflare_page_rule" "bar101_cdn_cache" {
+  zone_id  = data.cloudflare_zone.jmrlab_com.id
+  target   = "cdn-bar101.jmrlab.com/*"
+  priority = 1
+  status   = "active"
+
+  actions {
+    cache_level = "cache_everything"
+    edge_cache_ttl = 2592000 # 30 days
+    browser_cache_ttl = 2592000 # 30 days  
+  }
+}
+
 # Outputs for reference
 output "bar101_app_s3_website_endpoint" {
   description = "S3 website endpoint for main application"
@@ -205,4 +219,9 @@ output "bar101_app_cloudflare_record" {
 output "bar101_cdn_cloudflare_record" {
   description = "Cloudflare record for CDN assets"
   value       = cloudflare_record.bar101_cdn.hostname
+}
+
+output "bar101_cdn_page_rule" {
+  description = "Cloudflare Page Rule for CDN caching (1 month)"
+  value       = "Target: ${cloudflare_page_rule.bar101_cdn_cache.target}, Cache TTL: ${cloudflare_page_rule.bar101_cdn_cache.actions[0].edge_cache_ttl} seconds"
 }
