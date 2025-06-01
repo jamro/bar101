@@ -15,9 +15,33 @@ The infrastructure leverages cost-effective AWS S3 static hosting combined with 
 **DNS & CDN**
 - **CloudFlare**: DNS configuration and free CDN tier for improved performance and cost optimization
 
+**Cost Protection**
+- **AWS Budgets**: Monitors S3 transfer costs with configurable daily limits
+- **Lambda Functions**: Automatically blocks S3 access when cost thresholds are exceeded
+- **SNS Alerts**: Email notifications for cost overruns
+
 **CI/CD Pipeline**
 - **GitHub Actions**: Automated build and deployment pipelines for continuous delivery
 - Triggers on code changes for seamless updates to S3 buckets
+
+## Project Structure
+
+The Terraform infrastructure is organized by business function rather than technology, making it easy to understand and maintain:
+
+```
+bar101-infra/
+├── terraform/
+│   ├── main.tf              # Terraform configuration and providers (26 lines)
+│   ├── variables.tf         # Input variable definitions (47 lines)
+│   ├── s3.tf                # S3 buckets, policies, and configurations (132 lines)
+│   ├── cloudflare.tf        # DNS records and CDN caching rules (42 lines)
+│   ├── cost-protection.tf   # Cost monitoring, budgets, alerts, and Lambda (166 lines)
+│   ├── outputs.tf           # Output values organized by service (26 lines)
+│   ├── terraform.tfvars.example  # Example configuration file
+│   └── s3_cost_limiter.py   # Python code for cost protection Lambda
+├── setup-cloudflare.sh     # Cloudflare setup automation script
+└── README.md               # This file
+```
 
 ## Cost Optimization Strategy
 
@@ -25,7 +49,9 @@ This setup prioritizes minimal operational costs suitable for a hobby project:
 
 - **S3 Static Hosting**: Pay-per-use storage and bandwidth (typically $1-5/month for small projects)
 - **CloudFlare Free Tier**: No-cost DNS management, global CDN, and free HTTPS certificates
+- **Cloudflare Caching**: 30 day cache for CDN assets to reduce costs
 - **GitHub Actions**: Free tier provides sufficient CI/CD minutes for hobby projects
+- **Cost Protection**: Automated monitoring prevents unexpected charges from exceeding daily limits
 - **No Server Costs**: Serverless architecture eliminates ongoing compute expenses
 
 ## Deployment Flow
