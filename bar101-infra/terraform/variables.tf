@@ -37,7 +37,7 @@ variable "cloudflare_ttl" {
 variable "daily_transfer_cost_limit" {
   description = "Daily S3 transfer cost limit in USD (e.g., 2.00 for $2 per day)"
   type        = number
-  default     = 2.00
+  default     = 0.10
 }
 
 variable "alert_email" {
