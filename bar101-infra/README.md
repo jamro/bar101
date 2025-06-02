@@ -6,6 +6,8 @@ A low-cost infrastructure setup for the Bar101 hobby project, optimized for mini
 
 The infrastructure leverages cost-effective AWS S3 static hosting combined with CloudFlare for DNS management and CDN capabilities.
 
+![Architecture Diagram](./docs/architecture.png)
+
 ### Core Components
 
 **Static Hosting (S3)**
@@ -16,9 +18,7 @@ The infrastructure leverages cost-effective AWS S3 static hosting combined with 
 - **CloudFlare**: DNS configuration and free CDN tier for improved performance and cost optimization
 
 **Cost Protection**
-- **AWS Budgets**: Monitors S3 transfer costs with configurable daily limits
 - **Lambda Functions**: Automatically blocks S3 access when cost thresholds are exceeded
-- **SNS Alerts**: Email notifications for cost overruns
 
 **CI/CD Pipeline**
 - **GitHub Actions**: Automated build and deployment pipelines for continuous delivery
