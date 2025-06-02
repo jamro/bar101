@@ -129,4 +129,9 @@ resource "aws_s3_bucket_policy" "s3_cdn_bar101_policy" {
   })
 
   depends_on = [aws_s3_bucket_public_access_block.s3_cdn_bar101_pab]
+}
+
+resource "aws_s3_bucket_metric" "s3_cdn_bar101_metrics" {
+  bucket = aws_s3_bucket.s3_cdn_bar101.id
+  name   = "EntireBucket"
 } 
