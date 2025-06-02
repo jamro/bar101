@@ -29,7 +29,7 @@ const ChatWindow = forwardRef(({
   if (inputHeader) {
     buttons = <div>
       <div className={styles.headerTitle}>{inputHeader}</div>
-      <div>{buttons}</div>
+      <div class={styles.buttonsJustify} >{buttons}</div>
     </div>
   }
 
