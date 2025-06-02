@@ -14,6 +14,7 @@ The game is an experiment in AI-driven game development. It explores how far gen
 - **[Play the Demo](https://bar101.jmrlab.com)**
 - [Game Assets](bar101-assets)
 - [Story Generation](bar101-storyline-gen)
+- [Audio Generation](bar101-voiceover)
 - [Game Engine](bar101-game)
 - [Infrastructure as Code](bar101-infra)
 
