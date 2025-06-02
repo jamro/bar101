@@ -4,6 +4,8 @@ import { Howl } from 'howler';
 import HomeMasterContainer from '../pixi/home/HomeMasterContainer';
 import ResizablePixiCanvas from "../components/ResizablePixiCanvas";
 import useResizeObserver from "../hooks/useResizeObserver";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapLocationDot, faWineGlass, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const clickSound = new Howl({
   src: ['/audio/click.mp3'],
@@ -54,7 +56,10 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
   let clearSavedDataButton = null;
   if (debugClicks > 10) {
     clearSavedDataButton = <div className={styles.buttonRow}>
-      <button onClick={() => clear()} >Clear Saved Data</button>
+      <button onClick={() => clear()}  className={styles.startButton}>
+        <span className={styles.startButtonIcon}><FontAwesomeIcon icon={faTrashCan} /></span>
+        <span className={styles.startButtonText}>Clear Data</span>
+      </button>
     </div>
   }
 
@@ -88,10 +93,16 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
         <div className={styles.controlsContainer}>
           <div style={{ textAlign: 'center', paddingBottom: '3em' }}>
             <div className={styles.buttonRow}>
-              <button onClick={() => start()} >Enter Bar 101</button>
+              <button onClick={() => start()} className={styles.startButton}>
+                <span className={styles.startButtonIcon}><FontAwesomeIcon icon={faWineGlass} /></span>
+                <span className={styles.startButtonText}>Enter Bar 101</span>
+              </button>
             </div>
             <div className={styles.buttonRow}>
-              <button onClick={() => openStoryTree()} >Story Tree</button>
+              <button onClick={() => openStoryTree()} className={styles.startButton}>
+                <span className={styles.startButtonIcon}><FontAwesomeIcon icon={faMapLocationDot} /></span>
+                <span className={styles.startButtonText}>Story Tree</span>
+              </button>
             </div>
             {clearSavedDataButton}
           </div>

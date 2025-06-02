@@ -56,6 +56,32 @@ button {
   border-radius: 0.5em !important;
   color: #000;
 }
+
+.startButton {
+  width: 15em;
+  min-width: 15em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .buttonRow {
   padding: 0.5em 0;
+}
+
+.startButtonText {
+  width: 100%;
+  text-align: center;
+}
+
+.startButtonIcon {
+  width: 3em;
+  text-align: center;
+  border-right: 2px solid #000;
 }
