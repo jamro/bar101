@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import GameLayout from './layouts/GameLayout';  
 import LoadingScreen from './layouts/LoadingScreen';
 import StartLayout from './layouts/StartLayout';
-import useGameState from './hooks/useGameState';
+import { useGameState } from './state';
 import GameAssets from './pixi/GameAssets';
 import StoryTreeLayout from './layouts/StoryTreeLayout';
 import HomeMasterContainer from './pixi/home/HomeMasterContainer';
