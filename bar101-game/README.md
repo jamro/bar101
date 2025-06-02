@@ -64,7 +64,6 @@ The `useGameState` hook manages all persistent game data:
 }
 ```
 
-
 ## Game Loop & Flow
 
 ### Phase Management
@@ -112,6 +111,26 @@ window.debug = {
 }
 ```
 
+## Testing
+
+The project includes unit tests for React components and Pixi.js game logic:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+```
+
+Tests cover:
+- **React Components**: User interactions and rendering
+- **Pixi.js Classes**: Game object behavior and inheritance
+- **Game Logic**: State management and calculations
+
 ## Browser Compatibility
 
 Tested and optimized for:
@@ -119,8 +138,3 @@ Tested and optimized for:
 - **Firefox**: 88+
 - **Safari**: 14+
 - **Edge**: 90+
-
-Requires:
-- WebGL support for Pixi.js rendering
-- ES6+ JavaScript support
-- Audio API for sound management
