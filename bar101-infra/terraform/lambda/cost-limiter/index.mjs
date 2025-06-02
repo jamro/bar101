@@ -1,6 +1,6 @@
 import { getDownloadsFromTimeWindow } from './metrics.mjs';
 
-const S3_BUCKET_ID = 'cdn-bar101.jmrlab.com';
+const S3_BUCKET_ID = process.env.S3_BUCKET_ID || 'cdn-bar101.jmrlab.com';
 
 export const handler = async (event) => {
   try {

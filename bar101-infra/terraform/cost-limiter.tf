@@ -72,6 +72,7 @@ resource "aws_lambda_function" "cost_limiter" {
   environment {
     variables = {
       NODE_ENV = "production"
+      S3_BUCKET_ID = "cdn-bar101.jmrlab.com"
     }
   }
 
