@@ -256,10 +256,10 @@ export default class CocktailView extends PIXI.Container {
     if (this._shaker.shaking || this._shaker.progress >= 1) {
       return;
     }
-    const localX = event.x/this.scale.x - this.x/this.scale.x;
-    const localY = event.y/this.scale.y - this.y/this.scale.y;
-    this._dragPointer.x = localX;
-    this._dragPointer.y = localY;
+    // Use PIXI's proper coordinate conversion to handle canvas offset
+    const localPosition = this.toLocal(event.data.global);
+    this._dragPointer.x = localPosition.x;
+    this._dragPointer.y = localPosition.y;
     this._dragTarget = event.currentTarget;
     this._dragTarget.parent.setChildIndex(this._dragTarget, this._dragTarget.parent.children.length - 1);
   }
@@ -269,10 +269,10 @@ export default class CocktailView extends PIXI.Container {
   }
 
   _onDragMove(event) {
-    const localX = event.x/this.scale.x - this.x/this.scale.x;
-    const localY = event.y/this.scale.y - this.y/this.scale.y;
-    this._dragPointer.x = localX;
-    this._dragPointer.y = localY;
+    // Use PIXI's proper coordinate conversion to handle canvas offset
+    const localPosition = this.toLocal(event.data.global);
+    this._dragPointer.x = localPosition.x;
+    this._dragPointer.y = localPosition.y;
   }
 
   _update() {

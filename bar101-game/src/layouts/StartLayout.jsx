@@ -3,6 +3,7 @@ import * as styles from './StartLayout.module.css';
 import { Howl } from 'howler';
 import HomeMasterContainer from '../pixi/home/HomeMasterContainer';
 import ResizablePixiCanvas from "../components/ResizablePixiCanvas";
+import useResizeObserver from "../hooks/useResizeObserver";
 
 const clickSound = new Howl({
   src: ['/audio/click.mp3'],
@@ -13,6 +14,7 @@ const clickSound = new Howl({
 export default function StartLayout({ onStart, onClear, onStoryTree }) {
   const masterContainer = HomeMasterContainer.getInstance()
   const [debugClicks, setDebugClicks] = useState(0);
+  const [containerRef, size] = useResizeObserver();
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
@@ -56,11 +58,26 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
     </div>
   }
 
-  return <div className={styles.mainContainer}>
+  // calculate flex direction based on container size
+  let flexDirection, windowWidth, windowHeight;
+  if (size.width && size.height) {
+    windowWidth = size.width;
+    windowHeight = size.height;
+  } else {
+    windowWidth = window.innerWidth;
+    windowHeight = window.innerHeight;
+  }
+  if (windowWidth > windowHeight * 1.3) {
+    flexDirection = "row";
+  } else {
+    flexDirection = "column";
+  }
+
+  return <div className={styles.mainContainer} ref={containerRef}>
       <div className={styles.version} onClick={() => setDebugClicks(debugClicks + 1)}>
         <small>ver.{__BUILD_DATE__}</small>
       </div>
-      <div className={styles.flexContainer}>
+      <div className={styles.flexContainer} style={{flexDirection: flexDirection}}>
         <div className={styles.barImage}>
           <ResizablePixiCanvas 
               masterContainer={masterContainer} 

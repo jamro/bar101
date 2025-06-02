@@ -29,6 +29,46 @@
     #root {
       height: 100%;
     }
+
+    /* Better desktop mobile emulation using CSS Grid */
+    @media screen and (min-aspect-ratio: 1/1) and (pointer: fine) and (hover: hover) {
+      body {
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        padding: 20px;
+        box-sizing: border-box;
+        background-image: url('/img/wall.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      
+      #root {
+        width: min(414px, 100vw - 40px); /* Responsive with minimum margins */
+        max-height: calc(100vh - 40px);
+        background-color: #000;
+        border-radius: 20px; /* Modern phone-like rounded corners */
+        overflow: hidden;
+        box-shadow: 
+          0 10px 30px rgba(0, 0, 0, 0.3),
+          0 1px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+      
+      /* Optional: Add a subtle border for more realistic phone appearance */
+      #root::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        pointer-events: none;
+      }
+    }
   </style>
 </head>
 <body>
