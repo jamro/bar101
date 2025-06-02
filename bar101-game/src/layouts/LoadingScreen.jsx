@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as styles from './LoadingScreen.module.css';
 
 export default function LoadingScreen() {
@@ -8,3 +9,7 @@ export default function LoadingScreen() {
     </div>
   );
 }
+
+LoadingScreen.propTypes = {};
+
+LoadingScreen.defaultProps = {};

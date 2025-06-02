@@ -14,7 +14,7 @@ const userNames = {
   npetrak: "Nikola Petrak",
   lkova: "Lenart Kova",
 }
-export default function TradingWindow({ inventory, balance, onBuy, onClose }) {
+export default function TradingWindow({ inventory, balance, onBuy, onClose, trader }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [storeInventory, setStoreInventory] = useState([]);
@@ -213,11 +213,13 @@ TradingWindow.propTypes = {
     antenna: PropTypes.bool,
     scanner: PropTypes.bool,
     special: PropTypes.number,
+    timemachine: PropTypes.bool,
     files: PropTypes.arrayOf(PropTypes.string)
   }).isRequired,
   balance: PropTypes.number.isRequired,
   onBuy: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  trader: PropTypes.object.isRequired
 };
 
 TradingWindow.defaultProps = {
@@ -225,6 +227,7 @@ TradingWindow.defaultProps = {
     antenna: false,
     scanner: false,
     special: 0,
+    timemachine: false,
     files: []
   },
   balance: 0

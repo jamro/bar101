@@ -39,3 +39,17 @@ export default function GoodbyeLayout({ bartender, customer, drink, balance, onC
       <ChatWindow ref={chatWindowRef} />
     </CustomerPreview>
 }
+
+GoodbyeLayout.propTypes = {
+  bartender: PropTypes.object.isRequired,
+  customer: PropTypes.object.isRequired,
+  drink: PropTypes.object.isRequired,
+  balance: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired
+};
+
+GoodbyeLayout.defaultProps = {
+  onClose: () => {},
+  onExit: () => {}
+};

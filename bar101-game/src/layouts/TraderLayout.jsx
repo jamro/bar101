@@ -52,3 +52,18 @@ export default function TraderLayout({ bartender, trader, balance, onClose, onBu
       {phase !== "trade" ? chat : tradingWindow}
     </CustomerPreview>
 }
+
+TraderLayout.propTypes = {
+  bartender: PropTypes.object.isRequired,
+  trader: PropTypes.object.isRequired,
+  balance: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onBuy: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired
+};
+
+TraderLayout.defaultProps = {
+  onClose: () => {},
+  onBuy: () => {},
+  onExit: () => {}
+};

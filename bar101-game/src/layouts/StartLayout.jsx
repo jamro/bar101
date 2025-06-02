@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import * as styles from './StartLayout.module.css';
 import { Howl } from 'howler';
 import HomeMasterContainer from '../pixi/home/HomeMasterContainer';
@@ -110,4 +111,16 @@ export default function StartLayout({ onStart, onClear, onStoryTree }) {
       </div>
     </div>
 }
+
+StartLayout.propTypes = {
+  onStart: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
+  onStoryTree: PropTypes.func.isRequired
+};
+
+StartLayout.defaultProps = {
+  onStart: () => {},
+  onClear: () => {},
+  onStoryTree: () => {}
+};
 

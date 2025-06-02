@@ -1,4 +1,5 @@
 import React, { useState, useEffect, use } from 'react';
+import PropTypes from 'prop-types';
 import NewsLayout from './NewsLayout';
 import CustomerLayout from './CustomerLayout';
 import TraderLayout from './TraderLayout';
@@ -94,3 +95,40 @@ function GameLayout({
 }
 
 export default GameLayout;
+
+GameLayout.propTypes = {
+  storyNode: PropTypes.object.isRequired,
+  bartender: PropTypes.object.isRequired,
+  trader: PropTypes.object.isRequired,
+  customers: PropTypes.object.isRequired,
+  balance: PropTypes.number.isRequired,
+  drinks: PropTypes.object.isRequired,
+  chats: PropTypes.object.isRequired,
+  levelPhase: PropTypes.string.isRequired,
+  customerIndex: PropTypes.number.isRequired,
+  onCustomerLeave: PropTypes.func.isRequired,
+  onPhaseChange: PropTypes.func.isRequired,
+  onTrustChange: PropTypes.func.isRequired,
+  onLevelComplete: PropTypes.func.isRequired,
+  onDecision: PropTypes.func.isRequired,
+  onBalanceChange: PropTypes.func.isRequired,
+  onUseItem: PropTypes.func.isRequired,
+  onBuy: PropTypes.func.isRequired,
+  onGameOver: PropTypes.func.isRequired,
+  onBarNoiseVolumeChange: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired
+};
+
+GameLayout.defaultProps = {
+  onCustomerLeave: () => {},
+  onPhaseChange: () => {},
+  onTrustChange: () => {},
+  onLevelComplete: () => {},
+  onDecision: () => {},
+  onBalanceChange: () => {},
+  onUseItem: () => {},
+  onBuy: () => {},
+  onGameOver: () => {},
+  onBarNoiseVolumeChange: () => {},
+  onExit: () => {}
+};

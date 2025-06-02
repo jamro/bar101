@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import ConversationText from '../components/chat/ConversationText';
 import TV from '../components/TV'
 import * as styles from './NewsLayout.module.css';
@@ -110,3 +111,13 @@ export default function NewsLayout({storyNode, inventory, onClose=() => {}}) {
     </div>
   );
 }
+
+NewsLayout.propTypes = {
+  storyNode: PropTypes.object.isRequired,
+  inventory: PropTypes.object.isRequired,
+  onClose: PropTypes.func
+};
+
+NewsLayout.defaultProps = {
+  onClose: () => {}
+};

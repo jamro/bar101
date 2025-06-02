@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import * as styles from './DateLayout.module.css';
 
 export default function DateLayout({storyNode, onClose=() => {}}) {
@@ -64,3 +65,12 @@ export default function DateLayout({storyNode, onClose=() => {}}) {
     </div>
   );
 }
+
+DateLayout.propTypes = {
+  storyNode: PropTypes.object.isRequired,
+  onClose: PropTypes.func
+};
+
+DateLayout.defaultProps = {
+  onClose: () => {}
+};

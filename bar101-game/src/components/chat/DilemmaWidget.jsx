@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as styles from './DilemmaWidget.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -43,3 +44,20 @@ const DilemmaWidget = ({
 }
 
 export default DilemmaWidget;
+
+DilemmaWidget.propTypes = {
+  dilemmaTitleA: PropTypes.string.isRequired,
+  dilemmaTitleB: PropTypes.string.isRequired,
+  buttonLabelA: PropTypes.string.isRequired,
+  buttonLabelB: PropTypes.string.isRequired,
+  dilemmaPreference: PropTypes.number.isRequired,
+  enabled: PropTypes.bool,
+  onButtonAClick: PropTypes.func,
+  onButtonBClick: PropTypes.func
+};
+
+DilemmaWidget.defaultProps = {
+  enabled: true,
+  onButtonAClick: () => {},
+  onButtonBClick: () => {}
+};

@@ -187,3 +187,26 @@ export default function OpenerLayout({ bartender, customer, allCustomers, chat, 
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} inputHeader={chatInputHeader} />
     </CustomerPreview>
 }
+
+OpenerLayout.propTypes = {
+  bartender: PropTypes.object.isRequired,
+  customer: PropTypes.object.isRequired,
+  allCustomers: PropTypes.object.isRequired,
+  chat: PropTypes.object.isRequired,
+  drink: PropTypes.object.isRequired,
+  balance: PropTypes.number.isRequired,
+  serveUsual: PropTypes.bool.isRequired,
+  onBalanceChange: PropTypes.func.isRequired,
+  onGoBack: PropTypes.func.isRequired,
+  onTrustChange: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired
+};
+
+OpenerLayout.defaultProps = {
+  onBalanceChange: () => {},
+  onGoBack: () => {},
+  onTrustChange: () => {},
+  onClose: () => {},
+  onExit: () => {}
+};

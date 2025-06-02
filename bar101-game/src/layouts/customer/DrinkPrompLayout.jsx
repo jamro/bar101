@@ -57,14 +57,19 @@ export default function DrinkPrompLayout({ bartender, customer, balance, onClose
 }
 
 DrinkPrompLayout.propTypes = {
+  bartender: PropTypes.object.isRequired,
   customer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     trust: PropTypes.number.isRequired,
     drink: PropTypes.string.isRequired,
   }).isRequired,
+  balance: PropTypes.number.isRequired,
   onClose: PropTypes.func,
+  onExit: PropTypes.func
 };
+
 DrinkPrompLayout.defaultProps = {
   onClose: () => {},
+  onExit: () => {}
 };

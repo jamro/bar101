@@ -41,13 +41,14 @@ const TV = forwardRef(({
 
 TV.propTypes = {
   mode: PropTypes.oneOf(['official', 'underground']),
-  pipUrl: PropTypes.string.isRequired,
+  pipUrl: PropTypes.string,
   headline: PropTypes.string,
   onReady: PropTypes.func
 };
 
 TV.defaultProps = {
   mode: 'official',
+  pipUrl: null,
   headline: 'Breaking News',
   onReady: () => {}
 };

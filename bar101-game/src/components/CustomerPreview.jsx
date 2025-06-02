@@ -78,16 +78,24 @@ CustomerPreview.propTypes = {
     name: PropTypes.string.isRequired,
     jobTitle: PropTypes.string.isRequired,
     trust: PropTypes.number.isRequired,
-    bciScore: PropTypes.number.isRequired,
-    politicalPreference: PropTypes.string.isRequired,
+    bci_score: PropTypes.number.isRequired,
+    political_preference: PropTypes.string.isRequired,
+  }).isRequired,
+  bartender: PropTypes.shape({
+    inventory: PropTypes.object.isRequired
   }).isRequired,
   drink: PropTypes.object,
+  children: PropTypes.node,
   drinkAnim: PropTypes.bool,
   customerAnim: PropTypes.bool,
   balance: PropTypes.number,
-  children: PropTypes.node,
+  onExit: PropTypes.func
 };
 CustomerPreview.defaultProps = {
   drink: null,
   children: null,
+  drinkAnim: false,
+  customerAnim: false,
+  balance: 0,
+  onExit: () => {}
 };

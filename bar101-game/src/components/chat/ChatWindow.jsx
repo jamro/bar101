@@ -84,11 +84,13 @@ const ChatWindow = forwardRef(({
 ChatWindow.propTypes = {
   onSubmit: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string),
+  children: PropTypes.node,
   inputHeader: PropTypes.string,
 };
 ChatWindow.defaultProps = {
   onSubmit: () => {},
   options: [],
+  children: null,
   inputHeader: "",
 };
 

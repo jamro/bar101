@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import ResizablePixiCanvas from '../components/ResizablePixiCanvas';
 import StoryTreeMasterContainer from '../pixi/storyTree/StoryTreeMasterContainer';
 
@@ -40,3 +41,19 @@ export default function StoryTreeLayout({ onClose, visitedNodes, storyPath, enab
       cacheKey="StoryTreeLayout" 
     />
 }
+
+StoryTreeLayout.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  visitedNodes: PropTypes.array.isRequired,
+  storyPath: PropTypes.array.isRequired,
+  enableTimeTravel: PropTypes.bool.isRequired,
+  onStoryPathChange: PropTypes.func.isRequired
+};
+
+StoryTreeLayout.defaultProps = {
+  onClose: () => {},
+  visitedNodes: [],
+  storyPath: [],
+  enableTimeTravel: false,
+  onStoryPathChange: () => {}
+};

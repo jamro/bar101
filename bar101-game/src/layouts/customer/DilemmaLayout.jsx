@@ -180,3 +180,20 @@ export default function DilemmaLayout({ customer, chat, balance, drink, onClose,
       </ChatWindow>
     </CustomerPreview>
 }
+
+DilemmaLayout.propTypes = {
+  customer: PropTypes.object.isRequired,
+  chat: PropTypes.object.isRequired,
+  balance: PropTypes.number.isRequired,
+  drink: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onDecision: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired,
+  bartender: PropTypes.object.isRequired
+};
+
+DilemmaLayout.defaultProps = {
+  onClose: () => {},
+  onDecision: () => {},
+  onExit: () => {}
+};

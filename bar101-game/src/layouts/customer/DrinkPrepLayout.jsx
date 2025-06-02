@@ -36,13 +36,10 @@ export default function DrinkPrepLayout({ drinks, bartender, onServe }) {
 
 DrinkPrepLayout.propTypes = {
   drinks: PropTypes.object.isRequired,
-  onServe: PropTypes.func,
+  bartender: PropTypes.object.isRequired,
+  onServe: PropTypes.func
 };
 
-
 DrinkPrepLayout.defaultProps = {
-  customer: {},
-  drinks: {},
-  onServe: () => {},
-  bartender: {},
+  onServe: () => {}
 };

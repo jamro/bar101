@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import DrinkPrompLayout from './customer/DrinkPrompLayout';
 import * as styles from './CustomerLayout.module.css';
 import DrinkPrepLayout from './customer/DrinkPrepLayout';
@@ -141,3 +142,29 @@ export default function CustomerLayout({
   
   return content;
 }
+
+CustomerLayout.propTypes = {
+  bartender: PropTypes.object.isRequired,
+  customers: PropTypes.object.isRequired,
+  customerId: PropTypes.string.isRequired,
+  drinks: PropTypes.object.isRequired,
+  chats: PropTypes.object.isRequired,
+  balance: PropTypes.number.isRequired,
+  onBalanceChange: PropTypes.func.isRequired,
+  onTrustChange: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired,
+  onDecision: PropTypes.func.isRequired,
+  onUseItem: PropTypes.func.isRequired,
+  onBarNoiseVolumeChange: PropTypes.func.isRequired
+};
+
+CustomerLayout.defaultProps = {
+  onBalanceChange: () => {},
+  onTrustChange: () => {},
+  onClose: () => {},
+  onExit: () => {},
+  onDecision: () => {},
+  onUseItem: () => {},
+  onBarNoiseVolumeChange: () => {}
+};

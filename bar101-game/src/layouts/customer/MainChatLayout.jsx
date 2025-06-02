@@ -73,3 +73,20 @@ export default function MainChatLayout({ customer, chat, onTrustChange, drink, b
       <ChatWindow ref={chatWindowRef} options={chatOptions} onSubmit={(index) => sendMessage(index)} inputHeader={chatInputHeader} />
     </CustomerPreview>
 }
+
+MainChatLayout.propTypes = {
+  customer: PropTypes.object.isRequired,
+  chat: PropTypes.object.isRequired,
+  onTrustChange: PropTypes.func.isRequired,
+  drink: PropTypes.object.isRequired,
+  balance: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+  bartender: PropTypes.object.isRequired,
+  onExit: PropTypes.func.isRequired
+};
+
+MainChatLayout.defaultProps = {
+  onTrustChange: () => {},
+  onClose: () => {},
+  onExit: () => {}
+};

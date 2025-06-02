@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import GameLayout from './layouts/GameLayout';  
 import LoadingScreen from './layouts/LoadingScreen';
 import StartLayout from './layouts/StartLayout';
@@ -178,4 +179,13 @@ function App({ onBarNoiseVolumeChange }) {
     onExit={() => setIsStarted(false)}
   />
 }
+
 export default App;
+
+App.propTypes = {
+  onBarNoiseVolumeChange: PropTypes.func.isRequired
+};
+
+App.defaultProps = {
+  onBarNoiseVolumeChange: () => {}
+};
