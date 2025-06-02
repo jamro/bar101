@@ -17,7 +17,7 @@ The game engine is built as a React application with Pixi.js for 2D rendering. I
 
 ```bash
 # Install dependencies
-npm install
+npm install --legacy-peer-deps # --legacy-peer-deps is required for now because of a dependency conflict with the pixi.js package
 
 # Start development server
 npm start

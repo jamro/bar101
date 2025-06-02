@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import MasterContainer from '../pixi/MasterContainer';
+import MasterContainer from '../MasterContainer';
 
 describe('MasterContainer Pixi Component', () => {
   let container;

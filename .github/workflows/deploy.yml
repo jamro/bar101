@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./bar101-game
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build project
         working-directory: ./bar101-game
