@@ -5,6 +5,7 @@ import StartLayout from './layouts/StartLayout';
 import useGameState from './hooks/useGameState';
 import GameAssets from './pixi/GameAssets';
 import StoryTreeLayout from './layouts/StoryTreeLayout';
+import HomeMasterContainer from './pixi/home/HomeMasterContainer';
 
 function App({ onBarNoiseVolumeChange }) {
   const [ storyNode, setStoryNode ] = useState(null);

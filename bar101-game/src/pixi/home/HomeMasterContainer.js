@@ -26,6 +26,9 @@ class HomeMasterContainer extends MasterContainer {
     this._ledTimer = 0;
 
     this._loop = setInterval(() => this.update(), 16);
+
+    this._cover = new PIXI.Graphics();
+    this.addChild(this._cover);
   }
 
   update() {
@@ -59,8 +62,29 @@ class HomeMasterContainer extends MasterContainer {
     this._container.scale.set(scale, scale);
     this._container.x = (width - this._bg.width * scale) / 2;
     this._container.y = (height - this._bg.height * scale) / 2;
+
+    this._cover.clear();
+    this._cover.rect(0, 0, width, height).fill(0x000000);
   }
 
+  fadeIn() {
+    this._cover.alpha = 1;
+    this._cover.blendMode = 'overlay';
+    this._loop = setInterval(() => {
+      this._cover.alpha -= 0.015;
+      if(this._cover.alpha <= 0) {
+        clearInterval(this._loop);
+      }
+    }, 16)
+  }
+  
+  restore() {
+    this.fadeIn();
+  }
+
+  init() {
+    this.fadeIn();
+  }
 }
 
 HomeMasterContainer.instance = null;
