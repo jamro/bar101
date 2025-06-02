@@ -9,7 +9,7 @@ export default class Shaker extends PIXI.Container {
     this._container = new PIXI.Container();
     this.addChild(this._container);
     this.interactive = true;
-    this.buttonMode = true;
+    this.cursor = 'pointer';
     this.interactiveChildren = true;
 
     // Initialize shaker sound

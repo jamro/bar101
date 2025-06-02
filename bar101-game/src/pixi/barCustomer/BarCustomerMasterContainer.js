@@ -33,7 +33,7 @@ class BarCustomerMasterContainer extends MasterContainer {
     }
     this._bciButton = new PIXI.Sprite(GameAssets.assets['img/bci_button.png']);
     this._bciButton.interactive = true;
-    this._bciButton.buttonMode = true;
+    this._bciButton.cursor = 'pointer';
     this._bciButton.anchor.set(0, 0);
     this._bciButton.on('pointerdown', () => {
       this.emit('bciToggle');

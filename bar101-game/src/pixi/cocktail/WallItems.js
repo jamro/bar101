@@ -14,7 +14,7 @@ export default class WallItems extends PIXI.Container {
     this._recipesButton.rect(-380, -250, 250, 330).fill(0x000000);
     this._recipesButton.alpha = 0;
     this._recipesButton.interactive = true;
-    this._recipesButton.buttonMode = true;
+    this._recipesButton.cursor = 'pointer';
     this._recipesButton.on('pointerdown', () => {
       this.emit('openRecipes');
     });

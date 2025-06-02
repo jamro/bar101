@@ -126,7 +126,7 @@ class StoryTreeMasterContainer extends MasterContainer {
 
   init() {
     this._closeButton.interactive = true;
-    this._closeButton.buttonMode = true;
+    this._closeButton.cursor = 'pointer';
     this._masterContainer.interactive = true;
     this._masterContainer.interactiveChildren = true;
 

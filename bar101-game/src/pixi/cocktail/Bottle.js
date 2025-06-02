@@ -69,7 +69,7 @@ export default class Bottle extends PIXI.Container {
     this._graphics.y = -this._yShift;
     this.addChild(this._graphics);
     this.interactive = true;
-    this.buttonMode = true;
+    this.cursor = 'pointer';
     this.interactiveChildren = true;
 
     if(!assetConfigs[id]) {

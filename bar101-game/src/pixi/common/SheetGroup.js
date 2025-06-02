@@ -41,7 +41,7 @@ export default class SheetGroup extends PIXI.Container {
 
     this._closeButton = new PIXI.Graphics();
     this._closeButton.interactive = true;
-    this._closeButton.buttonMode = true;
+    this._closeButton.cursor = 'pointer';
     this._closeButton.on('pointerdown', () => {
       this.emit('close');
     });
@@ -57,7 +57,7 @@ export default class SheetGroup extends PIXI.Container {
     this._paperContainer.addChild(sheet);
     this._sheets.push(sheet);
     sheet.interactive = true;
-    sheet.buttonMode = true;
+    sheet.cursor = 'pointer';
     sheet.on('pointerdown', () => {
       this.movePageToTop(sheet);
     });

@@ -35,7 +35,7 @@ export default class StoryBookButton extends PIXI.Container {
     });
 
     this.interactive = true;
-    this.buttonMode = true;
+    this.cursor = 'pointer';
     this.eventMode = 'static';
 
   }

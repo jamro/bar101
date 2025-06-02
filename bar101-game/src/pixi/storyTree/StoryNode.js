@@ -14,6 +14,8 @@ export default class StoryNode extends PIXI.Container {
 
     this.current = false;
     this.visited = false;
+
+    this.cursor = 'pointer';
   }
 
   hitTest(x, y) {

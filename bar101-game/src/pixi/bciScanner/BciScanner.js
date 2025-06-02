@@ -95,7 +95,7 @@ export default class BciScanner extends PIXI.Container {
     this._upButton.x = 609;
     this._upButton.y = 210;
     this._upButton.interactive = true;
-    this._upButton.buttonMode = true;
+    this._upButton.cursor = 'pointer';
     this._upButton.alpha = 0;
     this._upButton.on('pointerdown', () => {
       this._upButton.alpha = 1;
@@ -117,7 +117,7 @@ export default class BciScanner extends PIXI.Container {
     this._downButton.x = 607;
     this._downButton.y = 458;
     this._downButton.interactive = true;
-    this._downButton.buttonMode = true;
+    this._downButton.cursor = 'pointer';
     this._downButton.alpha = 0;
     this._downButton.on('pointerdown', () => {
       this._downButton.alpha = 1;
@@ -139,7 +139,7 @@ export default class BciScanner extends PIXI.Container {
     this._offButton.x = 608;
     this._offButton.y = 325;
     this._offButton.interactive = true;
-    this._offButton.buttonMode = true;
+    this._offButton.cursor = 'pointer';
     this._offButton.alpha = 0;
     this._offButton.on('pointerdown', () => {
       this._offButton.alpha = 1;

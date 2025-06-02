@@ -7,7 +7,7 @@ export default class Slider extends PIXI.Container {
     super();
 
     this.interactive = true;
-    this.buttonMode = true;
+    this.cursor = 'pointer';
     this.eventMode = 'static';
 
     this._bg = new PIXI.Graphics();

@@ -5,7 +5,7 @@ export default class TimeTravelButton extends PIXI.Container {
     super();
 
     this.interactive = true;
-    this.buttonMode = true;
+    this.cursor = 'pointer';
     this.eventMode = 'static';
 
     const buttonBg = new PIXI.Graphics();
