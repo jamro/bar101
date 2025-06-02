@@ -22,6 +22,10 @@ jobs:
         working-directory: ./bar101-game
         run: npm install --legacy-peer-deps
 
+      - name: Run tests
+        working-directory: ./bar101-game
+        run: npm test
+
       - name: Build project
         working-directory: ./bar101-game
         run: npm run build-prod
