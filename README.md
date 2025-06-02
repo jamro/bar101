@@ -2,6 +2,12 @@
 
 Welcome to Bar 101, a narrative-driven game set in the dystopian city of Stenograd, where you'll play as a bartender navigating a world controlled by the Behavioral Compliance Index (BCI) - an all-seeing system that scores every citizen's behavior in real-time.
 
+## Technology Stack
+
+Bar 101 is built as a modern web application using **React.js** for the UI framework and **Pixi.js** for 2D rendering and game mechanics. The game's narrative and plot are dynamically generated using AI (**Open AI ChatGPT**) with custom **Python scripting** for story management. Visual assets are created through AI tools including **OpenAI**, **Midjourney**, and **VITS/VCTK** for voice synthesis. The entire infrastructure is managed as code on **AWS** using **Terraform**, providing a scalable and cost-effective hosting solution.
+
+The game is an experiment in AI-driven game development. It explores how far generative AI can go in creating compelling, interactive content—from storylines and character behavior to visuals and audio—minimizing the need for traditional manual asset creation while maintaining an engaging player experience.
+
 ![Bar 101](./bar101-assets/bar_wide.jpg)
 
 ## Quick Links

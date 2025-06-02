@@ -32,4 +32,16 @@ variable "cloudflare_ttl" {
   description = "TTL for Cloudflare DNS records (only used when proxied is false)"
   type        = number
   default     = 300
+}
+
+variable "daily_transfer_bytes_limit" {
+  description = "Daily data transfer limit in bytes"
+  type        = number
+  default     = 10737418240  # 10 GB in bytes
+}
+
+variable "alert_email" {
+  description = "Email address for cost limiter alerts (optional)"
+  type        = string
+  default     = "kjamroz83@gmail.com"
 } 

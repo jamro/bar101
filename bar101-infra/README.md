@@ -4,7 +4,7 @@ A low-cost infrastructure setup for the Bar101 hobby project, optimized for mini
 
 ## Architecture Overview
 
-The infrastructure leverages cost-effective AWS S3 static hosting combined with CloudFlare for DNS management and CDN capabilities.
+The infrastructure leverages cost-effective AWS S3 static hosting combined with CloudFlare for DNS management and CDN capabilities, enhanced with automated cost protection.
 
 ![Architecture Diagram](./docs/architecture.png)
 
@@ -19,6 +19,8 @@ The infrastructure leverages cost-effective AWS S3 static hosting combined with 
 
 **Cost Protection**
 - **Lambda Functions**: Automatically blocks S3 access when cost thresholds are exceeded
+- **CloudWatch Alarms**: Real-time monitoring with warning (80%) and blocking (100%) thresholds
+- **Automatic Access Restoration**: Restores access when cost is back below threshold
 
 **CI/CD Pipeline**
 - **GitHub Actions**: Automated build and deployment pipelines for continuous delivery
@@ -30,29 +32,31 @@ The Terraform infrastructure is organized by business function rather than techn
 
 ```
 bar101-infra/
-├── terraform/
-│   ├── main.tf              # Terraform configuration and providers (26 lines)
-│   ├── variables.tf         # Input variable definitions (47 lines)
-│   ├── s3.tf                # S3 buckets, policies, and configurations (132 lines)
-│   ├── cloudflare.tf        # DNS records and CDN caching rules (42 lines)
-│   ├── cost-protection.tf   # Cost monitoring, budgets, alerts, and Lambda (166 lines)
-│   ├── outputs.tf           # Output values organized by service (26 lines)
-│   ├── terraform.tfvars.example  # Example configuration file
-│   └── s3_cost_limiter.py   # Python code for cost protection Lambda
-├── setup-cloudflare.sh     # Cloudflare setup automation script
+├── terraform/               # Terraform configuration files
+│   ├── ...
+│   └── lambda/
+│       └── cost-limiter/    # Lambda function source code
+│           ├── ...
 └── README.md               # This file
 ```
 
 ## Cost Optimization Strategy
 
-This setup prioritizes minimal operational costs suitable for a hobby project:
+This setup prioritizes minimal operational costs suitable for a hobby project, with multiple layers of protection and optimization:
 
-- **S3 Static Hosting**: Pay-per-use storage and bandwidth (typically $1-5/month for small projects)
+- **S3 Static Hosting**: Pay-per-use storage and bandwidth
 - **CloudFlare Free Tier**: No-cost DNS management, global CDN, and free HTTPS certificates
-- **Cloudflare Caching**: 30 day cache for CDN assets to reduce costs
+- **Aggressive CloudFlare Caching**: 30-day cache for CDN assets dramatically reduces S3 bandwidth usage and costs
 - **GitHub Actions**: Free tier provides sufficient CI/CD minutes for hobby projects
-- **Cost Protection**: Automated monitoring prevents unexpected charges from exceeding daily limits
+- **Automated Cost Protection**: Prevents runaway charges while maintaining core functionality (default: 10GB ≈ $0.90/day)
 - **No Server Costs**: Serverless architecture eliminates ongoing compute expenses
+- **Graceful Degradation**: Game remains playable even when cost limits trigger - only voiceovers are affected
+
+The combination of CloudFlare's aggressive caching and the cost protection system ensures that:
+1. Most user requests are served from CloudFlare's cache (no AWS charges)
+2. Only cache misses or expired content trigger S3 downloads
+3. If unusual traffic spikes occur, automatic protection kicks in
+4. Users experience minimal impact (game works, just without voice narration)
 
 ## Deployment Flow
 
@@ -61,6 +65,17 @@ This setup prioritizes minimal operational costs suitable for a hobby project:
 3. Build process compiles and optimized assets
 4. Deployment uploads files to `bar101.jmrlab.com` S3 bucket (voiceovers must be manually uploaded to `cdn-bar101.jmrlab.com` S3 bucket - too many files to sync automatically)
 
+
+### Why Cost Protection?
+
+This cost protection system was specifically designed for Bar101 as a **hobby project** where keeping operational costs predictable and minimal is essential.
+
+### How It Works
+1. **CloudWatch Metrics**: Monitors `BytesDownloaded` from the CDN bucket with 24-hour rolling windows
+2. **Alarms**: Warning at 80% and blocking at 100% of daily limit
+3. **Lambda Function**: Automatically blocks/unblocks S3 access based on usage
+4. **Automatic Access Restoration**: Restores access when cost is back below threshold
+5. **SNS Notifications**: Email alerts for all usage events and status changes
 
 # Installation
 
@@ -136,7 +151,7 @@ export CLOUDFLARE_API_KEY="your-global-api-key"
 
 1. **Navigate to Terraform directory**:
    ```bash
-   cd terraform
+   cd bar101-infra/terraform
    ```
 
 2. **Initialize Terraform**:
@@ -145,8 +160,11 @@ export CLOUDFLARE_API_KEY="your-global-api-key"
    ```
    This downloads the required providers and sets up the backend.
 
-3. **Import existing Cloudflare resources** (if they exist):
-   Follow the detailed instructions in `terraform/IMPORT.md`
+3. **Configure your settings**:
+   ```bash
+   cp terraform.tfvars.example terraform.tfvars
+   # Edit terraform.tfvars with your values
+   ```
 
 4. **Review the deployment plan**:
    ```bash
@@ -160,26 +178,55 @@ export CLOUDFLARE_API_KEY="your-global-api-key"
    ```
    Review the plan and type `yes` to confirm deployment.
 
-## Configuration
+## Monitoring and Management
 
-The infrastructure uses variables for easy customization. Default values are:
+After deployment, you can monitor your infrastructure:
 
-- **Domain**: `jmrlab.com`
-- **App subdomain**: `bar101` (creates `bar101.jmrlab.com`)
-- **CDN subdomain**: `cdn-bar101` (creates `cdn-bar101.jmrlab.com`)
-- **AWS Region**: `us-east-1`
-- **Cloudflare Proxy**: `true` (enables CDN and security features)
-- **Cloudflare TTL**: `300` seconds (only used when proxy is disabled)
+### CloudWatch Resources
+- **Alarms**: `cost-limiter-daily-transfer-warning` and `cost-limiter-daily-transfer-exceeded`
+- **Lambda Logs**: `/aws/lambda/cost-limiter`
+- **Metrics**: S3 `BytesDownloaded` for your CDN bucket
 
-To customize these values, create a `terraform.tfvars` file in the `terraform/` directory:
+### SNS Notifications
+- **Topic**: `cost-limiter-alerts`
+- **Email Subscription**: Configured with your `alert_email`
 
-```hcl
-domain_name = "yourdomain.com"
-app_subdomain = "myapp"
-cdn_subdomain = "cdn-myapp"
-aws_region = "us-west-2"
-cloudflare_proxied = true
-cloudflare_ttl = 600
+### Manual Operations
+
+Check current usage:
+```bash
+aws cloudwatch get-metric-statistics \
+  --namespace AWS/S3 \
+  --metric-name BytesDownloaded \
+  --dimensions Name=BucketName,Value=cdn-bar101.jmrlab.com \
+  --start-time $(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%S) \
+  --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
+  --period 86400 \
+  --statistics Sum
 ```
 
-**Note**: When `cloudflare_proxied` is `true`, the TTL is automatically set to `1` (Cloudflare automatic). The `cloudflare_ttl` variable only applies when the proxy is disabled.
+Manually trigger cost-limiter:
+```bash
+aws lambda invoke \
+  --function-name cost-limiter \
+  --payload '{}' \
+  response.json
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **CloudWatch Metrics Not Available**
+   - S3 request metrics need to be enabled
+   - Allow 15-30 minutes for metrics to appear after first requests
+
+2. **Lambda Not Triggering**
+   - Check CloudWatch alarm state
+   - Verify Lambda permissions for S3 and SNS
+   - Check Lambda logs in CloudWatch: `/aws/lambda/cost-limiter`
+
+3. **Access Still Blocked**
+   - Check current bucket policy in S3 console
+   - Manually trigger unblock by invoking Lambda
+   - Verify daily reset schedule (EventBridge rule)

@@ -11,7 +11,10 @@ aws_region = "us-east-1"
 
 # Cloudflare configuration
 cloudflare_proxied = true
-cloudflare_ttl = 300
+cloudflare_ttl = 300  # Only used when cloudflare_proxied = false
+
+# Cost protection configuration
+daily_transfer_bytes_limit = 10737418240  # 10 GB in bytes
 
 # Alert email for usage notifications
 alert_email = "your-email@example.com" 
