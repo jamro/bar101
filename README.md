@@ -9,6 +9,7 @@ Welcome to Bar 101, a narrative-driven game set in the dystopian city of Stenogr
 - [Game Assets](bar101-assets)
 - [Story Generation](bar101-storyline-gen)
 - [Game Engine](bar101-game)
+- [Infrastructure as Code](bar101-infra)
 
 ## The World of Stenograd
 

@@ -38,3 +38,12 @@ htmlcov/
 
 # Logs
 *.log
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!terraform.tfvars.example
+cost-limiter-lambda.zip

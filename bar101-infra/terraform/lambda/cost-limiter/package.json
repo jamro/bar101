@@ -1,0 +1,15 @@
+{
+  "name": "cost-limiter-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function to monitor S3 bucket download costs",
+  "main": "index.mjs",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+} 
