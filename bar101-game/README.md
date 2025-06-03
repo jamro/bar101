@@ -138,3 +138,12 @@ Tested and optimized for:
 - **Firefox**: 88+
 - **Safari**: 14+
 - **Edge**: 90+
+
+
+## Google Analytics
+
+The game uses Google Analytics to track user interactions. The `GA_ID` is set from the environment variable `GA_ID` in the `webpack.config.js` file.
+
+```javascript
+const GA_ID = process.env.GA_ID || 'G-XXXXXXX';
+```

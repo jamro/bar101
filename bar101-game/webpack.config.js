@@ -45,7 +45,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      templateParameters: {
+        GA_ID: process.env.GA_ID || 'G-XXXXXXX'
+      }
     }),
     new CopyPlugin({
       patterns: [
