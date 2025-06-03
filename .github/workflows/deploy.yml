@@ -29,6 +29,8 @@ jobs:
       - name: Build project
         working-directory: ./bar101-game
         run: npm run build-prod
+        env:
+          GA_ID: ${{ secrets.GA_ID }}
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@v0.5.1
