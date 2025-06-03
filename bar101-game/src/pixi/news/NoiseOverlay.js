@@ -18,10 +18,7 @@ export default class NoiseOverlay extends PIXI.Container {
     const height = 670
     this._canvas.clear()
 
-
     this._phaseTimer--;
-
-    console.log(this._phase, this._phaseTimer)
 
     if(this._phaseTimer < 0) {
       this._phase = (this._phase + 1) % 2
