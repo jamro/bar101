@@ -5,6 +5,10 @@ const webpack = require('webpack');
 const { url } = require('inspector');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
+// Print GA_ID value during build process
+const GA_ID = process.env.GA_ID || 'G-XXXXXXX';
+console.log('🔧 Build Info: GA_ID =', GA_ID);
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -47,7 +51,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       templateParameters: {
-        GA_ID: process.env.GA_ID || 'G-XXXXXXX'
+        GA_ID: GA_ID
       }
     }),
     new CopyPlugin({
