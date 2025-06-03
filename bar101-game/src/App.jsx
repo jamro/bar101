@@ -157,6 +157,7 @@ function App({ onBarNoiseVolumeChange }) {
   }
 
   return <GameLayout 
+    storyPath={gameState.storyPath}
     storyNode={storyNode} 
     bartender={bartender}
     trader={worldContext.bar.trader}

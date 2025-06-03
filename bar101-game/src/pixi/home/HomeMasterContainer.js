@@ -58,7 +58,6 @@ class HomeMasterContainer extends MasterContainer {
     const scaleW = width / this._bg.width;
     const scaleH = height / this._bg.height;
     const scale = Math.min(scaleW, scaleH);
-    console.log(scale);
     this._container.scale.set(scale, scale);
     this._container.x = (width - this._bg.width * scale) / 2;
     this._container.y = (height - this._bg.height * scale) / 2;

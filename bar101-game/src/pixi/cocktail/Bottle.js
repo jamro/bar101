@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import GameAssets from '../GameAssets';
+import GlowEffect from '../common/GlowEffect';
 
 
 const assetConfigs = {
@@ -82,8 +83,6 @@ export default class Bottle extends PIXI.Container {
   constructor(id) {
     super();
     this.id = id;
-    this._isGlowing = false;
-    this._glowingLoop = null;
 
     const assetConfig = assetConfigs[id] || assetConfigs['rum'];
 
@@ -95,15 +94,16 @@ export default class Bottle extends PIXI.Container {
     this._graphics.y = -this._yShift;
     this.addChild(this._graphics);
 
-    this._glow = null;
+    this._glowEffect = null;
     if(assetConfig.glow) {
-      this._glow = new PIXI.Sprite(GameAssets.assets[assetConfig.texture.replace('.png', '_glow.png')]);
-      this._glow.scale.set(assetConfigs[id].scale);
-      this._glow.anchor.set(0.5, 0);
-      this._glow.x = assetConfig.glowX + assetConfig.x
-      this._glow.y = assetConfig.glowY -this._yShift
-      this._glow.alpha = 0;
-      this.addChild(this._glow);
+      const glowTexture = GameAssets.assets[assetConfig.texture.replace('.png', '_glow.png')];
+      this._glowEffect = new GlowEffect(glowTexture, {
+        x: assetConfig.glowX + assetConfig.x,
+        y: assetConfig.glowY - this._yShift,
+        anchor: { x: 0.5, y: 0 },
+        scale: assetConfigs[id].scale
+      });
+      this.addChild(this._glowEffect);
     }
 
     this.interactive = true;
@@ -136,8 +136,10 @@ export default class Bottle extends PIXI.Container {
   set grayedOut(value) {
     if(value) {
       this._graphics.tint = 0x333333;
+      this.interactive = false;
     } else {
       this._graphics.tint = undefined;
+      this.interactive = true;
     }
   }
 
@@ -162,23 +164,24 @@ export default class Bottle extends PIXI.Container {
   }
 
   set glowing(value) {
-    if(!this._glow) {
-      return;
-    }
-    this._isGlowing = value;
-    this._glow.alpha = value ? 1 : 0;
-    if(value && !this._glowingLoop) {
-      this._glowingLoop = setInterval(() => {
-        this._glow.alpha = Math.sin(Date.now() * 0.005) * 0.5 + 0.5;
-      }, 16);
-    } else if(!value && this._glowingLoop) {
-      clearInterval(this._glowingLoop);
-      this._glowingLoop = null;
+    if (this._glowEffect) {
+      this._glowEffect.glowing = value;
     }
   }
 
   get glowing() {
-    return this._glowing;
+    return this._glowEffect ? this._glowEffect.glowing : false;
+  }
+
+  destroy() {
+    // Clean up glow effect
+    if (this._glowEffect) {
+      this._glowEffect.destroy();
+      this._glowEffect = null;
+    }
+    
+    // Call parent destroy
+    super.destroy();
   }
 
 }

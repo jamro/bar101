@@ -6,6 +6,7 @@ import TraderLayout from './TraderLayout';
 import DateLayout from './DateLayout';
 
 function GameLayout({
+  storyPath,
   storyNode, 
   bartender, 
   trader,
@@ -50,6 +51,8 @@ function GameLayout({
     }
   }
 
+  let tutorialMode = storyPath.length === 0 && customerIndex === 0;
+
   switch (levelPhase) {
     case 'date':
       onBarNoiseVolumeChange(0);
@@ -64,6 +67,7 @@ function GameLayout({
         return <div>Error: No customer ID found</div>;
       }
       return <CustomerLayout 
+        tutorialMode={tutorialMode}
         customers={customers} 
         bartender={bartender}
         customerId={customerId} 
@@ -97,6 +101,7 @@ function GameLayout({
 export default GameLayout;
 
 GameLayout.propTypes = {
+  storyPath: PropTypes.string.isRequired,
   storyNode: PropTypes.object.isRequired,
   bartender: PropTypes.object.isRequired,
   trader: PropTypes.object.isRequired,

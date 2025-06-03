@@ -15,4 +15,11 @@ export default class RecipesView extends SheetGroup {
 
   }
 
+  openPage(id) {
+    const page = this._sheets.find(sheet => sheet.id === id);
+    if(page) {
+      this.movePageToTop(page);
+    }
+  }
+
 }

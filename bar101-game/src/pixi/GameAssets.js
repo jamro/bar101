@@ -61,6 +61,7 @@ class GameAssets {
       'img/bci_off.png',
       'img/warning.png',
       'img/led.png',
+      'img/shaker_glow.png',
     ];
   }
 

@@ -15,6 +15,7 @@ export default function CustomerLayout({
   drinks, 
   chats, 
   balance,
+  tutorialMode,
   onBalanceChange,
   onTrustChange,
   onClose, 
@@ -82,6 +83,7 @@ export default function CustomerLayout({
       customer={customer} 
       balance={balance}
       drinks={drinks} 
+      tutorialMode={tutorialMode}
       onServe={(drink) => serveDrink(drink)} 
     />;
   } else if (phase === "opener") {
@@ -150,6 +152,7 @@ CustomerLayout.propTypes = {
   drinks: PropTypes.object.isRequired,
   chats: PropTypes.object.isRequired,
   balance: PropTypes.number.isRequired,
+  tutorialMode: PropTypes.bool,
   onBalanceChange: PropTypes.func.isRequired,
   onTrustChange: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
@@ -160,6 +163,7 @@ CustomerLayout.propTypes = {
 };
 
 CustomerLayout.defaultProps = {
+  tutorialMode: false,
   onBalanceChange: () => {},
   onTrustChange: () => {},
   onClose: () => {},

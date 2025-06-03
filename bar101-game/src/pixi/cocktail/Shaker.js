@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import GameAssets from '../GameAssets.js';
 import { Howl } from 'howler';
+import GlowEffect from '../common/GlowEffect';
 
 export default class Shaker extends PIXI.Container {
 
@@ -73,8 +74,17 @@ export default class Shaker extends PIXI.Container {
     this._progressLabel.visible = false;
 
     this.isSpecial = false;
-    this.open(2);
 
+    // Create glow effect
+    const glowTexture = GameAssets.assets['img/shaker_glow.png'];
+    this._glowEffect = new GlowEffect(glowTexture, {
+      x: 0,
+      y: -30,
+      anchor: { x: 0.5, y: 0.5 }
+    });
+    this._container.addChild(this._glowEffect);
+    
+    this.open(2);
   }
 
   get graphicHeight() {
@@ -198,5 +208,26 @@ export default class Shaker extends PIXI.Container {
 
   set isSpecial(value) {
     this._special.visible = value;
+  }
+
+  set glowing(value) {
+    if (this._glowEffect) {
+      this._glowEffect.glowing = value;
+    }
+  }
+
+  get glowing() {
+    return this._glowEffect ? this._glowEffect.glowing : false;
+  }
+
+  destroy() {
+    // Clean up glow effect
+    if (this._glowEffect) {
+      this._glowEffect.destroy();
+      this._glowEffect = null;
+    }
+    
+    // Call parent destroy
+    super.destroy();
   }
 }

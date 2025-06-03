@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import MasterContainer from "../MasterContainer";
 import CocktailView from './CocktailView';
 import RecipesView from './RecipesView';
+import Tutorial, { RECIPE_STAGE } from './Tutorial';
 
 class CocktailMasterContainer extends MasterContainer {
   constructor() {
@@ -11,9 +12,12 @@ class CocktailMasterContainer extends MasterContainer {
     this._fadeoutCover = null;
     this._drinks = null;
     this._inventory = null;
+    this._tutorial = new Tutorial();
+    this._orderGuideline = null
   }
 
   init() {
+    console.log("[CocktailMasterContainer] init");
     this._mixingView = new CocktailView(this._drinks, this._inventory);
     this._recipesView = new RecipesView(this._drinks);
     this._fadeoutCover = new PIXI.Graphics();
@@ -22,15 +26,28 @@ class CocktailMasterContainer extends MasterContainer {
     });
     this._mixingView.on('openRecipes', () => {
       this._recipesView.visible = true;
+      if(this._orderGuideline) {
+        this._recipesView.openPage(this._orderGuideline.id);
+      }
     });
     this._recipesView.on('close', () => {
       this._recipesView.visible = false;
+      if(this._tutorial.stage === RECIPE_STAGE) {
+        this._mixingView.recipeGlowing = false;
+        this._mixingView.enableAllBottles();
+        if(this._orderGuideline) {
+          this._mixingView.setOrderGuideline(this._orderGuideline);
+        }
+        this._tutorial.moveToNextStage();
+      }
     })
     this.addChild(this._mixingView);
     this.addChild(this._recipesView);
     this._recipesView.visible = false;
 
     this._fadeIn();
+
+    this._initTutorial();
   }
 
   _fadeIn() {
@@ -63,6 +80,24 @@ class CocktailMasterContainer extends MasterContainer {
 
   cleanUp() {
     console.log("[CocktailMasterContainer] cleanUp");
+    
+    // Disable all glowing effects first to prevent memory leaks
+    if (this._mixingView) {
+      this._mixingView.recipeGlowing = false;
+      this._mixingView.shakerGlowing = false;
+      this._mixingView.enableAllBottles();
+      this._mixingView.setOrderGuideline(null);
+      
+      // Ensure all bottle glowing is disabled
+      if(this._mixingView._shelfs && this._mixingView._shelfs.bottles) {
+        this._mixingView._shelfs.bottles.forEach(bottle => {
+          if(bottle) {
+            bottle.glowing = false;
+          }
+        });
+      }
+    }
+
     if (this._mixingView && this._mixingView.parent) {
       this.removeChild(this._mixingView);
     }
@@ -87,10 +122,26 @@ class CocktailMasterContainer extends MasterContainer {
     this._fadeoutCover = null;
   }
 
+  _initTutorial() {
+    this._tutorial.reset();
+
+    if(!this._tutorial.enabled) {
+      this._mixingView.enableAllBottles();
+      return;
+    }
+    if(this._tutorial.stage === RECIPE_STAGE) {
+      this._mixingView.recipeGlowing = true;
+      this._mixingView.disableAllBottles();
+    }
+    
+  }
+
   restore() {
+    console.log("[CocktailMasterContainer] restore");
     this.visible = false;
     this.cleanUp();
     this.init();
+    this._initTutorial();
   }
 
   setDrinks(drinks) {
@@ -114,6 +165,26 @@ class CocktailMasterContainer extends MasterContainer {
       this._mixingView.setInventory(inventory);
     }
     this._inventory = inventory;
+  }
+
+  setOrderAssistant(order=null) {
+    console.log("[CocktailMasterContainer] setOrderAssistant", order);
+    this._orderGuideline = order;
+    if(!order && this._mixingView) {
+      this._mixingView.enableAllBottles();
+    } else if(order && this._mixingView) {
+      this._mixingView.setOrderGuideline(order);
+    }
+  }
+
+  setTutorialMode(isEnabled=false) {
+    console.log("[CocktailMasterContainer] setTutorialMode", isEnabled);
+    this._tutorial.enabled = isEnabled;
+    if(this._tutorial.stage === RECIPE_STAGE && this._mixingView) {
+      this._mixingView.recipeGlowing = true;
+    } else if(this._mixingView) {
+      this._mixingView.recipeGlowing = false;
+    }
   }
 
   resize(width, height) {

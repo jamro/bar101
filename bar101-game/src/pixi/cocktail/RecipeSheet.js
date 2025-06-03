@@ -8,6 +8,7 @@ export default class RecipeSheet extends PaperSheet {
     super(recipe.name);
 
     recipe = recipe;
+    this.id = recipe.id;
 
     for (let i = 0; i < recipe.ingredients.length; i++) {
       const ingredient = recipe.ingredients[i];

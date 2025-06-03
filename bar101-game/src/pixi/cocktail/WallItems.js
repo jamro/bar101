@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import GameAssets from '../GameAssets';
+import GlowEffect from '../common/GlowEffect';
 
 export default class WallItems extends PIXI.Container {
 
@@ -19,33 +20,37 @@ export default class WallItems extends PIXI.Container {
       this.emit('openRecipes');
     });
 
-    this._isGlowing = false;
-    this._glowingLoop = null;
-    this._recipesButtonGlow = new PIXI.Sprite(GameAssets.assets['img/recipes_glow.png']);
-    this._recipesButtonGlow.x = -450;
-    this._recipesButtonGlow.y = -320;
-    this._recipesButtonGlow.alpha = 0;
-    this.addChild(this._recipesButtonGlow);
+    // Create glow effect for recipes button
+    const glowTexture = GameAssets.assets['img/recipes_glow.png'];
+    this._glowEffect = new GlowEffect(glowTexture, {
+      x: -450,
+      y: -320,
+      anchor: { x: 0, y: 0 }
+    });
+    this.addChild(this._glowEffect);
 
     this.addChild(this._recipesButton);
-
   }
 
   set glowing(value) {
-    this._isGlowing = value;
-    this._recipesButtonGlow.alpha = value ? 1 : 0;
-    if(value && !this._glowingLoop) {
-      this._glowingLoop = setInterval(() => {
-        this._recipesButtonGlow.alpha = Math.sin(Date.now() * 0.005) * 0.5 + 0.5;
-      }, 16);
-    } else if(!value && this._glowingLoop) {
-      clearInterval(this._glowingLoop);
-      this._glowingLoop = null;
+    if (this._glowEffect) {
+      this._glowEffect.glowing = value;
     }
   }
 
   get glowing() {
-    return this._isGlowing;
+    return this._glowEffect ? this._glowEffect.glowing : false;
+  }
+
+  destroy() {
+    // Clean up glow effect
+    if (this._glowEffect) {
+      this._glowEffect.destroy();
+      this._glowEffect = null;
+    }
+    
+    // Call parent destroy
+    super.destroy();
   }
 
 }

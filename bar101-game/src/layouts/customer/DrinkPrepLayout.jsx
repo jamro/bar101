@@ -4,7 +4,7 @@ import ResizablePixiCanvas from '../../components/ResizablePixiCanvas';
 import CocktailMasterContainer from '../../pixi/cocktail/CocktailMasterContainer';
 
 
-export default function DrinkPrepLayout({ drinks, bartender, onServe }) {
+export default function DrinkPrepLayout({ drinks, bartender, customer, tutorialMode, onServe }) {
   const masterContainer = CocktailMasterContainer.getInstance();
 
   const inventory = bartender.inventory;
@@ -26,6 +26,19 @@ export default function DrinkPrepLayout({ drinks, bartender, onServe }) {
     masterContainer.setInventory(inventory);
   }, [inventory]);
 
+  useEffect(() => {
+    if(!tutorialMode) {
+      masterContainer.setOrderAssistant(null);
+    } else {
+      const order = drinks[customer.drink];
+      masterContainer.setOrderAssistant(order);
+    }
+  }, [customer, drinks]);
+
+  useEffect(() => {
+    masterContainer.setTutorialMode(tutorialMode);
+  }, [tutorialMode]);
+
   return <ResizablePixiCanvas 
       style={{width: '100%', height: '100%'}} 
       masterContainer={masterContainer} 
@@ -37,9 +50,12 @@ export default function DrinkPrepLayout({ drinks, bartender, onServe }) {
 DrinkPrepLayout.propTypes = {
   drinks: PropTypes.object.isRequired,
   bartender: PropTypes.object.isRequired,
+  customer: PropTypes.object.isRequired,
+  tutorialMode: PropTypes.bool,
   onServe: PropTypes.func
 };
 
 DrinkPrepLayout.defaultProps = {
+  tutorialMode: false,
   onServe: () => {}
 };

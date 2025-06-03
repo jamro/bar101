@@ -43,6 +43,7 @@ export default class CocktailView extends PIXI.Container {
     this._drinks = drinks;
     this._ingredients = getIngredients(drinks);
     this._mode = LANDSCAPE;
+    this._orderGuideline = null;
 
     // bakckround
     this._background = new PIXI.Sprite(GameAssets.assets['img/wall.jpg']);
@@ -137,7 +138,83 @@ export default class CocktailView extends PIXI.Container {
     this._shelfs.setInventory(inventory);
   }
 
+  setOrderGuideline(order) {
+    this._orderGuideline = order;
+    
+    if(!order) {
+      this.enableAllBottles();
+      return;
+    }
+
+    this._updateOrderGuideline();
+  }
+
+  _updateOrderGuideline() {
+    if(!this._orderGuideline) {
+      return;
+    }
+
+    const recipeIngredients = this._orderGuideline.ingredients.reduce((acc, ingredient) => {
+      acc[ingredient.id] = ingredient.amount;
+      return acc;
+    }, {});
+
+    for (const bottle of this._shelfs.bottles) {
+      const id = bottle.id;
+      if(
+          recipeIngredients[id] && 
+          (!this._currentDrinkIngredients[id] || this._currentDrinkIngredients[id].amount < recipeIngredients[id]) &&
+          this._shakerContent < SHAKER_CAPACITY
+        ) {
+        bottle.grayedOut = false;
+        bottle.glowing = true;
+      } else {
+        bottle.grayedOut = true;
+        bottle.glowing = false;
+        if(this._dragTarget === bottle) {
+          this._endDrag();
+        }
+      }
+    }
+    if(this._shakerContent >= SHAKER_CAPACITY && this._orderGuideline) {
+      this._shaker.glowing = true;
+    } else {
+      this._shaker.glowing = false;
+    }
+  }
+
+  get recipeGlowing() {
+    return this._wallItems.glowing;
+  }
+
+  set recipeGlowing(value) {
+    this._wallItems.glowing = value;
+  }
+
+  get shakerGlowing() {
+    return this._shaker.glowing;
+  }
+
+  set shakerGlowing(value) {
+    this._shaker.glowing = value;
+  }
+
   destroy() {
+    // Clean up all glowing effects before destroying
+    if(this._shaker) {
+      this._shaker.glowing = false;
+    }
+    if(this._wallItems) {
+      this._wallItems.glowing = false;
+    }
+    if(this._shelfs && this._shelfs.bottles) {
+      this._shelfs.bottles.forEach(bottle => {
+        if(bottle) {
+          bottle.glowing = false;
+        }
+      });
+    }
+    
     super.destroy();
     this.clearAllIntervals();
   }
@@ -166,6 +243,20 @@ export default class CocktailView extends PIXI.Container {
     
     this._shakerContent = Object.values(this._currentDrinkIngredients).reduce((acc, ingredient) => acc + Math.round(ingredient.amount), 0)
     this._shaker.resetProgress()
+
+    this._updateOrderGuideline();
+  }
+
+  disableAllBottles() {
+    this._shelfs.bottles.forEach(bottle => {
+      bottle.grayedOut = true;
+    })
+  }
+
+  enableAllBottles() {
+    this._shelfs.bottles.forEach(bottle => {
+      bottle.grayedOut = false;
+    })
   }
 
   _startShaking(event) {
@@ -354,6 +445,7 @@ export default class CocktailView extends PIXI.Container {
     if (this._endingAnimationPlaying) {
       return;
     }
+    this._shaker.glowing = false;
     this._endingAnimationPlaying = true;
     this._shaker.open(1);
     this._ingredientsDisplay.showHint("")
