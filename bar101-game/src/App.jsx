@@ -82,6 +82,11 @@ function App({ onBarNoiseVolumeChange }) {
       }
     }
     fetchStoryNode(`node_x${gameState.storyPath.join('')}.json`);
+    if(window.gtag) {
+      window.gtag('event', 'story_node', {
+        path: "x" + gameState.storyPath.join('')
+      });
+    }
 
   }, [gameState.storyPath]);
 
