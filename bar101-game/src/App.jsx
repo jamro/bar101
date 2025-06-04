@@ -83,7 +83,7 @@ function App({ onBarNoiseVolumeChange }) {
     }
     fetchStoryNode(`node_x${gameState.storyPath.join('')}.json`);
     if(window.gtag) {
-      window.gtag('event', 'story_node', {
+      window.gtag('event', 'story_node_' + (gameState.storyPath.length), {
         path: "x" + gameState.storyPath.join('')
       });
     }
