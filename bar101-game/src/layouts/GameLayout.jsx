@@ -4,6 +4,7 @@ import NewsLayout from './NewsLayout';
 import CustomerLayout from './CustomerLayout';
 import TraderLayout from './TraderLayout';
 import DateLayout from './DateLayout';
+import trackEvent from '../trackEvent';
 
 function GameLayout({
   storyPath,
@@ -32,6 +33,17 @@ function GameLayout({
     onBarNoiseVolumeChange(0);
     return <div>Loading...</div>;
   }
+
+  let eventLabelPostfix = levelPhase;
+  if (levelPhase === 'customer') {
+    eventLabelPostfix += '_' + customerIndex;
+  }
+
+  useEffect(() => {
+    trackEvent('story_node_' + (storyPath.length) + '_' + eventLabelPostfix, {
+      path: "x" + storyPath.join('')
+    });
+  }, [storyPath, eventLabelPostfix]);
 
   const handleCustomerLeave = () => {
     if (customerIndex === storyNode.visitors.length - 1) { // last customer
@@ -67,6 +79,7 @@ function GameLayout({
         return <div>Error: No customer ID found</div>;
       }
       return <CustomerLayout 
+        trackingEvent={'story_node_' + (storyPath.length) + '_' + eventLabelPostfix}
         tutorialMode={tutorialMode}
         customers={customers} 
         bartender={bartender}

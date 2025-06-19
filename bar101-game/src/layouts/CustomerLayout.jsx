@@ -7,8 +7,10 @@ import OpenerLayout from './customer/OpenerLayout';
 import MainChatLayout from './customer/MainChatLayout';
 import DilemmaLayout from './customer/DilemmaLayout';
 import GoodbyeLayout from './customer/GoodbyeLayout';
+import trackEvent from '../trackEvent';
 
 export default function CustomerLayout({ 
+  trackingEvent,
   bartender, 
   customers, 
   customerId, 
@@ -34,6 +36,12 @@ export default function CustomerLayout({
     setPhase("ask_drink");
     setDrink(null);
   }, [customerId]);
+
+  useEffect(() => {
+    if(trackingEvent) {
+      trackEvent(trackingEvent + '_' + phase);
+    }
+  }, [trackingEvent, phase]);
 
   const serveDrink = (drink) => {
     setDrink(drink);

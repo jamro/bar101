@@ -7,6 +7,7 @@ import { useGameState } from './state';
 import GameAssets from './pixi/GameAssets';
 import StoryTreeLayout from './layouts/StoryTreeLayout';
 import HomeMasterContainer from './pixi/home/HomeMasterContainer';
+import trackEvent from './trackEvent';
 
 function App({ onBarNoiseVolumeChange }) {
   const [ storyNode, setStoryNode ] = useState(null);
@@ -82,11 +83,9 @@ function App({ onBarNoiseVolumeChange }) {
       }
     }
     fetchStoryNode(`node_x${gameState.storyPath.join('')}.json`);
-    if(window.gtag) {
-      window.gtag('event', 'story_node_' + (gameState.storyPath.length), {
-        path: "x" + gameState.storyPath.join('')
-      });
-    }
+    trackEvent('story_node_' + (gameState.storyPath.length), {
+      path: "x" + gameState.storyPath.join('')
+    });
 
   }, [gameState.storyPath]);
 
